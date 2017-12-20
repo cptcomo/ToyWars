@@ -6,6 +6,7 @@ namespace Brackeys {
     public class Bullet : MonoBehaviour {
         private Transform target;
         public float speed = 70f;
+        public int damage = 50;
         public float explosionRadius = 0f;
         public GameObject impactEffect;
 
@@ -38,21 +39,24 @@ namespace Brackeys {
                 explode();
             }
             else {
-                damage(target);
+                doDamage(target);
             }
             
             Destroy(gameObject);
         }
 
-        void damage(Transform enemy) {
-            Destroy(enemy.gameObject);
+        void doDamage(Transform enemy) {
+            Enemy e = enemy.GetComponent<Enemy>();
+
+            if(e != null)
+                e.takeDamage(damage);
         }
 
         void explode() {
             Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
             foreach(Collider col in colliders) {
                 if(col.tag == "Enemy") {
-                    damage(col.transform);
+                    doDamage(col.transform);
                 }
             }
         }

@@ -9,7 +9,7 @@ namespace Brackeys {
         public Transform spawnPoint;
         public Text countdownText;
 
-        public float timeBetweenWaves = 5f;
+        public float timeBetweenWaves = 20f;
         private float countdown = 2f;
         private int waveIndex = 0;
 
@@ -19,7 +19,8 @@ namespace Brackeys {
                 countdown = timeBetweenWaves;
             }
             countdown -= Time.deltaTime;
-            countdownText.text = Mathf.Ceil(countdown).ToString();
+            countdown = Mathf.Clamp(countdown, 0, Mathf.Infinity);
+            countdownText.text = string.Format("{0:00.00}", countdown);
         }
 
         IEnumerator spawnWave() {

@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 namespace Brackeys {
     public class Node : MonoBehaviour {
         public Color hoverColor;
+        public Color notEnoughMoneyColor;
         public Vector3 posOffset;
 
         [Header("Optional")]
@@ -26,10 +27,13 @@ namespace Brackeys {
             if(EventSystem.current.IsPointerOverGameObject())
                 return;
 
-            if(buildManager.canBuild)
+            if(!buildManager.canBuild)
                 return;
 
-            rend.material.color = hoverColor;
+            if(buildManager.hasMoney)
+                rend.material.color = hoverColor;
+            else
+                rend.material.color = notEnoughMoneyColor;
         }
 
         private void OnMouseExit() {
@@ -37,7 +41,7 @@ namespace Brackeys {
         }
 
         private void OnMouseDown() {
-            if(!buildManager.canBuild)
+            if(!buildManager.canBuild || EventSystem.current.IsPointerOverGameObject())
                 return;
 
             if(turret != null) {

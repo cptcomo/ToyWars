@@ -5,6 +5,9 @@ using UnityEngine;
 namespace Brackeys {
     public class Enemy : MonoBehaviour {
         public float speed = 10f;
+        public int health = 100;
+        public int value = 50;
+        public GameObject deathEffect;
         private Transform target;
         private int wpIndex = 0;
         private const double wpTolerance = 0.4f; //How close to waypoint is close enough
@@ -22,13 +25,32 @@ namespace Brackeys {
             }
         }
 
+        public void takeDamage(int damage) {
+            this.health -= damage;
+            if(health <= 0f) {
+                die();
+            }
+        }
+
+        void die() {
+            PlayerStats.money += value;
+            GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
+            Destroy(effect, 5f);          
+            Destroy(gameObject);
+        }
+
         void nextWaypoint() {
             if(wpIndex >= Waypoints.wps.Length - 1) {
-                Destroy(gameObject);
+                endPath();
                 return;
             }
             wpIndex++;
             target = Waypoints.wps[wpIndex];
+        }
+
+        void endPath() {
+            PlayerStats.lives--;
+            Destroy(gameObject);
         }
     }
 }
