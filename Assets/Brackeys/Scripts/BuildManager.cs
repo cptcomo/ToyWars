@@ -15,15 +15,16 @@ namespace Brackeys {
         }
 
         public GameObject standardTurretPrefab;
-
-        private void Start() {
-            turretToBuild = standardTurretPrefab;
-        }
+        public GameObject missileLauncherPrefab;
 
         private GameObject turretToBuild;
 
         public GameObject getTurretToBuild() {
             return turretToBuild;
+        }
+
+        public void setTurretToBuild(GameObject turret) {
+            turretToBuild = turret;
         }
     }
 }
