@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretBlueprint : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+namespace Brackeys {
+    [System.Serializable]
+    public class TurretBlueprint {
+        public GameObject prefab;
+        public int cost;
+    }
 }

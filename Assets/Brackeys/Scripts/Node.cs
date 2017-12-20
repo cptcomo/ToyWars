@@ -8,7 +8,8 @@ namespace Brackeys {
         public Color hoverColor;
         public Vector3 posOffset;
 
-        private GameObject turret;
+        [Header("Optional")]
+        public GameObject turret;
 
         private Renderer rend;
         private Color startColor;
@@ -25,7 +26,7 @@ namespace Brackeys {
             if(EventSystem.current.IsPointerOverGameObject())
                 return;
 
-            if(buildManager.getTurretToBuild() == null)
+            if(buildManager.canBuild)
                 return;
 
             rend.material.color = hoverColor;
@@ -36,7 +37,7 @@ namespace Brackeys {
         }
 
         private void OnMouseDown() {
-            if(buildManager.getTurretToBuild() == null)
+            if(!buildManager.canBuild)
                 return;
 
             if(turret != null) {
@@ -44,8 +45,11 @@ namespace Brackeys {
                 return;
             }
 
-            GameObject turretToBuild = buildManager.getTurretToBuild();
-            turret = (GameObject)Instantiate(turretToBuild, transform.position + posOffset, transform.rotation);
+            buildManager.buildTurretOn(this);
+        }
+
+        public Vector3 getBuildPosition() {
+            return transform.position + posOffset;
         }
     }
 }

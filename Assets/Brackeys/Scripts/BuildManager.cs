@@ -14,17 +14,25 @@ namespace Brackeys {
             instance = this;
         }
 
-        public GameObject standardTurretPrefab;
-        public GameObject missileLauncherPrefab;
+        private TurretBlueprint turretToBuild;
 
-        private GameObject turretToBuild;
+        public bool canBuild { get { return turretToBuild != null; } }
 
-        public GameObject getTurretToBuild() {
-            return turretToBuild;
+        public void selectTurretToBuild(TurretBlueprint turret) {
+            turretToBuild = turret;
         }
 
-        public void setTurretToBuild(GameObject turret) {
-            turretToBuild = turret;
+        public void buildTurretOn(Node node) {
+            if(PlayerStats.money < turretToBuild.cost) {
+                Debug.Log("Not enough money");
+                return;
+            }
+        
+            GameObject turret = (GameObject) Instantiate(turretToBuild.prefab, node.getBuildPosition(), Quaternion.identity);
+            node.turret = turret;
+
+            PlayerStats.money -= turretToBuild.cost;
+            Debug.Log("Turret Build! Money left: " + PlayerStats.money);
         }
     }
 }
