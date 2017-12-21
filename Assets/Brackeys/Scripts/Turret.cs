@@ -16,6 +16,8 @@ namespace Brackeys {
         [Header("Use Laser")]
         public bool useLaser = false;
         public LineRenderer lineRenderer;
+        public ParticleSystem laserImpactEffect;
+        public Light impactLight;
 
         [Header("Unity Setup Fields")]
         public float turnSpeed = 10f;
@@ -31,8 +33,11 @@ namespace Brackeys {
         private void Update() {
             if(target == null) {
                 if(useLaser)
-                    if(lineRenderer.enabled)
+                    if(lineRenderer.enabled) {
                         lineRenderer.enabled = false;
+                        laserImpactEffect.Stop();
+                        impactLight.enabled = false;
+                    }
                 return;
             }
 
@@ -52,10 +57,17 @@ namespace Brackeys {
         }
 
         void laser() {
-            if(!lineRenderer.enabled)
+            if(!lineRenderer.enabled) {
                 lineRenderer.enabled = true;
+                laserImpactEffect.Play();
+                impactLight.enabled = true;
+            }
             lineRenderer.SetPosition(0, firePoint.position);
             lineRenderer.SetPosition(1, target.position);
+
+            Vector3 dir = firePoint.position - target.position;
+            laserImpactEffect.transform.rotation = Quaternion.LookRotation(dir);
+            laserImpactEffect.transform.position = target.position + dir.normalized;
         }
 
         void lockOnTarget() {
