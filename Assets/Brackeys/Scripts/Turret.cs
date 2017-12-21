@@ -15,6 +15,8 @@ namespace Brackeys {
 
         [Header("Use Laser")]
         public bool useLaser = false;
+        public int damageOverTime = 40;
+        public float slowPct = .3f;
         public LineRenderer lineRenderer;
         public ParticleSystem laserImpactEffect;
         public Light impactLight;
@@ -23,6 +25,7 @@ namespace Brackeys {
         public float turnSpeed = 10f;
         public string enemyTag = "Enemy";
         private Transform target;
+        private Enemy targetEnemy;
         public Transform partToRotate;     
         public Transform firePoint;
 
@@ -57,6 +60,8 @@ namespace Brackeys {
         }
 
         void laser() {
+            targetEnemy.takeDamage(damageOverTime * Time.deltaTime);
+            targetEnemy.slow(slowPct);
             if(!lineRenderer.enabled) {
                 lineRenderer.enabled = true;
                 laserImpactEffect.Play();
@@ -90,6 +95,7 @@ namespace Brackeys {
             }
             if(nearestEnemy != null && minDist <= range) {
                 target = nearestEnemy.transform;
+                targetEnemy = target.GetComponent<Enemy>();
             } else target = null;
         }
 

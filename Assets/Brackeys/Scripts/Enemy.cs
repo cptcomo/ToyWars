@@ -4,52 +4,34 @@ using UnityEngine;
 
 namespace Brackeys {
     public class Enemy : MonoBehaviour {
-        public float speed = 10f;
-        public int health = 100;
-        public int value = 50;
+        public float startSpeed = 10f;
+
+        [HideInInspector]
+        public float speed;
+
+        public float health = 100f;
+        public int worth = 50;
         public GameObject deathEffect;
-        private Transform target;
-        private int wpIndex = 0;
-        private const double wpTolerance = 0.4f; //How close to waypoint is close enough
 
         private void Start() {
-            target = Waypoints.wps[0];
+            speed = startSpeed;
         }
 
-        private void Update() {
-            Vector3 dir = (target.position - this.transform.position).normalized;
-            transform.Translate(dir * speed * Time.deltaTime, Space.World);
-
-            if(Vector3.Distance(transform.position, target.position) <= wpTolerance) {
-                nextWaypoint();
-            }
-        }
-
-        public void takeDamage(int damage) {
+        public void takeDamage(float damage) {
             this.health -= damage;
             if(health <= 0f) {
                 die();
             }
         }
 
+        public void slow(float slowPct) {
+            speed = Mathf.Min(speed, startSpeed * (1f - slowPct));
+        }
+
         void die() {
-            PlayerStats.money += value;
+            PlayerStats.money += worth;
             GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(effect, 5f);          
-            Destroy(gameObject);
-        }
-
-        void nextWaypoint() {
-            if(wpIndex >= Waypoints.wps.Length - 1) {
-                endPath();
-                return;
-            }
-            wpIndex++;
-            target = Waypoints.wps[wpIndex];
-        }
-
-        void endPath() {
-            PlayerStats.lives--;
             Destroy(gameObject);
         }
     }
