@@ -6,6 +6,7 @@ namespace Brackeys {
     public class Shop : MonoBehaviour {
         public TurretBlueprint standardTurret;
         public TurretBlueprint missileLauncher;
+        public TurretBlueprint laserBeamer;
 
         BuildManager buildManager;
 
@@ -17,8 +18,10 @@ namespace Brackeys {
             buildManager.selectTurretToBuild(standardTurret);
         }
         public void selectMissileLauncher() {
-            Debug.Log("MissileLauncher selected");
             buildManager.selectTurretToBuild(missileLauncher);
+        }
+        public void selectLaserBeamer() {
+            buildManager.selectTurretToBuild(laserBeamer);
         }
     }
 }
