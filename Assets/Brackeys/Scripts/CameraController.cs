@@ -13,6 +13,11 @@ namespace Brackeys {
         private bool doMovement = true;
 
         private void Update() {
+            if(GameManager.gameEnded) {
+                this.enabled = false;
+                return;
+            }
+
             if(Input.GetKeyDown(KeyCode.Escape))
                 doMovement = !doMovement;
             if(!doMovement)

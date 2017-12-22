@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Brackeys {
     public class GameManager : MonoBehaviour {
-        private bool gameEnded;
+        public static bool gameEnded;
+        public GameObject gameOverUI;
 
         private void Start() {
             gameEnded = false;
@@ -20,7 +21,7 @@ namespace Brackeys {
         }
 
         void endGame() {
-            Debug.Log("Game end");
+            gameOverUI.SetActive(true);
             gameEnded = true;
         }
     }

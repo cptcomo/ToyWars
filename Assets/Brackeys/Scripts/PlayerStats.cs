@@ -10,9 +10,12 @@ namespace Brackeys {
         public static int lives;
         public int startLives = 20;
 
+        public static int rounds;
+
         private void Start() {
             money = startMoney;
             lives = startLives;
+            rounds = 0;
         }
     }
 }

@@ -25,6 +25,7 @@ namespace Brackeys {
 
         IEnumerator spawnWave() {
             waveIndex++;
+            PlayerStats.rounds++;
             for(int i = 0; i < waveIndex; i++) {
                 spawnEnemy();
                 yield return new WaitForSeconds(0.5f);
