@@ -41,13 +41,16 @@ namespace Brackeys {
         }
 
         private void OnMouseDown() {
-            if(!buildManager.canBuild || EventSystem.current.IsPointerOverGameObject())
+            if(EventSystem.current.IsPointerOverGameObject())
                 return;
 
             if(turret != null) {
-                Debug.Log("Can't build there! - TODO: Display on screen");
+                buildManager.selectNode(this);
                 return;
             }
+
+            if(!buildManager.canBuild)
+                return;
 
             buildManager.buildTurretOn(this);
         }

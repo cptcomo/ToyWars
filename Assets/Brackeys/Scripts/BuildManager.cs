@@ -16,12 +16,30 @@ namespace Brackeys {
         }
 
         private TurretBlueprint turretToBuild;
+        private Node selectedNode;
+        public NodeUI nodeUI;
 
         public bool canBuild { get { return turretToBuild != null; } }
         public bool hasMoney { get { return PlayerStats.money >= turretToBuild.cost; } }
 
         public void selectTurretToBuild(TurretBlueprint turret) {
             turretToBuild = turret;
+            deselectNode();
+        }
+
+        public void selectNode(Node node) {
+            if(selectedNode == node) {
+                deselectNode();
+                return;
+            }
+            selectedNode = node;
+            turretToBuild = null;
+            nodeUI.setTarget(node);
+        }
+
+        public void deselectNode() {
+            selectedNode = null;
+            nodeUI.hide();
         }
 
         public void buildTurretOn(Node node) {
