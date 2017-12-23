@@ -27,6 +27,10 @@ namespace Brackeys {
             deselectNode();
         }
 
+        public TurretBlueprint getTurretToBuild() {
+            return turretToBuild;
+        }
+
         public void selectNode(Node node) {
             if(selectedNode == node) {
                 deselectNode();
@@ -40,22 +44,6 @@ namespace Brackeys {
         public void deselectNode() {
             selectedNode = null;
             nodeUI.hide();
-        }
-
-        public void buildTurretOn(Node node) {
-            if(PlayerStats.money < turretToBuild.cost) {
-                Debug.Log("Not enough money");
-                return;
-            }
-        
-            GameObject turret = (GameObject) Instantiate(turretToBuild.prefab, node.getBuildPosition(), Quaternion.identity);
-            node.turret = turret;
-
-            GameObject effect = (GameObject)Instantiate(buildEffect, node.getBuildPosition(), Quaternion.identity);
-            Destroy(effect, 5);
-
-            PlayerStats.money -= turretToBuild.cost;
-            Debug.Log("Turret Build! Money left: " + PlayerStats.money);
         }
     }
 }

@@ -9,8 +9,12 @@ namespace Brackeys {
         public Color notEnoughMoneyColor;
         public Vector3 posOffset;
 
-        [Header("Optional")]
+        [HideInInspector]
         public GameObject turret;
+        [HideInInspector]
+        public TurretBlueprint turretBlueprint;
+        [HideInInspector]
+        public bool isUpgraded = false;
 
         private Renderer rend;
         private Color startColor;
@@ -52,7 +56,43 @@ namespace Brackeys {
             if(!buildManager.canBuild)
                 return;
 
-            buildManager.buildTurretOn(this);
+            buildTurret(buildManager.getTurretToBuild());
+        }
+
+        void buildTurret(TurretBlueprint blueprint) {
+            if(PlayerStats.money < blueprint.cost) {
+                Debug.Log("Not enough money");
+                return;
+            }
+
+            GameObject turret = (GameObject)Instantiate(blueprint.prefab, getBuildPosition(), Quaternion.identity);
+            this.turret = turret;
+
+            GameObject effect = (GameObject)Instantiate(buildManager.buildEffect, getBuildPosition(), Quaternion.identity);
+            Destroy(effect, 5);
+
+            this.turretBlueprint = blueprint;
+
+            PlayerStats.money -= blueprint.cost;
+        }
+
+        public void upgradeTurret() {
+            if(PlayerStats.money < turretBlueprint.upgradeCost) {
+                Debug.Log("Not enough money to upgrade");
+                return;
+            }
+
+            Destroy(this.turret); //Get rid of old turret
+
+            GameObject turret = (GameObject)Instantiate(turretBlueprint.upgradedPrefab, getBuildPosition(), Quaternion.identity);
+            this.turret = turret;
+
+            GameObject effect = (GameObject)Instantiate(buildManager.buildEffect, getBuildPosition(), Quaternion.identity);
+            Destroy(effect, 5);
+
+            isUpgraded = true;
+
+            PlayerStats.money -= turretBlueprint.upgradeCost;
         }
 
         public Vector3 getBuildPosition() {
