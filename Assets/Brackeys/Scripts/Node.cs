@@ -14,7 +14,7 @@ namespace Brackeys {
         [HideInInspector]
         public TurretBlueprint turretBlueprint;
         [HideInInspector]
-        public bool isUpgraded = false;
+        public bool isUpgraded;
 
         private Renderer rend;
         private Color startColor;
@@ -22,6 +22,7 @@ namespace Brackeys {
         private BuildManager buildManager;
 
         private void Start() {
+            this.isUpgraded = false;
             rend = GetComponent<Renderer>();
             startColor = rend.material.color;
             buildManager = BuildManager.instance;
@@ -72,7 +73,7 @@ namespace Brackeys {
             Destroy(effect, 5);
 
             this.turretBlueprint = blueprint;
-
+            this.isUpgraded = false;
             PlayerStats.money -= blueprint.cost;
         }
 
