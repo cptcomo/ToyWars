@@ -9,5 +9,9 @@ namespace Brackeys {
         public int cost;
         public GameObject upgradedPrefab;
         public int upgradeCost;
+
+        public int getSellAmount() {
+            return this.cost / 2;
+        }
     }
 }

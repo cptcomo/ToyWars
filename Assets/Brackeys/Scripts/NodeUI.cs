@@ -8,6 +8,7 @@ namespace Brackeys {
         private Node target;
         public GameObject ui;
         public Text upgradeCost;
+        public Text sellAmount;
         public Button upgradeButton;
 
         public void setTarget(Node target) {
@@ -23,6 +24,8 @@ namespace Brackeys {
                 upgradeButton.interactable = false;
             }
 
+            sellAmount.text = "$" + target.turretBlueprint.getSellAmount();
+
             ui.SetActive(true);
         }
 
@@ -32,6 +35,11 @@ namespace Brackeys {
 
         public void upgrade() {
             target.upgradeTurret();
+            BuildManager.instance.deselectNode();
+        }
+
+        public void sell() {
+            target.sellTurret();
             BuildManager.instance.deselectNode();
         }
     }
