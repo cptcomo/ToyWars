@@ -37,6 +37,7 @@ namespace Brackeys {
 
         void endPath() {
             PlayerStats.lives--;
+            WaveSpawner.enemiesAlive--;
             Destroy(gameObject);
         }
     }

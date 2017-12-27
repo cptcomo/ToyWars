@@ -16,7 +16,7 @@ namespace Brackeys {
         }
 
         public void menu() {
-            Debug.Log("Go To Menu");
+            SceneManager.LoadScene(0);
         }
     }
 }
