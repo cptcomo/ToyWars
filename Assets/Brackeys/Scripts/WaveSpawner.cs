@@ -32,14 +32,20 @@ namespace Brackeys {
         IEnumerator spawnWave() {
             PlayerStats.rounds++;
             Wave wave = waves[waveIndex];
-            for(int i = 0; i < wave.count; i++) {
-                spawnEnemy(wave.enemy);
-                yield return new WaitForSeconds(1 / wave.rate);
+            for(int i = 0; i < wave.sections.Length; i++) {
+                yield return StartCoroutine(spawnWaveSection(wave.sections[i]));
             }
             waveIndex++;
             if(waveIndex == waves.Length) {
-                Debug.Log("LEVEL WON!");
+                Debug.Log("WIN!");
                 this.enabled = false;
+            }
+        }
+
+        IEnumerator spawnWaveSection(WaveSection section) {
+            for(int i = 0; i < section.count; i++) {
+                spawnEnemy(section.enemy);
+                yield return new WaitForSeconds(1 / section.rate);
             }
         }
         
