@@ -255,8 +255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f029226549893745b5cc244ff3f48d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 40
-  fireRate: 0.4
+  range: 18
+  fireRate: 0.55
   bulletPrefab: {fileID: 1557568546517940, guid: f9b32f70c483761418792f9bda2781ee,
     type: 2}
   useLaser: 0
