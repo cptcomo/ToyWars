@@ -2752,7 +2752,7 @@ Prefab:
     - target: {fileID: 224925090179542248, guid: d39a5660f98f23d469e561b4119125b7,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -51.024994
       objectReference: {fileID: 0}
     - target: {fileID: 224925090179542248, guid: d39a5660f98f23d469e561b4119125b7,
         type: 2}
@@ -2762,7 +2762,7 @@ Prefab:
     - target: {fileID: 224925090179542248, guid: d39a5660f98f23d469e561b4119125b7,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 102.04999
       objectReference: {fileID: 0}
     - target: {fileID: 224925090179542248, guid: d39a5660f98f23d469e561b4119125b7,
         type: 2}
@@ -5364,7 +5364,7 @@ Prefab:
     - target: {fileID: 224925090179542248, guid: d39a5660f98f23d469e561b4119125b7,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -51.024994
       objectReference: {fileID: 0}
     - target: {fileID: 224925090179542248, guid: d39a5660f98f23d469e561b4119125b7,
         type: 2}
@@ -5374,7 +5374,7 @@ Prefab:
     - target: {fileID: 224925090179542248, guid: d39a5660f98f23d469e561b4119125b7,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 224925090179542248, guid: d39a5660f98f23d469e561b4119125b7,
         type: 2}
@@ -11625,7 +11625,7 @@ Prefab:
     - target: {fileID: 224925090179542248, guid: d39a5660f98f23d469e561b4119125b7,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -51.024994
       objectReference: {fileID: 0}
     - target: {fileID: 224925090179542248, guid: d39a5660f98f23d469e561b4119125b7,
         type: 2}
@@ -11635,7 +11635,7 @@ Prefab:
     - target: {fileID: 224925090179542248, guid: d39a5660f98f23d469e561b4119125b7,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 224925090179542248, guid: d39a5660f98f23d469e561b4119125b7,
         type: 2}
