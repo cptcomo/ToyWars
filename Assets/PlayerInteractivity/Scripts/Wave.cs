@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Brackeys {
+namespace PlayerInteractivity {
     [System.Serializable]
     public class Wave {
         public WaveSection[] sections;
     }
-}
 
+}

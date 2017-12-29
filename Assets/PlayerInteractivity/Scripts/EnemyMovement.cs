@@ -17,11 +17,29 @@ namespace PlayerInteractivity {
 
             nva = GetComponent<NavMeshAgent>();
             nva.SetDestination(this.destination.position);
+            nva.stoppingDistance = 1;
+        }
+
+        private void Update() {
+            if(reachedDestination())
+                endPath();
+        }
+
+        bool reachedDestination() {
+            if(!nva.pathPending) {
+                if(nva.remainingDistance <= nva.stoppingDistance) {
+                    Debug.Log(this.transform.name);
+                    if(!nva.hasPath || nva.velocity.sqrMagnitude == 0f) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         void endPath() {
             //PlayerStats.lives--;
-            //WaveSpawner.enemiesAlive--;
+            gm.enemiesAlive--;
             Destroy(gameObject);
         }
 

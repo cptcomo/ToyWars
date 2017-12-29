@@ -9,6 +9,11 @@ namespace PlayerInteractivity {
         [SerializeField]
         private MapData mapData;
 
+        [HideInInspector]
+        public int enemiesAlive;
+
+        public PlayerStats playerStats;
+
         private void Awake() {
             if(instance == null) {
                 instance = this;
@@ -16,6 +21,10 @@ namespace PlayerInteractivity {
             else if(instance != this) {
                 Destroy(gameObject);
             }
+        }
+
+        private void Start() {
+            enemiesAlive = 0;
         }
 
         public static GameManager getInstance() {
