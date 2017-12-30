@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Brackeys/MainMenu.unity
-    guid: 9eff54bdad7874b48b82d8fee304cd48
+    path: Assets/PlayerInteractivity/MainMenu.unity
+    guid: 2ec9691784f26874bbed5dd2645e8126
   - enabled: 1
-    path: Assets/Brackeys/Game.unity
-    guid: bf24812b34675ae4ca5609421f8e8f7c
+    path: Assets/PlayerInteractivity/Game.unity
+    guid: c76356998c92eca4ea96d80a5c677f10

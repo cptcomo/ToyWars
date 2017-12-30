@@ -9,7 +9,9 @@ namespace PlayerInteractivity {
         private WaveSpawner[] spawners;
 
         public float timeBetweenWaves = 2f;
+
         private float countdown = 2f;
+
         private int waveIndex = 0;
 
         private GameManager gm;
@@ -21,6 +23,11 @@ namespace PlayerInteractivity {
             for(int i = 0; i < spawners.Length; i++) {
                 spawners[i] = spawnPoints[i].GetComponent<WaveSpawner>();
             }
+            gm.GameOverEvent += disableScript;
+        }
+
+        private void OnDisable() {
+            gm.GameOverEvent -= disableScript;
         }
 
         private void Update() {
@@ -28,9 +35,7 @@ namespace PlayerInteractivity {
                 return;
 
             if(gameOver()) {
-                //TODO: Game Over Screen
-                Debug.Log("WIN!");
-                this.enabled = false;
+                gm.callEventGameOver();
                 return;
             }
 
@@ -46,7 +51,6 @@ namespace PlayerInteractivity {
 
         void nextWave() {
             foreach(WaveSpawner spawner in spawners) {
-                Debug.Log("Logging: " + waveIndex);
                 spawner.spawnWave(waveIndex);
             }
             waveIndex++;
@@ -58,6 +62,10 @@ namespace PlayerInteractivity {
                     return false;
             }
             return true;
+        }
+
+        void disableScript() {
+            this.enabled = false;
         }
     }
 }

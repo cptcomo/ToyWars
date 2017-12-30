@@ -28,7 +28,6 @@ namespace PlayerInteractivity {
         bool reachedDestination() {
             if(!nva.pathPending) {
                 if(nva.remainingDistance <= nva.stoppingDistance) {
-                    Debug.Log(this.transform.name);
                     if(!nva.hasPath || nva.velocity.sqrMagnitude == 0f) {
                         return true;
                     }

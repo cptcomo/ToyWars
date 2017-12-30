@@ -20,11 +20,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4271470667335636}
   - component: {fileID: 33683987621935310}
-  - component: {fileID: 135603364535960430}
   - component: {fileID: 23783022366449858}
   - component: {fileID: 195176324346920370}
   - component: {fileID: 114559513411291008}
   - component: {fileID: 114361172109718720}
+  - component: {fileID: 135651966576152662}
   m_Layer: 0
   m_Name: Enemy_Simple
   m_TagString: Enemy
@@ -242,7 +242,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf477c6fe72d1b4fa2aba3953ebc0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destination: {fileID: 0}
 --- !u!114 &114987706183168294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -259,7 +258,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!135 &135603364535960430
+--- !u!135 &135651966576152662
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
