@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace PlayerInteractivity {
     public class Enemy : MonoBehaviour {
+        GameManager gm;
         public float startSpeed = 10f;
 
         [HideInInspector]
@@ -20,13 +21,14 @@ namespace PlayerInteractivity {
         public Image healthBar;
 
         private void Start() {
+            gm = GameManager.getInstance();
             speed = startSpeed;
             health = startHealth;
         }
 
         public void takeDamage(float damage) {
             this.health -= damage;
-            healthBar.fillAmount = health / startHealth;
+            //healthBar.fillAmount = health / startHealth;
             if(health <= 0f) {
                 die();
             }
@@ -37,7 +39,7 @@ namespace PlayerInteractivity {
         }
 
         void die() {
-            //WaveSpawner.enemiesAlive--;
+            gm.enemiesAlive--;
             //PlayerStats.money += worth;
             GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(effect, 5f);
