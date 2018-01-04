@@ -10,20 +10,28 @@ namespace PlayerInteractivity {
         private MapData mapData;
 
         [HideInInspector]
+        public int waveIndex;
+
+        [HideInInspector]
         public int enemiesAlive;
 
         public PlayerStats playerStats;
 
         public delegate void GameManagerEventHandler();
+        public event GameManagerEventHandler StartNextWaveEvent;
+        public event GameManagerEventHandler EndWaveEvent;
         public event GameManagerEventHandler MenuToggleEvent;
         public event GameManagerEventHandler RestartLevelEvent;
         public event GameManagerEventHandler GoToMenuSceneEvent;
         public event GameManagerEventHandler GameOverEvent;
 
         [HideInInspector]
-        public bool isGameOver;
+        public enum GameState {
+            Play, Build, Pause, GameOver
+        }
+
         [HideInInspector]
-        public bool isMenuOn;
+        public GameState gameState;
 
         private void Awake() {
             if(instance == null) {
@@ -37,6 +45,11 @@ namespace PlayerInteractivity {
         private void Start() {
             Time.timeScale = 1;
             enemiesAlive = 0;
+            gameState = GameState.Build;
+        }
+
+        private void Update() {
+            Debug.Log(gameState);
         }
 
         public static GameManager getInstance() {
@@ -47,6 +60,34 @@ namespace PlayerInteractivity {
             return this.mapData;
         }
 
+        public bool isPlaying() {
+            return gameState == GameState.Play;
+        }
+
+        public bool isBuilding() {
+            return gameState == GameState.Build;
+        }
+
+        public bool isPaused() {
+            return gameState == GameState.Pause;
+        }
+
+        public bool isGameOver() {
+            return gameState == GameState.GameOver;
+        }
+
+        public void callEventStartNextWave() {
+            if(StartNextWaveEvent != null) {
+                StartNextWaveEvent();
+            }
+        }
+
+        public void callEventEndWave() {
+            if(EndWaveEvent != null) {
+                EndWaveEvent();
+            }
+        }
+
         public void callEventMenuToggle() {
             if(MenuToggleEvent != null) {
                 MenuToggleEvent();
@@ -54,7 +95,7 @@ namespace PlayerInteractivity {
         }
 
         public void callEventRestartLevel() {
-            if(RestartLevelEvent != null) {
+            if(RestartLevelEvent != null) {            
                 RestartLevelEvent();
             }
         }
@@ -67,7 +108,6 @@ namespace PlayerInteractivity {
 
         public void callEventGameOver() {
             if(GameOverEvent != null) {
-                isGameOver = true;
                 GameOverEvent();
             }
         }

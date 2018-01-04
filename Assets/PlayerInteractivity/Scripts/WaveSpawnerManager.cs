@@ -4,61 +4,68 @@ using UnityEngine;
 
 namespace PlayerInteractivity {
     public class WaveSpawnerManager : MonoBehaviour {
-        //public Text countdownText;
         public GameObject[] spawnPoints;
         private WaveSpawner[] spawners;
-
-        public float timeBetweenWaves = 2f;
-
-        private float countdown = 2f;
-
-        private int waveIndex = 0;
-
         private GameManager gm;
+
+        private void OnDisable() {
+            gm.GameOverEvent -= disableScript;
+            gm.StartNextWaveEvent -= startNextWave;
+            gm.EndWaveEvent -= endWave;
+        }
+
+        void startNextWave() {
+            gm.gameState = GameManager.GameState.Play;
+            foreach(WaveSpawner spawner in spawners) {
+                spawner.spawnWave(gm.waveIndex);
+            }
+            gm.waveIndex++;
+        }
+
+        void endWave() {
+            gm.gameState = GameManager.GameState.Build;
+        }
 
         private void Start() {
             gm = GameManager.getInstance();
-            waveIndex = 0;
+            gm.GameOverEvent += disableScript;
+            gm.StartNextWaveEvent += startNextWave;
+            gm.EndWaveEvent += endWave;
+
             spawners = new WaveSpawner[spawnPoints.Length];
             for(int i = 0; i < spawners.Length; i++) {
                 spawners[i] = spawnPoints[i].GetComponent<WaveSpawner>();
             }
-            gm.GameOverEvent += disableScript;
-        }
-
-        private void OnDisable() {
-            gm.GameOverEvent -= disableScript;
         }
 
         private void Update() {
-            if(gm.enemiesAlive > 0)
-                return;
-
-            if(gameOver()) {
+            if(gm.gameState == GameManager.GameState.Build && gameOver()) {
                 gm.callEventGameOver();
                 return;
             }
 
-            if(countdown <= 0f) {
-                nextWave();
-                countdown = timeBetweenWaves;
+            if(gm.gameState == GameManager.GameState.Play && doneWithWave() && gm.enemiesAlive == 0) {
+                gm.callEventEndWave();
                 return;
             }
-            countdown -= Time.deltaTime;
-            countdown = Mathf.Clamp(countdown, 0, Mathf.Infinity);
-            //countdownText.text = string.Format("{0:00.00}", countdown);
-        }
-
-        void nextWave() {
-            foreach(WaveSpawner spawner in spawners) {
-                spawner.spawnWave(waveIndex);
+      
+            if(gm.gameState == GameManager.GameState.Build && Input.GetKeyDown(KeyCode.S)) {
+                gm.callEventStartNextWave();
+                return;
             }
-            waveIndex++;
         }
 
         bool gameOver() {
             foreach(WaveSpawner spawner in spawners) {
                 if(!spawner.outOfWaves())
+                    return false;
+            }
+            return true;
+        }
+
+        bool doneWithWave() {
+            foreach(WaveSpawner spawner in spawners) {
+                if(!spawner.doneWithWave)
                     return false;
             }
             return true;

@@ -12,16 +12,24 @@ namespace PlayerInteractivity {
         private void OnEnable() {
             gm = GameManager.getInstance();
             gm.GameOverEvent += turnOnGameOverPanel;
+            gm.GameOverEvent += updateState;
         }
 
         private void OnDisable() {
             gm.GameOverEvent -= turnOnGameOverPanel;
+            gm.GameOverEvent -= updateState;
+        }
+
+        void updateState() {
+            gm.gameState = GameManager.GameState.GameOver;
         }
 
         void turnOnGameOverPanel() {
             if(panelGameOver != null) {
                 panelGameOver.SetActive(true);
-            } else Debug.LogWarning("Please make a reference to a Game Over UI panel in the GameOver script");
+            } else {
+                Debug.LogWarning("Please make a reference to a Game Over UI panel in the GameOver script");
+            }
         }
     }
 }

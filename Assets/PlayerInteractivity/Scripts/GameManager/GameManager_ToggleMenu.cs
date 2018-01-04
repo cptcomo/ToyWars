@@ -7,6 +7,8 @@ namespace PlayerInteractivity {
         private GameManager gm;
         public GameObject menu;
 
+        private GameManager.GameState lastStateBeforePause;
+
         private void OnEnable() {
             gm = GameManager.getInstance();
             gm.MenuToggleEvent += toggleMenu;
@@ -21,7 +23,7 @@ namespace PlayerInteractivity {
         }
 
         void checkForMenuToggleRequest() {
-            if(Input.GetKeyUp(KeyCode.Escape) && !gm.isGameOver) {
+            if(Input.GetKeyUp(KeyCode.Escape) && !gm.isGameOver()) {
                 gm.callEventMenuToggle();
             }
         }
@@ -29,7 +31,13 @@ namespace PlayerInteractivity {
         void toggleMenu() {
             if(menu != null) {
                 menu.SetActive(!menu.activeSelf);
-                gm.isMenuOn = !gm.isMenuOn;
+                if(gm.isPaused()) {
+                    gm.gameState = lastStateBeforePause;
+                }
+                else {
+                    lastStateBeforePause = gm.gameState;
+                    gm.gameState = GameManager.GameState.Pause;
+                }
             }
             else {
                 Debug.LogWarning("Menu not referenced in GameManager_ToggleMenu script");

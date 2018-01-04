@@ -4860,7 +4860,6 @@ MonoBehaviour:
   - {fileID: 171264741}
   - {fileID: 1480880340}
   - {fileID: 2092656777}
-  timeBetweenWaves: 2
 --- !u!4 &375992833
 Transform:
   m_ObjectHideFlags: 0
@@ -15211,10 +15210,10 @@ MonoBehaviour:
     endNodes:
     - {fileID: 827809383}
     - {fileID: 1319072741}
+  waveIndex: 0
   enemiesAlive: 0
   playerStats: {fileID: 0}
-  isGameOver: 0
-  isMenuOn: 0
+  gameState: 0
 --- !u!4 &1147363918
 Transform:
   m_ObjectHideFlags: 0

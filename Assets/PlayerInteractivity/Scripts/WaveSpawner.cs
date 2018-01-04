@@ -10,6 +10,9 @@ namespace PlayerInteractivity {
 
         GameManager gm;
 
+        [HideInInspector]
+        public bool doneWithWave;
+
         private void Start() {
             gm = GameManager.getInstance();
             waveIndex = 0;
@@ -25,10 +28,12 @@ namespace PlayerInteractivity {
         }
 
         IEnumerator spawnNextWave() {
+            doneWithWave = false;
             Wave wave = waves[waveIndex];
             for(int i = 0; i < wave.sections.Length; i++) {
                 yield return StartCoroutine(spawnWaveSection(wave.sections[i]));
             }
+            doneWithWave = true;
             waveIndex++;
         }
 
