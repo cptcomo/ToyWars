@@ -6,6 +6,7 @@ using UnityEngine.AI;
 namespace PlayerInteractivity {
     [RequireComponent(typeof(Enemy))]
     public class EnemyMovement : MonoBehaviour {
+        public float startSpeed = 3f;
         private Transform destination;
         private NavMeshAgent nva;
         private GameManager gm;
@@ -18,6 +19,7 @@ namespace PlayerInteractivity {
             nva = GetComponent<NavMeshAgent>();
             nva.SetDestination(this.destination.position);
             nva.stoppingDistance = 1;
+            nva.speed = startSpeed;
         }
 
         private void Update() {
@@ -34,6 +36,10 @@ namespace PlayerInteractivity {
                 }
             }
             return false;
+        }
+
+        public void slow(float slowPct) {
+            nva.speed = Mathf.Min(nva.speed, startSpeed * (1f - slowPct));
         }
 
         void endPath() {

@@ -6,11 +6,6 @@ using UnityEngine.UI;
 namespace PlayerInteractivity {
     public class Enemy : MonoBehaviour {
         GameManager gm;
-        public float startSpeed = 10f;
-
-        [HideInInspector]
-        public float speed;
-
         public float startHealth = 100f;
         private float health;
         public int worth = 50;
@@ -22,7 +17,6 @@ namespace PlayerInteractivity {
 
         private void Start() {
             gm = GameManager.getInstance();
-            speed = startSpeed;
             health = startHealth;
         }
 
@@ -32,10 +26,6 @@ namespace PlayerInteractivity {
             if(health <= 0f) {
                 die();
             }
-        }
-
-        public void slow(float slowPct) {
-            speed = Mathf.Min(speed, startSpeed * (1f - slowPct));
         }
 
         void die() {

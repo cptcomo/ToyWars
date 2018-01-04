@@ -390,7 +390,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 0}
   useLaser: 1
   dot: 40
-  slowPct: 0.3
+  slowPct: 0.7
   lineRenderer: {fileID: 120155357004823078}
   laserImpactEffect: {fileID: 198858390960681222}
   impactLight: {fileID: 108297251997772158}

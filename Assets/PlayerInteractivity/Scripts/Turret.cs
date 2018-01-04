@@ -25,6 +25,7 @@ namespace PlayerInteractivity {
         public string enemyTag = "Enemy";
         private Transform target;
         private Enemy targetEnemy;
+        private EnemyMovement targetMovement;
         public Transform partToRotate;
         public Transform firePoint;
 
@@ -72,6 +73,7 @@ namespace PlayerInteractivity {
             if(nearestEnemy != null && minDist <= range) {
                 target = nearestEnemy.transform;
                 targetEnemy = target.GetComponent<Enemy>();
+                targetMovement = target.GetComponent<EnemyMovement>();
             } else
                 target = null;
         }
@@ -90,7 +92,7 @@ namespace PlayerInteractivity {
 
         void laser() {
             targetEnemy.takeDamage(dot * Time.deltaTime);
-            targetEnemy.slow(slowPct);
+            targetMovement.slow(slowPct);
             if(!lineRenderer.enabled) {
                 lineRenderer.enabled = true;
                 laserImpactEffect.Play();
