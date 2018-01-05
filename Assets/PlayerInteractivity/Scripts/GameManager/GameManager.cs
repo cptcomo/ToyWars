@@ -15,8 +15,6 @@ namespace PlayerInteractivity {
         [HideInInspector]
         public int enemiesAlive;
 
-        public PlayerStats playerStats;
-
         public delegate void GameManagerEventHandler();
         public event GameManagerEventHandler StartNextWaveEvent;
         public event GameManagerEventHandler EndWaveEvent;
