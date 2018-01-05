@@ -28,9 +28,11 @@ namespace PlayerInteractivity {
         public void selectStandardTurret() {
             buildManager.selectTurretToBuild(standardTurret);
         }
+
         public void selectMissileLauncher() {
             buildManager.selectTurretToBuild(missileLauncher);
         }
+
         public void selectLaserBeamer() {
             buildManager.selectTurretToBuild(laserBeamer);
         }

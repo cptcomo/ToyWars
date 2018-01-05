@@ -5,6 +5,8 @@ using UnityEngine;
 namespace PlayerInteractivity {
     public class BuildManager : MonoBehaviour {
         private static BuildManager instance;
+        private GameManager gm;
+
         public GameObject buildEffect;
 
         private void Awake() {
@@ -12,6 +14,10 @@ namespace PlayerInteractivity {
                 instance = this;
             else
                 Destroy(gameObject);
+        }
+
+        private void Start() {
+            gm = GameManager.getInstance();
         }
 
         public static BuildManager getInstance() {
@@ -22,7 +28,7 @@ namespace PlayerInteractivity {
         private Node selectedNode;
 
         public bool canBuild { get { return turretToBuild != null; } }
-        public bool hasMoney { get { return PlayerStats.money >= turretToBuild.cost; } }
+        public bool hasMoney { get { return gm.playerStats.money >= turretToBuild.cost; } }
 
         public void selectTurretToBuild(TurretBlueprint turret) {
             turretToBuild = turret;

@@ -46,11 +46,11 @@ namespace PlayerInteractivity {
             Destroy(effect, 5f);
 
             this.turretBlueprint = blueprint;
-            PlayerStats.money -= blueprint.cost;
+            gm.playerStats.money -= turretBlueprint.cost;
         }
 
         public Vector3 getBuildPosition() {
-            return transform.position + posOffset;
+            return transform.position;
         }
     }
 }

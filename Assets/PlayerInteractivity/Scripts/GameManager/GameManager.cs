@@ -15,6 +15,8 @@ namespace PlayerInteractivity {
         [HideInInspector]
         public int enemiesAlive;
 
+        public PlayerStats playerStats;
+
         public delegate void GameManagerEventHandler();
         public event GameManagerEventHandler StartNextWaveEvent;
         public event GameManagerEventHandler EndWaveEvent;
@@ -43,6 +45,7 @@ namespace PlayerInteractivity {
         private void Start() {
             Time.timeScale = 1;
             enemiesAlive = 0;
+            playerStats.init();
             gameState = GameState.Build;
         }
 

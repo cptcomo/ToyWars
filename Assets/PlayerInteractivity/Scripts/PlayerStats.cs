@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace PlayerInteractivity {
-    public class PlayerStats : MonoBehaviour {
-        public static int money;
-        public int startMoney = 400;
+    [System.Serializable]
+    public class PlayerStats {
+        public int startMoney;
+        public int startLives;
 
-        public static int lives;
-        public int startLives = 20;
+        [HideInInspector]
+        public int money;
+        [HideInInspector]
+        public int lives;
 
-        private void Start() {
-            money = startMoney;
-            lives = startLives;
+        public void init() {
+            this.money = startMoney;
+            this.lives = startLives;
         }
     }
 }
