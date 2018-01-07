@@ -24,10 +24,12 @@ namespace PlayerInteractivity {
             if(gm.isBuilding()) {
                 if(EventSystem.current.IsPointerOverGameObject())
                     return;
+
                 if(turret != null) {
-                    buildManager.selectNode(this);
+                    gm.callEventSelectNode(this);
                     return;
                 }
+
                 if(!buildManager.canBuild)
                     return;
 

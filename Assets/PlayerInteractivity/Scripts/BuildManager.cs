@@ -6,7 +6,6 @@ namespace PlayerInteractivity {
     public class BuildManager : MonoBehaviour {
         private static BuildManager instance;
         private GameManager gm;
-
         public GameObject buildEffect;
 
         private void Awake() {
@@ -18,6 +17,11 @@ namespace PlayerInteractivity {
 
         private void Start() {
             gm = GameManager.getInstance();
+            gm.SelectNodeEvent += selectNode;
+        }
+
+        private void OnDisable() {
+            gm.SelectNodeEvent -= selectNode;
         }
 
         public static BuildManager getInstance() {

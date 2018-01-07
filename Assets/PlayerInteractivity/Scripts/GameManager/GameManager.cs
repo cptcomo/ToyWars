@@ -25,6 +25,12 @@ namespace PlayerInteractivity {
         public event GameManagerEventHandler GoToMenuSceneEvent;
         public event GameManagerEventHandler GameOverEvent;
 
+        public delegate void NodeSelectHandler(Node node);
+        public event NodeSelectHandler SelectNodeEvent;
+
+        public delegate void NodeDeselectHandler();
+        public event NodeDeselectHandler DeselectNodeEvent;
+
         [HideInInspector]
         public enum GameState {
             Play, Build, Pause, GameOver
@@ -110,6 +116,18 @@ namespace PlayerInteractivity {
         public void callEventGameOver() {
             if(GameOverEvent != null) {
                 GameOverEvent();
+            }
+        }
+
+        public void callEventSelectNode(Node node) {
+            if(SelectNodeEvent != null) {
+                SelectNodeEvent(node);
+            }
+        }
+
+        public void callEventDeselectNode() {
+            if(DeselectNodeEvent != null) {
+                DeselectNodeEvent();
             }
         }
     }
