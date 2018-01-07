@@ -18,10 +18,12 @@ namespace PlayerInteractivity {
         private void Start() {
             gm = GameManager.getInstance();
             gm.SelectNodeEvent += selectNode;
+            gm.DeselectNodeEvent += deselectNode;
         }
 
         private void OnDisable() {
             gm.SelectNodeEvent -= selectNode;
+            gm.DeselectNodeEvent -= deselectNode;
         }
 
         public static BuildManager getInstance() {
@@ -36,7 +38,7 @@ namespace PlayerInteractivity {
 
         public void selectTurretToBuild(TurretBlueprint turret) {
             turretToBuild = turret;
-            deselectNode();
+            gm.callEventDeselectNode();
         }
 
         public TurretBlueprint getTurretToBuild() {
@@ -45,7 +47,7 @@ namespace PlayerInteractivity {
 
         public void selectNode(Node node) {
             if(selectedNode == node) {
-                deselectNode();
+                gm.callEventDeselectNode();
                 return;
             }
             selectedNode = node;
@@ -53,6 +55,7 @@ namespace PlayerInteractivity {
         }
 
         public void deselectNode() {
+            Debug.Log("Deselected");
             selectedNode = null;
         }
     }
