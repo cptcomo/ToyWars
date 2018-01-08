@@ -29,6 +29,8 @@ namespace PlayerInteractivity {
         public Transform partToRotate;
         public Transform firePoint;
 
+        public TowerUpgradePath towerUpgradePath;
+
         private void Start() {
             InvokeRepeating("updateTarget", 0f, 0.5f);
         }
