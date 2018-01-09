@@ -3820,6 +3820,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeUI: {fileID: 1825583120}
   upgradeUI: {fileID: 1182626428}
+  upgradeButtonPrefab: {fileID: 1104416984160120, guid: 11b45ccb9a7735f4eb407ac009f2477f,
+    type: 2}
+  upgradeNameText: UpgradeName
+  upgradeCostText: UpgradeCost
 --- !u!1001 &263352830
 Prefab:
   m_ObjectHideFlags: 0
@@ -5841,66 +5845,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4028682564120768, guid: 5011369c0e5894944a809f5840ea6943,
     type: 2}
   m_PrefabInternal: {fileID: 465548972}
---- !u!1001 &467566004
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4577398279509270, guid: 86464171711737d4482633f8ecd7acc7, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 117.97359
-      objectReference: {fileID: 0}
-    - target: {fileID: 4577398279509270, guid: 86464171711737d4482633f8ecd7acc7, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 328.74545
-      objectReference: {fileID: 0}
-    - target: {fileID: 4577398279509270, guid: 86464171711737d4482633f8ecd7acc7, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0.7080219
-      objectReference: {fileID: 0}
-    - target: {fileID: 4577398279509270, guid: 86464171711737d4482633f8ecd7acc7, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4577398279509270, guid: 86464171711737d4482633f8ecd7acc7, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4577398279509270, guid: 86464171711737d4482633f8ecd7acc7, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4577398279509270, guid: 86464171711737d4482633f8ecd7acc7, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4577398279509270, guid: 86464171711737d4482633f8ecd7acc7, type: 2}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 86464171711737d4482633f8ecd7acc7, type: 2}
-  m_IsPrefabParent: 0
---- !u!1 &467566005 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1269739363097102, guid: 86464171711737d4482633f8ecd7acc7,
-    type: 2}
-  m_PrefabInternal: {fileID: 467566004}
---- !u!114 &467566006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 467566005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cd53a2f829c856419e079e562fe23b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgradeName: JFI
-  cost: 20
 --- !u!1001 &470622739
 Prefab:
   m_ObjectHideFlags: 0

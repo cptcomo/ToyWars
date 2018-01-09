@@ -20,6 +20,9 @@ namespace PlayerInteractivity {
             buildManager = BuildManager.getInstance();
         }
 
+        private void OnDisable() {
+        }
+
         private void OnMouseDown() {
             if(gm.isBuilding()) {
                 if(EventSystem.current.IsPointerOverGameObject())
@@ -49,6 +52,11 @@ namespace PlayerInteractivity {
 
             this.turretBlueprint = blueprint;
             gm.playerStats.money -= turretBlueprint.cost;
+        }
+
+        public void upgradeTurret(int upgradeIndex) {
+            this.turret.GetComponent<Turret>().upgrade(upgradeIndex);
+            gm.callEventSelectNode(this);
         }
 
         public Vector3 getBuildPosition() {

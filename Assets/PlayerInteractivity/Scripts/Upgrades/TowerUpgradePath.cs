@@ -13,11 +13,25 @@ namespace PlayerInteractivity {
             if(leftIndex >= 2) {
                 if(leftIndex != leftPath.Length)
                     return new TowerUpgrade[] { leftPath[leftIndex] };
+                else return new TowerUpgrade[] { };
             } else if(rightIndex >= 2) {
                 if(rightIndex != rightPath.Length)
                     return new TowerUpgrade[] { rightPath[rightIndex] };
-            } 
-            return new TowerUpgrade[] { leftPath[leftIndex], rightPath[rightIndex] };
+                else return new TowerUpgrade[] { };
+            } else return new TowerUpgrade[] { leftPath[leftIndex], rightPath[rightIndex] }; 
+        }
+
+        public void upgrade(int upgradeIndex) {
+            if(upgradeIndex == 0) {
+                TowerUpgrade upgrade = leftPath[leftIndex];
+                leftIndex++;
+                upgrade.activate();
+            }
+            else {
+                TowerUpgrade upgrade = rightPath[rightIndex];
+                rightIndex++;
+                upgrade.activate();
+            }
         }
     }
 }

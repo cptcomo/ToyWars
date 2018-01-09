@@ -51,5 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5b4b89ba51d5641932f9b2ae709425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: 
+  upgradeName: Bazinga
   cost: 0

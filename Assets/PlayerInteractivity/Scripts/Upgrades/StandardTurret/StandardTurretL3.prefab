@@ -51,5 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e1f67bff6ae2e5439fee4dc94deb718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: 
+  upgradeName: Bazooka
   cost: 0

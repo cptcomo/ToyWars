@@ -115,6 +115,10 @@ namespace PlayerInteractivity {
                 bullet.seek(target);
             }
         }
+
+        public void upgrade(int upgradeIndex) {
+            towerUpgradePath.upgrade(upgradeIndex);
+        }
     }
 }
 

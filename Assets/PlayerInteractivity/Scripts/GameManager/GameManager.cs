@@ -31,6 +31,9 @@ namespace PlayerInteractivity {
         public delegate void NodeDeselectHandler();
         public event NodeDeselectHandler DeselectNodeEvent;
 
+        public delegate void UpgradeTurretHandler(int upgradeIndex);
+        public event UpgradeTurretHandler UpgradeTurretEvent;
+
         [HideInInspector]
         public enum GameState {
             Play, Build, Pause, GameOver
@@ -128,6 +131,12 @@ namespace PlayerInteractivity {
         public void callEventDeselectNode() {
             if(DeselectNodeEvent != null) {
                 DeselectNodeEvent();
+            }
+        }
+
+        public void callEventUpgradeTurret(int upgradeIndex) {
+            if(UpgradeTurretEvent != null) {
+                UpgradeTurretEvent(upgradeIndex);
             }
         }
     }
