@@ -272,7 +272,7 @@ MonoBehaviour:
   firePoint: {fileID: 4515269661851138}
   towerUpgradePath:
     leftPath:
-    - {fileID: 114396012946887034, guid: bed8afa9b6b653144ae2a4991badc9a5, type: 2}
+    - {fileID: 114074161691967086, guid: bed8afa9b6b653144ae2a4991badc9a5, type: 2}
     - {fileID: 114562219858296546, guid: 2eafe4b00749c6646b5e370e2d03f33a, type: 2}
     - {fileID: 114355754040661540, guid: 681168ff0d051b9448eebf9e8de21e64, type: 2}
     - {fileID: 114267408649942134, guid: d2ef2081985ac194282b3077d9956393, type: 2}

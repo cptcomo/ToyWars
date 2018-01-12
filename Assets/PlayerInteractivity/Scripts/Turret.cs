@@ -36,9 +36,9 @@ namespace PlayerInteractivity {
         }
 
         private void Update() {
-            if(target == null) {
-                if(useLaser) {
-                    if(lineRenderer.enabled) {
+            if (target == null) {
+                if (useLaser) {
+                    if (lineRenderer.enabled) {
                         lineRenderer.enabled = false;
                         laserImpactEffect.Stop();
                         impactLight.enabled = false;
@@ -49,10 +49,10 @@ namespace PlayerInteractivity {
 
             lockOnTarget();
 
-            if(useLaser)
+            if (useLaser)
                 laser();
             else {
-                if(fireCountdown <= 0f) {
+                if (fireCountdown <= 0f) {
                     shoot();
                     fireCountdown = 1f / fireRate;
                 }
@@ -65,14 +65,14 @@ namespace PlayerInteractivity {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
             float minDist = Mathf.Infinity;
             GameObject nearestEnemy = null;
-            foreach(GameObject enemy in enemies) {
+            foreach (GameObject enemy in enemies) {
                 float dist = Vector3.Distance(transform.position, enemy.transform.position);
-                if(dist < minDist) {
+                if (dist < minDist) {
                     minDist = dist;
                     nearestEnemy = enemy;
                 }
             }
-            if(nearestEnemy != null && minDist <= range) {
+            if (nearestEnemy != null && minDist <= range) {
                 target = nearestEnemy.transform;
                 targetEnemy = target.GetComponent<Enemy>();
                 targetMovement = target.GetComponent<EnemyMovement>();
@@ -95,7 +95,7 @@ namespace PlayerInteractivity {
         void laser() {
             targetEnemy.takeDamage(dot * Time.deltaTime);
             targetMovement.slow(slowPct);
-            if(!lineRenderer.enabled) {
+            if (!lineRenderer.enabled) {
                 lineRenderer.enabled = true;
                 laserImpactEffect.Play();
                 impactLight.enabled = true;
@@ -111,13 +111,28 @@ namespace PlayerInteractivity {
         void shoot() {
             GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             Bullet bullet = bulletGO.GetComponent<Bullet>();
-            if(bullet != null) {
+            if (bullet != null) {
                 bullet.seek(target);
             }
         }
 
         public void upgrade(int upgradeIndex) {
-            towerUpgradePath.upgrade(upgradeIndex);
+            towerUpgradePath.upgrade(upgradeIndex, this);
+        }
+
+        public void updateFireRate(float pct)
+        {
+            fireRate *= (1 + pct / 100);
+        }
+
+        public void updateRange(float pct)
+        {
+            range *= (1 + pct / 100);
+        }
+
+        public void updateSlowPct(float pct)
+        {
+            slowPct *= (1 + pct / 100);
         }
     }
 }

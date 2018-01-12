@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4744951135532702}
-  - component: {fileID: 114396012946887034}
+  - component: {fileID: 114074161691967086}
   m_Layer: 0
   m_Name: StandardTurretL1
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114396012946887034
+--- !u!114 &114074161691967086
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,8 +48,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1613066126285836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fa68b0e2bf92734885a6c64b7d0e6ad, type: 3}
+  m_Script: {fileID: 11500000, guid: fef2eba7708ffb348bf3f7228823dde0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Shoot Fast
+  upgradeName: Faster Shooting
   cost: 150
+  pct: 400

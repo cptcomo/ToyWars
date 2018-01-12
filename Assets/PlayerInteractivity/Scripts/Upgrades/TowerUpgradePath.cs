@@ -21,16 +21,16 @@ namespace PlayerInteractivity {
             } else return new TowerUpgrade[] { leftPath[leftIndex], rightPath[rightIndex] }; 
         }
 
-        public void upgrade(int upgradeIndex) {
+        public void upgrade(int upgradeIndex, Turret turret) {
             if(upgradeIndex == 0) {
                 TowerUpgrade upgrade = leftPath[leftIndex];
                 leftIndex++;
-                upgrade.activate();
+                upgrade.activate(turret);
             }
             else {
                 TowerUpgrade upgrade = rightPath[rightIndex];
                 rightIndex++;
-                upgrade.activate();
+                upgrade.activate(turret);
             }
         }
     }

@@ -7,6 +7,6 @@ namespace PlayerInteractivity {
         public string upgradeName;
         public int cost;
 
-        public abstract void activate();
+        public abstract void activate(Turret turret);
     }
 }
