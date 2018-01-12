@@ -6,8 +6,9 @@ namespace PlayerInteractivity {
     public class Bullet : MonoBehaviour {
         private Transform target;
         public float speed = 70f;
-        public int damage = 50;
-        public float explosionRadius = 0f;
+
+        private float damage;
+        private float explosionRadius;
         public GameObject impactEffect;
 
         public void seek(Transform target) {
@@ -29,6 +30,16 @@ namespace PlayerInteractivity {
 
             transform.Translate(dir.normalized * distToMove, Space.World);
             transform.LookAt(target);
+        }
+
+        public void setDamage(float damage)
+        {
+            this.damage = damage;
+        }
+
+        public void setExplosionRadius(float explosionRadius)
+        {
+            this.explosionRadius = explosionRadius;
         }
 
         void hitTarget() {

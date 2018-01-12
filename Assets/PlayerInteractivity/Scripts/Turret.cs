@@ -9,6 +9,8 @@ namespace PlayerInteractivity {
 
         [Header("Use Bullets (Default)")]
         public float fireRate = 1f;
+        public float explosionRadius = 0f;
+        public float damage = 50f;
         private float fireCountdown = 0;
         public GameObject bulletPrefab;
 
@@ -113,6 +115,8 @@ namespace PlayerInteractivity {
             Bullet bullet = bulletGO.GetComponent<Bullet>();
             if (bullet != null) {
                 bullet.seek(target);
+                bullet.setDamage(damage);
+                bullet.setExplosionRadius(explosionRadius);
             }
         }
 
