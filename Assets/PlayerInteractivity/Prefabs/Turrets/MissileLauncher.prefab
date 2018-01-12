@@ -257,6 +257,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 15
   fireRate: 0.4
+  explosionRadius: 7
+  damage: 50
   bulletPrefab: {fileID: 1802994176725908, guid: 6b8db085654b67b47b39e775cb7693f1,
     type: 2}
   useLaser: 0
@@ -269,3 +271,6 @@ MonoBehaviour:
   enemyTag: Enemy
   partToRotate: {fileID: 4472867435522608}
   firePoint: {fileID: 4329050872738252}
+  towerUpgradePath:
+    leftPath: []
+    rightPath: []
