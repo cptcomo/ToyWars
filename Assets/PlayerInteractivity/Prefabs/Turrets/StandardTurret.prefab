@@ -258,6 +258,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 10
   fireRate: 1
+  explosionRadius: 0
+  damage: 50
   bulletPrefab: {fileID: 1826154541861776, guid: f94ecd8d4d3ddf7409a97161c0b505d7,
     type: 2}
   useLaser: 0
@@ -277,4 +279,5 @@ MonoBehaviour:
     - {fileID: 114355754040661540, guid: 681168ff0d051b9448eebf9e8de21e64, type: 2}
     - {fileID: 114267408649942134, guid: d2ef2081985ac194282b3077d9956393, type: 2}
     rightPath:
+    - {fileID: 114009824354822992, guid: 86464171711737d4482633f8ecd7acc7, type: 2}
     - {fileID: 114009824354822992, guid: 86464171711737d4482633f8ecd7acc7, type: 2}
