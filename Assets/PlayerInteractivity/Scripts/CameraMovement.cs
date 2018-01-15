@@ -48,6 +48,22 @@ namespace PlayerInteractivity {
             }
         }
 
+        public void qAbility() {
+
+        }
+
+        public void wAbility() {
+
+        }
+
+        public void eAbility() {
+
+        }
+
+        public void rAbility() {
+
+        }
+
         void focusOnPlayer() {
             this.transform.position = player.position + playerHoverOffset;  
         }
