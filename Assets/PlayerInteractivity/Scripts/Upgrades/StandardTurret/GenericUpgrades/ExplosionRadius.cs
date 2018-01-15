@@ -10,7 +10,7 @@ namespace PlayerInteractivity
 
         public override void activate(Turret turret)
         {
-
+            turret.updateExplosionRadius(pct);
         }
     }
 }

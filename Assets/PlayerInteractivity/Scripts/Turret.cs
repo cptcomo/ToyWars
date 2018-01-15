@@ -138,6 +138,11 @@ namespace PlayerInteractivity {
         {
             slowPct *= (1 + pct / 100);
         }
+
+        public void updateExplosionRadius(float pct)
+        {
+            explosionRadius *= (1 + pct / 100);
+        }
     }
 }
 
