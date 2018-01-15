@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4319472635671708}
-  - component: {fileID: 114562219858296546}
+  - component: {fileID: 114717798464214838}
   m_Layer: 0
   m_Name: StandardTurretL2
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114562219858296546
+--- !u!114 &114717798464214838
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,8 +48,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1152819309387998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d81a0e45b681a3844b296f5efa640a4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 19e76de62ee247e4aaa4c4f72267655f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Far Range
-  cost: 300
+  upgradeName: More Range
+  cost: 200
+  pct: 70

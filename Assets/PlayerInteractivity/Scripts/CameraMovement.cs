@@ -7,6 +7,7 @@ namespace PlayerInteractivity {
         private GameManager gm;
 
         public Transform player;
+        private Player playerScript;
         public Vector3 playerHoverOffset;
 
         public float panSpeed = 30f;
@@ -17,6 +18,8 @@ namespace PlayerInteractivity {
 
         private void Start() {
             gm = GameManager.getInstance();
+            playerScript = player.gameObject.GetComponent<Player>();
+            playerScript.setCameraHeightOffset(playerHoverOffset.y);
         }
 
         private void Update() {
@@ -41,12 +44,12 @@ namespace PlayerInteractivity {
                 transform.position = pos;
             }
             else if(gm.gameState == GameManager.GameState.Play){
-                //focusOnPlayer();
+                focusOnPlayer();
             }
         }
 
         void focusOnPlayer() {
-            this.transform.position = player.position + playerHoverOffset;
+            this.transform.position = player.position + playerHoverOffset;  
         }
     }
 }
