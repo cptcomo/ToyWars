@@ -2543,6 +2543,55 @@ Transform:
   m_PrefabParentObject: {fileID: 4671235678134940, guid: 5f307ca1fbbc98a4d9305f82cdeac375,
     type: 2}
   m_PrefabInternal: {fileID: 185493563}
+--- !u!1 &185687195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1450471947962614, guid: 27fa14f34439bd74590e3b139e6da125,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 185687197}
+  - component: {fileID: 185687196}
+  m_Layer: 0
+  m_Name: QAbility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &185687196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114604322812741000, guid: 27fa14f34439bd74590e3b139e6da125,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 185687195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed80c01f223b19e4f8671fd2e0e9bc22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: Shoot
+  description: Shoots in a line
+  cooldown: 0.4
+  projectile: {fileID: 1826154541861776, guid: 805346df6000c4243985b7651f8f27e8, type: 2}
+  damage: 25
+  range: 80
+--- !u!4 &185687197
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4261278895157658, guid: 27fa14f34439bd74590e3b139e6da125,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 185687195}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.134811, y: -5.8819623, z: 10.881923}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1142278853}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &185823377
 Prefab:
   m_ObjectHideFlags: 0
@@ -3474,6 +3523,55 @@ Transform:
   m_PrefabParentObject: {fileID: 4671235678134940, guid: 5f307ca1fbbc98a4d9305f82cdeac375,
     type: 2}
   m_PrefabInternal: {fileID: 247148440}
+--- !u!1 &247805662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 247805663}
+  - component: {fileID: 247805664}
+  m_Layer: 0
+  m_Name: RAbility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &247805663
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 247805662}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1142278853}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &247805664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 247805662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f611a02e318bf25479ffb2bda97a0713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: Bazooka
+  description: Shoots a lot of bullets
+  cooldown: 10
+  numOfCasts: 3
+  intervalBtwnCast: 0.75
+  startCDOnCast: 0
+  projectile: {fileID: 1826154541861776, guid: 805346df6000c4243985b7651f8f27e8, type: 2}
+  damagePerProjectile: 25
+  range: 200
 --- !u!1001 &250857084
 Prefab:
   m_ObjectHideFlags: 0
@@ -8718,6 +8816,58 @@ Transform:
   m_PrefabParentObject: {fileID: 4884731537621684, guid: b48c6f59314855e48abff3be7d5ac171,
     type: 2}
   m_PrefabInternal: {fileID: 650878354}
+--- !u!1 &660104432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1883577395789576, guid: ad3e191734ca7f64bb8a4658a96a792b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 660104434}
+  - component: {fileID: 660104433}
+  m_Layer: 0
+  m_Name: EAbility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &660104433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114845771753614306, guid: ad3e191734ca7f64bb8a4658a96a792b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 660104432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e68de7c3b57570408e2cd8857e01c6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: Triple Shot
+  description: Shoots Three Bullets
+  cooldown: 4
+  numOfCasts: 3
+  intervalBtwnCast: 0.35
+  startCDOnCast: 0
+  projectile: {fileID: 1826154541861776, guid: 805346df6000c4243985b7651f8f27e8, type: 2}
+  damagePerBullet: 25
+  range: 80
+--- !u!4 &660104434
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4389489618597738, guid: ad3e191734ca7f64bb8a4658a96a792b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 660104432}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.134811, y: -5.8819623, z: 10.881923}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1142278853}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &661761383
 Prefab:
   m_ObjectHideFlags: 0
@@ -15241,10 +15391,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a22dea1c41f1f5d48b5c494f4206e2a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 1826154541861776, guid: 805346df6000c4243985b7651f8f27e8, type: 2}
   startHealth: 100
   startSpeed: 7
   roundStartPosition: {x: 2.5, y: 0.5, z: 7}
+  Q: {fileID: 185687196}
+  W: {fileID: 0}
+  E: {fileID: 660104433}
+  R: {fileID: 247805664}
 --- !u!23 &1142278850
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15307,7 +15460,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.5, y: 0.5, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 185687197}
+  - {fileID: 660104434}
+  - {fileID: 247805663}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

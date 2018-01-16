@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33197242331805574}
   - component: {fileID: 23529593341759420}
   - component: {fileID: 114338896590453782}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 70
-  damage: 50
-  explosionRadius: 0
   impactEffect: {fileID: 1749179818377794, guid: 200f08f9bca641642a45cbe7a91239af,
     type: 2}

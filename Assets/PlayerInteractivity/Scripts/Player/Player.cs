@@ -5,8 +5,6 @@ using UnityEngine.AI;
 
 namespace PlayerInteractivity {
     public class Player : MonoBehaviour {
-        public GameObject projectile;
-
         public float startHealth = 100;
         private float health;
         public float startSpeed = 5;
@@ -20,6 +18,9 @@ namespace PlayerInteractivity {
 
         private GameManager gm;
 
+        public Ability Q, W, E, R;
+        private Ability[] abilities;
+
         private void Start() {
             gm = GameManager.getInstance();
             nva = GetComponent<NavMeshAgent>();
@@ -27,6 +28,9 @@ namespace PlayerInteractivity {
             nva.angularSpeed = 360;
             nva.acceleration = 15;
             gm.StartNextWaveEvent += resetPosition;
+            abilities = new Ability[] { Q, W, E, R };
+            foreach(Ability ability in abilities)
+                ability.start();
         }
 
         private void OnDisable() {
@@ -49,31 +53,24 @@ namespace PlayerInteractivity {
                 }
 
                 if(Input.GetKeyDown(KeyCode.Q)) {
-                    qAbility();
+                    if(Q.isAvailable())
+                        Q.activate(this);
                 }
                 else if(Input.GetKeyDown(KeyCode.W)) {
-                    wAbility();
+                    if(W.isAvailable())
+                        W.activate(this);
+                }
+                else if(Input.GetKeyDown(KeyCode.E)) {
+                    if(E.isAvailable())
+                        E.activate(this);
+                }
+                else if(Input.GetKeyDown(KeyCode.R)) {
+                    if(R.isAvailable())
+                        R.activate(this);
                 }
             }
         }
-
-        public void qAbility() {
-            Vector3 pos = Input.mousePosition;
-            pos.z = cameraHeightOffset;
-            pos = Camera.main.ScreenToWorldPoint(pos);
-            Vector3 dir = pos - this.transform.position;
-            GameObject proj = (GameObject)Instantiate(projectile, this.transform.position, Quaternion.identity);
-            Projectile projScript = proj.GetComponent<Projectile>();
-            projScript.seek(dir);
-            projScript.setDamage(50);
-            projScript.setRange(70);
-        }
-
-        public void wAbility() {
-            this.speed *= 1.5f;
-            Invoke("resetSpeed", 3f);
-        }
-
+       
         void resetSpeed() {
             this.speed = startSpeed;
         }
@@ -86,6 +83,10 @@ namespace PlayerInteractivity {
 
         public void setCameraHeightOffset(float newHeight) {
             cameraHeightOffset = newHeight;
+        }
+
+        public float getCameraHeightOffset() {
+            return this.cameraHeightOffset;
         }
     }
 }

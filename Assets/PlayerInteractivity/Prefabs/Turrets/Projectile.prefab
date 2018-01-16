@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23529593341759420}
   - component: {fileID: 114390510713117790}
   - component: {fileID: 135674956367086026}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db97591675819b4ab2ace991efc816e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 40
   impactEffect: {fileID: 1749179818377794, guid: 200f08f9bca641642a45cbe7a91239af,
     type: 2}
 --- !u!135 &135674956367086026
@@ -108,5 +108,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.75
   m_Center: {x: 0, y: 0, z: 0}
