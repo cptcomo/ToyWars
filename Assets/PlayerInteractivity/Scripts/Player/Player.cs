@@ -21,8 +21,11 @@ namespace PlayerInteractivity {
         public Ability Q, W, E, R;
         private Ability[] abilities;
 
+        private List<Buff> buffs;
+
         private void Start() {
             gm = GameManager.getInstance();
+            buffs = new List<Buff>();
             nva = GetComponent<NavMeshAgent>();
             this.speed = startSpeed;
             nva.angularSpeed = 360;
@@ -39,6 +42,8 @@ namespace PlayerInteractivity {
 
         private void Update() {
             if(gm.gameState == GameManager.GameState.Play) {
+                resetAttributes();
+                updateBuffs();
                 nva.speed = speed;
                 if(Input.GetMouseButtonDown(1)) {
                     RaycastHit hit;
@@ -71,8 +76,28 @@ namespace PlayerInteractivity {
             }
         }
        
+        public void addBuff(Buff buff) {
+            buffs.Add(buff);
+        }
+
+        public void resetAttributes() {
+            resetSpeed();    
+        }
+
+        void updateBuffs() {
+            for(int i = 0; i < buffs.Count; i++) {
+                if(buffs[i].finished)
+                    buffs.Remove(buffs[i]);
+                else buffs[i].tick();
+            }
+        }
+
         void resetSpeed() {
             this.speed = startSpeed;
+        }
+
+        public void updateSpeed(float pct) {
+            this.speed = speed * (1 + pct / 100);
         }
 
         public void resetPosition() {
