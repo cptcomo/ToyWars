@@ -74,6 +74,10 @@ namespace PlayerInteractivity {
                         R.activate(this);
                 }
             }
+            else {
+                dest = this.transform.position;
+                nva.SetDestination(dest);
+            }
         }
        
         public void addBuff(Buff buff) {
