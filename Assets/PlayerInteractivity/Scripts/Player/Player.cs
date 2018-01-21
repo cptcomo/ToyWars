@@ -20,6 +20,7 @@ namespace PlayerInteractivity {
 
         public Ability Q, W, E, R;
         private Ability[] abilities;
+        public AbilityUpgradePath abilityUpgradePath;
 
         private List<Buff> buffs;
 
@@ -31,6 +32,7 @@ namespace PlayerInteractivity {
             nva.angularSpeed = 360;
             nva.acceleration = 15;
             gm.StartNextWaveEvent += resetPosition;
+            gm.UpgradePlayerEvent += upgradeAbility;
             abilities = new Ability[] { Q, W, E, R };
             foreach(Ability ability in abilities)
                 ability.start();
@@ -38,6 +40,7 @@ namespace PlayerInteractivity {
 
         private void OnDisable() {
             gm.StartNextWaveEvent -= resetPosition;
+            gm.UpgradePlayerEvent -= upgradeAbility;
         }
 
         private void Update() {
@@ -116,6 +119,10 @@ namespace PlayerInteractivity {
 
         public float getCameraHeightOffset() {
             return this.cameraHeightOffset;
+        }
+        
+        void upgradeAbility(int upgradeIndex) {
+            abilityUpgradePath.upgrade(upgradeIndex, this);
         }
     }
 }

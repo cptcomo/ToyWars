@@ -19,6 +19,7 @@ namespace PlayerInteractivity {
 
         private void Start() {
             gm = GameManager.getInstance();
+            gm.StartNextWaveEvent += gm.callEventDeselectNode;
             gm.SelectNodeEvent += show;
             gm.DeselectNodeEvent += hide;
         }
@@ -26,9 +27,10 @@ namespace PlayerInteractivity {
         private void OnDisable() {
             gm.SelectNodeEvent -= show;
             gm.DeselectNodeEvent -= hide;
+            gm.StartNextWaveEvent -= gm.callEventDeselectNode;
         }
-
-        void show(Node node) {      
+        void show(Node node) {
+            gm.callEventHideAbilityUpgrade();
             nodeUI.SetActive(true);
             updateUI(node);
         }

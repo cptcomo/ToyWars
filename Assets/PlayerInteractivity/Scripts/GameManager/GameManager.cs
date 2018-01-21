@@ -34,6 +34,12 @@ namespace PlayerInteractivity {
         public delegate void UpgradeTurretHandler(int upgradeIndex);
         public event UpgradeTurretHandler UpgradeTurretEvent;
 
+        public delegate void PlayerAbilityUpgradeHandler();
+        public event PlayerAbilityUpgradeHandler ShowAbilityUpgradeEvent, HideAbilityUpgradeEvent;
+
+        public delegate void UpgradePlayerHandler(int upgradeIndex);
+        public event UpgradePlayerHandler UpgradePlayerEvent;
+
         [HideInInspector]
         public enum GameState {
             Play, Build, Pause, GameOver
@@ -137,6 +143,24 @@ namespace PlayerInteractivity {
         public void callEventUpgradeTurret(int upgradeIndex) {
             if(UpgradeTurretEvent != null) {
                 UpgradeTurretEvent(upgradeIndex);
+            }
+        }
+
+        public void callEventShowAbilityUpgrade() {
+            if(ShowAbilityUpgradeEvent != null) {
+                ShowAbilityUpgradeEvent();
+            }
+        }
+
+        public void callEventHideAbilityUpgrade() {
+            if(HideAbilityUpgradeEvent != null) {
+                HideAbilityUpgradeEvent();
+            }
+        }
+
+        public void callEventUpgradePlayer(int upgradeIndex) {
+            if(UpgradePlayerEvent != null) {
+                UpgradePlayerEvent(upgradeIndex);
             }
         }
     }
