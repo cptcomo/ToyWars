@@ -27,6 +27,7 @@ namespace PlayerInteractivity {
             gm.EndWaveEvent += gm.callEventShowAbilityUpgrade;
             gm.StartNextWaveEvent += gm.callEventHideAbilityUpgrade;
             gm.HideAbilityUpgradeEvent += hide;
+            gm.GameOverEvent += hide;
             show();
         }
 
@@ -35,6 +36,12 @@ namespace PlayerInteractivity {
             gm.EndWaveEvent -= gm.callEventShowAbilityUpgrade;
             gm.StartNextWaveEvent -= gm.callEventHideAbilityUpgrade;
             gm.HideAbilityUpgradeEvent -= hide;
+            gm.GameOverEvent -= hide;
+        }
+
+        private void Update() {
+            if(gm.isBuilding() && Input.GetKeyDown(KeyCode.A))
+                gm.callEventShowAbilityUpgrade();
         }
 
         void show() {
