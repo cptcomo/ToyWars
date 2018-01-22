@@ -139,6 +139,10 @@ namespace PlayerInteractivity {
         public float getCameraHeightOffset() {
             return this.cameraHeightOffset;
         }
+
+        public void takeDamage(float dmg) {
+            this.health -= dmg;
+        }
         
         void upgradeAbility(int upgradeIndex) {
             abilityUpgradePath.upgrade(upgradeIndex, this);

@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114361172109718720}
   - component: {fileID: 135651966576152662}
   - component: {fileID: 54612984218843892}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy_Simple
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -195,9 +195,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 100
   worth: 50
+  damage: 3
+  attackRadius: 1.5
   deathEffect: {fileID: 1787243369622486, guid: 4d9985dc233fd794a88597096276e1f0,
     type: 2}
-  healthBar: {fileID: 0}
 --- !u!114 &114431392995043340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -257,7 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf477c6fe72d1b4fa2aba3953ebc0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSpeed: 3
+  startSpeed: 4
+  detectionRadius: 8
 --- !u!114 &114987706183168294
 MonoBehaviour:
   m_ObjectHideFlags: 1
