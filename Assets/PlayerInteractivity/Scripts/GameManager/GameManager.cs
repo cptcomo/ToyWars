@@ -40,6 +40,9 @@ namespace PlayerInteractivity {
         public delegate void UpgradePlayerHandler(int upgradeIndex);
         public event UpgradePlayerHandler UpgradePlayerEvent;
 
+        public delegate void TogglePlayerUIHandler();
+        public event TogglePlayerUIHandler TogglePlayerUIEvent;
+
         [HideInInspector]
         public enum GameState {
             Play, Build, Pause, GameOver
@@ -161,6 +164,12 @@ namespace PlayerInteractivity {
         public void callEventUpgradePlayer(int upgradeIndex) {
             if(UpgradePlayerEvent != null) {
                 UpgradePlayerEvent(upgradeIndex);
+            }
+        }
+
+        public void callEventTogglePlayerUI() {
+            if(TogglePlayerUIEvent != null) {
+                TogglePlayerUIEvent();
             }
         }
     }

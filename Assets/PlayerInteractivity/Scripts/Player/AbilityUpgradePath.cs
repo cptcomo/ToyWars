@@ -7,7 +7,6 @@ namespace PlayerInteractivity {
     public class AbilityUpgradePath {
         private int qIndex = 0, wIndex = 0, eIndex = 0, rIndex = 0;
         public AbilityUpgrade[] qPath, wPath, ePath, rPath;
-        public AbilityUpgrade upgradeComplete;
 
         public AbilityUpgrade[] getAvailableUpgrades() {
             List<AbilityUpgrade> upgrades = new List<AbilityUpgrade>();

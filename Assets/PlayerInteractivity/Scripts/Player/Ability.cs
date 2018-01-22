@@ -18,6 +18,10 @@ namespace PlayerInteractivity {
         public bool isAvailable() {
             return Time.time > nextFire;
         }
+
+        public float uiFillAmount() {
+            return Mathf.Clamp(1 - (nextFire - Time.time) / cooldown, 0, 1);
+        }
     }
 }
 

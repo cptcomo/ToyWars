@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace PlayerInteractivity {
     public class Player : MonoBehaviour {
+        public GameObject playerUI;
+
         public float startHealth = 100;
+        public Image healthBar;
+        public Text healthText;
         private float health;
         public float startSpeed = 5;
         private float speed;
@@ -21,6 +26,7 @@ namespace PlayerInteractivity {
         public Ability Q, W, E, R;
         private Ability[] abilities;
         public AbilityUpgradePath abilityUpgradePath;
+        public Image QImage, WImage, EImage, RImage;
 
         private List<Buff> buffs;
 
@@ -29,10 +35,14 @@ namespace PlayerInteractivity {
             buffs = new List<Buff>();
             nva = GetComponent<NavMeshAgent>();
             this.speed = startSpeed;
+            this.health = startHealth;
             nva.angularSpeed = 360;
             nva.acceleration = 15;
             gm.StartNextWaveEvent += resetPosition;
+            gm.StartNextWaveEvent += gm.callEventTogglePlayerUI;
+            gm.EndWaveEvent += gm.callEventTogglePlayerUI;
             gm.UpgradePlayerEvent += upgradeAbility;
+            gm.TogglePlayerUIEvent += toggleUI;
             abilities = new Ability[] { Q, W, E, R };
             foreach(Ability ability in abilities)
                 ability.start();
@@ -41,12 +51,16 @@ namespace PlayerInteractivity {
         private void OnDisable() {
             gm.StartNextWaveEvent -= resetPosition;
             gm.UpgradePlayerEvent -= upgradeAbility;
+            gm.TogglePlayerUIEvent -= toggleUI;
+            gm.StartNextWaveEvent -= gm.callEventTogglePlayerUI;
+            gm.EndWaveEvent -= gm.callEventTogglePlayerUI;
         }
 
         private void Update() {
             if(gm.gameState == GameManager.GameState.Play) {
                 resetAttributes();
                 updateBuffs();
+                updateAbilityUI();
                 nva.speed = speed;
                 if(Input.GetMouseButtonDown(1)) {
                     RaycastHit hit;
@@ -76,6 +90,11 @@ namespace PlayerInteractivity {
                     if(R.isAvailable())
                         R.activate(this);
                 }
+                if(health <= 0)
+                    gm.callEventGameOver();
+
+                healthBar.fillAmount = health / startHealth;
+                healthText.text = "" + Mathf.Round(health);
             }
             else {
                 dest = this.transform.position;
@@ -123,6 +142,17 @@ namespace PlayerInteractivity {
         
         void upgradeAbility(int upgradeIndex) {
             abilityUpgradePath.upgrade(upgradeIndex, this);
+        }
+
+        void toggleUI() {
+            playerUI.SetActive(!playerUI.activeSelf);
+        }
+
+        void updateAbilityUI() {
+            QImage.fillAmount = Q.uiFillAmount();
+            WImage.fillAmount = W.uiFillAmount();
+            EImage.fillAmount = E.uiFillAmount();
+            RImage.fillAmount = R.uiFillAmount();
         }
     }
 }
