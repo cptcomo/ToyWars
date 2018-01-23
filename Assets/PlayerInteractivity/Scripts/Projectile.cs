@@ -10,14 +10,21 @@ namespace PlayerInteractivity {
 
         private float damage;
         private float range = 10000;
+        private bool playerShot;
         public GameObject impactEffect;
 
         private void Start() {
             this.startPos = this.transform.position;
+            if(!playerShot)
+                playerShot = false;
         }
 
         public void seek(Vector3 dir) {
             this.dir = dir;
+        }
+
+        public void setPlayerShot(bool playerShot) {
+            this.playerShot = playerShot;
         }
 
         private void Update() {
@@ -51,9 +58,8 @@ namespace PlayerInteractivity {
 
         void doDamage(Transform enemy) {
             Enemy e = enemy.GetComponent<Enemy>();
-
             if(e != null)
-                e.takeDamage(damage);
+                e.takeDamage(damage, playerShot);
         }
     }
 }

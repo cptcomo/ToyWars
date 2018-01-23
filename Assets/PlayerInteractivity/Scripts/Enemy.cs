@@ -8,7 +8,8 @@ namespace PlayerInteractivity {
         GameManager gm;
         public float startHealth = 100f;
         private float health;
-        public int worth = 50;
+        public int moneyValue = 50;
+        public int expValue = 20;
         public float damage;
         public float attackRadius = 2f;
 
@@ -28,16 +29,20 @@ namespace PlayerInteractivity {
             }
         }
 
-        public void takeDamage(float damage) {
+        public void takeDamage(float damage, bool playerShot) {
             this.health -= damage;
             if(health <= 0f) {
-                die();
+                die(playerShot);
             }
         }
 
-        void die() {
+        void die(bool playerShot) {
             gm.enemiesAlive--;
-            gm.playerStats.money += worth;
+            gm.playerStats.money += moneyValue;
+            if(playerShot) {
+                gm.playerStats.exp += expValue;
+            }
+                
             GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(effect, 5f);
             Destroy(gameObject);

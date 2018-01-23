@@ -9,6 +9,12 @@ namespace PlayerInteractivity {
         public TowerUpgrade[] leftPath;
         public TowerUpgrade[] rightPath;
 
+        GameManager gm;
+
+        public void init() {
+            gm = GameManager.getInstance();
+        }
+
         public TowerUpgrade[] getAvailableUpgrades() {
             if(leftIndex > 2) {
                 if(leftIndex != leftPath.Length)
@@ -24,13 +30,19 @@ namespace PlayerInteractivity {
         public void upgrade(int upgradeIndex, Turret turret) {
             if(upgradeIndex == 0) {
                 TowerUpgrade upgrade = leftPath[leftIndex];
-                leftIndex++;
-                upgrade.activate(turret);
+                if(gm.playerStats.money >= upgrade.cost) {
+                    gm.playerStats.money -= upgrade.cost;
+                    leftIndex++;
+                    upgrade.activate(turret);
+                }              
             }
             else {
                 TowerUpgrade upgrade = rightPath[rightIndex];
-                rightIndex++;
-                upgrade.activate(turret);
+                if(gm.playerStats.money >= upgrade.cost) {
+                    gm.playerStats.money -= upgrade.cost;
+                    rightIndex++;
+                    upgrade.activate(turret);
+                }               
             }
         }
     }

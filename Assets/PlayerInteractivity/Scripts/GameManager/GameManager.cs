@@ -68,7 +68,7 @@ namespace PlayerInteractivity {
         }
 
         private void Update() {
-            Debug.Log(gameState);
+            //Debug.Log(gameState);
         }
 
         public static GameManager getInstance() {

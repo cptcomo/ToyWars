@@ -35,6 +35,7 @@ namespace PlayerInteractivity {
 
         private void Start() {
             InvokeRepeating("updateTarget", 0f, 0.5f);
+            towerUpgradePath.init();
         }
 
         private void Update() {
@@ -95,7 +96,7 @@ namespace PlayerInteractivity {
         }
 
         void laser() {
-            targetEnemy.takeDamage(dot * Time.deltaTime);
+            targetEnemy.takeDamage(dot * Time.deltaTime, false);
             targetMovement.slow(slowPct);
             if (!lineRenderer.enabled) {
                 lineRenderer.enabled = true;

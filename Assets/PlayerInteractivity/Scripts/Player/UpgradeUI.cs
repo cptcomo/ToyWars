@@ -64,7 +64,7 @@ namespace PlayerInteractivity {
                         }
 
                         if(child.name.Equals(upgradeCostText))
-                            child.GetComponent<Text>().text = "$" + upgrades[i].cost;
+                            child.GetComponent<Text>().text = "Cost: " + upgrades[i].cost;
                     });
                     int index = i;
                     newButton.GetComponent<Button>().onClick.AddListener(delegate () { onButtonUpgradeClick(index); });

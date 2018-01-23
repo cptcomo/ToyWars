@@ -30,6 +30,7 @@ namespace PlayerInteractivity {
             projScript.seek(Vector3.forward);
             projScript.setDamage(damagePerProjectile);
             projScript.setRange(range);
+            projScript.setPlayerShot(true);
         }
 
         void shootEast(Player player) {
@@ -38,6 +39,7 @@ namespace PlayerInteractivity {
             projScript.seek(Vector3.right);
             projScript.setDamage(damagePerProjectile);
             projScript.setRange(range);
+            projScript.setPlayerShot(true);
         }
 
         void shootWest(Player player) {
@@ -46,6 +48,7 @@ namespace PlayerInteractivity {
             projScript.seek(Vector3.left);
             projScript.setDamage(damagePerProjectile);
             projScript.setRange(range);
+            projScript.setPlayerShot(true);
         }
 
         void shootSouth(Player player) {
@@ -54,6 +57,7 @@ namespace PlayerInteractivity {
             projScript.seek(Vector3.back);
             projScript.setDamage(damagePerProjectile);
             projScript.setRange(range);
+            projScript.setPlayerShot(true);
         }
     }
 }

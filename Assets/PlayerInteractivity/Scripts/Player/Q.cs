@@ -17,6 +17,7 @@ namespace PlayerInteractivity {
             projScript.seek(dir);
             projScript.setDamage(damage);
             projScript.setRange(range);
+            projScript.setPlayerShot(true);
             nextFire = Time.time + cooldown;
         }
     }

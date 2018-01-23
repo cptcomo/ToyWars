@@ -43,6 +43,7 @@ namespace PlayerInteractivity {
             gm.EndWaveEvent += gm.callEventTogglePlayerUI;
             gm.UpgradePlayerEvent += upgradeAbility;
             gm.TogglePlayerUIEvent += toggleUI;
+            abilityUpgradePath.init();
             abilities = new Ability[] { Q, W, E, R };
             foreach(Ability ability in abilities)
                 ability.start();

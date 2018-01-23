@@ -32,6 +32,7 @@ namespace PlayerInteractivity {
             projScript.seek(dir);
             projScript.setDamage(damagePerBullet);
             projScript.setRange(range);
+            projScript.setPlayerShot(true);
         }
     }
 }

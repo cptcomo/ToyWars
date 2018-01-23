@@ -9,7 +9,13 @@ namespace PlayerInteractivity {
 
         private float damage;
         private float explosionRadius;
+        private bool playerShot;
         public GameObject impactEffect;
+
+        private void Start() {
+            if(!playerShot)
+                playerShot = false;
+        }
 
         public void seek(Transform target) {
             this.target = target;
@@ -42,6 +48,10 @@ namespace PlayerInteractivity {
             this.explosionRadius = explosionRadius;
         }
 
+        public void setPlayerShot(bool playerShot) {
+            this.playerShot = playerShot;
+        }
+
         void hitTarget() {
             GameObject effectInstance = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
             Destroy(effectInstance, 5f);
@@ -59,7 +69,7 @@ namespace PlayerInteractivity {
             Enemy e = enemy.GetComponent<Enemy>();
 
             if(e != null)
-                e.takeDamage(damage);
+                e.takeDamage(damage, playerShot);
         }
 
         void explode() {
