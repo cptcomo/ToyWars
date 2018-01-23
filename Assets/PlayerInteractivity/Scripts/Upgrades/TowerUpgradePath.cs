@@ -10,14 +10,14 @@ namespace PlayerInteractivity {
         public TowerUpgrade[] rightPath;
 
         public TowerUpgrade[] getAvailableUpgrades() {
-            if(leftIndex >= 2) {
+            if(leftIndex > 2) {
                 if(leftIndex != leftPath.Length)
-                    return new TowerUpgrade[] { leftPath[leftIndex] };
-                else return new TowerUpgrade[] { };
-            } else if(rightIndex >= 2) {
+                    return new TowerUpgrade[] { leftPath[leftIndex], null };
+                else return new TowerUpgrade[] { null, null };
+            } else if(rightIndex > 2) {
                 if(rightIndex != rightPath.Length)
-                    return new TowerUpgrade[] { rightPath[rightIndex] };
-                else return new TowerUpgrade[] { };
+                    return new TowerUpgrade[] { null, rightPath[rightIndex] };
+                else return new TowerUpgrade[] { null, null };
             } else return new TowerUpgrade[] { leftPath[leftIndex], rightPath[rightIndex] }; 
         }
 

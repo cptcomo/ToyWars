@@ -44,16 +44,30 @@ namespace PlayerInteractivity {
             TowerUpgrade[] upgrades = turret.towerUpgradePath.getAvailableUpgrades();
             for(int i = 0; i < upgrades.Length; i++) {
                 GameObject newButton = Instantiate(upgradeButtonPrefab);
-                List<GameObject> buttonChildren = new List<GameObject>();
-                foreach(Transform child in newButton.transform) buttonChildren.Add(child.gameObject);
-                buttonChildren.ForEach(child => {
-                    if(child.name.Equals(upgradeNameText))
-                        child.GetComponent<Text>().text = upgrades[i].upgradeName;
-                    if(child.name.Equals(upgradeCostText))
-                        child.GetComponent<Text>().text = "$" + upgrades[i].cost;
-                });
-                int index = i;
-                newButton.GetComponent<Button>().onClick.AddListener(delegate() { onButtonUpgradeClick(index); });
+                if(upgrades[i] != null) {
+                    List<GameObject> buttonChildren = new List<GameObject>();
+                    foreach(Transform child in newButton.transform) buttonChildren.Add(child.gameObject);
+                    buttonChildren.ForEach(child => {
+                        if(child.name.Equals(upgradeNameText))
+                            child.GetComponent<Text>().text = upgrades[i].upgradeName;
+                        if(child.name.Equals(upgradeCostText))
+                            child.GetComponent<Text>().text = "$" + upgrades[i].cost;
+                    });
+                    int index = i;
+                    newButton.GetComponent<Button>().onClick.AddListener(delegate () { onButtonUpgradeClick(index); });                  
+                }
+                else {
+                    newButton = Instantiate(upgradeButtonPrefab);
+                    List<GameObject> buttonChildren = new List<GameObject>();
+                    foreach(Transform child in newButton.transform) buttonChildren.Add(child.gameObject);
+                    buttonChildren.ForEach(child => {
+                        if(child.name.Equals(upgradeNameText)) {
+                            child.GetComponent<Text>().text = "UPGRADE NOT AVAILABLE";
+                        }
+                        if(child.name.Equals(upgradeCostText))
+                            child.GetComponent<Text>().text = "";
+                    });
+                }
                 newButton.transform.SetParent(upgradeUI.transform, false);
             }
         }

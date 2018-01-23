@@ -143,6 +143,14 @@ namespace PlayerInteractivity {
         {
             explosionRadius *= (1 + pct / 100);
         }
+
+        public void updateDamage(float pct) {
+            damage *= (1 + pct / 100);
+        }
+
+        public void updateDamage(int flat) {
+            damage += flat;
+        }
     }
 }
 
