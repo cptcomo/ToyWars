@@ -17,14 +17,31 @@ namespace PlayerInteractivity {
 
         public TowerUpgrade[] getAvailableUpgrades() {
             if(leftIndex > 2) {
-                if(leftIndex != leftPath.Length)
-                    return new TowerUpgrade[] { leftPath[leftIndex], null };
-                else return new TowerUpgrade[] { null, null };
-            } else if(rightIndex > 2) {
-                if(rightIndex != rightPath.Length)
-                    return new TowerUpgrade[] { null, rightPath[rightIndex] };
-                else return new TowerUpgrade[] { null, null };
-            } else return new TowerUpgrade[] { leftPath[leftIndex], rightPath[rightIndex] }; 
+                if(leftIndex != leftPath.Length) {
+                    if(rightIndex >= 2)
+                        return new TowerUpgrade[] { leftPath[leftIndex], null };
+                    else return new TowerUpgrade[] { leftPath[leftIndex], rightPath[rightIndex] };
+                } else {
+                    if(rightIndex >= 2)
+                        return new TowerUpgrade[] { null, null };
+                    else
+                        return new TowerUpgrade[] { null, rightPath[rightIndex] };
+                }
+                
+            }
+            if(rightIndex > 2) {
+                if(rightIndex != rightPath.Length) {
+                    if(leftIndex >= 2)
+                        return new TowerUpgrade[] { null, rightPath[rightIndex] };
+                    else
+                        return new TowerUpgrade[] { leftPath[leftIndex], rightPath[rightIndex] };
+                } else {
+                    if(leftIndex >= 2)
+                        return new TowerUpgrade[] { null, null };
+                    else return new TowerUpgrade[] { leftPath[leftIndex], null };
+                }
+            }
+            return new TowerUpgrade[] { leftPath[leftIndex], rightPath[rightIndex] }; 
         }
 
         public void upgrade(int upgradeIndex, Turret turret) {
