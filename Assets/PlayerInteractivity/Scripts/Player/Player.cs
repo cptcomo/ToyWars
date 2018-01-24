@@ -91,8 +91,10 @@ namespace PlayerInteractivity {
                     if(R.isAvailable())
                         R.activate(this);
                 }
-                if(health <= 0)
-                    gm.callEventGameOver();
+                if(health <= 0) {
+                    Debug.Log("2");
+                    gm.callEventGameOver(false);
+                }
 
                 healthBar.fillAmount = health / startHealth;
                 healthText.text = "" + Mathf.Round(health);

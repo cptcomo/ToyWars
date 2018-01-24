@@ -72,6 +72,7 @@ namespace PlayerInteractivity {
 
         void endPath() {
             gm.enemiesAlive--;
+            gm.callEventLoseLives(1);
             Destroy(gameObject);
         }
 

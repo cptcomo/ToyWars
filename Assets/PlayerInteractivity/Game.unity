@@ -1750,7 +1750,7 @@ GameObject:
   - component: {fileID: 143137243}
   - component: {fileID: 143137242}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ResultText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2459,7 +2459,7 @@ Prefab:
     - target: {fileID: 114441131731681374, guid: bdc8e95b3d6efde4dab6876e6399e6ae,
         type: 2}
       propertyPath: waves.Array.data[1].sections.Array.data[1].count
-      value: 50
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114441131731681374, guid: bdc8e95b3d6efde4dab6876e6399e6ae,
         type: 2}
@@ -4485,6 +4485,93 @@ Transform:
   m_PrefabParentObject: {fileID: 4884731537621684, guid: b48c6f59314855e48abff3be7d5ac171,
     type: 2}
   m_PrefabInternal: {fileID: 279593922}
+--- !u!1 &279932191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 279932192}
+  - component: {fileID: 279932195}
+  - component: {fileID: 279932194}
+  - component: {fileID: 279932193}
+  m_Layer: 5
+  m_Name: LivesText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &279932192
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 279932191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 593062326}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -50, y: -30}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &279932193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 279932191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32bde891755c15a4f99828e2f3d7403d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  livesText: {fileID: 279932194}
+--- !u!114 &279932194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 279932191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: New Text
+--- !u!222 &279932195
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 279932191}
 --- !u!1001 &286099803
 Prefab:
   m_ObjectHideFlags: 0
@@ -8459,6 +8546,7 @@ RectTransform:
   - {fileID: 1411282459}
   - {fileID: 1094822266}
   - {fileID: 465807154}
+  - {fileID: 279932192}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16570,6 +16658,7 @@ GameObject:
   - component: {fileID: 1147363922}
   - component: {fileID: 1147363923}
   - component: {fileID: 1147363924}
+  - component: {fileID: 1147363925}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -16607,6 +16696,7 @@ MonoBehaviour:
     lives: 0
     exp: 0
   gameState: 0
+  gameResult: 0
 --- !u!4 &1147363918
 Transform:
   m_ObjectHideFlags: 0
@@ -16677,6 +16767,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelGameOver: {fileID: 1572995421}
+  resultText: {fileID: 143137243}
+  roundsText: {fileID: 641432410}
 --- !u!114 &1147363924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16690,6 +16782,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildEffect: {fileID: 1260696139226476, guid: 5d9b0c3b691ac164585d16247cef5080,
     type: 2}
+--- !u!114 &1147363925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1147363916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d6edac77bc2efe4ab8ede02d2fb06e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1160196385
 Prefab:
   m_ObjectHideFlags: 0
@@ -21716,7 +21819,7 @@ Prefab:
     - target: {fileID: 114441131731681374, guid: bdc8e95b3d6efde4dab6876e6399e6ae,
         type: 2}
       propertyPath: waves.Array.data[1].sections.Array.data[1].count
-      value: 100
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114441131731681374, guid: bdc8e95b3d6efde4dab6876e6399e6ae,
         type: 2}
@@ -22649,7 +22752,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1572995422}
-  - component: {fileID: 1572995423}
   m_Layer: 5
   m_Name: GameOver
   m_TagString: Untagged
@@ -22681,19 +22783,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1572995423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114997725944062300, guid: 0d5c66891e9af7345994335080dbb9f6,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1572995421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bbd45aab77353747bf96b6584d65d2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roundsText: {fileID: 641432410}
 --- !u!1001 &1588087379
 Prefab:
   m_ObjectHideFlags: 0
@@ -29415,7 +29504,7 @@ Prefab:
     - target: {fileID: 114441131731681374, guid: bdc8e95b3d6efde4dab6876e6399e6ae,
         type: 2}
       propertyPath: waves.Array.data[1].sections.Array.data[1].count
-      value: 100
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114441131731681374, guid: bdc8e95b3d6efde4dab6876e6399e6ae,
         type: 2}

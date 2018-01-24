@@ -43,13 +43,24 @@ namespace PlayerInteractivity {
         public delegate void TogglePlayerUIHandler();
         public event TogglePlayerUIHandler TogglePlayerUIEvent;
 
+        public delegate void LoseLifeHandler(int livesLost);
+        public event LoseLifeHandler LoseLivesEvent;
+
         [HideInInspector]
         public enum GameState {
             Play, Build, Pause, GameOver
         }
 
         [HideInInspector]
+        public enum GameResult {
+            Win, Lose
+        }
+
+        [HideInInspector]
         public GameState gameState;
+
+        [HideInInspector]
+        public GameResult gameResult;
 
         private void Awake() {
             if(instance == null) {
@@ -95,6 +106,10 @@ namespace PlayerInteractivity {
             return gameState == GameState.GameOver;
         }
 
+        public bool isWin() {
+            return gameResult == GameResult.Win;
+        }
+
         public void callEventStartNextWave() {
             if(StartNextWaveEvent != null) {
                 StartNextWaveEvent();
@@ -125,8 +140,13 @@ namespace PlayerInteractivity {
             }
         }
 
-        public void callEventGameOver() {
+        public void callEventGameOver(bool win) {
             if(GameOverEvent != null) {
+                if(win)
+                    gameResult = GameResult.Win;
+                else
+                    gameResult = GameResult.Lose;
+
                 GameOverEvent();
             }
         }
@@ -170,6 +190,12 @@ namespace PlayerInteractivity {
         public void callEventTogglePlayerUI() {
             if(TogglePlayerUIEvent != null) {
                 TogglePlayerUIEvent();
+            }
+        }
+
+        public void callEventLoseLives(int livesLost) {
+            if(LoseLivesEvent != null) {
+                LoseLivesEvent(livesLost);
             }
         }
     }

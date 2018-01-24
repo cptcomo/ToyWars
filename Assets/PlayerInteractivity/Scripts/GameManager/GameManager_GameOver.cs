@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace PlayerInteractivity {
     public class GameManager_GameOver : MonoBehaviour {
@@ -8,6 +9,9 @@ namespace PlayerInteractivity {
 
         [SerializeField]
         private GameObject panelGameOver;
+
+        public Text resultText;
+        public Text roundsText;
 
         private void OnEnable() {
             gm = GameManager.getInstance();
@@ -29,6 +33,18 @@ namespace PlayerInteractivity {
                 panelGameOver.SetActive(true);
             } else {
                 Debug.LogWarning("Please make a reference to a Game Over UI panel in the GameOver script");
+            }
+
+            updateUI();
+        }
+
+        void updateUI() {
+            if(gm.isWin()) {
+                resultText.text = "You Win!";
+                roundsText.text = "" + gm.waveIndex;
+            } else {
+                resultText.text = "You Lose!";
+                roundsText.text = "" + (gm.waveIndex - 1);
             }
         }
     }

@@ -40,7 +40,8 @@ namespace PlayerInteractivity {
 
         private void Update() {
             if(gm.gameState == GameManager.GameState.Build && gameOver()) {
-                gm.callEventGameOver();
+                Debug.Log("1");
+                gm.callEventGameOver(true);
                 return;
             }
 
