@@ -51,6 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e76de62ee247e4aaa4c4f72267655f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Right 3
-  cost: 150
-  pct: 50
+  upgradeName: Global Range
+  cost: 400
+  pct: 75

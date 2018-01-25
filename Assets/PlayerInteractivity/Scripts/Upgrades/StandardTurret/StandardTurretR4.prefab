@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4744951135532702}
-  - component: {fileID: 114767987778183668}
+  - component: {fileID: 114826443569868738}
   m_Layer: 0
   m_Name: StandardTurretR4
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114767987778183668
+--- !u!114 &114826443569868738
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,9 +48,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1613066126285836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19e76de62ee247e4aaa4c4f72267655f, type: 3}
+  m_Script: {fileID: 11500000, guid: ca9e24c88dfd57446bb15dd43edabb21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Right 4
-  cost: 150
-  pct: 76
+  upgradeName: Global Sniper
+  cost: 800
+  isPctBuff: 1
+  pct: 150
+  flatDmg: 0

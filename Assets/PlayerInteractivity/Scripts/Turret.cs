@@ -152,6 +152,16 @@ namespace PlayerInteractivity {
         public void updateDamage(int flat) {
             damage += flat;
         }
+
+        public void updateDOT(int flat) {
+            dot += flat;
+            Debug.Log("Flat: " + flat + " " + dot);
+        }
+
+        public void updateDOT(float pct) {
+            dot = (int)(dot * (1 + pct / 100));
+            Debug.Log("Pct: " + pct + " " + dot);
+        }
     }
 }
 

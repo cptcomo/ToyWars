@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4143914263043284}
-  - component: {fileID: 114510036167940270}
+  - component: {fileID: 114604545635292664}
   m_Layer: 0
   m_Name: MissileLauncherL3
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114510036167940270
+--- !u!114 &114604545635292664
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,11 +48,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1122033745722410}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca9e24c88dfd57446bb15dd43edabb21, type: 3}
+  m_Script: {fileID: 11500000, guid: fef2eba7708ffb348bf3f7228823dde0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Do Even More Damage
+  upgradeName: Shoot Fast
   cost: 400
-  isPctBuff: 0
-  pct: 0
-  flatDmg: 25
+  pct: 100

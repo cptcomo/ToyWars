@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 135651966576152662}
   - component: {fileID: 54612984218843892}
   m_Layer: 10
-  m_Name: Enemy_Simple
+  m_Name: Enemy_Fast
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +113,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: a19972c536ac1c64bad50e42cb006ffb, type: 2}
+  - {fileID: 2100000, guid: adcd191222093dc4aa9d23b6a2c4758c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -193,10 +193,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 702e7dfcae4329b40a12cb29eb09a5bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 200
-  moneyValue: 100
+  startHealth: 75
+  moneyValue: 60
   expValue: 20
-  damage: 3
+  damage: 10
   attackRadius: 1.5
   deathEffect: {fileID: 1787243369622486, guid: 4d9985dc233fd794a88597096276e1f0,
     type: 2}
@@ -263,8 +263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf477c6fe72d1b4fa2aba3953ebc0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSpeed: 4
-  detectionRadius: 8
+  startSpeed: 9
+  detectionRadius: 20
 --- !u!114 &114987706183168294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -302,7 +302,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 6
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

@@ -255,10 +255,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 799f51ef39d198c439dd3c3b0780b44f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 15
+  range: 12
   fireRate: 0.4
-  explosionRadius: 7
-  damage: 50
+  explosionRadius: 6
+  damage: 40
   bulletPrefab: {fileID: 1802994176725908, guid: 6b8db085654b67b47b39e775cb7693f1,
     type: 2}
   useLaser: 0
@@ -275,7 +275,7 @@ MonoBehaviour:
     leftPath:
     - {fileID: 114758843125607472, guid: 6ac507a0b54bc974186032ccd3fac478, type: 2}
     - {fileID: 114126181066788142, guid: 0101cd4023a097e4ebd31bff2c21f73b, type: 2}
-    - {fileID: 114510036167940270, guid: 89b05754bd98f1646a8d0b6b984f0c0d, type: 2}
+    - {fileID: 114604545635292664, guid: 89b05754bd98f1646a8d0b6b984f0c0d, type: 2}
     - {fileID: 114447366142653422, guid: c592233b75a1b0e43b9221f8a1e0c304, type: 2}
     rightPath:
     - {fileID: 114879477304873942, guid: a2909f052b07f5544bb9a812446e9be8, type: 2}

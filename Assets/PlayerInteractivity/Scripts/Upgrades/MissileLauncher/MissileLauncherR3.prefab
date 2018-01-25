@@ -52,5 +52,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeName: ICBM
-  cost: 300
+  cost: 1000
   pct: 100

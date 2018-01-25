@@ -53,4 +53,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: More Range
   cost: 200
-  pct: 70
+  pct: 30

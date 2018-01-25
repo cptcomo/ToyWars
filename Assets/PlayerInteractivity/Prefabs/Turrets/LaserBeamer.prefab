@@ -385,12 +385,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 799f51ef39d198c439dd3c3b0780b44f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 15
+  range: 12
   fireRate: 1
+  explosionRadius: 0
+  damage: 50
   bulletPrefab: {fileID: 0}
   useLaser: 1
   dot: 40
-  slowPct: 0.7
+  slowPct: 0.3
   lineRenderer: {fileID: 120155357004823078}
   laserImpactEffect: {fileID: 198858390960681222}
   impactLight: {fileID: 108297251997772158}
@@ -398,6 +400,17 @@ MonoBehaviour:
   enemyTag: Enemy
   partToRotate: {fileID: 4088465091112662}
   firePoint: {fileID: 4111531793861510}
+  towerUpgradePath:
+    leftPath:
+    - {fileID: 114129923576457850, guid: 426381608845c194db66d369c33659e2, type: 2}
+    - {fileID: 114447985557932046, guid: e541dd8d6b9912c44b11c25f5aa484d5, type: 2}
+    - {fileID: 114591212771061208, guid: df6645eb688498b41bef86d7e937ec08, type: 2}
+    - {fileID: 114777759441901410, guid: dddbfad9148a7b74096f546108e718d3, type: 2}
+    rightPath:
+    - {fileID: 114811410206117012, guid: 9c3de2d2343846d4cbb7955ab9eba54d, type: 2}
+    - {fileID: 114095480587116114, guid: 7698bd9c7f933e4498a8871efa94cc3b, type: 2}
+    - {fileID: 114480794465899622, guid: 552d68151bd4c3344bcc6641612a076b, type: 2}
+    - {fileID: 114956251286678734, guid: f76d66978b86ba448b38e2792573a25b, type: 2}
 --- !u!120 &120155357004823078
 LineRenderer:
   m_ObjectHideFlags: 1
