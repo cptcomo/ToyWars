@@ -14,10 +14,22 @@ namespace PlayerInteractivity {
         public float attackRadius = 2f;
 
         public GameObject deathEffect;
+        public GameObject hpBarPrefab;
+        public string hpCanvasName;
+        private GameObject hpCanvas;
+        public float hpBarOffset;
+        private GameObject hpBar;
+        private Image hpBarImage;
 
         private void Start() {
             gm = GameManager.getInstance();
             health = startHealth;
+            hpCanvas = GameObject.Find(hpCanvasName);
+            hpBar = (GameObject)Instantiate(hpBarPrefab);
+            hpBar.transform.SetParent(hpCanvas.transform, false);
+            hpBarImage = hpBar.GetComponent<Image>();
+            if(hpBarImage == null)
+                Debug.LogWarning("Enemy Health Bar does not have an Image component");
         }
 
         private void Update() {
@@ -27,6 +39,9 @@ namespace PlayerInteractivity {
                     c.GetComponent<Player>().takeDamage(damage * Time.deltaTime);
                 }
             }
+
+            hpBar.transform.position = (Vector3.up * hpBarOffset) + transform.position;
+            hpBarImage.fillAmount = health / startHealth;
         }
 
         public void takeDamage(float damage, bool playerShot) {
@@ -46,6 +61,10 @@ namespace PlayerInteractivity {
             GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(effect, 5f);
             Destroy(gameObject);
+        }
+
+        private void OnDestroy() {
+            Destroy(hpBar);
         }
     }
 }

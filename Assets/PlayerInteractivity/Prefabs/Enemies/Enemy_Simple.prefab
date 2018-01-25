@@ -92,7 +92,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1044195431293078}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224236324922011986}
@@ -194,11 +194,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHealth: 100
-  worth: 50
+  moneyValue: 50
+  expValue: 20
   damage: 3
   attackRadius: 1.5
   deathEffect: {fileID: 1787243369622486, guid: 4d9985dc233fd794a88597096276e1f0,
     type: 2}
+  hpBarPrefab: {fileID: 1914454742012642, guid: 837bff24bdd9d984f820be99b0ea668a,
+    type: 2}
+  hpCanvasName: EnemiesHealthBarCanvas
+  hpBarOffset: 1.5
 --- !u!114 &114431392995043340
 MonoBehaviour:
   m_ObjectHideFlags: 1
