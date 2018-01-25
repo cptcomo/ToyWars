@@ -54,4 +54,5 @@ MonoBehaviour:
   upgradeName: Q Upgrade 1
   cost: 150
   cdReduce: 0.05
-  damageInc: 10
+  damageInc: 20
+  rangeInc: 10

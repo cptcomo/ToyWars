@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeName: W Upgrade 2
-  cost: 100
+  cost: 250
   cdReduce: 0.5
-  durationInc: 0
+  durationInc: 0.5
   buffInc: 10

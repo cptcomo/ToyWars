@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeName: R Upgrade 3
-  cost: 100
+  cost: 500
   cdReduce: 1
   shotsIncrease: 1
-  dmgPerBulletIncrease: 25
-  rangeIncrease: 20
+  dmgPerBulletIncrease: 50
+  rangeIncrease: 50

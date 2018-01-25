@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeName: Q Upgrade 2
-  cost: 150
-  cdReduce: 0.05
-  damageInc: 25
+  cost: 300
+  cdReduce: 0.07
+  damageInc: 35
+  rangeInc: 20

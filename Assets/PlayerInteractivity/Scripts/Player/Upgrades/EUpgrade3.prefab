@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeName: E Upgrade 3
-  cost: 100
+  cost: 500
   cdReduce: 0.5
   shotsIncrease: 1
-  dmgPerBulletIncrease: 10
+  dmgPerBulletIncrease: 30

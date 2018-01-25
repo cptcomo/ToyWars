@@ -2836,8 +2836,8 @@ MonoBehaviour:
   cooldown: 0.4
   nextFire: 0
   projectile: {fileID: 1826154541861776, guid: 805346df6000c4243985b7651f8f27e8, type: 2}
-  damage: 25
-  range: 80
+  damage: 40
+  range: 90
 --- !u!4 &185687197
 Transform:
   m_ObjectHideFlags: 0
@@ -9694,11 +9694,11 @@ MonoBehaviour:
   cooldown: 4
   nextFire: 0
   numOfCasts: 3
-  intervalBtwnCast: 0.35
+  intervalBtwnCast: 0.3
   startCDOnCast: 0
   projectile: {fileID: 1826154541861776, guid: 805346df6000c4243985b7651f8f27e8, type: 2}
-  damagePerBullet: 25
-  range: 80
+  damagePerBullet: 30
+  range: 90
 --- !u!4 &660104434
 Transform:
   m_ObjectHideFlags: 0
@@ -25720,10 +25720,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Move Fast
   description: Make you move really fast
-  cooldown: 6
+  cooldown: 5
   nextFire: 0
   pct: 50
-  duration: 3
+  duration: 2.5
 --- !u!1001 &1798698700
 Prefab:
   m_ObjectHideFlags: 0

@@ -55,5 +55,5 @@ MonoBehaviour:
   cost: 100
   cdReduce: 1
   shotsIncrease: 0
-  dmgPerBulletIncrease: 15
-  rangeIncrease: 0
+  dmgPerBulletIncrease: 20
+  rangeIncrease: 10
