@@ -256,6 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 12
+  towerSprite: {fileID: 21300000, guid: 222444063aa9ba34b8a91b5d09a0b8d9, type: 3}
   fireRate: 0.4
   explosionRadius: 6
   damage: 40

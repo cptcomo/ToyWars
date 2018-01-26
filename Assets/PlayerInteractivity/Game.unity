@@ -4325,7 +4325,7 @@ MonoBehaviour:
   upgradeUI: {fileID: 1182626428}
   upgradeButtonPrefab: {fileID: 1104416984160120, guid: 11b45ccb9a7735f4eb407ac009f2477f,
     type: 2}
-  towerSpriteImage: {fileID: 0}
+  towerSpriteImage: {fileID: 889056481}
   upgradeNameText: UpgradeName
   upgradeCostText: UpgradeCost
 --- !u!1001 &263352830
@@ -13007,8 +13007,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: -100.3}
-  m_SizeDelta: {x: 250, y: 200.6}
+  m_AnchoredPosition: {x: 0.000030517578, y: -100}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &889056481
 MonoBehaviour:
@@ -26171,7 +26171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1825583121
 RectTransform:
   m_ObjectHideFlags: 0
