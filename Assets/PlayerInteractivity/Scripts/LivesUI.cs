@@ -14,7 +14,7 @@ namespace PlayerInteractivity {
         }
 
         private void Update() {
-            livesText.text = "" + gm.playerStats.lives;
+            livesText.text = "Lives: " + gm.playerStats.lives;
         }
     }
 }

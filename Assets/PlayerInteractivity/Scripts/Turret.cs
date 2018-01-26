@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace PlayerInteractivity {
     public class Turret : MonoBehaviour {
         [Header("General Turret Attributes")]
         public float range;
+        public Sprite towerSprite;
 
         [Header("Use Bullets (Default)")]
         public float fireRate = 1f;

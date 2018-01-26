@@ -8,6 +8,7 @@ namespace PlayerInteractivity {
         public GameObject nodeUI;
         public GameObject upgradeUI;
         public GameObject upgradeButtonPrefab;
+        public Image towerSpriteImage;
 
         [Header("Upgrade Button Prefab Settings")]
         [SerializeField]
@@ -70,6 +71,7 @@ namespace PlayerInteractivity {
                 }
                 newButton.transform.SetParent(upgradeUI.transform, false);
             }
+            towerSpriteImage.sprite = turret.towerSprite;
         }
 
         void onButtonUpgradeClick(int i) {
