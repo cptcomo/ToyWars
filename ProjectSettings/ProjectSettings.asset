@@ -630,7 +630,12 @@ PlayerSettings:
     daydream:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
+<<<<<<< HEAD
   cloudServicesEnabled: {}
+=======
+  cloudServicesEnabled:
+    UNet: 1
+>>>>>>> player-interactivity
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
   cloudProjectId: 334ae0e3-4837-46f0-97cc-6a2dd0f2164b
