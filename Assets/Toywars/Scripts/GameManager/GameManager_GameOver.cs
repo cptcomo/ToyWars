@@ -13,7 +13,7 @@ namespace Toywars {
         public Text resultText;
         public Text roundsText;
 
-        private void OnEnable() {
+        private void Start() {
             gm = GameManager.getInstance();
             gm.GameOverEvent += turnOnGameOverPanel;
             gm.GameOverEvent += updateState;

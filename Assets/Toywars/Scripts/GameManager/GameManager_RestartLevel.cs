@@ -7,7 +7,7 @@ namespace Toywars {
     public class GameManager_RestartLevel : MonoBehaviour {
         private GameManager gm;
 
-        private void OnEnable() {
+        private void Start() {
             gm = GameManager.getInstance();
             gm.RestartLevelEvent += restartLevel;
         }

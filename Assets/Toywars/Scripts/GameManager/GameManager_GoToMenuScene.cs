@@ -7,7 +7,7 @@ namespace Toywars {
     public class GameManager_GoToMenuScene : MonoBehaviour {
         private GameManager gm;
 
-        private void OnEnable() {
+        private void Start() {
             gm = GameManager.getInstance();
             gm.GoToMenuSceneEvent += goToMenuScene;
         }

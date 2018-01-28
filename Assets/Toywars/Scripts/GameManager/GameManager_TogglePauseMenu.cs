@@ -10,7 +10,7 @@ namespace Toywars {
 
         private GameManager.GameState lastStateBeforePause;
 
-        private void OnEnable() {
+        private void Start() {
             gm = GameManager.getInstance();
             gm.PauseToggleEvent += toggleMenu;
         }

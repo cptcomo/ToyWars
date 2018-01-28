@@ -7,7 +7,7 @@ namespace Toywars {
         private GameManager gm;
         private bool isPaused;
 
-        private void OnEnable() {
+        private void Start() {
             gm = GameManager.getInstance();
             isPaused = false;
             gm.PauseToggleEvent += togglePause;
