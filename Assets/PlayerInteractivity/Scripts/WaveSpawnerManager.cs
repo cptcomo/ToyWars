@@ -27,6 +27,7 @@ namespace PlayerInteractivity {
         }
 
         private void Start() {
+            Debug.Log("Start");
             gm = GameManager.getInstance();
             gm.GameOverEvent += disableScript;
             gm.StartNextWaveEvent += startNextWave;
@@ -73,6 +74,7 @@ namespace PlayerInteractivity {
         }
 
         void disableScript() {
+            Debug.Log("Disable");
             this.enabled = false;
         }
     }

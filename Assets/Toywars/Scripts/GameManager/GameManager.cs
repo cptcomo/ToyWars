@@ -5,6 +5,8 @@ using UnityEngine;
 namespace Toywars {
     public class GameManager : MonoBehaviour {
         private static GameManager instance = null;
+        private EnemiesManager em;
+        private PlayerManager pm;
 
         public delegate void GameManagerEventHandler();
         public event GameManagerEventHandler StartNextWaveEvent;
@@ -13,6 +15,13 @@ namespace Toywars {
         public event GameManagerEventHandler RestartLevelEvent;
         public event GameManagerEventHandler GoToMenuSceneEvent;
         public event GameManagerEventHandler GameOverEvent;
+
+        public int minionsAlive
+        {
+            get {
+                return em.enemiesAlive + pm.alliesAlive;
+            }
+        }
 
         [HideInInspector]
         public int waveIndex;
@@ -46,10 +55,13 @@ namespace Toywars {
         }
 
         private void Start() {
+            pm = PlayerManager.getInstance();
+            em = EnemiesManager.getInstance();
             Time.timeScale = 1;
             waveIndex = 0;
             gameState = GameState.Build;
         }
+        
 
         public static GameManager getInstance() {
             return instance;
