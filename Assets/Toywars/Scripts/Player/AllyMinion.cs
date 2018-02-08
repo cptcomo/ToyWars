@@ -19,17 +19,17 @@ namespace Toywars {
 
         protected override void attack() {
             base.attack();
-            Collider[] cols = Physics.OverlapSphere(this.transform.position, attackRadius);
+            Collider[] cols = Physics.OverlapSphere(this.transform.position, attackRadius.get());
             foreach(Collider c in cols) {
                 if(c.transform.tag.Equals("Enemy")) {
-                    c.GetComponent<Enemy>().takeDamage(damage * Time.deltaTime, false);
+                    c.GetComponent<Enemy>().takeDamage(damage.get() * Time.deltaTime, false);
                 }
             }
         }
 
-        public void takeDamage(float damage) {
-            this.health -= damage;
-            if(health <= 0f)
+        public override void takeDamage(float damage, bool playerShot) {
+            this.health.change(-damage);
+            if(health.get() <= 0f)
                 die();
         }
 

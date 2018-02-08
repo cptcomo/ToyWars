@@ -994,7 +994,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1669311905}
+      - m_Target: {fileID: 0}
         m_MethodName: selectStandardTurret
         m_Mode: 1
         m_Arguments:
@@ -1614,7 +1614,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1669311905}
+      - m_Target: {fileID: 0}
         m_MethodName: selectMissileLauncher
         m_Mode: 1
         m_Arguments:
@@ -6361,25 +6361,14 @@ RectTransform:
 --- !u!114 &1669311905
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114627975105144042, guid: 5e5c92e92fca392418f20f0abd06119b,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1669311903}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa82337a1dbefac408b1e3a5281348d1, type: 3}
+  m_Script: {fileID: 11500000, guid: b33c775937e7b0e4b86c573ee8ba9aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shop: {fileID: 1344050185}
-  standardTurret:
-    prefab: {fileID: 1981894023409998, guid: 964bbb03346576049a97da663c2bce15, type: 2}
-    cost: 100
-  missileLauncher:
-    prefab: {fileID: 1738347638228482, guid: 337e09f959c9a8f47a1a88113a242bc7, type: 2}
-    cost: 250
-  laserBeamer:
-    prefab: {fileID: 1418180885210040, guid: 6ba76c943fe5dd24ba4cf76ade03e250, type: 2}
-    cost: 500
 --- !u!1 &1738161187
 GameObject:
   m_ObjectHideFlags: 0
@@ -7456,7 +7445,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1669311905}
+      - m_Target: {fileID: 0}
         m_MethodName: selectLaserBeamer
         m_Mode: 1
         m_Arguments:

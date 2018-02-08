@@ -8,8 +8,8 @@ namespace Toywars {
         protected GameManager gm;
         protected PlayerManager pm;
         protected EnemiesManager em;
-        public float startSpeed;
-        public float detectionRadius;
+        public Attribute speed;
+        public Attribute detectionRadius;
         public string[] tagsToDetect;
 
         protected NavMeshAgent nva;
@@ -29,9 +29,11 @@ namespace Toywars {
             gm = GameManager.getInstance();
             pm = PlayerManager.getInstance();
             em = EnemiesManager.getInstance();
+            speed.init();
+            detectionRadius.init();
             nva = GetComponent<NavMeshAgent>();
             nva.stoppingDistance = 1;
-            nva.speed = startSpeed;
+            nva.speed = speed.getStart();
         }
 
         protected virtual void Update() {
@@ -44,7 +46,7 @@ namespace Toywars {
                     endPath();
                 }
                 else {
-                    if(state == State.exit && Vector3.SqrMagnitude(this.transform.position - getNextDestination()) < .1) {
+                    if(state == State.exit && Vector3.Distance(this.transform.position, getNextDestination()) < .1) {
                         waypointIndex++;
                         this.destination = getNextDestination();
                     }
@@ -53,7 +55,7 @@ namespace Toywars {
         }
 
         void setTarget() {
-            Collider[] nearby = Physics.OverlapSphere(this.transform.position, detectionRadius);
+            Collider[] nearby = Physics.OverlapSphere(this.transform.position, detectionRadius.get());
             bool hasTarget = false;
             foreach(Collider col in nearby) {
                 foreach(string tag in tagsToDetect) {

@@ -16,6 +16,12 @@ namespace Toywars {
         public event GameManagerEventHandler GoToMenuSceneEvent;
         public event GameManagerEventHandler GameOverEvent;
 
+        public delegate void TileSelectHandler(Tile tile);
+        public event TileSelectHandler SelectTileEvent;
+
+        public delegate void TileDeselectHandler();
+        public event TileDeselectHandler DeselectTileEvent;
+
         public int minionsAlive
         {
             get {
@@ -125,6 +131,18 @@ namespace Toywars {
                     gameResult = GameResult.Lose;
 
                 GameOverEvent();
+            }
+        }
+
+        public void callEventSelectTile(Tile tile) {
+            if(SelectTileEvent != null) {
+                SelectTileEvent(tile);
+            }
+        }
+
+        public void callEventDeselectTile() {
+            if(DeselectTileEvent != null) {
+                DeselectTileEvent();
             }
         }
     }

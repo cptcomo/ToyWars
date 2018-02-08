@@ -6,10 +6,9 @@ using UnityEngine.UI;
 namespace Toywars {
     public class Minion : MonoBehaviour {
         protected GameManager gm;
-        public float startHealth;
-        protected float health;
-        public float damage;
-        public float attackRadius;
+        public Attribute health;
+        public Attribute damage;
+        public Attribute attackRadius;
 
         public GameObject deathEffect;
         public GameObject hpBarPrefab;
@@ -21,7 +20,7 @@ namespace Toywars {
 
         public virtual void Start() {
             gm = GameManager.getInstance();
-            health = startHealth;
+            health.init();
             hpCanvas = GameObject.Find(hpCanvasName);
             hpBar = (GameObject)Instantiate(hpBarPrefab);
             hpBar.transform.SetParent(hpCanvas.transform, false);
@@ -30,10 +29,12 @@ namespace Toywars {
                 Debug.LogWarning("Minion Health Bar does not have an Image component");
         }
 
+        public virtual void takeDamage(float damage, bool playerShot) { }
+
         public virtual void Update() {
             attack();
             hpBar.transform.position = (Vector3.up * hpBarOffset) + transform.position;
-            hpBarImage.fillAmount = health / startHealth;    
+            hpBarImage.fillAmount = health.get() / health.getStart();    
         }
 
         public virtual void OnDestroy() {
