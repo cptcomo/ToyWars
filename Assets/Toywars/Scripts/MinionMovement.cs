@@ -44,7 +44,10 @@ namespace Toywars {
                     endPath();
                 }
                 else {
-                    waypointIndex++;
+                    if(state == State.exit && Vector3.SqrMagnitude(this.transform.position - getNextDestination()) < .1) {
+                        waypointIndex++;
+                        this.destination = getNextDestination();
+                    }
                 }
             }
         }

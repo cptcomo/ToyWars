@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Toywars {
     public class WaveSpawner : MonoBehaviour {
         public bool isEnemy;
-
+        public Vector3[] minionWaypoints;
         public Wave wave;
 
         GameManager gm;
@@ -35,13 +35,14 @@ namespace Toywars {
 
         IEnumerator spawnWaveSection(WaveSection section) {
             for(int i = 0; i < section.count; i++) {
-                spawnEnemy(section.enemy);
+                spawnMinion(section.minion);
                 yield return new WaitForSeconds(1 / section.rate);
             }
         }
 
-        void spawnEnemy(GameObject enemy) {
-            Instantiate(enemy, this.transform.position, this.transform.rotation);
+        void spawnMinion(GameObject minion) {
+            GameObject obj = (GameObject)Instantiate(minion, this.transform.position, this.transform.rotation);
+            obj.GetComponent<MinionMovement>().waypoints = minionWaypoints;
             if(isEnemy)
                 em.enemiesAlive++;
             else

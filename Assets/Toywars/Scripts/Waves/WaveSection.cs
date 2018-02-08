@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Toywars {
     [System.Serializable]
     public class WaveSection {
-        public GameObject enemy;
+        public GameObject minion;
         public int count;
         public float rate;
     }

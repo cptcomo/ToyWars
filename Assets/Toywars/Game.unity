@@ -1247,6 +1247,14 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1813124688449912, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8, type: 2}
+      propertyPath: m_NavMeshLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929131839228456, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8, type: 2}
+      propertyPath: m_NavMeshLayer
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8, type: 2}
   m_IsPrefabParent: 0
@@ -1763,10 +1771,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  minionWaypoints:
+  - {x: -30, y: 0.5, z: -60}
+  - {x: -30, y: 0.5, z: 41}
+  - {x: -22, y: 0.5, z: 98.5}
   wave:
     sections:
-    - enemy: {fileID: 1044195431293078, guid: 3447c7d034538ee4297e06585f017903, type: 2}
-      count: 1
+    - minion: {fileID: 1044195431293078, guid: 3447c7d034538ee4297e06585f017903, type: 2}
+      count: 2
       rate: 1
   doneWithWave: 0
 --- !u!1 &568281549
@@ -1810,10 +1822,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 1
+  minionWaypoints:
+  - {x: -30, y: 0.5, z: 61}
+  - {x: -30, y: 0.5, z: -40}
+  - {x: -22, y: 0.5, z: -98.5}
   wave:
     sections:
-    - enemy: {fileID: 1044195431293078, guid: 6ab181c249b2b9b429c43fc457c183ba, type: 2}
-      count: 1
+    - minion: {fileID: 1044195431293078, guid: 6ab181c249b2b9b429c43fc457c183ba, type: 2}
+      count: 2
       rate: 1
   doneWithWave: 0
 --- !u!1 &569281314
@@ -3570,6 +3586,14 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1929131839228456, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8, type: 2}
+      propertyPath: m_NavMeshLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813124688449912, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8, type: 2}
+      propertyPath: m_NavMeshLayer
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8, type: 2}
   m_IsPrefabParent: 0
@@ -4841,10 +4865,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  minionWaypoints:
+  - {x: 30, y: 0.5, z: -60}
+  - {x: 30, y: 0.5, z: 41}
+  - {x: 10, y: 0, z: 98.5}
   wave:
     sections:
-    - enemy: {fileID: 1044195431293078, guid: 3447c7d034538ee4297e06585f017903, type: 2}
-      count: 1
+    - minion: {fileID: 1044195431293078, guid: 3447c7d034538ee4297e06585f017903, type: 2}
+      count: 2
       rate: 1
   doneWithWave: 0
 --- !u!1 &1284435957
@@ -6393,10 +6421,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 1
+  minionWaypoints:
+  - {x: 0, y: 0.5, z: 61}
+  - {x: 0, y: 0.5, z: -40}
+  - {x: -6, y: 0.5, z: -87}
   wave:
     sections:
-    - enemy: {fileID: 1044195431293078, guid: 6ab181c249b2b9b429c43fc457c183ba, type: 2}
-      count: 1
+    - minion: {fileID: 1044195431293078, guid: 6ab181c249b2b9b429c43fc457c183ba, type: 2}
+      count: 2
       rate: 1
   doneWithWave: 0
 --- !u!1 &1814424748
@@ -7203,10 +7235,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  minionWaypoints:
+  - {x: 0, y: 0.5, z: -60}
+  - {x: 0, y: 0.5, z: 41}
+  - {x: -6, y: 0.5, z: 86}
   wave:
     sections:
-    - enemy: {fileID: 1044195431293078, guid: 3447c7d034538ee4297e06585f017903, type: 2}
-      count: 1
+    - minion: {fileID: 1044195431293078, guid: 3447c7d034538ee4297e06585f017903, type: 2}
+      count: 2
       rate: 1
   doneWithWave: 0
 --- !u!1 &2053174899
@@ -7250,10 +7286,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 1
+  minionWaypoints:
+  - {x: 30, y: 0.5, z: 61}
+  - {x: 30, y: 0.5, z: -40}
+  - {x: 10, y: 0.5, z: -98.5}
   wave:
     sections:
-    - enemy: {fileID: 1044195431293078, guid: 6ab181c249b2b9b429c43fc457c183ba, type: 2}
-      count: 1
+    - minion: {fileID: 1044195431293078, guid: 6ab181c249b2b9b429c43fc457c183ba, type: 2}
+      count: 2
       rate: 1
   doneWithWave: 0
 --- !u!1 &2054888055

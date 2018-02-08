@@ -13,8 +13,8 @@ NavMeshProjectSettings:
     cost: 2
   - name: SidePaths
     cost: 1
-  - name: 
-    cost: 1
+  - name: ConnectionPath
+    cost: 10
   - name: 
     cost: 1
   - name: 
