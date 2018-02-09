@@ -21,6 +21,8 @@ namespace Toywars {
         public virtual void Start() {
             gm = GameManager.getInstance();
             health.init();
+            damage.init();
+            attackRadius.init();
             hpCanvas = GameObject.Find(hpCanvasName);
             hpBar = (GameObject)Instantiate(hpBarPrefab);
             hpBar.transform.SetParent(hpCanvas.transform, false);

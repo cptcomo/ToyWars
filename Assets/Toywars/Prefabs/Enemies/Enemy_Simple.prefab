@@ -154,7 +154,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &114117820863267334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -193,8 +193,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cff37422111a784785ae82f7538da72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSpeed: 10
-  detectionRadius: 20
+  speed:
+    start: 10
+  detectionRadius:
+    start: 10
   tagsToDetect:
   - Player
   - AllyMinion
@@ -238,9 +240,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bbb1ff1768b69b46ae06e4189fce85f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 100
-  damage: 10
-  attackRadius: 2
+  health:
+    start: 20
+  damage:
+    start: 20
+  attackRadius:
+    start: 2
   deathEffect: {fileID: 1787243369622486, guid: ffa7fb7607c9baa46bcb69956d18788c,
     type: 2}
   hpBarPrefab: {fileID: 1453098498204944, guid: 54209f3e5e99ef34c88c9508dc919680,
