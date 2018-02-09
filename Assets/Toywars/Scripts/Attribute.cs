@@ -9,8 +9,11 @@ namespace Toywars {
         private float start;
         private float current;
 
+        bool calledInit = false;
+
         public void init() {
             this.current = this.start;
+            calledInit = true;
         }
 
         public float getStart() {
@@ -18,6 +21,9 @@ namespace Toywars {
         }
 
         public void set(float val) {
+            if(!calledInit)
+                Debug.LogWarning("Attribute init() was not called before callng set");
+
             this.current = val;
         }
 
@@ -26,6 +32,9 @@ namespace Toywars {
         }
 
         public float get() {
+            if(!calledInit)
+                Debug.LogWarning("Attribute init() was not called before callng get");
+
             return this.current;
         }
 

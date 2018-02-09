@@ -31,6 +31,7 @@ namespace Toywars{
         public Transform firePoint;
 
         private void Start() {
+            range.init();
             fireRate.init();
             explosionRadius.init();
             damage.init();

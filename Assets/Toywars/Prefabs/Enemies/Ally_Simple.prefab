@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health:
-    start: 20
+    start: 100
   damage:
     start: 20
   attackRadius:

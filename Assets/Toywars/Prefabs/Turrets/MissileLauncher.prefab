@@ -274,6 +274,6 @@ MonoBehaviour:
   laserImpactEffect: {fileID: 0}
   impactLight: {fileID: 0}
   turnSpeed: 10
-  targetTag: 
+  targetTag: Enemy
   partToRotate: {fileID: 4472867435522608}
   firePoint: {fileID: 4329050872738252}
