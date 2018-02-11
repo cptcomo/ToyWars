@@ -33,9 +33,11 @@ namespace Toywars {
 
                 if(!buildManager.canBuild)
                     return;
-
+                
                 if(!buildManager.hasMoney)
                     return;
+
+                buildTurret(buildManager.getTurretToBuild());
             }
         }
 
