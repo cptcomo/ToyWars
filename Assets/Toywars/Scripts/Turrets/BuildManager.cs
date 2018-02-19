@@ -21,12 +21,13 @@ namespace Toywars {
             pm = PlayerManager.getInstance();
             gm.SelectTileEvent += selectTile;
             gm.DeselectTileEvent += deselectTile;
-           
+            gm.UpgradeTurretEvent += upgradeSelectedTurret;
         }
 
         private void OnDisable() {
             gm.SelectTileEvent -= selectTile;
             gm.DeselectTileEvent -= deselectTile;
+            gm.UpgradeTurretEvent -= upgradeSelectedTurret;
         }
 
         public static BuildManager getInstance() {
@@ -55,6 +56,10 @@ namespace Toywars {
 
         void deselectTile() {
             selectedTile = null;
+        }
+
+        void upgradeSelectedTurret(int upgradeIndex) {
+            selectedTile.upgradeTurret(upgradeIndex);
         }
     }
 }

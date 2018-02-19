@@ -39,11 +39,11 @@ namespace Toywars {
         }
 
         public void modifyPct(float pct) {
-
+            this.current *= (1 + pct / 100);
         }
 
         public void modifyFlat(float flat) {
-
+            this.current += start;
         }
     }
 }

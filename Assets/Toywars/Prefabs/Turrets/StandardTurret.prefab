@@ -278,3 +278,14 @@ MonoBehaviour:
   targetTag: Enemy
   partToRotate: {fileID: 4808403617968734}
   firePoint: {fileID: 4515269661851138}
+  towerUpgradePath:
+    leftPath:
+    - {fileID: 114456777402546388, guid: 20f0766d699773f4ebafd394192226f3, type: 2}
+    - {fileID: 114456777402546388, guid: e5a554b8e1b1a83409de86f031f4fd77, type: 2}
+    - {fileID: 114456777402546388, guid: dc4c6e70be4bd4344b1815675a1a0e8f, type: 2}
+    - {fileID: 114456777402546388, guid: 40827bd83f1ea6f41be2110f9459318c, type: 2}
+    rightPath:
+    - {fileID: 114456777402546388, guid: 233944ba111aa984e99336fcd46c040a, type: 2}
+    - {fileID: 114456777402546388, guid: 605e935905bb7b84e8036f3ac599c0ca, type: 2}
+    - {fileID: 114456777402546388, guid: d5824c3b2a7959a4989bfb8fb7b787df, type: 2}
+    - {fileID: 114456777402546388, guid: b67b11fc8227b4a419a5e95403e0b9de, type: 2}

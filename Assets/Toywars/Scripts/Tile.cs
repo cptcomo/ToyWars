@@ -53,7 +53,7 @@ namespace Toywars {
         }
 
         public void upgradeTurret(int upgradeIndex) {
-            //this.turret.GetComponent<Turret>().upgrade(upgradeIndex);
+            this.turret.GetComponent<Turret>().upgrade(upgradeIndex);
             gm.callEventSelectTile(this);
         }
 

@@ -22,6 +22,9 @@ namespace Toywars {
         public delegate void TileDeselectHandler();
         public event TileDeselectHandler DeselectTileEvent;
 
+        public delegate void UpgradeTurretHandler(int upgradeIndex);
+        public event UpgradeTurretHandler UpgradeTurretEvent;
+
         public int minionsAlive
         {
             get {
@@ -143,6 +146,12 @@ namespace Toywars {
         public void callEventDeselectTile() {
             if(DeselectTileEvent != null) {
                 DeselectTileEvent();
+            }
+        }
+
+        public void callEventUpgradeTurret(int upgradeIndex) {
+            if(UpgradeTurretEvent != null) {
+                UpgradeTurretEvent(upgradeIndex);
             }
         }
     }

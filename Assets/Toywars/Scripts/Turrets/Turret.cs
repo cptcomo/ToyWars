@@ -30,6 +30,8 @@ namespace Toywars{
         public Transform partToRotate;
         public Transform firePoint;
 
+        public TowerUpgradePath towerUpgradePath;
+
         private void Start() {
             range.init();
             fireRate.init();
@@ -37,6 +39,7 @@ namespace Toywars{
             damage.init();
             dot.init();
             slowPct.init();
+            towerUpgradePath.init();
             InvokeRepeating("updateTarget", 0f, 0.25f);
         }
 
@@ -119,6 +122,11 @@ namespace Toywars{
                 bullet.setExplosionRadius(explosionRadius.get());
                 bullet.setTargetTag(targetTag);
             } 
+        }
+
+        public void upgrade(int upgradeIndex) {
+            Debug.Log("Hi");
+            towerUpgradePath.upgrade(upgradeIndex, this);
         }
     }
 }

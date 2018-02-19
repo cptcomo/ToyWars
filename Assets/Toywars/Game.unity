@@ -8986,6 +8986,48 @@ MonoBehaviour:
   turretBlueprint:
     prefab: {fileID: 0}
     cost: 0
+--- !u!1001 &838676298
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4093993837066828, guid: 20f0766d699773f4ebafd394192226f3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 10.865277
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093993837066828, guid: 20f0766d699773f4ebafd394192226f3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1.2786751
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093993837066828, guid: 20f0766d699773f4ebafd394192226f3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -5.4913807
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093993837066828, guid: 20f0766d699773f4ebafd394192226f3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093993837066828, guid: 20f0766d699773f4ebafd394192226f3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093993837066828, guid: 20f0766d699773f4ebafd394192226f3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093993837066828, guid: 20f0766d699773f4ebafd394192226f3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093993837066828, guid: 20f0766d699773f4ebafd394192226f3, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 20f0766d699773f4ebafd394192226f3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &840584201 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1812570028850938, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8,
@@ -18232,7 +18274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1930889150
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18256,20 +18298,18 @@ RectTransform:
 --- !u!114 &1930889151
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114912042054948278, guid: 5e5c92e92fca392418f20f0abd06119b,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1930889149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02b61313252e4204cb5ae6bdf2043b70, type: 3}
+  m_Script: {fileID: 11500000, guid: 45aad10a6b7c530438d05b576a7fe250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeUI: {fileID: 1201124694}
-  upgradeUI: {fileID: 2100460690}
-  upgradeButtonPrefab: {fileID: 1104416984160120, guid: 11b45ccb9a7735f4eb407ac009f2477f,
-    type: 2}
-  towerSpriteImage: {fileID: 1605922226}
+  tileUI: {fileID: 0}
+  upgradeUI: {fileID: 0}
+  upgradeButtonPrefab: {fileID: 0}
+  towerSpriteImage: {fileID: 0}
   upgradeNameText: UpgradeName
   upgradeCostText: UpgradeCost
 --- !u!1 &1933731216 stripped
