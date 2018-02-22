@@ -21,9 +21,10 @@ GameObject:
   - component: {fileID: 4183436310015514}
   - component: {fileID: 33197242331805574}
   - component: {fileID: 23529593341759420}
-  - component: {fileID: 114486756436178436}
+  - component: {fileID: 135674956367086026}
+  - component: {fileID: 114062373366495904}
   m_Layer: 9
-  m_Name: Bullet
+  m_Name: SkillshotBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +84,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1826154541861776}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114486756436178436
+--- !u!114 &114062373366495904
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -91,9 +92,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1826154541861776}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88e60534dd4263a4fa12966628a22558, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d339cef7d4e9dc46bf9b031c5b52818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 70
+  speed: 50
   impactEffect: {fileID: 1749179818377794, guid: 958045474c08db34aaa5fd329b437753,
     type: 2}
+--- !u!135 &135674956367086026
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1826154541861776}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.75
+  m_Center: {x: 0, y: 0, z: 0}

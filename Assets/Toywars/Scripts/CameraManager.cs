@@ -19,7 +19,7 @@ namespace Toywars {
         private void Start() {
             gm = GameManager.getInstance();
             playerScript = player.gameObject.GetComponent<Player>();
-            //playerScript.setCameraHeightOffset(playerHoverOffset.y);
+            playerScript.setCameraHeightOffset(playerHoverOffset.y);
         }
 
         private void Update() {

@@ -11,7 +11,8 @@ namespace Toywars {
         public Attribute health;
         public Attribute speed;
 
-        //Health UI here
+        public Image healthBar;
+        public Text healthText;
 
         public Vector3 waveStartPosition = new Vector3(0, 0, 96);
 
@@ -21,27 +22,41 @@ namespace Toywars {
 
         private GameManager gm;
 
-        //Abilities here
+        public string targetTag = "Enemy";
 
+        public Ability Q, W, E, R;
+        private Ability[] abilities;
+        //Ability Upgrades here
+        public Image qImage, wImage, eImage, rImage;
 
-        //Buffs here
-
+        private List<Buff> buffs;
+        private List<Attribute> attrs;
 
         private void Start() {
             gm = GameManager.getInstance();
-            //buffs = new List<Buff>();
-            health.init();
-            speed.init();
+            buffs = new List<Buff>();
+            attrs = new List<Attribute>();
+            attrs.Add(health);
+            attrs.Add(speed);
+            attrs.ForEach(attr => attr.init());
             nva = GetComponent<NavMeshAgent>();
             nva.speed = speed.getStart();
             nva.angularSpeed = 360;
             nva.acceleration = 15;
             gm.StartNextWaveEvent += resetPosition;
-            
+            gm.StartNextWaveEvent += gm.callEventTogglePlayerUI;
+            gm.EndWaveEvent += gm.callEventTogglePlayerUI;
+            gm.TogglePlayerUIEvent += toggleUI;
+            abilities = new Ability[] { Q, W, E, R };
+            foreach(Ability ability in abilities)
+                ability.start();
         }
 
         private void OnDisable() {
             gm.StartNextWaveEvent -= resetPosition;
+            gm.StartNextWaveEvent -= gm.callEventTogglePlayerUI;
+            gm.EndWaveEvent -= gm.callEventTogglePlayerUI;
+            gm.TogglePlayerUIEvent -= toggleUI;
         }
 
         private void Update() {
@@ -61,28 +76,78 @@ namespace Toywars {
                         nva.SetDestination(this.dest);
                     }
                 }
-                //Abilities
 
-                //Health Bar
+                if(Input.GetKeyDown(KeyCode.Q)) {
+                    if(Q.isAvailable())
+                        Q.activate(this);
+                } else if(Input.GetKeyDown(KeyCode.W)) {
+                    if(W.isAvailable())
+                        W.activate(this);
+                } else if(Input.GetKeyDown(KeyCode.E)) {
+                    if(E.isAvailable())
+                        E.activate(this);
+                } else if(Input.GetKeyDown(KeyCode.R)) {
+                    if(R.isAvailable())
+                        R.activate(this);
+                }
+
+                if(health.get() < 0f) {
+                    gm.callEventGameOver(false);
+                }
+
+                healthBar.fillAmount = health.get() / health.getStart();
+                healthText.text = "" + Mathf.Round(health.get());
+            }
+            else {
+                dest = this.transform.position;
+                nva.SetDestination(dest);
             }
         }
 
-        void resetAttributes() {
+        public void addBuff(Buff buff) {
+            buffs.Add(buff);
+        }
 
+        void resetAttributes() {
+            attrs.ForEach(attr => attr.reset());
         }
 
         void updateBuffs() {
-
+            buffs.ForEach(buff => {
+                if(buff.finished)
+                    buffs.Remove(buff);
+                else
+                    buff.tick();
+            });
         }
 
         void updateAbilityUI() {
+            qImage.fillAmount = Q.uiFillAmount();
+            wImage.fillAmount = W.uiFillAmount();
+            eImage.fillAmount = E.uiFillAmount();
+            rImage.fillAmount = R.uiFillAmount();
+        }
 
+        public void takeDamage(float dmg) {
+            this.health.change(-dmg);
+        }
+
+        void toggleUI() {
+            playerUI.SetActive(!playerUI.activeSelf);
         }
 
         public void resetPosition() {
             this.transform.position = waveStartPosition;
             this.transform.rotation = Quaternion.identity;
             this.nva.SetDestination(waveStartPosition);
+        }
+
+        public void setCameraHeightOffset(float newHeight) {
+            cameraHeightOffset = newHeight;
+        }
+
+        public float getCameraHeightOffset() {
+            return cameraHeightOffset;
         }
     }
 

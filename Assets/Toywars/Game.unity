@@ -6917,6 +6917,55 @@ MonoBehaviour:
   turretBlueprint:
     prefab: {fileID: 0}
     cost: 0
+--- !u!1 &754270679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 754270680}
+  - component: {fileID: 754270681}
+  m_Layer: 0
+  m_Name: E
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &754270680
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 754270679}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1121123861}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &754270681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 754270679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 143ed6d58bf33e046aac66aff8b6cdd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: Triple Shot
+  description: Shoots 3 projectiles
+  cooldown: 10
+  numOfCasts: 3
+  intervalBtwnCast: 0.3
+  startCDOnCast: 0
+  projectile: {fileID: 1826154541861776, guid: ceab346c7d650ea4881c8f3c39c027cd, type: 2}
+  damagePerBullet: 20
+  range: 40
 --- !u!1 &757377913 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1250438212866666, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8,
@@ -10525,7 +10574,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1040085845
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11150,6 +11199,8 @@ GameObject:
   - component: {fileID: 1121123860}
   - component: {fileID: 1121123859}
   - component: {fileID: 1121123858}
+  - component: {fileID: 1121123863}
+  - component: {fileID: 1121123862}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -11217,12 +11268,65 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1121123857}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -96}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1963437978}
+  - {fileID: 1654585323}
+  - {fileID: 754270680}
+  - {fileID: 1426249666}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!195 &1121123862
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1121123857}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &1121123863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1121123857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a752704feaf4074b8052696f1e53ba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerUI: {fileID: 1814424748}
+  health:
+    start: 100
+  speed:
+    start: 7
+  healthBar: {fileID: 2075271560}
+  healthText: {fileID: 427013154}
+  waveStartPosition: {x: 0, y: 0, z: -96}
+  targetTag: Enemy
+  Q: {fileID: 0}
+  W: {fileID: 0}
+  E: {fileID: 0}
+  R: {fileID: 0}
+  qImage: {fileID: 0}
+  wImage: {fileID: 0}
+  eImage: {fileID: 0}
+  rImage: {fileID: 0}
 --- !u!1 &1125887039 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1516422824915846, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8,
@@ -11831,22 +11935,22 @@ Prefab:
     - target: {fileID: 224604469536065422, guid: aa24edce0ef92e946b90cc73b92948a6,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 414.5
       objectReference: {fileID: 0}
     - target: {fileID: 224604469536065422, guid: aa24edce0ef92e946b90cc73b92948a6,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 286.5
       objectReference: {fileID: 0}
     - target: {fileID: 224604469536065422, guid: aa24edce0ef92e946b90cc73b92948a6,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 1597.5309
       objectReference: {fileID: 0}
     - target: {fileID: 224604469536065422, guid: aa24edce0ef92e946b90cc73b92948a6,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 1104.2041
       objectReference: {fileID: 0}
     - target: {fileID: 224604469536065422, guid: aa24edce0ef92e946b90cc73b92948a6,
         type: 2}
@@ -11871,12 +11975,32 @@ Prefab:
     - target: {fileID: 224604469536065422, guid: aa24edce0ef92e946b90cc73b92948a6,
         type: 2}
       propertyPath: m_Pivot.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 224604469536065422, guid: aa24edce0ef92e946b90cc73b92948a6,
         type: 2}
       propertyPath: m_Pivot.y
-      value: 0
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 223745406908564926, guid: aa24edce0ef92e946b90cc73b92948a6,
+        type: 2}
+      propertyPath: m_RenderMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224604469536065422, guid: aa24edce0ef92e946b90cc73b92948a6,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.5189258
+      objectReference: {fileID: 0}
+    - target: {fileID: 224604469536065422, guid: aa24edce0ef92e946b90cc73b92948a6,
+        type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.5189258
+      objectReference: {fileID: 0}
+    - target: {fileID: 224604469536065422, guid: aa24edce0ef92e946b90cc73b92948a6,
+        type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.5189258
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aa24edce0ef92e946b90cc73b92948a6, type: 2}
@@ -13767,6 +13891,55 @@ MonoBehaviour:
   turretBlueprint:
     prefab: {fileID: 0}
     cost: 0
+--- !u!1 &1426249665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1426249666}
+  - component: {fileID: 1426249667}
+  m_Layer: 0
+  m_Name: R
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1426249666
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1426249665}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1121123861}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1426249667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1426249665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8cde92dd652b04ca772d6289803ad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: BAZOOKA
+  description: Shoots a lot of projectiles
+  cooldown: 16
+  numOfCasts: 8
+  intervalBtwnCast: 0.15
+  startCDOnCast: 0
+  projectile: {fileID: 1826154541861776, guid: ceab346c7d650ea4881c8f3c39c027cd, type: 2}
+  damagePerProjectile: 15
+  range: 120
 --- !u!1 &1429566952
 GameObject:
   m_ObjectHideFlags: 0
@@ -15727,8 +15900,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b6bbf39f48f2144aaef5b4ef7602a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  playerHoverOffset: {x: 0, y: 10, z: 0}
+  player: {fileID: 1121123861}
+  playerHoverOffset: {x: 0, y: 15, z: 0}
   panSpeed: 40
   panBorderThickness: 5
   scrollSpeed: 8
@@ -16064,6 +16237,51 @@ MonoBehaviour:
   turretBlueprint:
     prefab: {fileID: 0}
     cost: 0
+--- !u!1 &1654585322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1654585323}
+  - component: {fileID: 1654585324}
+  m_Layer: 0
+  m_Name: W
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1654585323
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1654585322}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1121123861}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1654585324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1654585322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e320e392836e74a8955870e5298e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: Ghost
+  description: Moves fast
+  cooldown: 8
+  pct: 30
+  duration: 3
 --- !u!1 &1662082454 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1847401130309966, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8,
@@ -18574,6 +18792,52 @@ MonoBehaviour:
   turretBlueprint:
     prefab: {fileID: 0}
     cost: 0
+--- !u!1 &1963437977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1963437978}
+  - component: {fileID: 1963437979}
+  m_Layer: 0
+  m_Name: Q
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1963437978
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1963437977}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1121123861}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1963437979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1963437977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3a76c856ed36e14180f9887905e1555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: Basic Shot
+  description: Shoots a basic projectile
+  cooldown: 0.7
+  projectile: {fileID: 1826154541861776, guid: ceab346c7d650ea4881c8f3c39c027cd, type: 2}
+  damage: 25
+  range: 40
 --- !u!1 &1968682236 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1377821095082028, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8,

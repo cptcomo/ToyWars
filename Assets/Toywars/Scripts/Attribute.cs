@@ -31,6 +31,10 @@ namespace Toywars {
             this.current += delta;
         }
 
+        public void reset() {
+            set(getStart());
+        }
+
         public float get() {
             if(!calledInit)
                 Debug.LogWarning("Attribute init() was not called before callng get");

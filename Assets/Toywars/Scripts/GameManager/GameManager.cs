@@ -25,6 +25,9 @@ namespace Toywars {
         public delegate void UpgradeTurretHandler(int upgradeIndex);
         public event UpgradeTurretHandler UpgradeTurretEvent;
 
+        public delegate void TogglePlayerUIHandler();
+        public event TogglePlayerUIHandler TogglePlayerUIEvent;
+
         public int minionsAlive
         {
             get {
@@ -152,6 +155,12 @@ namespace Toywars {
         public void callEventUpgradeTurret(int upgradeIndex) {
             if(UpgradeTurretEvent != null) {
                 UpgradeTurretEvent(upgradeIndex);
+            }
+        }
+
+        public void callEventTogglePlayerUI() {
+            if(TogglePlayerUIEvent != null) {
+                TogglePlayerUIEvent();
             }
         }
     }
