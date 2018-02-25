@@ -28,6 +28,12 @@ namespace Toywars {
         public delegate void TogglePlayerUIHandler();
         public event TogglePlayerUIHandler TogglePlayerUIEvent;
 
+        public delegate void PlayerAbilityUpgradeHandler();
+        public event PlayerAbilityUpgradeHandler ShowAbilityUpgradeEvent, HideAbilityUpgradeEvent;
+
+        public delegate void UpgradePlayerHandler(int upgradeIndex);
+        public event UpgradePlayerHandler UpgradePlayerEvent;
+
         public int minionsAlive
         {
             get {
@@ -161,6 +167,24 @@ namespace Toywars {
         public void callEventTogglePlayerUI() {
             if(TogglePlayerUIEvent != null) {
                 TogglePlayerUIEvent();
+            }
+        }
+
+        public void callEventShowAbilityUpgrade() {
+            if(ShowAbilityUpgradeEvent != null) {
+                ShowAbilityUpgradeEvent();
+            }
+        }
+
+        public void callEventHideAbilityUpgrade() {
+            if(HideAbilityUpgradeEvent != null) {
+                HideAbilityUpgradeEvent();
+            }
+        }
+
+        public void callEventUpgradePlayer(int upgradeIndex) {
+            if(UpgradePlayerEvent != null) {
+                UpgradePlayerEvent(upgradeIndex);
             }
         }
     }

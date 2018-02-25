@@ -31,6 +31,7 @@ namespace Toywars {
             projScript.setDamage(damagePerProjectile);
             projScript.setRange(range);
             projScript.setPlayerShot(true);
+            projScript.setTargetTag(player.targetTag);
         }
 
         void shootEast(Player player) {
@@ -40,6 +41,7 @@ namespace Toywars {
             projScript.setDamage(damagePerProjectile);
             projScript.setRange(range);
             projScript.setPlayerShot(true);
+            projScript.setTargetTag(player.targetTag);
         }
 
         void shootWest(Player player) {
@@ -49,6 +51,7 @@ namespace Toywars {
             projScript.setDamage(damagePerProjectile);
             projScript.setRange(range);
             projScript.setPlayerShot(true);
+            projScript.setTargetTag(player.targetTag);
         }
 
         void shootSouth(Player player) {
@@ -58,6 +61,7 @@ namespace Toywars {
             projScript.setDamage(damagePerProjectile);
             projScript.setRange(range);
             projScript.setPlayerShot(true);
+            projScript.setTargetTag(player.targetTag);
         }
     }
 }

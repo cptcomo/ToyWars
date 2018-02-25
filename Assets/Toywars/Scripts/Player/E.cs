@@ -32,6 +32,7 @@ namespace Toywars {
             projScript.seek(dir);
             projScript.setDamage(damagePerBullet);
             projScript.setRange(range);
+            projScript.setTargetTag(player.targetTag);
             projScript.setPlayerShot(true);
         }
     }

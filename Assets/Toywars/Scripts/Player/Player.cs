@@ -26,7 +26,7 @@ namespace Toywars {
 
         public Ability Q, W, E, R;
         private Ability[] abilities;
-        //Ability Upgrades here
+        public AbilityUpgradePath abilityUpgradePath;
         public Image qImage, wImage, eImage, rImage;
 
         private List<Buff> buffs;
@@ -43,10 +43,12 @@ namespace Toywars {
             nva.speed = speed.getStart();
             nva.angularSpeed = 360;
             nva.acceleration = 15;
+            abilityUpgradePath.init();
             gm.StartNextWaveEvent += resetPosition;
             gm.StartNextWaveEvent += gm.callEventTogglePlayerUI;
             gm.EndWaveEvent += gm.callEventTogglePlayerUI;
             gm.TogglePlayerUIEvent += toggleUI;
+            gm.UpgradePlayerEvent += upgradeAbility;
             abilities = new Ability[] { Q, W, E, R };
             foreach(Ability ability in abilities)
                 ability.start();
@@ -57,6 +59,7 @@ namespace Toywars {
             gm.StartNextWaveEvent -= gm.callEventTogglePlayerUI;
             gm.EndWaveEvent -= gm.callEventTogglePlayerUI;
             gm.TogglePlayerUIEvent -= toggleUI;
+            gm.UpgradePlayerEvent -= upgradeAbility;
         }
 
         private void Update() {
@@ -140,6 +143,10 @@ namespace Toywars {
             this.transform.position = waveStartPosition;
             this.transform.rotation = Quaternion.identity;
             this.nva.SetDestination(waveStartPosition);
+        }
+
+        void upgradeAbility(int upgradeIndex) {
+            abilityUpgradePath.upgrade(upgradeIndex, this);
         }
 
         public void setCameraHeightOffset(float newHeight) {

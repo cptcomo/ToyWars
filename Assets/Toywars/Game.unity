@@ -2772,13 +2772,12 @@ RectTransform:
 --- !u!114 &285179012
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114806106923085948, guid: 5e5c92e92fca392418f20f0abd06119b,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 285179010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59e62120787e8fb458b08d90fbb7ff2d, type: 3}
+  m_Script: {fileID: 11500000, guid: f0c21207aea7bd0408ee571c28c9256e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   expText: {fileID: 958923393}
@@ -3638,7 +3637,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &360982024
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3662,20 +3661,19 @@ RectTransform:
 --- !u!114 &360982025
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114105405419783712, guid: 5e5c92e92fca392418f20f0abd06119b,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 360982023}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9781eaad2b0973a498c60a422acace8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ae72daf777bbed4f96e2e39d35aead2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerUI: {fileID: 169218347}
   upgradeUI: {fileID: 2054888055}
-  upgradeButtonPrefab: {fileID: 1104416984160120, guid: 11b45ccb9a7735f4eb407ac009f2477f,
+  upgradeButtonPrefab: {fileID: 1104416984160120, guid: 25d9bd8456cbb6c4d90b2d311dccffac,
     type: 2}
-  playerGO: {fileID: 0}
+  playerGO: {fileID: 1121123857}
   upgradeNameText: UpgradeName
   upgradeCostText: UpgradeCost
 --- !u!1 &362283249 stripped
@@ -6516,7 +6514,7 @@ MonoBehaviour:
   alliesAlive: 0
   baseHealth: 20
   money: 5000
-  exp: 100
+  exp: 10000
 --- !u!1 &698767524 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1831553133066324, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8,
@@ -6965,7 +6963,7 @@ MonoBehaviour:
   startCDOnCast: 0
   projectile: {fileID: 1826154541861776, guid: ceab346c7d650ea4881c8f3c39c027cd, type: 2}
   damagePerBullet: 20
-  range: 40
+  range: 70
 --- !u!1 &757377913 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1250438212866666, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8,
@@ -11314,19 +11312,36 @@ MonoBehaviour:
   health:
     start: 100
   speed:
-    start: 7
+    start: 15
   healthBar: {fileID: 2075271560}
   healthText: {fileID: 427013154}
   waveStartPosition: {x: 0, y: 0, z: -96}
   targetTag: Enemy
-  Q: {fileID: 0}
-  W: {fileID: 0}
-  E: {fileID: 0}
-  R: {fileID: 0}
-  qImage: {fileID: 0}
-  wImage: {fileID: 0}
-  eImage: {fileID: 0}
-  rImage: {fileID: 0}
+  Q: {fileID: 1963437979}
+  W: {fileID: 1654585324}
+  E: {fileID: 754270681}
+  R: {fileID: 1426249667}
+  abilityUpgradePath:
+    qPath:
+    - {fileID: 114318860199296668, guid: 5cf7ca3c36207c54fb38cdf440577c29, type: 2}
+    - {fileID: 114318860199296668, guid: 41af64ec05925e74bb2064358af19ccf, type: 2}
+    - {fileID: 114318860199296668, guid: 3fd9b3b700d82ca4eb27571f4b13455c, type: 2}
+    wPath:
+    - {fileID: 114022099251892088, guid: 35d44966270bd934d87352b4efd39aef, type: 2}
+    - {fileID: 114022099251892088, guid: d3ac02ed0ec8dea47b52e6287a9c7e6c, type: 2}
+    - {fileID: 114022099251892088, guid: f4a3b35469e795640a690df41c051892, type: 2}
+    ePath:
+    - {fileID: 114255554771853846, guid: 903c3653035ee2144a4ee303fbff6931, type: 2}
+    - {fileID: 114255554771853846, guid: 06b9b8107eec2854488ce496055abc46, type: 2}
+    - {fileID: 114255554771853846, guid: 2838001a28f01104cbbfe64e5f9df65b, type: 2}
+    rPath:
+    - {fileID: 114399874717196444, guid: b35cccd699b3c30429a4f96f729e20b5, type: 2}
+    - {fileID: 114399874717196444, guid: 61bc29386ad2b464a9ff787698649da4, type: 2}
+    - {fileID: 114399874717196444, guid: 734ac45e4c165d64295288c8882022c6, type: 2}
+  qImage: {fileID: 915681952}
+  wImage: {fileID: 1199065327}
+  eImage: {fileID: 70307217}
+  rImage: {fileID: 980654213}
 --- !u!1 &1125887039 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1516422824915846, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8,
@@ -15901,7 +15916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1121123861}
-  playerHoverOffset: {x: 0, y: 15, z: 0}
+  playerHoverOffset: {x: 0, y: 20, z: 0}
   panSpeed: 40
   panBorderThickness: 5
   scrollSpeed: 8
@@ -18837,7 +18852,7 @@ MonoBehaviour:
   cooldown: 0.7
   projectile: {fileID: 1826154541861776, guid: ceab346c7d650ea4881c8f3c39c027cd, type: 2}
   damage: 25
-  range: 40
+  range: 70
 --- !u!1 &1968682236 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1377821095082028, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8,
