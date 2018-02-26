@@ -25,6 +25,7 @@ namespace Toywars {
             player = playerGO.GetComponent<Player>();
             gm.ShowAbilityUpgradeEvent += show;
             gm.EndWaveEvent += gm.callEventShowAbilityUpgrade;
+            gm.DeselectTileEvent += gm.callEventShowAbilityUpgrade;
             gm.StartNextWaveEvent += gm.callEventHideAbilityUpgrade;
             gm.HideAbilityUpgradeEvent += hide;
             gm.GameOverEvent += hide;
@@ -34,14 +35,15 @@ namespace Toywars {
         private void OnDisable() {
             gm.ShowAbilityUpgradeEvent -= show;
             gm.EndWaveEvent -= gm.callEventShowAbilityUpgrade;
+            gm.DeselectTileEvent -= gm.callEventShowAbilityUpgrade;
             gm.StartNextWaveEvent -= gm.callEventHideAbilityUpgrade;
             gm.HideAbilityUpgradeEvent -= hide;
             gm.GameOverEvent -= hide;
         }
 
         private void Update() {
-            if(gm.isBuilding() && Input.GetKeyDown(KeyCode.A))
-                gm.callEventShowAbilityUpgrade();
+            if(!gm.isBuilding() && gameObject.activeSelf)
+                gm.callEventHideAbilityUpgrade();
         }
 
         void show() {

@@ -21,20 +21,20 @@ namespace Toywars {
         private void Start() {
             gm = GameManager.getInstance();
             gm.StartNextWaveEvent += gm.callEventDeselectTile;
-            //gm.ShowAbilityUpgradeEvent += hide;
+            gm.ShowAbilityUpgradeEvent += hide;
             gm.SelectTileEvent += show;
             gm.DeselectTileEvent += hide;
         }
 
         private void OnDisable() {
             gm.StartNextWaveEvent -= gm.callEventDeselectTile;
-            //gm.ShowAbilityUpgradeEvent -= hide;
+            gm.ShowAbilityUpgradeEvent -= hide;
             gm.SelectTileEvent -= show;
             gm.DeselectTileEvent -= hide;
         }
 
         void show(Tile tile) {
-            //gm.callEventHideAbilityUpgrade();
+            gm.callEventHideAbilityUpgrade();
             tileUI.SetActive(true);
             updateUI(tile);
         }
