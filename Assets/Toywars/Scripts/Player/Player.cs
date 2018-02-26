@@ -41,8 +41,6 @@ namespace Toywars {
             attrs.ForEach(attr => attr.init());
             nva = GetComponent<NavMeshAgent>();
             nva.speed = speed.getStart();
-            nva.angularSpeed = 360;
-            nva.acceleration = 15;
             abilityUpgradePath.init();
             gm.StartNextWaveEvent += resetPosition;
             gm.StartNextWaveEvent += gm.callEventTogglePlayerUI;
