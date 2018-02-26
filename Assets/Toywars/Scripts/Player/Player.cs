@@ -49,6 +49,7 @@ namespace Toywars {
             gm.EndWaveEvent += gm.callEventTogglePlayerUI;
             gm.TogglePlayerUIEvent += toggleUI;
             gm.UpgradePlayerEvent += upgradeAbility;
+            gm.GameOverEvent += gm.callEventTogglePlayerUI;
             abilities = new Ability[] { Q, W, E, R };
             foreach(Ability ability in abilities)
                 ability.start();
@@ -60,6 +61,7 @@ namespace Toywars {
             gm.EndWaveEvent -= gm.callEventTogglePlayerUI;
             gm.TogglePlayerUIEvent -= toggleUI;
             gm.UpgradePlayerEvent -= upgradeAbility;
+            gm.GameOverEvent -= gm.callEventTogglePlayerUI;
         }
 
         private void Update() {
