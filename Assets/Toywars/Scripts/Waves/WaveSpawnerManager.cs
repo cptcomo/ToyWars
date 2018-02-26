@@ -79,6 +79,8 @@ namespace Toywars {
         }
 
         void checkEndWave() {
+            Debug.Log(gm.minionsAlive);
+
             if(gm.minionsAlive > 0)
                 return;
 

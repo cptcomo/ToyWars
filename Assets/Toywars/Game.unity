@@ -19547,7 +19547,7 @@ MonoBehaviour:
   wave:
     sections:
     - minion: {fileID: 1044195431293078, guid: 6ab181c249b2b9b429c43fc457c183ba, type: 2}
-      count: 3
+      count: 2
       rate: 1
   doneWithWave: 0
 --- !u!1 &2054888055

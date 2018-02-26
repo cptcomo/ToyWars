@@ -43,10 +43,6 @@ namespace Toywars {
         void spawnMinion(GameObject minion) {
             GameObject obj = (GameObject)Instantiate(minion, this.transform.position, this.transform.rotation);
             obj.GetComponent<MinionMovement>().waypoints = minionWaypoints;
-            if(isEnemy)
-                em.enemiesAlive++;
-            else
-                pm.alliesAlive++;
         }
     }
 }
