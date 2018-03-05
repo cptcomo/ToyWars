@@ -112,7 +112,7 @@ namespace Toywars {
         }
 
         void resetAttributes() {
-            attrs.ForEach(attr => attr.reset());
+            speed.reset();
         }
 
         void updateBuffs() {
