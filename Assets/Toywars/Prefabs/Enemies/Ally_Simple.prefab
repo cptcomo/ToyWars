@@ -113,7 +113,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: a19972c536ac1c64bad50e42cb006ffb, type: 2}
+  - {fileID: 2100000, guid: faa7ce0bd20b67843aa2520f8a59cc02, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -222,7 +222,7 @@ MonoBehaviour:
     type: 2}
   hpBarPrefab: {fileID: 1914454742012642, guid: cb05f27a6cf80624e9252ae301389554,
     type: 2}
-  hpCanvasName: EnemiesHealthBarCanvas
+  hpCanvasName: MinionHealthBarCanvas
   hpBarOffset: 1
 --- !u!114 &114431392995043340
 MonoBehaviour:
