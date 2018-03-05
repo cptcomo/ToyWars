@@ -13,9 +13,11 @@ namespace Toywars {
         public string[] tagsToDetect;
 
         protected NavMeshAgent nva;
-        protected Vector3 destination;
         public Vector3[] waypoints;
         protected int waypointIndex;
+
+        GameObject target;
+        protected Vector3 destination;
 
         protected enum State {
             exit = 0,
@@ -56,17 +58,25 @@ namespace Toywars {
 
         void setTarget() {
             Collider[] nearby = Physics.OverlapSphere(this.transform.position, detectionRadius.get());
-            bool hasTarget = false;
+            GameObject closest = null;
+            double dist = Mathf.Infinity;
             foreach(Collider col in nearby) {
                 foreach(string tag in tagsToDetect) {
                     if(col.tag.Equals(tag)) {
-                        this.destination = col.transform.position;
-                        hasTarget = true;
-                        state = State.chase;
+                        double d = Vector3.Distance(this.transform.position, col.transform.position);
+                        if(d < dist) {
+                            closest = col.gameObject;
+                            dist = d;
+                        }
                     }
                 }
             }
-            if(!hasTarget) {
+            target = closest;
+            if(target != null) {
+                state = State.chase;
+                this.destination = target.transform.position;
+            }
+            else {
                 state = State.exit;
                 this.destination = getNextDestination();
             }
@@ -90,5 +100,9 @@ namespace Toywars {
         }
 
         protected virtual void endPath() {}
+
+        public GameObject getTarget() {
+            return target;
+        }
     }
 }

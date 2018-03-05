@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.AI;
 
 namespace Toywars {
-    public class Player : MonoBehaviour {
+    public class Player : MonoBehaviour, Damageable {
         public GameObject playerUI;
 
         public Attribute health;
@@ -131,7 +131,7 @@ namespace Toywars {
             rImage.fillAmount = R.uiFillAmount();
         }
 
-        public void takeDamage(float dmg) {
+        void Damageable.takeDamage(float dmg, bool isPlayerShot) {
             this.health.change(-dmg);
         }
 

@@ -9,7 +9,7 @@ namespace Toywars {
 
         EnemiesManager em;
         PlayerManager pm;
-
+        
         public override void Start() {
             base.Start();
             em = EnemiesManager.getInstance();
@@ -23,15 +23,6 @@ namespace Toywars {
 
         protected override void attack() {
             base.attack();
-            Collider[] cols = Physics.OverlapSphere(this.transform.position, attackRadius.get());
-            foreach(Collider c in cols) {
-                if(c.transform.tag.Equals("Player")) {
-                    //c.GetComponent<Player>().takeDamage(damage * Time.deltaTime);
-                }
-                else if(c.transform.tag.Equals("AllyMinion")) {
-                    c.GetComponent<AllyMinion>().takeDamage(damage.get() * Time.deltaTime, false);
-                }
-            }
         }
 
         public override void takeDamage(float damage, bool playershot) {

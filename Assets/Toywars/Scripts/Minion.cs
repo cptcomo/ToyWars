@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Toywars {
-    public class Minion : MonoBehaviour {
+    public class Minion : MonoBehaviour, Damageable {
         protected GameManager gm;
         public Attribute health;
         public Attribute damage;
@@ -18,6 +18,8 @@ namespace Toywars {
         private GameObject hpBar;
         private Image hpBarImage;
 
+        private MinionMovement minionMovement;
+
         public virtual void Start() {
             gm = GameManager.getInstance();
             health.init();
@@ -29,6 +31,7 @@ namespace Toywars {
             hpBarImage = hpBar.GetComponent<Image>();
             if(hpBarImage == null)
                 Debug.LogWarning("Minion Health Bar does not have an Image component");
+            minionMovement = (MinionMovement)GetComponent<MinionMovement>();
         }
 
         public virtual void takeDamage(float damage, bool playerShot) { }
@@ -43,6 +46,14 @@ namespace Toywars {
             Destroy(hpBar);
         }
 
-        protected virtual void attack() {}
+        protected virtual void attack() {
+            GameObject target = minionMovement.getTarget();
+            if(target != null) {
+                Damageable component = (Damageable)target.GetComponent(typeof(Damageable));
+                if(component != null && Vector3.Distance(this.transform.position, target.transform.position) < attackRadius.get()) {
+                    component.takeDamage(damage.get() * Time.deltaTime, false);
+                }
+            }
+        }
     }
 }
