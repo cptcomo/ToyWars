@@ -11,10 +11,12 @@ namespace Toywars {
 
         GameManager gm;
         PlayerManager pm;
+        EnemiesManager em;
 
         public void init() {
             gm = GameManager.getInstance();
             pm = PlayerManager.getInstance();
+            em = EnemiesManager.getInstance();
         }
 
         public TowerUpgrade[] getAvailableUpgrades() {
@@ -46,20 +48,39 @@ namespace Toywars {
             return new TowerUpgrade[] { leftPath[leftIndex], rightPath[rightIndex] };
         }
 
-        public void upgrade(int upgradeIndex, Turret turret) {
+        public void upgrade(int upgradeIndex, Turret turret, bool playerTurret) {
             if(upgradeIndex == 0) {
                 TowerUpgrade upgrade = leftPath[leftIndex];
-                if(pm.money >= upgrade.cost) {
-                    pm.money -= upgrade.cost;
-                    leftIndex++;
-                    upgrade.activate(turret);
+                if(playerTurret) {
+                    if(pm.money >= upgrade.cost) {
+                        pm.money -= upgrade.cost;
+                        leftIndex++;
+                        upgrade.activate(turret);
+                    }
                 }
+                else {
+                    if(em.money >= upgrade.cost) {
+                        em.money -= upgrade.cost;
+                        leftIndex++;
+                        upgrade.activate(turret);
+                    }
+                }
+                
             } else {
                 TowerUpgrade upgrade = rightPath[rightIndex];
-                if(pm.money >= upgrade.cost) {
-                    pm.money -= upgrade.cost;
-                    rightIndex++;
-                    upgrade.activate(turret);
+                if(playerTurret) {
+                    if(pm.money >= upgrade.cost) {
+                        pm.money -= upgrade.cost;
+                        rightIndex++;
+                        upgrade.activate(turret);
+                    }
+                }
+                else {
+                    if(em.money >= upgrade.cost) {
+                        em.money -= upgrade.cost;
+                        rightIndex++;
+                        upgrade.activate(turret);
+                    }
                 }
             }
         }

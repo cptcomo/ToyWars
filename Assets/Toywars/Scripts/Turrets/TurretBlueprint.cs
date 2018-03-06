@@ -6,6 +6,7 @@ namespace Toywars {
     [System.Serializable]
     public class TurretBlueprint {
         public GameObject prefab;
+        public GameObject buildEffect;
         public int cost;
     }
 }

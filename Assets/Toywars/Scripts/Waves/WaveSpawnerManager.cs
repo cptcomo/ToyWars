@@ -46,6 +46,11 @@ namespace Toywars {
             }
 
             if(gm.gameState == GameManager.GameState.Build && Input.GetKeyDown(KeyCode.S)) {
+                gm.callEventAIStartTurn();
+                return;
+            }
+
+            if(gm.gameState == GameManager.GameState.AI && Input.GetKeyDown(KeyCode.S)) {
                 gm.callEventStartNextWave();
                 return;
             }

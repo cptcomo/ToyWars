@@ -32,7 +32,15 @@ namespace Toywars{
 
         public TowerUpgradePath towerUpgradePath;
 
+        bool isInit = false;
+
         private void Start() {
+            if(!isInit)
+                init();
+        }
+
+        public void init() {
+            isInit = true;
             range.init();
             fireRate.init();
             explosionRadius.init();
@@ -124,9 +132,8 @@ namespace Toywars{
             } 
         }
 
-        public void upgrade(int upgradeIndex) {
-            Debug.Log("Hi");
-            towerUpgradePath.upgrade(upgradeIndex, this);
+        public void upgrade(int upgradeIndex, bool playerTurret) {
+            towerUpgradePath.upgrade(upgradeIndex, this, playerTurret);
         }
     }
 }

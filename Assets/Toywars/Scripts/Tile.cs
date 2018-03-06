@@ -45,7 +45,7 @@ namespace Toywars {
             GameObject turret = (GameObject)Instantiate(blueprint.prefab, getBuildPosition(), Quaternion.identity);
             this.turret = turret;
 
-            GameObject effect = (GameObject)Instantiate(buildManager.buildEffect, getBuildPosition(), Quaternion.identity);
+            GameObject effect = (GameObject)Instantiate(blueprint.buildEffect, getBuildPosition(), Quaternion.identity);
             Destroy(effect, 5f);
 
             this.turretBlueprint = blueprint;
@@ -53,7 +53,7 @@ namespace Toywars {
         }
 
         public void upgradeTurret(int upgradeIndex) {
-            this.turret.GetComponent<Turret>().upgrade(upgradeIndex);
+            this.turret.GetComponent<Turret>().upgrade(upgradeIndex, true);
             gm.callEventSelectTile(this);
         }
 

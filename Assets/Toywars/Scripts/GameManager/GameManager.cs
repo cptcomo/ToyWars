@@ -34,6 +34,9 @@ namespace Toywars {
         public delegate void UpgradePlayerHandler(int upgradeIndex);
         public event UpgradePlayerHandler UpgradePlayerEvent;
 
+        public delegate void AIStartTurnHandler();
+        public event AIStartTurnHandler AIStartTurnEvent;
+
         public int minionsAlive
         {
             get {
@@ -49,7 +52,7 @@ namespace Toywars {
 
         [HideInInspector]
         public enum GameState {
-            Play, Build, Pause, GameOver
+            Play, Build, AI, Pause, GameOver
         }
 
         [HideInInspector]
@@ -91,6 +94,10 @@ namespace Toywars {
 
         public bool isBuilding() {
             return gameState == GameState.Build;
+        }
+
+        public bool isAITurn() {
+            return gameState == GameState.AI;
         }
 
         public bool isPaused() {
@@ -185,6 +192,12 @@ namespace Toywars {
         public void callEventUpgradePlayer(int upgradeIndex) {
             if(UpgradePlayerEvent != null) {
                 UpgradePlayerEvent(upgradeIndex);
+            }
+        }
+
+        public void callEventAIStartTurn() {
+            if(AIStartTurnEvent != null) {
+                AIStartTurnEvent();
             }
         }
     }

@@ -11,6 +11,8 @@ namespace Toywars {
 
         public int baseHealth;
 
+        public int money;
+
         private void Awake() {
             if(instance == null) {
                 instance = this;
