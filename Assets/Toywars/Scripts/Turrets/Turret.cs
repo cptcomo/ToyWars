@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Toywars{
     public class Turret : MonoBehaviour {
+        public Sprite towerSprite;
         public Attribute range;
 
         [Header("Use Bullets (Default)")]

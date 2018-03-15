@@ -72,7 +72,7 @@ namespace Toywars {
                 }
                 newButton.transform.SetParent(upgradeUI.transform, false);
             }
-            //towerSpriteImage.sprite = turret.towerSprite;
+            towerSpriteImage.sprite = turret.towerSprite;
         }
 
         void onButtonUpgradeClick(int i) {

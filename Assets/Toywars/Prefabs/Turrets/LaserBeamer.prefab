@@ -385,6 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42905c1d6464f4849aff2f6ccacb95fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerSprite: {fileID: 21300000, guid: acbdf10cb59dba44b95ebaacb7a22149, type: 3}
   range:
     start: 15
   fireRate:
@@ -406,6 +407,9 @@ MonoBehaviour:
   targetTag: Enemy
   partToRotate: {fileID: 4088465091112662}
   firePoint: {fileID: 4111531793861510}
+  towerUpgradePath:
+    leftPath: []
+    rightPath: []
 --- !u!120 &120155357004823078
 LineRenderer:
   m_ObjectHideFlags: 1
