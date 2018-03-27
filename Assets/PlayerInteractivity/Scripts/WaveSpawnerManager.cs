@@ -4,9 +4,22 @@ using UnityEngine;
 
 namespace PlayerInteractivity {
     public class WaveSpawnerManager : MonoBehaviour {
+        private static WaveSpawnerManager instance;
         public GameObject[] spawnPoints;
         private WaveSpawner[] spawners;
         private GameManager gm;
+
+        public static WaveSpawnerManager getInstance() {
+            return instance;
+        }
+
+        private void Awake() {
+            if(instance == null) {
+                instance = this;
+            } else if(instance != this) {
+                Destroy(gameObject);
+            }
+        }
 
         private void OnDisable() {
             gm.GameOverEvent -= disableScript;
@@ -27,7 +40,6 @@ namespace PlayerInteractivity {
         }
 
         private void Start() {
-            Debug.Log("Start");
             gm = GameManager.getInstance();
             gm.GameOverEvent += disableScript;
             gm.StartNextWaveEvent += startNextWave;
@@ -41,7 +53,6 @@ namespace PlayerInteractivity {
 
         private void Update() {
             if(gm.gameState == GameManager.GameState.Build && gameOver()) {
-                Debug.Log("1");
                 gm.callEventGameOver(true);
                 return;
             }

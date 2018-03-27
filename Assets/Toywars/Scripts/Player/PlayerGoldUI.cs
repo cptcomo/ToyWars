@@ -12,13 +12,13 @@ namespace Toywars {
         private void Start() {
             gm = GameManager.getInstance();
             show();
-            gm.StartNextWaveEvent += hide;
+            gm.AIStartTurnEvent += hide;
             gm.EndWaveEvent += show;
             pm = PlayerManager.getInstance();
         }
 
         private void OnDisable() {
-            gm.StartNextWaveEvent -= hide;
+            gm.AIStartTurnEvent -= hide;
             gm.EndWaveEvent -= show;
         }
 

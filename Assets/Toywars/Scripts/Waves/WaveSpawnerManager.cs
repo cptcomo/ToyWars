@@ -10,6 +10,7 @@ namespace Toywars {
         private GameManager gm;
         private PlayerManager pm;
         private EnemiesManager em;
+        private MinionManagementUI minionManagement;
 
         private void Awake() {
             if(instance == null) {
@@ -26,6 +27,7 @@ namespace Toywars {
             gm.GameOverEvent += disableScript;
             gm.StartNextWaveEvent += startNextWave;
             gm.EndWaveEvent += endWave;
+            minionManagement = MinionManagementUI.getInstance();
 
             spawners = new WaveSpawner[spawnPoints.Length];
             for(int i = 0; i < spawners.Length; i++) {
@@ -43,16 +45,6 @@ namespace Toywars {
             if(gm.gameState == GameManager.GameState.Play) {
                 checkGameOver();
                 checkEndWave();
-            }
-
-            if(gm.gameState == GameManager.GameState.Build && Input.GetKeyDown(KeyCode.S)) {
-                gm.callEventAIStartTurn();
-                return;
-            }
-
-            if(gm.gameState == GameManager.GameState.AI && Input.GetKeyDown(KeyCode.S)) {
-                gm.callEventStartNextWave();
-                return;
             }
         }
 

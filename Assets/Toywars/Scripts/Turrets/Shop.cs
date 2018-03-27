@@ -17,12 +17,12 @@ namespace Toywars {
             gm = GameManager.getInstance();
             buildManager = BuildManager.getInstance();
             gm.EndWaveEvent += toggleShop;
-            gm.StartNextWaveEvent += toggleShop;
+            gm.AIStartTurnEvent += toggleShop;
         }
 
         private void OnDisable() {
             gm.EndWaveEvent -= toggleShop;
-            gm.StartNextWaveEvent -= toggleShop;
+            gm.AIStartTurnEvent -= toggleShop;
         }
 
         public void selectStandardTurret() {

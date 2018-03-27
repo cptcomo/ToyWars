@@ -24,7 +24,7 @@ namespace Toywars {
         }
 
         void checkForMenuToggleRequest() {
-            if(Input.GetKeyUp(KeyCode.Escape) && !gm.isGameOver()) {
+            if(Input.GetKeyUp(KeyCode.Escape) && !gm.isGameOver() && !gm.isMinionManagement()) {
                 gm.callEventMenuToggle();
             }
         }

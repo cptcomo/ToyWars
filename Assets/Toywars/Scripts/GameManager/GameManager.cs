@@ -37,6 +37,15 @@ namespace Toywars {
         public delegate void AIStartTurnHandler();
         public event AIStartTurnHandler AIStartTurnEvent;
 
+        public delegate void MinionManagementOpenHandler();
+        public event MinionManagementOpenHandler MinionManagementOpenEvent;
+
+        public delegate void MinionManagementCloseHandler();
+        public event MinionManagementCloseHandler MinionManagementCloseEvent;
+
+        public delegate void SlotAddHandler(GameObject slot);
+        public event SlotAddHandler SlotAddEvent;
+
         public int minionsAlive
         {
             get {
@@ -52,7 +61,7 @@ namespace Toywars {
 
         [HideInInspector]
         public enum GameState {
-            Play, Build, AI, Pause, GameOver
+            Play, Build, MinionManagement, AI, Pause, GameOver
         }
 
         [HideInInspector]
@@ -94,6 +103,10 @@ namespace Toywars {
 
         public bool isBuilding() {
             return gameState == GameState.Build;
+        }
+
+        public bool isMinionManagement() {
+            return gameState == GameState.MinionManagement;
         }
 
         public bool isAITurn() {
@@ -198,6 +211,24 @@ namespace Toywars {
         public void callEventAIStartTurn() {
             if(AIStartTurnEvent != null) {
                 AIStartTurnEvent();
+            }
+        }
+
+        public void callEventMinionManagementOpen() {
+            if(MinionManagementOpenEvent != null) {
+                MinionManagementOpenEvent();
+            }
+        }
+
+        public void callEventMinionManagementClose() {
+            if(MinionManagementCloseEvent != null) {
+                MinionManagementCloseEvent();
+            }
+        }
+
+        public void callEventSlotAdd(GameObject slot) {
+            if(SlotAddEvent != null) {
+                SlotAddEvent(slot);
             }
         }
     }

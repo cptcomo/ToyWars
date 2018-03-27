@@ -6,6 +6,9 @@ using UnityEngine.UI;
 namespace Toywars {
     public class Minion : MonoBehaviour, Damageable {
         protected GameManager gm;
+
+        public Sprite sprite;
+
         public Attribute health;
         public Attribute damage;
         public Attribute attackRadius;

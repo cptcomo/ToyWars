@@ -240,6 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bbb1ff1768b69b46ae06e4189fce85f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 66e112a6d81e2e04782529b4e210f0f5, type: 3}
   health:
     start: 100
   damage:
