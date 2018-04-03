@@ -6,6 +6,8 @@ namespace Toywars {
     public class WaveSpawner : MonoBehaviour {
         public bool isEnemy;
         public Vector3[] minionWaypoints;
+
+        [HideInInspector]
         public Wave wave;
 
         GameManager gm;

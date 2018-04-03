@@ -27,6 +27,7 @@ namespace Toywars {
             gm.GameOverEvent += disableScript;
             gm.StartNextWaveEvent += startNextWave;
             gm.EndWaveEvent += endWave;
+            gm.AIStartTurnEvent += retrieveWaveComposition;
             minionManagement = MinionManagementUI.getInstance();
 
             spawners = new WaveSpawner[spawnPoints.Length];
@@ -39,6 +40,7 @@ namespace Toywars {
             gm.GameOverEvent -= disableScript;
             gm.StartNextWaveEvent -= startNextWave;
             gm.EndWaveEvent -= endWave;
+            gm.AIStartTurnEvent -= retrieveWaveComposition;
         }
 
         private void Update() {
@@ -50,6 +52,13 @@ namespace Toywars {
 
         public WaveSpawnerManager getInstance() {
             return instance;
+        }
+        
+        void retrieveWaveComposition() {
+            Wave[] waves = minionManagement.getWaveComposition();
+            spawners[0].wave = waves[0];
+            spawners[1].wave = waves[1];
+            spawners[2].wave = waves[2];
         }
 
         void startNextWave() {

@@ -47,7 +47,6 @@ namespace Toywars {
             gm = GameManager.getInstance();
             gm.MinionManagementOpenEvent += open;
             gm.MinionManagementCloseEvent += close;
-            gm.AIStartTurnEvent += updateWaveSpawner;
             gm.SlotAddEvent += slotOnClick;
             initialize();
         }
@@ -55,7 +54,6 @@ namespace Toywars {
         void OnDisable() {
             gm.MinionManagementOpenEvent -= open;
             gm.MinionManagementCloseEvent -= close;
-            gm.AIStartTurnEvent -= updateWaveSpawner;
             gm.SlotAddEvent -= slotOnClick;
         }
 
@@ -152,8 +150,33 @@ namespace Toywars {
             }
         }
 
-        void updateWaveSpawner() {
+        public Wave[] getWaveComposition() {
+            Wave[] lanes = new Wave[3];
+            lanes[0] = convertSpritesToWave(leftLaneSlots);
+            lanes[1] = convertSpritesToWave(centerLaneSlots);
+            lanes[2] = convertSpritesToWave(rightLaneSlots);
+            return lanes;
+        }
 
+        Wave convertSpritesToWave(GameObject[] slots) {
+            Wave wave = new Wave();
+            for(int i = 0; i < slots.Length; i++) {
+                Transform[] ts = slots[i].GetComponentsInChildren<Transform>();
+                foreach(Transform t in ts) {
+                    if(t.name.ToLower().Contains("image")) {
+                        foreach(GameObject go in minions) {
+                            if(go.GetComponent<Minion>().sprite == t.GetComponent<Image>().sprite) {
+                                WaveSection section = new WaveSection();
+                                section.minion = go;
+                                section.count = 3;
+                                section.rate = 1;
+                                wave.sections.Add(section);
+                            }
+                        }
+                    }
+                }
+            }
+            return wave;
         }
 
         enum Selection {

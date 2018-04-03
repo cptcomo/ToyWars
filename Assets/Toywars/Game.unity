@@ -19344,6 +19344,7 @@ MonoBehaviour:
   selectionCanvas: {fileID: 534296000}
   wavesCanvas: {fileID: 542037304}
   selectionPanels:
+  - {fileID: 806126353}
   - {fileID: 3297165}
   - {fileID: 1095572161}
   - {fileID: 2094981361}
