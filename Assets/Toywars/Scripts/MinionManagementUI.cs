@@ -11,8 +11,8 @@ namespace Toywars {
         public GameObject selectionCanvas;
         public GameObject wavesCanvas;
 
-
         public Image[] selectionPanels;
+        bool[] panelsLockStatus;
 
         public GameObject[] minions;
 
@@ -23,11 +23,14 @@ namespace Toywars {
         private Color initialColor;
 
         Dictionary<Selection, Minion> minionMap;
+        public int[] minionUnlockLevels;
 
         GameManager gm;
 
         public GameObject leftLane, rightLane, centerLane;
         GameObject[] leftLaneSlots, rightLaneSlots, centerLaneSlots;
+        public int[] slotUnlockLevels;
+        bool[] slotUnlockStatus;
 
         public static MinionManagementUI getInstance() {
             return instance;
@@ -45,6 +48,7 @@ namespace Toywars {
             selectedMinion = Selection.NONE;
             initialColor = selectionPanels[0].color;
             gm = GameManager.getInstance();
+            gm.EndWaveEvent += updateLocks;
             gm.MinionManagementOpenEvent += open;
             gm.MinionManagementCloseEvent += close;
             gm.SlotAddEvent += slotOnClick;
@@ -52,6 +56,7 @@ namespace Toywars {
         }
 
         void OnDisable() {
+            gm.EndWaveEvent -= updateLocks;
             gm.MinionManagementOpenEvent -= open;
             gm.MinionManagementCloseEvent -= close;
             gm.SlotAddEvent -= slotOnClick;
@@ -66,6 +71,9 @@ namespace Toywars {
             addClickListeners(rightLaneSlots);
             addClickListeners(centerLaneSlots);
             initializeMinionMap();
+            initializeLockArrays();
+            updateLocks();
+            colorLocks();
         }
 
         void initializeSelectionPanels() {
@@ -79,6 +87,11 @@ namespace Toywars {
             for(int i = 0; i < minions.Length; i++) {
                 minionMap[allSelections[i + 2]] = minions[i].GetComponent<Minion>();
             }
+        }
+
+        void initializeLockArrays() {
+            panelsLockStatus = new bool[selectionPanels.Length - 1];
+            slotUnlockStatus = new bool[centerLaneSlots.Length];
         }
 
         void changeSprite(GameObject slot, Sprite sprite) {
@@ -131,7 +144,32 @@ namespace Toywars {
         }
 
         private void Update() {
-            colorSelection();
+            if(gm.isMinionManagement()) {
+                colorLocks();
+                colorSelection();
+            }
+        }
+
+        void updateLocks() {
+            int level = gm.waveIndex + 1;
+            for(int i = 0; i < minionUnlockLevels.Length; i++) {
+                if(minionUnlockLevels[i] == level) {
+                    panelsLockStatus[i] = true;
+                }
+            }
+            for(int i = 0; i < slotUnlockLevels.Length; i++) {
+                if(slotUnlockLevels[i] == level) {
+                    slotUnlockStatus[i] = true;
+                }
+            }
+        }
+
+        void colorLocks() {
+            for(int i = 1; i < selectionPanels.Length; i++) {
+                if(!panelsLockStatus[i - 1]) {
+                    selectionPanels[i].color = Color.red;
+                }
+            }
         }
 
         void colorSelection() {
@@ -168,7 +206,7 @@ namespace Toywars {
                             if(go.GetComponent<Minion>().sprite == t.GetComponent<Image>().sprite) {
                                 WaveSection section = new WaveSection();
                                 section.minion = go;
-                                section.count = 3;
+                                section.count = 1;
                                 section.rate = 1;
                                 wave.sections.Add(section);
                             }

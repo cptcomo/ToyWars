@@ -19356,9 +19356,11 @@ MonoBehaviour:
   - {fileID: 1044195431293078, guid: 20dcda9929f684c438fe02bc20924455, type: 2}
   - {fileID: 1044195431293078, guid: f6ad57d8ce67b4b4f909044b06e3cec1, type: 2}
   - {fileID: 1044195431293078, guid: e3d49316f480332489086b7546859c22, type: 2}
+  minionUnlockLevels: 0100000002000000030000000400000005000000
   leftLane: {fileID: 1109890695}
   rightLane: {fileID: 1933607697}
   centerLane: {fileID: 1297652223}
+  slotUnlockLevels: 0100000001000000020000000300000004000000
 --- !u!4 &868189015
 Transform:
   m_ObjectHideFlags: 0
