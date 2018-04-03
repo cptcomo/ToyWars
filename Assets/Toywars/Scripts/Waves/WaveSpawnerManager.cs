@@ -12,6 +12,9 @@ namespace Toywars {
         private EnemiesManager em;
         private MinionManagementUI minionManagement;
 
+        [HideInInspector]
+        public float allyLeftScore, allyCenterScore, allyRightScore, enemyLeftScore, enemyCenterScore, enemyRightScore;
+
         private void Awake() {
             if(instance == null) {
                 instance = this;
@@ -50,7 +53,7 @@ namespace Toywars {
             }
         }
 
-        public WaveSpawnerManager getInstance() {
+        public static WaveSpawnerManager getInstance() {
             return instance;
         }
         
@@ -59,6 +62,11 @@ namespace Toywars {
             spawners[0].wave = waves[0];
             spawners[1].wave = waves[1];
             spawners[2].wave = waves[2];
+
+            Dictionary<string, float> minionPowerScores = minionManagement.calculateMinionPowerScore();
+            allyLeftScore = spawners[0].calculateScore(minionPowerScores);
+            allyCenterScore = spawners[1].calculateScore(minionPowerScores);
+            allyRightScore = spawners[2].calculateScore(minionPowerScores);
         }
 
         void startNextWave() {

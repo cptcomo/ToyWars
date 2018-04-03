@@ -59,5 +59,9 @@ namespace Toywars {
                 }
             }
         }
+
+        public virtual float calculateScore() {
+            return health.getStart() / 5f + damage.getStart() * 10 + attackRadius.getStart() * 40 + minionMovement.speed.getStart() * 30;
+        }
     }
 }

@@ -46,6 +46,15 @@ namespace Toywars {
             GameObject obj = (GameObject)Instantiate(minion, this.transform.position, this.transform.rotation);
             obj.GetComponent<MinionMovement>().waypoints = minionWaypoints;
         }
+
+        public float calculateScore(Dictionary<string, float> minionPowerScores) {
+            float score = 0;
+            foreach(WaveSection ws in wave.sections) {
+                Minion m = ws.minion.GetComponent<Minion>();
+                score += minionPowerScores[m.minionName] * ws.count;
+            }
+            return score; 
+        }
     }
 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.AI;
 
 namespace Toywars {
     public class MinionManagementUI : MonoBehaviour {
@@ -188,6 +189,19 @@ namespace Toywars {
             lanes[1] = convertSpritesToWave(centerLaneSlots);
             lanes[2] = convertSpritesToWave(rightLaneSlots);
             return lanes;
+        }
+
+        public Dictionary<string, float> calculateMinionPowerScore() {
+            Dictionary<string, float> minionScores = new Dictionary<string, float>();
+            foreach(GameObject go in minions) {
+                GameObject g = (GameObject)Instantiate(go, new Vector3(1000, 1000, 1000), Quaternion.identity);
+                AllyMinion m = g.GetComponent<AllyMinion>();
+                m.Start(); 
+                g.GetComponent<MinionMovement>().enabled = false;
+                minionScores.Add(m.minionName, m.calculateScore());
+                Destroy(g);
+            }
+            return minionScores;
         }
 
         Wave convertSpritesToWave(GameObject[] slots) {
