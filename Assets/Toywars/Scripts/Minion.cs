@@ -8,6 +8,7 @@ namespace Toywars {
         protected GameManager gm;
 
         public Sprite sprite;
+        public string minionName;
 
         public Attribute health;
         public Attribute damage;

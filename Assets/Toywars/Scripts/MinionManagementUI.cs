@@ -63,23 +63,12 @@ namespace Toywars {
         }
 
         void initialize() {
-            initializeSelectionPanels();
             leftLaneSlots = getAllChildren(leftLane);
             rightLaneSlots = getAllChildren(rightLane);
             centerLaneSlots = getAllChildren(centerLane);
-            addClickListeners(leftLaneSlots);
-            addClickListeners(rightLaneSlots);
-            addClickListeners(centerLaneSlots);
             initializeMinionMap();
             initializeLockArrays();
             updateLocks();
-            colorLocks();
-        }
-
-        void initializeSelectionPanels() {
-            for(int i = 0; i < minions.Length; i++) {
-                changeSprite(selectionPanels[i + 1].gameObject, minions[i].GetComponent<Minion>().sprite);
-            }
         }
 
         void initializeMinionMap() {
@@ -113,13 +102,7 @@ namespace Toywars {
             }
             return gos.ToArray();
         }
-
-        void addClickListeners(GameObject[] slots) {
-            foreach(GameObject go in slots) {
-                go.gameObject.AddComponent<SlotClickListener>();
-            }
-        }
-
+       
         void slotOnClick(GameObject slot) {
             if(minionSelected()) {
                 Minion m = minionMap[selectedMinion];
@@ -145,8 +128,8 @@ namespace Toywars {
 
         private void Update() {
             if(gm.isMinionManagement()) {
-                colorLocks();
                 colorSelection();
+                textUpdate();
             }
         }
 
@@ -155,22 +138,22 @@ namespace Toywars {
             for(int i = 0; i < minionUnlockLevels.Length; i++) {
                 if(minionUnlockLevels[i] == level) {
                     panelsLockStatus[i] = true;
+                    changeSprite(selectionPanels[i + 1].gameObject, minions[i].GetComponent<Minion>().sprite);
                 }
             }
             for(int i = 0; i < slotUnlockLevels.Length; i++) {
                 if(slotUnlockLevels[i] == level) {
                     slotUnlockStatus[i] = true;
+                    changeSprite(leftLaneSlots[i], null);
+                    changeSprite(centerLaneSlots[i], null);
+                    changeSprite(rightLaneSlots[i], null);
+                    leftLaneSlots[i].AddComponent<SlotClickListener>();
+                    rightLaneSlots[i].AddComponent<SlotClickListener>();
+                    centerLaneSlots[i].AddComponent<SlotClickListener>();
                 }
             }
         }
-
-        void colorLocks() {
-            for(int i = 1; i < selectionPanels.Length; i++) {
-                if(!panelsLockStatus[i - 1]) {
-                    selectionPanels[i].color = Color.red;
-                }
-            }
-        }
+       
 
         void colorSelection() {
             int index = -1;
@@ -185,6 +168,17 @@ namespace Toywars {
                     selectionPanels[i].color = selectedColor;
                 else
                     selectionPanels[i].color = initialColor;
+            }
+        }
+
+        void textUpdate() {
+            for(int i = 1; i < selectionPanels.Length; i++) {
+                if(panelsLockStatus[i - 1]) {
+                    selectionPanels[i].GetComponentInChildren<Text>().text = minions[i - 1].GetComponent<Minion>().minionName;
+                }
+                else {
+                    selectionPanels[i].GetComponentInChildren<Text>().text = "Unlock on Level " + minionUnlockLevels[i - 1];
+                }
             }
         }
 
@@ -230,27 +224,43 @@ namespace Toywars {
         }
 
         public void selectSimple() {
-            selectedMinion = Selection.SIMPLE;
+            if(!isSelectionLocked(Selection.SIMPLE))
+                selectedMinion = Selection.SIMPLE;
         }
 
         public void selectNormal() {
-            selectedMinion = Selection.NORMAL;
+            if(!isSelectionLocked(Selection.NORMAL))
+                selectedMinion = Selection.NORMAL;
         }
 
         public void selectFast() {
-            selectedMinion = Selection.FAST;
+            if(!isSelectionLocked(Selection.FAST))
+                selectedMinion = Selection.FAST;
         }
 
         public void selectTough() {
-            selectedMinion = Selection.TOUGH;
+            if(!isSelectionLocked(Selection.TOUGH))
+                selectedMinion = Selection.TOUGH;
         }
 
         public void selectDivide() {
-            selectedMinion = Selection.DIVIDE;
+            if(!isSelectionLocked(Selection.DIVIDE))
+                selectedMinion = Selection.DIVIDE;
         }
 
         bool minionSelected() {
             return selectedMinion != Selection.NONE && selectedMinion != Selection.DELETE;
+        }
+
+        bool isSelectionLocked(Selection sel) {
+            for(int i = 2; i < allSelections.Length; i++) {
+                if(allSelections[i] == sel) {
+                    return !panelsLockStatus[i - 2];
+                }
+            }
+
+            Debug.LogWarning("This should not get here");
+            return true;
         }
     }
 }
