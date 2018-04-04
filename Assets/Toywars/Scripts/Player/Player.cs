@@ -9,6 +9,7 @@ namespace Toywars {
         public GameObject playerUI;
 
         public Attribute health;
+        public Attribute armor;
         public Attribute speed;
 
         public Image healthBar;
@@ -37,6 +38,7 @@ namespace Toywars {
             buffs = new List<Buff>();
             attrs = new List<Attribute>();
             attrs.Add(health);
+            attrs.Add(armor);
             attrs.Add(speed);
             attrs.ForEach(attr => attr.init());
             nva = GetComponent<NavMeshAgent>();
@@ -112,7 +114,7 @@ namespace Toywars {
         }
 
         void resetAttributes() {
-            speed.reset();
+            attrs.ForEach(attr => attr.reset());
         }
 
         void updateBuffs() {
@@ -132,7 +134,17 @@ namespace Toywars {
         }
 
         void Damageable.takeDamage(float dmg, bool isPlayerShot) {
-            this.health.change(-dmg);
+            this.health.modifyFlat(-dmg * armorDamageMultiplier(armor.get()) * Random.Range(0.9f, 1.1f));
+        }
+
+        float armorDamageMultiplier(float armor) {
+            
+            if(armor > 0) {
+                return 100 / (100 + armor);
+            }
+            else {
+                return 2 - 100 / (100 - armor);
+            }
         }
 
         void toggleUI() {

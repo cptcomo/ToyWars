@@ -26,11 +26,16 @@ namespace Toywars {
             startTime = Time.time;
             if(target as Player != null) {
                 player = (Player)target;
+                player.addBuff(this);
             }
         }
 
+        public Buff copy() {
+            return new MovementSpeedBuff(duration, pct);
+        }
+
         public void tick() {
-            player.speed.modifyPct(pct);
+            player.speed.buffPct(pct);
         }
     }
 

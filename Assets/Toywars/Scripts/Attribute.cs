@@ -7,12 +7,13 @@ namespace Toywars {
     public class Attribute {
         [SerializeField]
         private float start;
-        private float current;
+        private float currentUnbuffed;
+        private float currentBuffed;
 
         bool calledInit = false;
 
         public void init() {
-            this.current = this.start;
+            this.currentUnbuffed = this.currentBuffed = this.start;
             calledInit = true;
         }
 
@@ -24,38 +25,34 @@ namespace Toywars {
             if(!calledInit)
                 Debug.LogWarning("Attribute init() was not called before callng set");
 
-            this.current = val;
-        }
-
-        public void change(float delta) {
-            this.current += delta;
+            this.currentUnbuffed = val;
         }
 
         public void reset() {
-            set(getStart());
+            this.currentBuffed = this.currentUnbuffed;
         }
 
         public float get() {
             if(!calledInit)
                 Debug.LogWarning("Attribute init() was not called before callng get");
 
-            return this.current;
+            return this.currentBuffed;
         }
 
         public void modifyPct(float pct) {
-            this.current = this.current + (this.getStart() * (pct / 100));
+            this.currentUnbuffed = this.currentBuffed = this.currentUnbuffed + (this.getStart() * (pct / 100));
         }
 
         public void modifyPct(float pct, float min, float max) {
-            this.current = Mathf.Clamp(this.current + (this.getStart() * (pct / 100)), min, max);
+            this.currentUnbuffed = this.currentBuffed = Mathf.Clamp(this.currentUnbuffed + (this.getStart() * (pct / 100)), min, max);
         }
 
         public void modifyFlat(float flat) {
-            this.current += flat;
+            this.currentUnbuffed = this.currentBuffed = this.currentUnbuffed + flat;
         }
 
         public void modifyFlat(float flat, float min, float max) {
-            this.current = Mathf.Clamp(this.current + flat, min, max);
+            this.currentUnbuffed = this.currentBuffed = Mathf.Clamp(this.currentUnbuffed + flat, min, max);
         }
 
         public float getPctStart(float pct) {
@@ -68,6 +65,18 @@ namespace Toywars {
 
         public float getPctMissing() {
             return getMissing() / getStart();
+        }
+
+        public void buffFlat(float flat) {
+            this.currentBuffed = this.currentBuffed + flat;
+        }
+
+        public void buffPct(float pct) {
+            this.currentBuffed = this.currentUnbuffed + (this.currentBuffed * (pct / 100));
+        }
+
+        public void buffFlat(float flat, float min, float max) {
+            this.currentBuffed = Mathf.Clamp(this.currentBuffed + flat, min, max);
         }
     }
 }

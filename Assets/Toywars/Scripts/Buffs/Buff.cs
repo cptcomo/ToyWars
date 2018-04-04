@@ -7,5 +7,6 @@ namespace Toywars {
         void apply(Component target);
         void tick();
         bool finished { get; }
+        Buff copy();
     }
 }

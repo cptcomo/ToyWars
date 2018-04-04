@@ -244,6 +244,8 @@ MonoBehaviour:
   minionName: 
   health:
     start: 100
+  armor:
+    start: 40
   damage:
     start: 20
   attackRadius:

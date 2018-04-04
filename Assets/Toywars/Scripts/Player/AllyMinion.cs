@@ -23,7 +23,7 @@ namespace Toywars {
         }
 
         public override void takeDamage(float damage, bool playerShot) {
-            this.health.change(-damage);
+            this.health.modifyFlat(-damage * armorDamageMultiplier(armor.get()) * Random.Range(0.9f, 1.1f));
             if(health.get() <= 0f)
                 die();
         }

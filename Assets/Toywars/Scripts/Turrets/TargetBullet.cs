@@ -11,6 +11,7 @@ namespace Toywars {
         private float explosionRadius;
         private bool playerShot;
         private string targetTag;
+        private Buff buffToApply;
         public GameObject impactEffect;
 
         private void Start() {
@@ -60,6 +61,10 @@ namespace Toywars {
             this.targetTag = tag;
         }
 
+        public void setBuffToApply(Buff buff) {
+            buffToApply = buff;
+        }
+
         void hitTarget() {
             GameObject effectInstance = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
             Destroy(effectInstance, 5f);
@@ -69,22 +74,31 @@ namespace Toywars {
             } else {
                 doDamage(target);
             }
-
             Destroy(gameObject);
         }
 
-        void doDamage(Transform target) {
+        void doDamage(Transform t) {
             Minion m = target.GetComponent<Minion>();
 
             if(m != null)
                 m.takeDamage(damage, playerShot);
+
+            if(buffToApply != null) {
+                try {
+                    buffToApply.copy().apply(t);
+                }
+                catch(System.Exception) {
+                    Debug.LogWarning("Tried to add buff to an object without a Minion script");
+                }
+            }
         }
 
         void explode() {
             Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
             foreach(Collider col in colliders) {
-                if(col.tag.Equals(targetTag))
+                if(col.tag.Equals(targetTag)) {            
                     doDamage(col.transform);
+                }
             }
         }
     }

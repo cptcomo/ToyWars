@@ -25,6 +25,8 @@ namespace Toywars{
         [Header("Missile")]
         public Attribute missileExplosionRadius;
         public GameObject missilePrefab;
+        bool missileR3Unlock;
+        float missileR3ArmorShred;
 
         [Header("Laser")]
         public Attribute laserDOT;
@@ -147,7 +149,7 @@ namespace Toywars{
             partToRotate.rotation = Quaternion.Euler(0, rotation.y, 0);
         }
 
-        void shootTargetProjectile(GameObject prefab, float damage, float explosionRadius) {
+        void shootTargetProjectile(GameObject prefab, float damage, float explosionRadius, Buff buffToApply) {
             GameObject bulletGO = (GameObject)Instantiate(prefab, firePoint.position, firePoint.rotation);
             TargetBullet bullet = bulletGO.GetComponent<TargetBullet>();
             if(bullet != null) {
@@ -155,6 +157,7 @@ namespace Toywars{
                 bullet.setDamage(damage);
                 bullet.setExplosionRadius(explosionRadius);
                 bullet.setSpeed(projectileSpeed.get());
+                bullet.setBuffToApply(buffToApply);
                 bullet.setTargetTag(targetTag);
             } 
         }
@@ -183,14 +186,22 @@ namespace Toywars{
                     dam += targetMinion.health.getPctStart(turretR4PctDmg);
                 }
 
-                shootTargetProjectile(turretBulletPrefab, dam, 0);
+                shootTargetProjectile(turretBulletPrefab, dam, 0, null);
                 fireCooldown = 1f / fireRate.get();
             }
         }
 
         void missile() {
             if(fireCooldown <= 0f) {
-                shootTargetProjectile(missilePrefab, damage.get(), missileExplosionRadius.get());
+                float dam = damage.get();
+
+                Buff b = null;
+
+                if(missileR3Unlock) {
+                    b = new ArmorShredBuff(5000, missileR3ArmorShred);
+                }
+
+                shootTargetProjectile(missilePrefab, dam, missileExplosionRadius.get(), b);
                 fireCooldown = 1f / fireRate.get();
             }
         }
@@ -233,6 +244,11 @@ namespace Toywars{
         public void turretR4Upgrade(float pctDamage) {
             this.turretR4Unlock = true;
             this.turretR4PctDmg = pctDamage;
+        }
+
+        public void missileR3Upgrade(float armorShred) {
+            this.missileR3Unlock = true;
+            this.missileR3ArmorShred = armorShred;
         }
 
         private void OnDrawGizmosSelected() {

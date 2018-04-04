@@ -244,6 +244,8 @@ MonoBehaviour:
   minionName: Tough
   health:
     start: 800
+  armor:
+    start: 50
   damage:
     start: 20
   attackRadius:

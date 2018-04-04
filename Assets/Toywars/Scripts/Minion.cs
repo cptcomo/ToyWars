@@ -11,6 +11,7 @@ namespace Toywars {
         public string minionName;
 
         public Attribute health;
+        public Attribute armor;
         public Attribute damage;
         public Attribute attackRadius;
         public int moneyValue;
@@ -27,11 +28,18 @@ namespace Toywars {
 
         public float mobPct, dpsPct;
 
+        protected List<Buff> buffs;
+        List<Attribute> attrs;
+
         public virtual void Start() {
             gm = GameManager.getInstance();
-            health.init();
-            damage.init();
-            attackRadius.init();
+            buffs = new List<Buff>();
+            attrs = new List<Attribute>();
+            attrs.Add(health);
+            attrs.Add(damage);
+            attrs.Add(armor);
+            attrs.Add(attackRadius);
+            attrs.ForEach(attr => attr.init());
             hpCanvas = GameObject.Find(hpCanvasName);
             hpBar = (GameObject)Instantiate(hpBarPrefab);
             hpBar.transform.SetParent(hpCanvas.transform, false);
@@ -43,10 +51,33 @@ namespace Toywars {
 
         public virtual void takeDamage(float damage, bool playerShot) { }
 
+        protected float armorDamageMultiplier(float armor) {
+            if(armor > 0) {
+                return 100 / (100 + armor);
+            } else {
+                return 2 - 100 / (100 - armor);
+            }
+        }
+
         public virtual void Update() {
+            resetAttributes();
+            updateBuffs();
             attack();
             hpBar.transform.position = (Vector3.up * hpBarOffset) + transform.position;
             hpBarImage.fillAmount = health.get() / health.getStart();    
+        }
+
+        protected virtual void resetAttributes() {
+            attrs.ForEach(attr => attr.reset());
+        }
+
+        protected virtual void updateBuffs() {
+            buffs.ForEach(buff => {
+                if(buff.finished)
+                    buffs.Remove(buff);
+                else
+                    buff.tick();
+            });
         }
 
         public virtual void OnDestroy() {
@@ -66,6 +97,10 @@ namespace Toywars {
         public virtual Vector2 calculateScore() {
             float rawScore = health.getStart() / 5f + damage.getStart() * 10 + attackRadius.getStart() * 40 + minionMovement.speed.getStart() * 30;
             return new Vector2(rawScore * (mobPct / 100f), rawScore * (dpsPct / 100f));
+        }
+
+        public void addBuff(Buff buff) {
+            buffs.Add(buff);
         }
     }
 }

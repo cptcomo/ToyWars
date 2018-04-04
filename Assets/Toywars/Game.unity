@@ -72610,6 +72610,8 @@ MonoBehaviour:
   playerUI: {fileID: 1814424748}
   health:
     start: 100
+  armor:
+    start: 0
   speed:
     start: 15
   healthBar: {fileID: 2075271560}
@@ -104814,7 +104816,7 @@ MonoBehaviour:
   abilityName: Ghost
   description: Moves fast
   cooldown: 8
-  pct: 30
+  pct: 40
   duration: 3
 --- !u!1 &1655394998
 GameObject:
@@ -108991,8 +108993,8 @@ MonoBehaviour:
       count: 1
       rate: 1
     - minion: {fileID: 1044195431293078, guid: 6bab36d28a5fbce449196fb6dfc35bc9, type: 2}
-      count: 4
-      rate: 0.5
+      count: 10
+      rate: 2
   doneWithWave: 0
 --- !u!1 &1739551637 stripped
 GameObject:
