@@ -21,6 +21,8 @@ namespace Toywars {
         public TurretBlueprint missileLauncherBlueprint;
         public TurretBlueprint laserBeamerBlueprint;
 
+        public Turret dummyStandard, dummyMissile, dummyLaser;
+
         public static AI getInstance() {
             return instance;
         }
@@ -62,10 +64,47 @@ namespace Toywars {
 
         void takeTurn() {
             gm.gameState = GameManager.GameState.AI;
-            if(em.money >= standardTurretBlueprint.cost) {
+            while(em.money >= standardTurretBlueprint.cost) {
                 Debug.Log("Left: " + wsm.allyLeftScore);
                 Debug.Log("Center: " + wsm.allyCenterScore);
                 Debug.Log("Right: " + wsm.allyRightScore);
+                float range = dummyStandard.range.get();
+                float bestTileScore = 0;
+                int index = -1;
+                for(int i = 0; i < tiles.Length; i++) {
+                    float tileScore = 0;
+                    if(tiles[i].turret != null) {
+                        continue;
+                    }
+                    
+                    for(int j = 0; j < tiles[i].leftWrappers.Length; j++) {
+                        if(tiles[i].leftWrappers[j].getDistance() < range) {
+                            tileScore += (range - tiles[i].leftWrappers[j].getDistance()) * wsm.allyLeftScore.magnitude * Random.Range(0.8f, 1.2f);
+                        }
+                    }
+
+                    for(int j = 0; j < tiles[i].centerWrappers.Length; j++) {
+                        if(tiles[i].centerWrappers[j].getDistance() < range) {
+                            tileScore += (range - tiles[i].centerWrappers[j].getDistance()) * wsm.allyCenterScore.magnitude * Random.Range(0.8f, 1.2f);
+                        }
+                    }
+
+                    for(int j = 0; j < tiles[i].rightWrappers.Length; j++) {
+                        if(tiles[i].rightWrappers[j].getDistance() < range) {
+                            tileScore += (range - tiles[i].rightWrappers[j].getDistance()) * wsm.allyRightScore.magnitude * Random.Range(0.8f, 1.2f);
+                        }
+                    }
+
+                    Collider[] cols = Physics.OverlapSphere(tiles[i].transform.position, range);
+
+                    if(tileScore > bestTileScore) {
+                        bestTileScore = tileScore;
+                        index = i;
+                    }
+                }
+                
+                tiles[index].buildTurret(standardTurretBlueprint);
+                tiles[index].turret.GetComponent<Turret>().init();
                 /*
                 tiles[624].buildTurret(standardTurretBlueprint);
                 tiles[624].turret.GetComponent<Turret>().init();

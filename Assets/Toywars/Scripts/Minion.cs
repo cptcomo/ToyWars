@@ -24,6 +24,8 @@ namespace Toywars {
 
         private MinionMovement minionMovement;
 
+        public float mobPct, dpsPct;
+
         public virtual void Start() {
             gm = GameManager.getInstance();
             health.init();
@@ -60,8 +62,9 @@ namespace Toywars {
             }
         }
 
-        public virtual float calculateScore() {
-            return health.getStart() / 5f + damage.getStart() * 10 + attackRadius.getStart() * 40 + minionMovement.speed.getStart() * 30;
+        public virtual Vector2 calculateScore() {
+            float rawScore = health.getStart() / 5f + damage.getStart() * 10 + attackRadius.getStart() * 40 + minionMovement.speed.getStart() * 30;
+            return new Vector2(rawScore * (mobPct / 100f), rawScore * (dpsPct / 100f));
         }
     }
 }

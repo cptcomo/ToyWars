@@ -226,7 +226,8 @@ MonoBehaviour:
     type: 2}
   hpCanvasName: MinionHealthBarCanvas
   hpBarOffset: 1
-  powerScore: 0
+  mobPct: 80
+  dpsPct: 20
 --- !u!114 &114431392995043340
 MonoBehaviour:
   m_ObjectHideFlags: 1

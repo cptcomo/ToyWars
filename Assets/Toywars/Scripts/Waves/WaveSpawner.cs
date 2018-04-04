@@ -47,13 +47,13 @@ namespace Toywars {
             obj.GetComponent<MinionMovement>().waypoints = minionWaypoints;
         }
 
-        public float calculateScore(Dictionary<string, float> minionPowerScores) {
-            float score = 0;
+        public Vector2 calculateScore(Dictionary<string, Vector2> minionPowerScores) {
+            Vector2 scores = new Vector2(0, 0);
             foreach(WaveSection ws in wave.sections) {
                 Minion m = ws.minion.GetComponent<Minion>();
-                score += minionPowerScores[m.minionName] * ws.count;
+                scores += minionPowerScores[m.minionName] * ws.count;
             }
-            return score; 
+            return scores; 
         }
     }
 }

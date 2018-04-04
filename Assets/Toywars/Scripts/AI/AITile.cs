@@ -13,7 +13,8 @@ namespace Toywars {
         private EnemiesManager em;
         private AI ai;
 
-        PathWrapper[] leftLane, centerLane, rightLane;
+        [HideInInspector]
+        public PathWrapper[] leftWrappers, centerWrappers, rightWrappers;
 
         private void Start() {
             em = EnemiesManager.getInstance();
@@ -22,17 +23,17 @@ namespace Toywars {
         }
 
         void initialize() {
-            leftLane = new PathWrapper[ai.leftPaths.Length];
-            centerLane = new PathWrapper[ai.centerPaths.Length];
-            rightLane = new PathWrapper[ai.rightPaths.Length];
-            for(int i = 0; i < leftLane.Length; i++) {
-                leftLane[i] = new PathWrapper(ai.leftPaths[i], Vector3.Distance(this.transform.position, ai.leftPaths[i].transform.position));
+            leftWrappers = new PathWrapper[ai.leftPaths.Length];
+            centerWrappers = new PathWrapper[ai.centerPaths.Length];
+            rightWrappers = new PathWrapper[ai.rightPaths.Length];
+            for(int i = 0; i < leftWrappers.Length; i++) {
+                leftWrappers[i] = new PathWrapper(ai.leftPaths[i], Vector3.Distance(this.transform.position, ai.leftPaths[i].transform.position));
             }
-            for(int i = 0; i < centerLane.Length; i++) {
-                centerLane[i] = new PathWrapper(ai.centerPaths[i], Vector3.Distance(this.transform.position, ai.centerPaths[i].transform.position));
+            for(int i = 0; i < centerWrappers.Length; i++) {
+                centerWrappers[i] = new PathWrapper(ai.centerPaths[i], Vector3.Distance(this.transform.position, ai.centerPaths[i].transform.position));
             }
-            for(int i = 0; i < rightLane.Length; i++) {
-                rightLane[i] = new PathWrapper(ai.rightPaths[i], Vector3.Distance(this.transform.position, ai.rightPaths[i].transform.position));
+            for(int i = 0; i < rightWrappers.Length; i++) {
+                rightWrappers[i] = new PathWrapper(ai.rightPaths[i], Vector3.Distance(this.transform.position, ai.rightPaths[i].transform.position));
             }
         }
         
@@ -56,11 +57,14 @@ namespace Toywars {
         }
     }
 }
-class PathWrapper {
+public class PathWrapper {
     GameObject path;
     float dist;
     public PathWrapper(GameObject path, float dist) {
         this.path = path;
         this.dist = dist;
+    }
+    public float getDistance() {
+        return dist;
     }
 }

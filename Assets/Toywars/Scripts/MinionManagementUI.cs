@@ -191,8 +191,8 @@ namespace Toywars {
             return lanes;
         }
 
-        public Dictionary<string, float> calculateMinionPowerScore() {
-            Dictionary<string, float> minionScores = new Dictionary<string, float>();
+        public Dictionary<string, Vector2> calculateMinionPowerScore() {
+            Dictionary<string, Vector2> minionScores = new Dictionary<string, Vector2>();
             foreach(GameObject go in minions) {
                 GameObject g = (GameObject)Instantiate(go, new Vector3(1000, 1000, 1000), Quaternion.identity);
                 AllyMinion m = g.GetComponent<AllyMinion>();
