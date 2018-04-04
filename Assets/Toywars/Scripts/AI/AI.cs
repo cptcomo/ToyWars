@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Toywars {
@@ -69,14 +70,24 @@ namespace Toywars {
                 Debug.Log("Center: " + wsm.allyCenterScore);
                 Debug.Log("Right: " + wsm.allyRightScore);
                 float range = dummyStandard.range.get();
-                float bestTileScore = 0;
-                int index = -1;
+                Dictionary<AITile, float> tilesScore = new Dictionary<AITile, float>();
                 for(int i = 0; i < tiles.Length; i++) {
                     float tileScore = 0;
                     if(tiles[i].turret != null) {
+                        Collider[] cols = Physics.OverlapSphere(tiles[i].transform.position, tiles[i].turret.GetComponent<Turret>().range.get());
+                        foreach(Collider col in cols) {
+                            if(col.gameObject.layer.Equals(11)) {
+                                AITile ti = col.GetComponent<AITile>();
+                                if(tilesScore.ContainsKey(ti)) {
+                                    tilesScore[ti] -= Vector3.Distance(tiles[i].transform.position, ti.transform.position) * 5000;
+                                } else {
+                                    tilesScore[ti] = -Vector3.Distance(tiles[i].transform.position, ti.transform.position) * 5000;
+                                }   
+                            }
+                        }
                         continue;
                     }
-                    
+
                     for(int j = 0; j < tiles[i].leftWrappers.Length; j++) {
                         if(tiles[i].leftWrappers[j].getDistance() < range) {
                             tileScore += (range - tiles[i].leftWrappers[j].getDistance()) * wsm.allyLeftScore.magnitude * Random.Range(0.8f, 1.2f);
@@ -94,17 +105,15 @@ namespace Toywars {
                             tileScore += (range - tiles[i].rightWrappers[j].getDistance()) * wsm.allyRightScore.magnitude * Random.Range(0.8f, 1.2f);
                         }
                     }
-
-                    Collider[] cols = Physics.OverlapSphere(tiles[i].transform.position, range);
-
-                    if(tileScore > bestTileScore) {
-                        bestTileScore = tileScore;
-                        index = i;
-                    }
+                    if(tilesScore.ContainsKey(tiles[i]))
+                        tilesScore[tiles[i]] += tileScore;
+                    else tilesScore[tiles[i]] = tileScore;
                 }
-                
-                tiles[index].buildTurret(standardTurretBlueprint);
-                tiles[index].turret.GetComponent<Turret>().init();
+
+                AITile t = tilesScore.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
+                t.buildTurret(standardTurretBlueprint);
+                t.turret.GetComponent<Turret>().init();
+
                 /*
                 tiles[624].buildTurret(standardTurretBlueprint);
                 tiles[624].turret.GetComponent<Turret>().init();
