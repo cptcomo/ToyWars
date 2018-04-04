@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeName: Range Increase
-  cost: 200
+  cost: 150
   isPctBuff: 0
   pct: 0
-  flat: 25
+  flat: 7

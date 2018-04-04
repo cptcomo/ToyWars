@@ -5,10 +5,11 @@ using UnityEngine;
 namespace Toywars {
     public class AllyMinion : Minion {
         PlayerManager pm;
-
+        EnemiesManager em;
         public override void Start() {
             base.Start();
             pm = PlayerManager.getInstance();
+            em = EnemiesManager.getInstance();
             pm.alliesAlive++;
         }
 
@@ -29,6 +30,7 @@ namespace Toywars {
 
 
         protected void die() {
+            em.money += moneyValue;
             GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(effect, 5f);
             Destroy(gameObject);

@@ -43,11 +43,31 @@ namespace Toywars {
         }
 
         public void modifyPct(float pct) {
-            this.current *= (1 + pct / 100);
+            this.current = this.current + (this.getStart() * (pct / 100));
+        }
+
+        public void modifyPct(float pct, float min, float max) {
+            this.current = Mathf.Clamp(this.current + (this.getStart() * (pct / 100)), min, max);
         }
 
         public void modifyFlat(float flat) {
-            this.current += start;
+            this.current += flat;
+        }
+
+        public void modifyFlat(float flat, float min, float max) {
+            this.current = Mathf.Clamp(this.current + flat, min, max);
+        }
+
+        public float getPctStart(float pct) {
+            return pct / 100 * getStart();
+        }
+
+        public float getMissing() {
+            return getStart() - get();
+        }
+
+        public float getPctMissing() {
+            return getMissing() / getStart();
         }
     }
 }

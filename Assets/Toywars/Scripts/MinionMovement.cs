@@ -54,8 +54,6 @@ namespace Toywars {
                     }
                 }
             }
-
-            Debug.Log(nva.destination);
         }
 
         void setTarget() {

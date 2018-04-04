@@ -241,19 +241,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: d6fa2a04fb7ba8e4890efa94a44036fc, type: 3}
+  minionName: 
   health:
     start: 100
   damage:
     start: 20
   attackRadius:
     start: 2
+  moneyValue: 25
   deathEffect: {fileID: 1787243369622486, guid: ffa7fb7607c9baa46bcb69956d18788c,
     type: 2}
   hpBarPrefab: {fileID: 1453098498204944, guid: 54209f3e5e99ef34c88c9508dc919680,
     type: 2}
   hpCanvasName: MinionHealthBarCanvas
   hpBarOffset: 1
-  moneyValue: 30
+  mobPct: 0
+  dpsPct: 0
   expValue: 20
 --- !u!114 &114505111955585292
 MonoBehaviour:

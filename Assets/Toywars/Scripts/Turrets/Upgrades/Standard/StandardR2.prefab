@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4093993837066828}
-  - component: {fileID: 114200146718940236}
+  - component: {fileID: 114203245323179018}
   m_Layer: 0
   m_Name: StandardR2
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114200146718940236
+--- !u!114 &114203245323179018
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,11 +48,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1461170162323768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 085e7cd3791905e4481f88ced1301ef1, type: 3}
+  m_Script: {fileID: 11500000, guid: 88b305a9c633eba42be414153db8d745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Better Bullets
-  cost: 300
-  isPctBuff: 0
-  pct: 0
-  flatDmg: 20
+  upgradeName: Fire Rate
+  cost: 250
+  isPctBuff: 1
+  pct: 35
+  flatInc: 0

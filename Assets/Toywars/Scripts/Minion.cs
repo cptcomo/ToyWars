@@ -13,6 +13,7 @@ namespace Toywars {
         public Attribute health;
         public Attribute damage;
         public Attribute attackRadius;
+        public int moneyValue;
 
         public GameObject deathEffect;
         public GameObject hpBarPrefab;

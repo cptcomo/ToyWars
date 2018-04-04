@@ -9,9 +9,9 @@ namespace Toywars {
         public int flat;
         public override void activate(Turret turret) {
             if(isPctBuff)
-                turret.slowPct.modifyPct(pct);
+                turret.laserSlowPct.modifyPct(pct);
             else
-                turret.slowPct.modifyFlat(flat);
+                turret.laserSlowPct.modifyFlat(flat);
         }
     }
 }

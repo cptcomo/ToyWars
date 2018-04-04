@@ -48,6 +48,10 @@ namespace Toywars {
             this.explosionRadius = explRadius;
         }
 
+        public void setSpeed(float speed) {
+            this.speed = speed;
+        }
+
         public void setPlayerShot(bool playerShot) {
             this.playerShot = playerShot;
         }

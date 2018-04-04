@@ -6,21 +6,41 @@ namespace Toywars{
     public class Turret : MonoBehaviour {
         public Sprite towerSprite;
         public Attribute range;
-
-        [Header("Use Bullets (Default)")]
         public Attribute fireRate;
-        public Attribute explosionRadius;
         public Attribute damage;
+        public Attribute projectileSpeed;
         private float fireCooldown;
-        public GameObject bulletPrefab;
 
-        [Header("Use Laser")]
-        public bool useLaser = false;
-        public Attribute dot;
-        public Attribute slowPct;
-        public LineRenderer lineRenderer;
+        public TowerType towerType;
+
+        [Header("Turret")]
+        public GameObject turretBulletPrefab;
+        bool turretL3Unlock;
+        int turretL3NumberOfHits;
+        int turretL3HitCount;
+        float turretL3PctDmg;
+        bool turretR4Unlock;
+        float turretR4PctDmg;
+
+        [Header("Missile")]
+        public Attribute missileExplosionRadius;
+        public GameObject missilePrefab;
+
+        [Header("Laser")]
+        public Attribute laserDOT;
+        public Attribute laserSlowPct;
+        public LineRenderer laserLineRenderer;
         public ParticleSystem laserImpactEffect;
-        public Light impactLight;
+        public Light laserImpactLight;
+
+        [Header("Fire")]
+        public Attribute fireFireRate;
+        public Attribute fireDOT;
+        public Attribute fireDamage;
+        private float fireFireCooldown;
+
+        [Header("Beacon")]
+        public Attribute placeHolder;
 
         [Header("Unity Setup Fields")]
         public float turnSpeed = 10f;
@@ -44,21 +64,33 @@ namespace Toywars{
             isInit = true;
             range.init();
             fireRate.init();
-            explosionRadius.init();
             damage.init();
-            dot.init();
-            slowPct.init();
+            projectileSpeed.init();
+            if(towerType == TowerType.Turret) {
+            } else if(towerType == TowerType.Missile) {
+                missileExplosionRadius.init();
+            } else if(towerType == TowerType.Laser) {
+                laserDOT.init();
+                laserSlowPct.init();
+            } else if(towerType == TowerType.Fire) {
+                fireFireRate.init();
+                fireDOT.init();
+                fireDamage.init();
+            } else {
+                placeHolder.init();
+            }
+            turretL3Unlock = false;
             towerUpgradePath.init();
             InvokeRepeating("updateTarget", 0f, 0.25f);
         }
 
         private void Update() {
             if(target == null) {
-                if(useLaser) {
-                    if(lineRenderer.enabled) {
-                        lineRenderer.enabled = false;
+                if(towerType == TowerType.Laser) {
+                    if(laserLineRenderer.enabled) {
+                        laserLineRenderer.enabled = false;
                         laserImpactEffect.Stop();
-                        impactLight.enabled = false;
+                        laserImpactLight.enabled = false;
                     }
                 }
                 return;
@@ -66,13 +98,22 @@ namespace Toywars{
 
             lockOnTarget();
 
-            if(useLaser) {
-                laser();
-            } else {
-                if(fireCooldown <= 0f) {
-                    shoot();
-                    fireCooldown = 1f / fireRate.get();
-                }
+            switch(towerType) {
+                case TowerType.Turret:
+                    turret();
+                    break;
+                case TowerType.Missile:
+                    missile();
+                    break;
+                case TowerType.Laser:
+                    laser();
+                    break;
+                case TowerType.Fire:
+                    fire();
+                    break;
+                case TowerType.Beacon:
+                    beacon();
+                    break;
             }
 
             fireCooldown -= Time.deltaTime;
@@ -106,35 +147,102 @@ namespace Toywars{
             partToRotate.rotation = Quaternion.Euler(0, rotation.y, 0);
         }
 
-        void laser() {
-            targetMinion.takeDamage(dot.get() * Time.deltaTime, false);
-            targetMovement.speed.modifyPct(-slowPct.get());
-            if(!lineRenderer.enabled) {
-                lineRenderer.enabled = true;
-                laserImpactEffect.Play();
-                impactLight.enabled = true;
+        void shootTargetProjectile(GameObject prefab, float damage, float explosionRadius) {
+            GameObject bulletGO = (GameObject)Instantiate(prefab, firePoint.position, firePoint.rotation);
+            TargetBullet bullet = bulletGO.GetComponent<TargetBullet>();
+            if(bullet != null) {
+                bullet.seek(target);
+                bullet.setDamage(damage);
+                bullet.setExplosionRadius(explosionRadius);
+                bullet.setSpeed(projectileSpeed.get());
+                bullet.setTargetTag(targetTag);
+            } 
+        }
+
+        void turret() {
+            if(fireCooldown <= 0f) {
+                float dam = damage.get();
+
+                if(turretL3Unlock) {
+                    turretL3HitCount = (turretL3HitCount + 1) % turretL3NumberOfHits;
+                    if(turretL3HitCount == 0) {
+                        bool debug = false;
+                        if(debug) {
+                            Debug.Log("Minion Health: " + targetMinion.health.get());
+                            Debug.Log("Minion Start: " + targetMinion.health.getStart());
+                            Debug.Log("Minion % Max: " + targetMinion.health.getPctStart(turretL3PctDmg));
+                            Debug.Log("Normal Damage: " + dam);
+                        }
+                        dam += targetMinion.health.getPctStart(turretL3PctDmg);
+                        if(debug)
+                            Debug.Log("Now Damage: " + dam);
+                    }
+                }
+
+                if(turretR4Unlock) {
+                    dam += targetMinion.health.getPctStart(turretR4PctDmg);
+                }
+
+                shootTargetProjectile(turretBulletPrefab, dam, 0);
+                fireCooldown = 1f / fireRate.get();
             }
-            lineRenderer.SetPosition(0, firePoint.position);
-            lineRenderer.SetPosition(1, target.position);
+        }
+
+        void missile() {
+            if(fireCooldown <= 0f) {
+                shootTargetProjectile(missilePrefab, damage.get(), missileExplosionRadius.get());
+                fireCooldown = 1f / fireRate.get();
+            }
+        }
+
+        void laser() {
+            targetMinion.takeDamage(laserDOT.get() * Time.deltaTime, false);
+            targetMovement.speed.modifyPct(-laserSlowPct.get());
+            if(!laserLineRenderer.enabled) {
+                laserLineRenderer.enabled = true;
+                laserImpactEffect.Play();
+                laserImpactLight.enabled = true;
+            }
+            laserLineRenderer.SetPosition(0, firePoint.position);
+            laserLineRenderer.SetPosition(1, target.position);
 
             Vector3 dir = firePoint.position - target.position;
             laserImpactEffect.transform.rotation = Quaternion.LookRotation(dir);
             laserImpactEffect.transform.position = target.position + dir.normalized;
         }
 
-        void shoot() {
-            GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            TargetBullet bullet = bulletGO.GetComponent<TargetBullet>();
-            if(bullet != null) {
-                bullet.seek(target);
-                bullet.setDamage(damage.get());
-                bullet.setExplosionRadius(explosionRadius.get());
-                bullet.setTargetTag(targetTag);
-            } 
+        void fire() {
+
+        }
+
+        void beacon() {
+
         }
 
         public void upgrade(int upgradeIndex, bool playerTurret) {
             towerUpgradePath.upgrade(upgradeIndex, this, playerTurret);
+        }
+
+        public void turretL3Upgrade(int numberOfHits, float pctDamage) {
+            this.turretL3Unlock = true;
+            this.turretL3NumberOfHits = numberOfHits;
+            this.turretL3PctDmg = pctDamage;
+            this.turretL3HitCount = 0;
+        }
+
+        public void turretR4Upgrade(float pctDamage) {
+            this.turretR4Unlock = true;
+            this.turretR4PctDmg = pctDamage;
+        }
+
+        private void OnDrawGizmosSelected() {
+            Gizmos.color = new Color(1, 0, 0);
+            Gizmos.DrawWireSphere(this.transform.position, range.getStart());
+        }
+
+        [HideInInspector]
+        public enum TowerType {
+            Turret, Missile, Laser, Fire, Beacon
         }
     }
 }

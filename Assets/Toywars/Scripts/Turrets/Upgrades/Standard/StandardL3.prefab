@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4093993837066828}
-  - component: {fileID: 114635999099616174}
+  - component: {fileID: 114236874376374914}
   m_Layer: 0
   m_Name: StandardL3
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114635999099616174
+--- !u!114 &114236874376374914
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,11 +48,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1461170162323768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88b305a9c633eba42be414153db8d745, type: 3}
+  m_Script: {fileID: 11500000, guid: a543eac92b6a23145b313f9cfc64c988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Machine Gun
-  cost: 600
-  isPctBuff: 1
-  pct: 80
-  flatInc: 0
+  upgradeName: Third Shot
+  cost: 500
+  numberOfHits: 3
+  damagePct: 4

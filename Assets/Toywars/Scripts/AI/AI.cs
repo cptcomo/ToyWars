@@ -66,9 +66,6 @@ namespace Toywars {
         void takeTurn() {
             gm.gameState = GameManager.GameState.AI;
             while(em.money >= standardTurretBlueprint.cost) {
-                Debug.Log("Left: " + wsm.allyLeftScore);
-                Debug.Log("Center: " + wsm.allyCenterScore);
-                Debug.Log("Right: " + wsm.allyRightScore);
                 float range = dummyStandard.range.get();
                 Dictionary<AITile, float> tilesScore = new Dictionary<AITile, float>();
                 for(int i = 0; i < tiles.Length; i++) {

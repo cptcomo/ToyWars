@@ -152,7 +152,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1738347638228482}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 226.39926, y: 224.9533, z: 1150.3015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4796745624457770}
@@ -174,8 +174,8 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 8db5f65db674def45b861892884a14ba, type: 2}
-  - {fileID: 2100000, guid: 07830078be0fc104db7da120645ed146, type: 2}
+  - {fileID: 2100000, guid: 4c4e0ece3a5c41149b14af4d127651f4, type: 2}
+  - {fileID: 2100000, guid: 34ec026f9953fc54fa039540af336ee6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -209,8 +209,8 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 4120e61400b648844bcda03cdae8ff9e, type: 2}
-  - {fileID: 2100000, guid: c7fcf075392316d429c145602041c847, type: 2}
+  - {fileID: 2100000, guid: 56c9092d7b8304540b18c0e6a0f4f3d1, type: 2}
+  - {fileID: 2100000, guid: 5fb8eae3d97b12c41b17f4451c737958, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -255,24 +255,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42905c1d6464f4849aff2f6ccacb95fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerSprite: {fileID: 0}
   range:
     start: 15
   fireRate:
     start: 1
-  explosionRadius:
-    start: 7
   damage:
     start: 50
-  bulletPrefab: {fileID: 1802994176725908, guid: d192dcb3923b03242b866fea5b39e193,
-    type: 2}
-  useLaser: 0
-  dot:
+  projectileSpeed:
+    start: 70
+  towerType: 1
+  turretBulletPrefab: {fileID: 0}
+  missileExplosionRadius:
     start: 0
-  slowPct:
+  missilePrefab: {fileID: 0}
+  laserDOT:
     start: 0
-  lineRenderer: {fileID: 0}
+  laserSlowPct:
+    start: 0
+  laserLineRenderer: {fileID: 0}
   laserImpactEffect: {fileID: 0}
-  impactLight: {fileID: 0}
+  laserImpactLight: {fileID: 0}
+  fireFireRate:
+    start: 0
+  fireDOT:
+    start: 0
+  fireDamage:
+    start: 0
+  placeHolder:
+    start: 0
   turnSpeed: 10
   targetTag: AllyMinion
   partToRotate: {fileID: 4472867435522608}

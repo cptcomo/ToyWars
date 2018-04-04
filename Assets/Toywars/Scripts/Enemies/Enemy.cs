@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Toywars {
     public class Enemy : Minion {
-        public int moneyValue;
         public int expValue;
 
         EnemiesManager em;

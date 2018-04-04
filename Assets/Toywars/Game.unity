@@ -89463,7 +89463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesAlive: 0
   baseHealth: 10
-  money: 2000
+  money: 0
 --- !u!1 &1396861898 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1617708291032238, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8,
@@ -108988,8 +108988,11 @@ MonoBehaviour:
   wave:
     sections:
     - minion: {fileID: 1044195431293078, guid: 6ab181c249b2b9b429c43fc457c183ba, type: 2}
-      count: 2
+      count: 1
       rate: 1
+    - minion: {fileID: 1044195431293078, guid: 6bab36d28a5fbce449196fb6dfc35bc9, type: 2}
+      count: 4
+      rate: 0.5
   doneWithWave: 0
 --- !u!1 &1739551637 stripped
 GameObject:
