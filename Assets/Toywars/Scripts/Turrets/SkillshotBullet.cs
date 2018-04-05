@@ -12,12 +12,16 @@ namespace Toywars {
         private float damage;
         private float range = 10000;
         private bool playerShot;
+        private bool ignoreArmor;
         public GameObject impactEffect;
 
         private void Start() {
             this.startPos = this.transform.position;
             if(!playerShot)
                 playerShot = false;
+
+            if(!ignoreArmor)
+                ignoreArmor = false;
         }
 
         public void seek(Vector3 dir) {
@@ -48,6 +52,10 @@ namespace Toywars {
             this.range = rng;
         }
 
+        public void setIgnoreArmor(bool ignoreArmor) {
+            this.ignoreArmor = ignoreArmor;
+        }
+
         void OnCollisionEnter(Collision collision) {
             if(collision.transform.tag.Equals(targetTag)) {
                 hitTarget(collision.transform);
@@ -57,6 +65,7 @@ namespace Toywars {
         void hitTarget(Transform target) {
             GameObject effectInstance = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
             Destroy(effectInstance, 5f);
+
             doDamage(target);
             Destroy(gameObject);
         }
@@ -64,7 +73,7 @@ namespace Toywars {
         void doDamage(Transform minion) {
             Minion m = minion.GetComponent<Minion>();
             if(m != null)
-                m.takeDamage(damage, playerShot);
+                m.takeDamage(damage, playerShot, this.ignoreArmor);
         }
     }
 

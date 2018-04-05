@@ -34,6 +34,13 @@ namespace Toywars{
         public LineRenderer laserLineRenderer;
         public ParticleSystem laserImpactEffect;
         public Light laserImpactLight;
+        bool laserIgnoreArmor;
+        bool laserL3Unlock;
+        float laserL3PctMissing;
+        bool laserL4Unlock;
+        float laserL4PctMax;
+        bool laserR3Unlock;
+        float laserR3PctModifier;
 
         [Header("Fire")]
         public Attribute fireFireRate;
@@ -74,6 +81,7 @@ namespace Toywars{
             } else if(towerType == TowerType.Laser) {
                 laserDOT.init();
                 laserSlowPct.init();
+                laserIgnoreArmor = false;
             } else if(towerType == TowerType.Fire) {
                 fireFireRate.init();
                 fireDOT.init();
@@ -207,8 +215,27 @@ namespace Toywars{
         }
 
         void laser() {
-            targetMinion.takeDamage(laserDOT.get() * Time.deltaTime, false);
-            targetMovement.speed.modifyPct(-laserSlowPct.get());
+            float dam = laserDOT.get();
+
+            if(laserL3Unlock) {
+                dam += targetMinion.health.getMissing() * laserL3PctMissing / 100f;
+            }
+
+            if(laserL4Unlock) {
+                dam += targetMinion.health.getPctStart(laserL4PctMax);
+            }
+
+            targetMinion.takeDamage(dam * Time.deltaTime, false, laserIgnoreArmor);
+
+            if(laserR3Unlock) {
+                targetMinion.damageModifier.modifyFlat(-laserR3PctModifier * Time.deltaTime, 50, 200);
+            }
+
+            if(laserSlowPct.get() > 0) {
+                Buff slowBuff = new SlowDebuff(.5f, laserSlowPct.get());
+                slowBuff.apply(targetMinion);
+            }
+            
             if(!laserLineRenderer.enabled) {
                 laserLineRenderer.enabled = true;
                 laserImpactEffect.Play();
@@ -249,6 +276,25 @@ namespace Toywars{
         public void missileR3Upgrade(float armorShred) {
             this.missileR3Unlock = true;
             this.missileR3ArmorShred = armorShred;
+        }
+
+        public void laserL2Upgrade() {
+            this.laserIgnoreArmor = true;
+        }
+
+        public void laserL3Upgrade(float pct) {
+            this.laserL3Unlock = true;
+            this.laserL3PctMissing = pct;
+        }
+
+        public void laserL4Upgrade(float pct) {
+            this.laserL4Unlock = true;
+            this.laserL4PctMax = pct;
+        }
+
+        public void laserR3Upgrade(float pct) {
+            this.laserR3Unlock = true;
+            this.laserR3PctModifier = pct;
         }
 
         private void OnDrawGizmosSelected() {

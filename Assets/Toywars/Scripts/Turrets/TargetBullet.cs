@@ -10,6 +10,7 @@ namespace Toywars {
         private float damage;
         private float explosionRadius;
         private bool playerShot;
+        private bool ignoreArmor;
         private string targetTag;
         private Buff buffToApply;
         public GameObject impactEffect;
@@ -17,6 +18,9 @@ namespace Toywars {
         private void Start() {
             if(!playerShot)
                 playerShot = false;
+
+            if(!ignoreArmor)
+                ignoreArmor = false;
         }
 
         public void seek(Transform target) {
@@ -57,6 +61,10 @@ namespace Toywars {
             this.playerShot = playerShot;
         }
 
+        public void setIgnoreArmor(bool ignoreArmor) {
+            this.ignoreArmor = ignoreArmor;
+        }
+
         public void setTargetTag(string tag) {
             this.targetTag = tag;
         }
@@ -81,7 +89,7 @@ namespace Toywars {
             Minion m = target.GetComponent<Minion>();
 
             if(m != null)
-                m.takeDamage(damage, playerShot);
+                m.takeDamage(damage, playerShot, this.ignoreArmor);
 
             if(buffToApply != null) {
                 try {

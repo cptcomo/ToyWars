@@ -53,6 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Machine Gun
   cost: 800
-  flatRateInc: 5
-  flatDamageDec: 5
+  flatRateInc: 7
+  flatDamageDec: 10
   pctRangeInc: 10

@@ -31,8 +31,6 @@ namespace Toywars {
             gm = GameManager.getInstance();
             pm = PlayerManager.getInstance();
             em = EnemiesManager.getInstance();
-            speed.init();
-            detectionRadius.init();
             nva = GetComponent<NavMeshAgent>();
             nva.stoppingDistance = 1;
             nva.speed = speed.getStart();
@@ -42,6 +40,7 @@ namespace Toywars {
             setTarget();
 
             nva.SetDestination(destination);
+            nva.speed = speed.get();
 
             if(reachedDestination()) {
                 if(waypointIndex == waypoints.Length - 1) {

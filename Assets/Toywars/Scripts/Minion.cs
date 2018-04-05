@@ -14,6 +14,7 @@ namespace Toywars {
         public Attribute armor;
         public Attribute damage;
         public Attribute attackRadius;
+        public Attribute damageModifier;
         public int moneyValue;
 
         public GameObject deathEffect;
@@ -28,30 +29,37 @@ namespace Toywars {
 
         public float mobPct, dpsPct;
 
-        protected List<Buff> buffs;
+        [HideInInspector]
+        public List<Buff> buffs;
         List<Attribute> attrs;
 
         public virtual void Start() {
             gm = GameManager.getInstance();
+            minionMovement = (MinionMovement)GetComponent<MinionMovement>();
             buffs = new List<Buff>();
             attrs = new List<Attribute>();
             attrs.Add(health);
             attrs.Add(damage);
             attrs.Add(armor);
             attrs.Add(attackRadius);
+            attrs.Add(damageModifier);
+            attrs.Add(minionMovement.detectionRadius);
+            attrs.Add(minionMovement.speed);
             attrs.ForEach(attr => attr.init());
             hpCanvas = GameObject.Find(hpCanvasName);
             hpBar = (GameObject)Instantiate(hpBarPrefab);
             hpBar.transform.SetParent(hpCanvas.transform, false);
             hpBarImage = hpBar.GetComponent<Image>();
             if(hpBarImage == null)
-                Debug.LogWarning("Minion Health Bar does not have an Image component");
-            minionMovement = (MinionMovement)GetComponent<MinionMovement>();
+                Debug.LogWarning("Minion Health Bar does not have an Image component");       
         }
 
-        public virtual void takeDamage(float damage, bool playerShot) { }
+        public virtual void takeDamage(float damage, bool playerShot, bool ignoreArmor) { }
 
-        protected float armorDamageMultiplier(float armor) {
+        protected float armorDamageMultiplier(bool ignoreArmor, float armor) {
+            if(ignoreArmor)
+                return 1;
+
             if(armor > 0) {
                 return 100 / (100 + armor);
             } else {
@@ -89,7 +97,7 @@ namespace Toywars {
             if(target != null) {
                 Damageable component = (Damageable)target.GetComponent(typeof(Damageable));
                 if(component != null && Vector3.Distance(this.transform.position, target.transform.position) < attackRadius.get()) {
-                    component.takeDamage(damage.get() * Time.deltaTime, false);
+                    component.takeDamage(damage.get() * damageModifier.get() / 100 * Time.deltaTime, false, false);
                 }
             }
         }
@@ -101,6 +109,10 @@ namespace Toywars {
 
         public void addBuff(Buff buff) {
             buffs.Add(buff);
+        }
+
+        public MinionMovement getMinionMovement() {
+            return this.minionMovement;
         }
     }
 }

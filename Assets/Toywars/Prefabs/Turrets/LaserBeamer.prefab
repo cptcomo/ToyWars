@@ -392,6 +392,8 @@ MonoBehaviour:
     start: 0
   damage:
     start: 0
+  projectileSpeed:
+    start: 0
   towerType: 2
   turretBulletPrefab: {fileID: 0}
   missileExplosionRadius:
@@ -400,7 +402,7 @@ MonoBehaviour:
   laserDOT:
     start: 30
   laserSlowPct:
-    start: 15
+    start: 0
   laserLineRenderer: {fileID: 120155357004823078}
   laserImpactEffect: {fileID: 198858390960681222}
   laserImpactLight: {fileID: 108297251997772158}
@@ -417,8 +419,16 @@ MonoBehaviour:
   partToRotate: {fileID: 4088465091112662}
   firePoint: {fileID: 4111531793861510}
   towerUpgradePath:
-    leftPath: []
-    rightPath: []
+    leftPath:
+    - {fileID: 114046652309193214, guid: 942f59a3ee80fbb4c94092eef05be60f, type: 2}
+    - {fileID: 114695070582870620, guid: d20b754b44f09784baed379eeac3ef6b, type: 2}
+    - {fileID: 114833413563293878, guid: 7123ae599706f3d44b9c12074d57673e, type: 2}
+    - {fileID: 114107730312029000, guid: 15bcacfc172afda4895bcffa973ff3a9, type: 2}
+    rightPath:
+    - {fileID: 114459119701580244, guid: 84ff9c0cbd9c7dd48b8e30e12a2616ac, type: 2}
+    - {fileID: 114339037258725316, guid: de7478751f0e8b445bb6d8d917bcc10e, type: 2}
+    - {fileID: 114546955002018384, guid: 8835736012ad86e48be35fd7a6c8d1b8, type: 2}
+    - {fileID: 114198231174508958, guid: 9b9f1b71bf036bd4f8fc2bae13d6c6b5, type: 2}
 --- !u!120 &120155357004823078
 LineRenderer:
   m_ObjectHideFlags: 1

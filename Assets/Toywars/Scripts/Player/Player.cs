@@ -133,12 +133,14 @@ namespace Toywars {
             rImage.fillAmount = R.uiFillAmount();
         }
 
-        void Damageable.takeDamage(float dmg, bool isPlayerShot) {
-            this.health.modifyFlat(-dmg * armorDamageMultiplier(armor.get()) * Random.Range(0.9f, 1.1f));
+        void Damageable.takeDamage(float dmg, bool isPlayerShot, bool ignoreArmor) {
+            this.health.modifyFlat(-dmg * armorDamageMultiplier(ignoreArmor, armor.get()) * Random.Range(0.9f, 1.1f));
         }
 
-        float armorDamageMultiplier(float armor) {
-            
+        float armorDamageMultiplier(bool ignoreArmor, float armor) {
+            if(ignoreArmor)
+                return 1;
+
             if(armor > 0) {
                 return 100 / (100 + armor);
             }

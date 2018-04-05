@@ -25,7 +25,7 @@ namespace Toywars {
             if(!calledInit)
                 Debug.LogWarning("Attribute init() was not called before callng set");
 
-            this.currentUnbuffed = val;
+            this.currentUnbuffed = this.currentBuffed = val;
         }
 
         public void reset() {

@@ -24,8 +24,8 @@ namespace Toywars {
             base.attack();
         }
 
-        public override void takeDamage(float damage, bool playershot) {
-            this.health.modifyFlat(-damage * armorDamageMultiplier(armor.get()) * Random.Range(0.9f, 1.1f));
+        public override void takeDamage(float damage, bool playershot, bool ignoreArmor) {
+            this.health.modifyFlat(-damage * armorDamageMultiplier(ignoreArmor, armor.get()) * Random.Range(0.9f, 1.1f));
             if(health.get() <= 0f)
                 die(playershot);
         }

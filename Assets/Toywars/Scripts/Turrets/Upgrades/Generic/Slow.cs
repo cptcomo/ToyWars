@@ -4,14 +4,12 @@ using UnityEngine;
 
 namespace Toywars {
     public class Slow : TowerUpgrade {
-        public bool isPctBuff;
-        public float pct;
-        public int flat;
+        public float setSlowPct;
+        public float flatDmgDec;
+
         public override void activate(Turret turret) {
-            if(isPctBuff)
-                turret.laserSlowPct.modifyPct(pct);
-            else
-                turret.laserSlowPct.modifyFlat(flat);
+            turret.laserSlowPct.set(setSlowPct);
+            turret.laserDOT.modifyFlat(-flatDmgDec);
         }
     }
 }

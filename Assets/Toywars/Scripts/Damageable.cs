@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface Damageable {
-    void takeDamage(float dmg, bool isPlayerShot);
+    void takeDamage(float dmg, bool isPlayerShot, bool ignoreArmor);
 }
