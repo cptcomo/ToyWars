@@ -250,6 +250,8 @@ MonoBehaviour:
     start: 20
   attackRadius:
     start: 2
+  damageModifier:
+    start: 100
   moneyValue: 150
   deathEffect: {fileID: 1787243369622486, guid: ffa7fb7607c9baa46bcb69956d18788c,
     type: 2}

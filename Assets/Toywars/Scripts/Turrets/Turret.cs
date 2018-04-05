@@ -43,10 +43,19 @@ namespace Toywars{
         float laserR3PctModifier;
 
         [Header("Fire")]
-        public Attribute fireFireRate;
+        public GameObject fireballPrefab;
+        public GameObject ablazeEffect;
         public Attribute fireDOT;
-        public Attribute fireDamage;
-        private float fireFireCooldown;
+        bool fireAblazeUnlock;
+        float fireDotTickInterval;
+        float ablazeDuration;
+        bool fireL3Unlock;
+        float fireAblazePctHealth;
+        bool fireR3Unlock;
+        float fireExplosionRadius;
+        bool fireR4Unlock;
+        float fireR4rad;
+        float fireR4dps;
 
         [Header("Beacon")]
         public Attribute placeHolder;
@@ -83,15 +92,30 @@ namespace Toywars{
                 laserSlowPct.init();
                 laserIgnoreArmor = false;
             } else if(towerType == TowerType.Fire) {
-                fireFireRate.init();
                 fireDOT.init();
-                fireDamage.init();
             } else {
                 placeHolder.init();
             }
             turretL3Unlock = false;
             towerUpgradePath.init();
             InvokeRepeating("updateTarget", 0f, 0.25f);
+            InvokeRepeating("fireR4Check", 0f, 0.5f);
+        }
+        
+        void fireR4Check() {
+            if(fireR4Unlock) {
+                Collider[] cols = Physics.OverlapSphere(this.transform.position, fireR4rad);
+                foreach(Collider col in cols) {
+                    if(col.tag.Equals(targetTag)) {
+                        Minion m = col.GetComponent<Minion>();
+                        m.takeDamage(fireR4dps * 0.5f, false, true);
+                        if(fireAblazeUnlock) {
+                            AblazeBuff buff = new AblazeBuff(ablazeDuration, fireDOT.get(), fireDotTickInterval, fireAblazePctHealth, ablazeEffect);
+                            buff.apply(col.transform);
+                        }
+                    }
+                }
+            }
         }
 
         private void Update() {
@@ -250,7 +274,28 @@ namespace Toywars{
         }
 
         void fire() {
+            if(fireCooldown <= 0f) {
+                float dam = damage.get();
 
+                Buff b = null;
+
+                if(fireAblazeUnlock) {
+                    b = new AblazeBuff(ablazeDuration, fireDOT.get(), fireDotTickInterval, fireAblazePctHealth, ablazeEffect);
+                }
+
+                bool toExplode = false;
+
+                if(fireR3Unlock) {
+                    foreach(Buff buff in targetMinion.buffs) {
+                        if(buff is AblazeBuff) {
+                            toExplode = true;
+                        }
+                    }
+                }
+
+                shootTargetProjectile(fireballPrefab, dam, toExplode ? fireExplosionRadius : 0, b);
+                fireCooldown = 1f / fireRate.get();
+            }
         }
 
         void beacon() {
@@ -295,6 +340,34 @@ namespace Toywars{
         public void laserR3Upgrade(float pct) {
             this.laserR3Unlock = true;
             this.laserR3PctModifier = pct;
+        }
+
+        public void fireL2Upgrade(float tickInterval, float ablazeDuration) {
+            this.fireAblazeUnlock = true;
+            this.fireDotTickInterval = tickInterval;
+            this.ablazeDuration = ablazeDuration;
+        }
+
+        public void fireL3Upgrade(float pct) {
+            this.fireL3Unlock = true;
+            this.fireAblazePctHealth = pct;
+        }
+
+        public void fireL4Upgrade(float factor) {
+            this.fireDotTickInterval /= factor;
+            this.fireDOT.set(fireDOT.get() / Mathf.Log(factor));
+            this.fireAblazePctHealth /= Mathf.Log(factor);
+        }
+
+        public void fireR3Upgrade(float rad) {
+            this.fireR3Unlock = true;
+            this.fireExplosionRadius = rad;
+        }
+
+        public void fireR4Upgrade(float rad, float dps) {
+            this.fireR4Unlock = true;
+            this.fireR4rad = rad;
+            this.fireR4dps = dps;
         }
 
         private void OnDrawGizmosSelected() {

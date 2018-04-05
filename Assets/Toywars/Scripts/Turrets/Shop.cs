@@ -9,6 +9,7 @@ namespace Toywars {
         public TurretBlueprint standardTurret;
         public TurretBlueprint missileLauncher;
         public TurretBlueprint laserBeamer;
+        public TurretBlueprint fireTower;
 
         GameManager gm;
         BuildManager buildManager;
@@ -35,6 +36,10 @@ namespace Toywars {
 
         public void selectLaserBeamer() {
             buildManager.selectTurretToBuild(laserBeamer);
+        }
+
+        public void selectFireTower() {
+            buildManager.selectTurretToBuild(fireTower);
         }
 
         void toggleShop() {

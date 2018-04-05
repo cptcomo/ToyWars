@@ -216,10 +216,14 @@ MonoBehaviour:
   minionName: Normal
   health:
     start: 400
+  armor:
+    start: 0
   damage:
     start: 50
   attackRadius:
     start: 2.5
+  damageModifier:
+    start: 100
   moneyValue: 70
   deathEffect: {fileID: 1787243369622486, guid: ffa7fb7607c9baa46bcb69956d18788c,
     type: 2}

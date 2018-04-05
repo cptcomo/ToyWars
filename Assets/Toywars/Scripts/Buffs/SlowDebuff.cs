@@ -24,14 +24,21 @@ namespace Toywars {
             startTime = Time.time;
             minion = target.GetComponent<Minion>();
 
+            List<Buff> buffsToRemove = new List<Buff>();
+
             foreach(Buff b in minion.buffs) {
                 if(b is SlowDebuff) {
                     SlowDebuff sb = (SlowDebuff)b;
                     if(this.pct <= sb.pct) {
                         return;
                     }
+                    else {
+                        buffsToRemove.Add(sb);
+                    }
                 }
             }
+
+            buffsToRemove.ForEach(buff => buff.finish());
 
             minion.addBuff(this);
         }
@@ -42,6 +49,10 @@ namespace Toywars {
 
         public void tick() {
             minion.getMinionMovement().speed.buffPct(-pct);
+        }
+
+        public void finish() {
+            minion.removeBuff(this);
         }
     }
 }

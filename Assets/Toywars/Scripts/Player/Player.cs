@@ -113,6 +113,10 @@ namespace Toywars {
             buffs.Add(buff);
         }
 
+        public void removeBuff(Buff buff) {
+            buffs.Remove(buff);
+        }
+
         void resetAttributes() {
             attrs.ForEach(attr => attr.reset());
         }
@@ -120,7 +124,7 @@ namespace Toywars {
         void updateBuffs() {
             buffs.ForEach(buff => {
                 if(buff.finished)
-                    buffs.Remove(buff);
+                    buff.finish();
                 else
                     buff.tick();
             });

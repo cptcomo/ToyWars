@@ -35,6 +35,10 @@ namespace Toywars {
         public Buff copy() {
             return new ArmorShredBuff(duration, flat);
         }
+
+        public void finish() {
+            minion.removeBuff(this);
+        }
     }
 }
 

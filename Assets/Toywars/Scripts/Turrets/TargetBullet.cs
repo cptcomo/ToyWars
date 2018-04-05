@@ -15,12 +15,21 @@ namespace Toywars {
         private Buff buffToApply;
         public GameObject impactEffect;
 
+        [Header("Fireball")]
+        public bool isFireball;
+        public GameObject fireballParticle;
+        GameObject fireballParticleInstance;
+
         private void Start() {
             if(!playerShot)
                 playerShot = false;
 
             if(!ignoreArmor)
                 ignoreArmor = false;
+
+            if(isFireball) {
+                this.fireballParticleInstance = (GameObject)Instantiate(fireballParticle, transform.position, transform.rotation);
+            }
         }
 
         public void seek(Transform target) {
@@ -29,7 +38,7 @@ namespace Toywars {
 
         private void Update() {
             if(this.target == null) {
-                Destroy(gameObject);
+                destroy();
                 return;
             }
 
@@ -43,6 +52,16 @@ namespace Toywars {
 
             transform.Translate(dir.normalized * distToMove, Space.World);
             transform.LookAt(target);
+
+            if(isFireball) {
+                fireballParticleInstance.transform.position = this.transform.position;
+
+                Vector3 lookDir = target.position - this.transform.position;
+                lookDir.y = 0;
+                Quaternion rotation = Quaternion.LookRotation(lookDir);
+                rotation *= Quaternion.Euler(0, 90, 0);
+                fireballParticleInstance.transform.rotation = Quaternion.Slerp(fireballParticleInstance.transform.rotation, rotation, Time.deltaTime * 100);
+            }
         }
 
         public void setDamage(float damage) {
@@ -82,7 +101,8 @@ namespace Toywars {
             } else {
                 doDamage(target);
             }
-            Destroy(gameObject);
+
+            destroy();
         }
 
         void doDamage(Transform t) {
@@ -108,6 +128,14 @@ namespace Toywars {
                     doDamage(col.transform);
                 }
             }
+        }
+
+        void destroy() {
+            if(isFireball) {
+                Destroy(fireballParticleInstance);
+            }
+
+            Destroy(gameObject);     
         }
     }
 }

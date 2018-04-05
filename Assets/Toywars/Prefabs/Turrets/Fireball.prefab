@@ -36,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1826154541861776}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: -430.8978, y: 559.6336, z: -297.25302}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -96,4 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 70
   impactEffect: {fileID: 1749179818377794, guid: 958045474c08db34aaa5fd329b437753,
+    type: 2}
+  isFireball: 1
+  fireballParticle: {fileID: 1805904854945230, guid: 5ebe48951ad6b3a4d8a4d7fcfdccd120,
     type: 2}

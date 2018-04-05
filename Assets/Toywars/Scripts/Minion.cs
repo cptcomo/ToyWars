@@ -82,14 +82,19 @@ namespace Toywars {
         protected virtual void updateBuffs() {
             buffs.ForEach(buff => {
                 if(buff.finished)
-                    buffs.Remove(buff);
+                    buff.finish();
                 else
                     buff.tick();
             });
         }
 
+        public void removeBuff(Buff buff) {
+            buffs.Remove(buff);
+        }
+
         public virtual void OnDestroy() {
             Destroy(hpBar);
+            buffs.ForEach(buff => buff.finish());
         }
 
         protected virtual void attack() {
@@ -97,7 +102,7 @@ namespace Toywars {
             if(target != null) {
                 Damageable component = (Damageable)target.GetComponent(typeof(Damageable));
                 if(component != null && Vector3.Distance(this.transform.position, target.transform.position) < attackRadius.get()) {
-                    component.takeDamage(damage.get() * damageModifier.get() / 100 * Time.deltaTime, false, false);
+                    component.takeDamage(damage.get() * damageModifier.get() / 100f * Time.deltaTime, false, false);
                 }
             }
         }

@@ -216,10 +216,14 @@ MonoBehaviour:
   minionName: Fast
   health:
     start: 100
+  armor:
+    start: 0
   damage:
     start: 30
   attackRadius:
     start: 1.5
+  damageModifier:
+    start: 100
   moneyValue: 25
   deathEffect: {fileID: 1787243369622486, guid: ffa7fb7607c9baa46bcb69956d18788c,
     type: 2}

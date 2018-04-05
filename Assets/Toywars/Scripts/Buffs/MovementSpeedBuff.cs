@@ -37,6 +37,10 @@ namespace Toywars {
         public void tick() {
             player.speed.buffPct(pct);
         }
+
+        public void finish() {
+            player.removeBuff(this);
+        }
     }
 
 }
