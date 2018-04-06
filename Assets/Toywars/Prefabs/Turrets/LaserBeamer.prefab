@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4127409094240514}
   - component: {fileID: 108297251997772158}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4159748648041452}
   - component: {fileID: 198708476730296280}
   - component: {fileID: 199769310362430582}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 4954451154090028}
   - component: {fileID: 198858390960681222}
   - component: {fileID: 199221574996295254}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LaserImpactEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 4437325262271978}
   - component: {fileID: 33808759644702206}
   - component: {fileID: 23218512753250824}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,9 +88,10 @@ GameObject:
   - component: {fileID: 4123852024665288}
   - component: {fileID: 120155357004823078}
   - component: {fileID: 114917222432253092}
-  m_Layer: 0
+  - component: {fileID: 64624891948132548}
+  m_Layer: 11
   m_Name: LaserBeamer
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +104,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4088465091112662}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PartToRotate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +119,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4111531793861510}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +136,7 @@ GameObject:
   - component: {fileID: 4215687250214360}
   - component: {fileID: 33363304402812638}
   - component: {fileID: 23179822254524272}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Stand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,6 +339,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1399570396886132}
   m_Mesh: {fileID: 4300002, guid: 49e8acd437ca1a944b5246f3e0cb5526, type: 3}
+--- !u!64 &64624891948132548
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1418180885210040}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
 --- !u!108 &108297251997772158
 Light:
   m_ObjectHideFlags: 1
@@ -406,13 +421,36 @@ MonoBehaviour:
   laserLineRenderer: {fileID: 120155357004823078}
   laserImpactEffect: {fileID: 198858390960681222}
   laserImpactLight: {fileID: 108297251997772158}
-  fireFireRate:
-    start: 0
+  fireballPrefab: {fileID: 0}
+  ablazeEffect: {fileID: 0}
   fireDOT:
     start: 0
-  fireDamage:
+  beaconTurretTag: 
+  beaconMinionTag: 
+  isPlayer: 0
+  beaconTurretFireRate:
     start: 0
-  placeHolder:
+  beaconTurretRange:
+    start: 0
+  beaconTurretDamage:
+    start: 0
+  beaconTurretLaserDOT:
+    start: 0
+  beaconTurretFireDOT:
+    start: 0
+  beaconMinionDamage:
+    start: 0
+  beaconMinionMovespeed:
+    start: 0
+  beaconMinionHeal:
+    start: 0
+  beaconPlayerHeal:
+    start: 0
+  beaconMoneyPerRound:
+    start: 0
+  beaconMoneyRate:
+    start: 0
+  beaconExpRate:
     start: 0
   turnSpeed: 10
   targetTag: Enemy

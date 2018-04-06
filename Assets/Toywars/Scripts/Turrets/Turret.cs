@@ -41,6 +41,8 @@ namespace Toywars{
         float laserL4PctMax;
         bool laserR3Unlock;
         float laserR3PctModifier;
+        float laserR3lastFire;
+        float laserR3tickRate;
 
         [Header("Fire")]
         public GameObject fireballPrefab;
@@ -57,8 +59,25 @@ namespace Toywars{
         float fireR4rad;
         float fireR4dps;
 
+        static int globalBeaconIDs = 0;
+        int beaconID;
         [Header("Beacon")]
-        public Attribute placeHolder;
+        public string beaconTurretTag;
+        public string beaconMinionTag;
+
+        public bool isPlayer;
+        public Attribute beaconTurretFireRate;
+        public Attribute beaconTurretRange;
+        public Attribute beaconTurretDamage;
+        public Attribute beaconTurretLaserDOT;
+        public Attribute beaconTurretFireDOT;
+        public Attribute beaconMinionDamage;
+        public Attribute beaconMinionMovespeed;
+        public Attribute beaconMinionHeal;
+        public Attribute beaconPlayerHeal;
+        public Attribute beaconMoneyPerRound;
+        public Attribute beaconMoneyRate;
+        public Attribute beaconExpRate;
 
         [Header("Unity Setup Fields")]
         public float turnSpeed = 10f;
@@ -71,6 +90,10 @@ namespace Toywars{
 
         public TowerUpgradePath towerUpgradePath;
 
+        [HideInInspector]
+        public List<Buff> buffs;
+        List<Attribute> attrs;
+
         bool isInit = false;
 
         private void Start() {
@@ -80,28 +103,55 @@ namespace Toywars{
 
         public void init() {
             isInit = true;
-            range.init();
-            fireRate.init();
-            damage.init();
-            projectileSpeed.init();
+            attrs = new List<Attribute>();
+            attrs.Add(range);
+            attrs.Add(fireRate);
+            attrs.Add(damage);
+            attrs.Add(projectileSpeed);
             if(towerType == TowerType.Turret) {
             } else if(towerType == TowerType.Missile) {
-                missileExplosionRadius.init();
+                attrs.Add(missileExplosionRadius);
             } else if(towerType == TowerType.Laser) {
-                laserDOT.init();
-                laserSlowPct.init();
+                attrs.Add(laserDOT);
+                attrs.Add(laserSlowPct);
                 laserIgnoreArmor = false;
             } else if(towerType == TowerType.Fire) {
-                fireDOT.init();
-            } else {
-                placeHolder.init();
+                attrs.Add(fireDOT);
+            } else if(towerType == TowerType.Beacon) {
+                beaconID = globalBeaconIDs++;
+                attrs.Add(beaconTurretFireRate);
+                attrs.Add(beaconTurretRange);
+                attrs.Add(beaconTurretDamage);
+                attrs.Add(beaconTurretLaserDOT);
+                attrs.Add(beaconTurretFireDOT);
+                attrs.Add(beaconMinionDamage);
+                attrs.Add(beaconMinionMovespeed);
+                attrs.Add(beaconMinionHeal);
+                attrs.Add(beaconPlayerHeal);
+                attrs.Add(beaconMoneyPerRound);
+                attrs.Add(beaconMoneyRate);
+                attrs.Add(beaconExpRate);
             }
-            turretL3Unlock = false;
+            attrs.ForEach(attr => attr.init());
+            buffs = new List<Buff>();
             towerUpgradePath.init();
-            InvokeRepeating("updateTarget", 0f, 0.25f);
-            InvokeRepeating("fireR4Check", 0f, 0.5f);
+            if(towerType != TowerType.Beacon)
+                InvokeRepeating("updateTarget", 0f, 0.25f);
+            else if(towerType == TowerType.Beacon) {
+                GameManager.getInstance().EndWaveEvent += beaconMoney;
+                this.transform.Translate(0, 2, 0);
+                InvokeRepeating("beacon", 0f, 0.5f);
+            }
+            if(towerType == TowerType.Fire)
+                InvokeRepeating("fireR4Check", 0f, 0.5f);
         }
-        
+
+        private void OnDisable() {
+            if(towerType == TowerType.Beacon) {
+                GameManager.getInstance().EndWaveEvent -= beaconMoney;
+            }
+        }
+
         void fireR4Check() {
             if(fireR4Unlock) {
                 Collider[] cols = Physics.OverlapSphere(this.transform.position, fireR4rad);
@@ -119,6 +169,9 @@ namespace Toywars{
         }
 
         private void Update() {
+            resetAttributes();
+            updateBuffs();
+
             if(target == null) {
                 if(towerType == TowerType.Laser) {
                     if(laserLineRenderer.enabled) {
@@ -145,9 +198,6 @@ namespace Toywars{
                 case TowerType.Fire:
                     fire();
                     break;
-                case TowerType.Beacon:
-                    beacon();
-                    break;
             }
 
             fireCooldown -= Time.deltaTime;
@@ -172,6 +222,19 @@ namespace Toywars{
             else {
                 target = null;
             }
+        }
+
+        void resetAttributes() {
+            attrs.ForEach(attr => attr.reset());
+        }
+
+        void updateBuffs() {
+            buffs.ForEach(buff => {
+                if(buff.finished)
+                    buff.finish();
+                else
+                    buff.tick();
+            });
         }
 
         void lockOnTarget() {
@@ -230,7 +293,7 @@ namespace Toywars{
                 Buff b = null;
 
                 if(missileR3Unlock) {
-                    b = new ArmorShredBuff(5000, missileR3ArmorShred);
+                    b = new ArmorShredBuff(6, missileR3ArmorShred);
                 }
 
                 shootTargetProjectile(missilePrefab, dam, missileExplosionRadius.get(), b);
@@ -251,8 +314,10 @@ namespace Toywars{
 
             targetMinion.takeDamage(dam * Time.deltaTime, false, laserIgnoreArmor);
 
-            if(laserR3Unlock) {
-                targetMinion.damageModifier.modifyFlat(-laserR3PctModifier * Time.deltaTime, 50, 200);
+            if(laserR3Unlock && Time.time >= laserR3lastFire + laserR3tickRate) {
+                DamageModifierBuff dmb = new DamageModifierBuff(4, -laserR3PctModifier * laserR3tickRate);
+                dmb.apply(targetMinion);
+                laserR3lastFire = Time.time;
             }
 
             if(laserSlowPct.get() > 0) {
@@ -299,7 +364,35 @@ namespace Toywars{
         }
 
         void beacon() {
+            BeaconTurretBuff turretBuff = new BeaconTurretBuff(beaconID, 1f, beaconTurretFireRate.get(),
+                beaconTurretRange.get(), beaconTurretDamage.get(), beaconTurretLaserDOT.get(), beaconTurretFireDOT.get());
 
+            BeaconMinionBuff minionBuff = new BeaconMinionBuff(beaconID, 3f, beaconMinionDamage.get(), beaconMinionMovespeed.get());
+
+            Collider[] cols = Physics.OverlapSphere(this.transform.position, range.get());
+            foreach(Collider col in cols) {
+                if(col.tag.Equals(beaconTurretTag) && col.gameObject != this.gameObject) {
+                    if(col.GetComponent<Turret>().towerType != Turret.TowerType.Beacon)
+                        turretBuff.copy().apply(col.transform);
+                }
+                if(col.tag.Equals(beaconMinionTag) && col.gameObject != this.gameObject) {
+                    minionBuff.copy().apply(col.transform);
+                    Minion m = col.GetComponent<Minion>();
+                    m.takeDamage(-beaconMinionHeal.get() / 100f * m.health.getMissing() / .5f, false, true);
+                }
+                if(col.tag.Equals("Player") && isPlayer) {
+                    col.GetComponent<Damageable>().takeDamage(-beaconPlayerHeal.get() / 100f * col.GetComponent<Player>().health.getMissing() / .5f, false, true);
+                }
+            }
+        }
+
+        void beaconMoney() {
+            if(isPlayer) {
+                PlayerManager.getInstance().changeMoney((int)beaconMoneyPerRound.get());
+            }
+            else {
+                EnemiesManager.getInstance().changeMoney((int)beaconMoneyPerRound.get());
+            }
         }
 
         public void upgrade(int upgradeIndex, bool playerTurret) {
@@ -340,6 +433,8 @@ namespace Toywars{
         public void laserR3Upgrade(float pct) {
             this.laserR3Unlock = true;
             this.laserR3PctModifier = pct;
+            this.laserR3tickRate = 0.25f;
+            this.laserR3lastFire = Time.time;
         }
 
         public void fireL2Upgrade(float tickInterval, float ablazeDuration) {
@@ -373,6 +468,10 @@ namespace Toywars{
         private void OnDrawGizmosSelected() {
             Gizmos.color = new Color(1, 0, 0);
             Gizmos.DrawWireSphere(this.transform.position, range.getStart());
+        }
+
+        public void addBuff(Buff b) {
+            buffs.Add(b);
         }
 
         [HideInInspector]

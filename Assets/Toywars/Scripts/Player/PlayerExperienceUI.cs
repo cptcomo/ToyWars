@@ -11,7 +11,7 @@ namespace Toywars {
             pm = PlayerManager.getInstance();
         }
         private void Update() {
-            expText.text = "" + pm.exp;
+            expText.text = "" + pm.getExp();
         }
     }
 }

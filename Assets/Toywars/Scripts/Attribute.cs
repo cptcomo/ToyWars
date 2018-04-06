@@ -72,7 +72,7 @@ namespace Toywars {
         }
 
         public void buffPct(float pct) {
-            this.currentBuffed = this.currentUnbuffed + (this.currentBuffed * (pct / 100));
+            this.currentBuffed = this.currentBuffed + (this.currentBuffed * (pct / 100));
         }
 
         public void buffFlat(float flat, float min, float max) {

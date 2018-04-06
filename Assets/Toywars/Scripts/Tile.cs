@@ -49,7 +49,7 @@ namespace Toywars {
             Destroy(effect, 5f);
 
             this.turretBlueprint = blueprint;
-            pm.money -= turretBlueprint.cost;
+            pm.changeMoney(-turretBlueprint.cost);
         }
 
         public void upgradeTurret(int upgradeIndex) {

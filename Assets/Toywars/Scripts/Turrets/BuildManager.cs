@@ -38,7 +38,7 @@ namespace Toywars {
         private Tile selectedTile;
 
         public bool canBuild { get { return turretToBuild != null; } }
-        public bool hasMoney { get { return pm.money >= turretToBuild.cost; } }
+        public bool hasMoney { get { return pm.getMoney() >= turretToBuild.cost; } }
 
         public void selectTurretToBuild(TurretBlueprint turret) {
             turretToBuild = turret;

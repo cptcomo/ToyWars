@@ -25,15 +25,15 @@ namespace Toywars {
         }
 
         public override void takeDamage(float damage, bool playershot, bool ignoreArmor) {
-            this.health.modifyFlat(-damage * armorDamageMultiplier(ignoreArmor, armor.get()) * Random.Range(0.9f, 1.1f));
+            this.health.modifyFlat(-damage * armorDamageMultiplier(ignoreArmor, armor.get()) * Random.Range(0.9f, 1.1f), -1, health.getStart());
             if(health.get() <= 0f)
                 die(playershot);
         }
 
         protected void die(bool playerShot) {   
-            pm.money += moneyValue;
+            pm.changeMoney(moneyValue);
             if(playerShot) {
-                pm.exp += expValue;
+                pm.changeExp(expValue);
             }
 
             GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);

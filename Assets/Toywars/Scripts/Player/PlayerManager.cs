@@ -13,9 +13,16 @@ namespace Toywars {
 
         public int baseHealth;
 
-        public int money;
+        [SerializeField]
+        int money;
 
-        public int exp;
+        [SerializeField]
+        int exp;
+
+        [HideInInspector]
+        public float moneyAmplify;
+        [HideInInspector]
+        public float expAmplify;
 
         private void Awake() {
             if(instance == null) {
@@ -41,6 +48,24 @@ namespace Toywars {
             if(alliesAlive != 0) {
                 Debug.LogError("Minion count non-zero on wave start or end");
             }
+        }
+
+        public int getMoney() {
+            return money;
+        }
+
+        public void changeMoney(int d) {
+            if(d > 0) d += (int)(d * moneyAmplify / 100f);
+            this.money += d;
+        }
+
+        public int getExp() {
+            return exp;
+        }
+
+        public void changeExp(int d) {
+            if(d > 0) d += (int)(d * expAmplify / 100f);
+            this.exp += d;
         }
 
         public static PlayerManager getInstance() {

@@ -11,7 +11,11 @@ namespace Toywars {
 
         public int baseHealth;
 
-        public int money;
+        [SerializeField]
+        int money;
+
+        [HideInInspector]
+        public float moneyAmplify;
 
         private void Awake() {
             if(instance == null) {
@@ -23,6 +27,14 @@ namespace Toywars {
 
         private void Start() {
             enemiesAlive = 0;
+        }
+
+        public int getMoney() {
+            return money;
+        }
+
+        public void changeMoney(int d) {
+            this.money += d;
         }
 
         public static EnemiesManager getInstance() {

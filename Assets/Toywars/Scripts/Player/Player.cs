@@ -138,7 +138,7 @@ namespace Toywars {
         }
 
         void Damageable.takeDamage(float dmg, bool isPlayerShot, bool ignoreArmor) {
-            this.health.modifyFlat(-dmg * armorDamageMultiplier(ignoreArmor, armor.get()) * Random.Range(0.9f, 1.1f));
+            this.health.modifyFlat(-dmg * armorDamageMultiplier(ignoreArmor, armor.get()) * Random.Range(0.9f, 1.1f), -1, health.getStart());
         }
 
         float armorDamageMultiplier(bool ignoreArmor, float armor) {

@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 33565883032706610}
   - component: {fileID: 23596504034391000}
   - component: {fileID: 114415250242238440}
-  m_Layer: 0
+  - component: {fileID: 64776790000383044}
+  m_Layer: 11
   m_Name: SupportTower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1029087568022746}
   m_LocalRotation: {x: 0.00000008146034, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 236.10872, y: 226.06982, z: 1143.5935}
+  m_LocalPosition: {x: -0.18962765, y: 2.02, z: 3.0785315}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,6 +84,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1029087568022746}
   m_Mesh: {fileID: 4300000, guid: 8ecaa67fd9e2a495d9ba1343b126c651, type: 3}
+--- !u!64 &64776790000383044
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1029087568022746}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 8ecaa67fd9e2a495d9ba1343b126c651, type: 3}
 --- !u!114 &114415250242238440
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94,28 +109,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42905c1d6464f4849aff2f6ccacb95fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerSprite: {fileID: 0}
+  towerSprite: {fileID: 21300000, guid: f32fdc785adb7ee4792379fe8d6e08c9, type: 3}
   range:
-    start: 20
+    start: 15
   fireRate:
-    start: 0
-  explosionRadius:
-    start: 0
+    start: 50
   damage:
     start: 0
-  bulletPrefab: {fileID: 0}
-  useLaser: 0
-  dot:
+  projectileSpeed:
     start: 0
-  slowPct:
+  towerType: 4
+  turretBulletPrefab: {fileID: 0}
+  missileExplosionRadius:
     start: 0
-  lineRenderer: {fileID: 0}
+  missilePrefab: {fileID: 0}
+  laserDOT:
+    start: 0
+  laserSlowPct:
+    start: 0
+  laserLineRenderer: {fileID: 0}
   laserImpactEffect: {fileID: 0}
-  impactLight: {fileID: 0}
+  laserImpactLight: {fileID: 0}
+  fireballPrefab: {fileID: 0}
+  ablazeEffect: {fileID: 0}
+  fireDOT:
+    start: 0
+  beaconTurretTag: AllyTower
+  beaconMinionTag: AllyMinion
+  isPlayer: 1
+  beaconTurretFireRate:
+    start: 20
+  beaconTurretRange:
+    start: 20
+  beaconTurretDamage:
+    start: 10
+  beaconTurretLaserDOT:
+    start: 10
+  beaconTurretFireDOT:
+    start: 10
+  beaconMinionDamage:
+    start: 0
+  beaconMinionMovespeed:
+    start: 0
+  beaconMinionHeal:
+    start: 0
+  beaconPlayerHeal:
+    start: 0
+  beaconMoneyPerRound:
+    start: 0
+  beaconMoneyRate:
+    start: 0
+  beaconExpRate:
+    start: 0
   turnSpeed: 10
-  targetTag: 
+  targetTag: Enemy
   partToRotate: {fileID: 0}
   firePoint: {fileID: 0}
   towerUpgradePath:
-    leftPath: []
-    rightPath: []
+    leftPath:
+    - {fileID: 114199365408703280, guid: 1127e6737baccc54f84023d2a76fa582, type: 2}
+    - {fileID: 114036673656423548, guid: cc745d3f3142c1f49bf6d0f4b15366c6, type: 2}
+    - {fileID: 114458294903447574, guid: 6af5167835cf3984fb3f9fcd24556b7c, type: 2}
+    - {fileID: 114830810206844774, guid: dc9e4421001c7ff4293a5e36719e3894, type: 2}
+    rightPath:
+    - {fileID: 114939766296389784, guid: 70ae76aecfdbba84aa5ff1cdd538604d, type: 2}
+    - {fileID: 114753025566370352, guid: b16c19ecf02ccb34ca42a7e6b91e87c7, type: 2}
+    - {fileID: 114116805612395504, guid: 333e2980bc74ad64b952a5644ebc4e75, type: 2}
+    - {fileID: 0}

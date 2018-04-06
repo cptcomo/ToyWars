@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4110796911266756}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PartToRotate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4317844178932182}
   - component: {fileID: 33704297379135054}
   - component: {fileID: 23962261906320424}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,9 +52,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4109260721999466}
   - component: {fileID: 114962483813817650}
-  m_Layer: 0
+  - component: {fileID: 64143595261914896}
+  m_Layer: 11
   m_Name: FireTower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,7 +68,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4466243857221514}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +85,7 @@ GameObject:
   - component: {fileID: 4654838757801660}
   - component: {fileID: 33769772065160512}
   - component: {fileID: 23027707493841602}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,6 +245,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1956284493138980}
   m_Mesh: {fileID: 4300002, guid: 8cdb954a67785d24aa6be3a5f67b813d, type: 3}
+--- !u!64 &64143595261914896
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1630903717051468}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
 --- !u!114 &114962483813817650
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -282,7 +297,32 @@ MonoBehaviour:
     type: 2}
   fireDOT:
     start: 3
-  placeHolder:
+  beaconTurretTag: 
+  beaconMinionTag: 
+  isPlayer: 0
+  beaconTurretFireRate:
+    start: 0
+  beaconTurretRange:
+    start: 0
+  beaconTurretDamage:
+    start: 0
+  beaconTurretLaserDOT:
+    start: 0
+  beaconTurretFireDOT:
+    start: 0
+  beaconMinionDamage:
+    start: 0
+  beaconMinionMovespeed:
+    start: 0
+  beaconMinionHeal:
+    start: 0
+  beaconPlayerHeal:
+    start: 0
+  beaconMoneyPerRound:
+    start: 0
+  beaconMoneyRate:
+    start: 0
+  beaconExpRate:
     start: 0
   turnSpeed: 10
   targetTag: Enemy

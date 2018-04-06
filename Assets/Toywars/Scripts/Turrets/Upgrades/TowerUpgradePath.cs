@@ -52,15 +52,15 @@ namespace Toywars {
             if(upgradeIndex == 0) {
                 TowerUpgrade upgrade = leftPath[leftIndex];
                 if(playerTurret) {
-                    if(pm.money >= upgrade.cost) {
-                        pm.money -= upgrade.cost;
+                    if(pm.getMoney() >= upgrade.cost) {
+                        pm.changeMoney(-upgrade.cost);
                         leftIndex++;
                         upgrade.activate(turret);
                     }
                 }
                 else {
-                    if(em.money >= upgrade.cost) {
-                        em.money -= upgrade.cost;
+                    if(em.getMoney() >= upgrade.cost) {
+                        em.changeMoney(-upgrade.cost);
                         leftIndex++;
                         upgrade.activate(turret);
                     }
@@ -69,15 +69,15 @@ namespace Toywars {
             } else {
                 TowerUpgrade upgrade = rightPath[rightIndex];
                 if(playerTurret) {
-                    if(pm.money >= upgrade.cost) {
-                        pm.money -= upgrade.cost;
+                    if(pm.getMoney() >= upgrade.cost) {
+                        pm.changeMoney(-upgrade.cost);
                         rightIndex++;
                         upgrade.activate(turret);
                     }
                 }
                 else {
-                    if(em.money >= upgrade.cost) {
-                        em.money -= upgrade.cost;
+                    if(em.getMoney() >= upgrade.cost) {
+                        em.changeMoney(-upgrade.cost);
                         rightIndex++;
                         upgrade.activate(turret);
                     }

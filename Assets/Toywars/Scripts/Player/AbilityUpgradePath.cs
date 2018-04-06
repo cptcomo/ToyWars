@@ -36,29 +36,29 @@ namespace Toywars {
         public void upgrade(int upgradeIndex, Player player) {
             if(upgradeIndex == 0) {
                 AbilityUpgrade upgrade = qPath[qIndex];
-                if(pm.exp >= upgrade.cost) {
-                    pm.exp -= upgrade.cost;
+                if(pm.getExp() >= upgrade.cost) {
+                    pm.changeExp(-upgrade.cost);
                     qIndex++;
                     upgrade.activate(player);
                 }
             } else if(upgradeIndex == 1) {
                 AbilityUpgrade upgrade = wPath[wIndex];
-                if(pm.exp >= upgrade.cost) {
-                    pm.exp -= upgrade.cost;
+                if(pm.getExp() >= upgrade.cost) {
+                    pm.changeExp(-upgrade.cost);
                     wIndex++;
                     upgrade.activate(player);
                 }
             } else if(upgradeIndex == 2) {
                 AbilityUpgrade upgrade = ePath[eIndex];
-                if(pm.exp >= upgrade.cost) {
-                    pm.exp -= upgrade.cost;
+                if(pm.getExp() >= upgrade.cost) {
+                    pm.changeExp(-upgrade.cost);
                     eIndex++;
                     upgrade.activate(player);
                 }
             } else {
                 AbilityUpgrade upgrade = rPath[rIndex];
-                if(pm.exp >= upgrade.cost) {
-                    pm.exp -= upgrade.cost;
+                if(pm.getExp() >= upgrade.cost) {
+                    pm.changeExp(-upgrade.cost);
                     rIndex++;
                     upgrade.activate(player);
                 }
