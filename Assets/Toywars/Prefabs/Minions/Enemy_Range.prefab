@@ -24,11 +24,11 @@ GameObject:
   - component: {fileID: 195176324346920370}
   - component: {fileID: 135651966576152662}
   - component: {fileID: 54612984218843892}
-  - component: {fileID: 114368114358119182}
-  - component: {fileID: 114353216745923128}
+  - component: {fileID: 114175340761128080}
+  - component: {fileID: 114484807281911776}
   m_Layer: 10
-  m_Name: Ally_Normal
-  m_TagString: AllyMinion
+  m_Name: Enemy_Range
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,7 +92,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1044195431293078}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.050083637, y: 0.55, z: 4.5856586}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224236324922011986}
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114353216745923128
+--- !u!114 &114175340761128080
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -190,49 +190,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1044195431293078}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b792601ef606334a907db945501ce64, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cff37422111a784785ae82f7538da72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed:
-    start: 6
+    start: 5
   detectionRadius:
     start: 15
   tagsToDetect:
-  - Enemy
+  - Player
+  - AllyMinion
   waypoints:
-  - {x: 0, y: 0, z: 87}
---- !u!114 &114368114358119182
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1044195431293078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ba4b0ffb4f1ac4db7e53e41ca73aa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 98571f15aefe6454f9169f3d0180cf79, type: 3}
-  minionName: Normal
-  health:
-    start: 400
-  armor:
-    start: 0
-  damage:
-    start: 50
-  attackRadius:
-    start: 2.5
-  damageModifier:
-    start: 100
-  moneyValue: 70
-  deathEffect: {fileID: 1787243369622486, guid: ffa7fb7607c9baa46bcb69956d18788c,
-    type: 2}
-  hpBarPrefab: {fileID: 1914454742012642, guid: cb05f27a6cf80624e9252ae301389554,
-    type: 2}
-  hpCanvasName: MinionHealthBarCanvas
-  hpBarOffset: 1
-  mobPct: 50
-  dpsPct: 50
+  - {x: 0, y: 0, z: -87}
 --- !u!114 &114431392995043340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -260,6 +229,43 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114484807281911776
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1044195431293078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bbb1ff1768b69b46ae06e4189fce85f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 98571f15aefe6454f9169f3d0180cf79, type: 3}
+  minionName: Range
+  bulletPrefab: {fileID: 1826154541861776, guid: 69a4036772dcd7c4586123f121f9bb92,
+    type: 2}
+  minionType: 1
+  health:
+    start: 100
+  armor:
+    start: 40
+  damage:
+    start: 20
+  attackRadius:
+    start: 10
+  damageModifier:
+    start: 100
+  moneyValue: 70
+  rangeFireRate: 1
+  deathEffect: {fileID: 1787243369622486, guid: ffa7fb7607c9baa46bcb69956d18788c,
+    type: 2}
+  hpBarPrefab: {fileID: 1453098498204944, guid: 54209f3e5e99ef34c88c9508dc919680,
+    type: 2}
+  hpCanvasName: MinionHealthBarCanvas
+  hpBarOffset: 1
+  mobPct: 0
+  dpsPct: 0
+  expValue: 20
 --- !u!114 &114505111955585292
 MonoBehaviour:
   m_ObjectHideFlags: 1

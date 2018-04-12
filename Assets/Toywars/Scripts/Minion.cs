@@ -9,6 +9,9 @@ namespace Toywars {
 
         public Sprite sprite;
         public string minionName;
+        public GameObject bulletPrefab;
+
+        public MinionType minionType;
 
         public Attribute health;
         public Attribute armor;
@@ -16,6 +19,8 @@ namespace Toywars {
         public Attribute attackRadius;
         public Attribute damageModifier;
         public int moneyValue;
+        public float rangeFireRate;
+        float rangeLastFire;
 
         public GameObject deathEffect;
         public GameObject hpBarPrefab;
@@ -50,8 +55,12 @@ namespace Toywars {
             hpBar = (GameObject)Instantiate(hpBarPrefab);
             hpBar.transform.SetParent(hpCanvas.transform, false);
             hpBarImage = hpBar.GetComponent<Image>();
+            minionMovement.setMinionType(minionType);
+            minionMovement.setKiteRange(attackRadius.get() * .9f);
             if(hpBarImage == null)
-                Debug.LogWarning("Minion Health Bar does not have an Image component");       
+                Debug.LogWarning("Minion Health Bar does not have an Image component");
+            if(minionType == MinionType.Range)
+                rangeLastFire = Time.time;
         }
 
         public virtual void takeDamage(float damage, bool playerShot, bool ignoreArmor) { }
@@ -100,9 +109,23 @@ namespace Toywars {
         protected virtual void attack() {
             GameObject target = minionMovement.getTarget();
             if(target != null) {
-                Damageable component = (Damageable)target.GetComponent(typeof(Damageable));
-                if(component != null && Vector3.Distance(this.transform.position, target.transform.position) < attackRadius.get()) {
-                    component.takeDamage(damage.get() * damageModifier.get() / 100f * Time.deltaTime, false, false);
+                if(minionType == MinionType.Range && Vector3.Distance(this.transform.position, target.transform.position) < attackRadius.get() && Time.time >= rangeLastFire + rangeFireRate) {
+                    GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
+                    TargetBullet bullet = bulletGO.GetComponent<TargetBullet>();
+                    if(bullet != null) {
+                        bullet.seek(target.transform);
+                        bullet.setDamage(damage.get());
+                        bullet.setSpeed(70f);
+                        bullet.setBuffToApply(null);
+                        bullet.setTargetTag(target.tag);
+                    }
+                    rangeLastFire = Time.time;
+                }
+                else {
+                    Damageable component = (Damageable)target.GetComponent(typeof(Damageable));
+                    if(component != null && Vector3.Distance(this.transform.position, target.transform.position) < attackRadius.get()) {
+                        component.takeDamage(damage.get() * damageModifier.get() / 100f * Time.deltaTime, false, false);
+                    }
                 }
             }
         }
@@ -119,5 +142,10 @@ namespace Toywars {
         public MinionMovement getMinionMovement() {
             return this.minionMovement;
         }
+
+    }
+
+    public enum MinionType {
+        Melee, Range, Fast, Tank, Divide
     }
 }

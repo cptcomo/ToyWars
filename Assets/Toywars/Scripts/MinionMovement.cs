@@ -18,22 +18,31 @@ namespace Toywars {
 
         GameObject target;
         protected Vector3 destination;
+        float kiteRange;
 
         protected enum State {
-            exit = 0,
-            chase = 1
+            Exit, Chase, Kite
         }
 
         protected State state;
+        protected MinionType minionType;
 
         protected virtual void Start() {
-            state = State.exit;
+            state = State.Exit;
             gm = GameManager.getInstance();
             pm = PlayerManager.getInstance();
             em = EnemiesManager.getInstance();
             nva = GetComponent<NavMeshAgent>();
             nva.stoppingDistance = 1;
             nva.speed = speed.getStart();
+        }
+
+        public void setMinionType(MinionType type) {
+            minionType = type;
+        }
+
+        public void setKiteRange(float range) {
+            this.kiteRange = range;
         }
 
         protected virtual void Update() {
@@ -47,7 +56,7 @@ namespace Toywars {
                     endPath();
                 }
                 else {
-                    if(state == State.exit && Vector3.Distance(this.transform.position, getNextDestination()) < 3) {
+                    if(state == State.Exit && Vector3.Distance(this.transform.position, getNextDestination()) < 3) {
                         waypointIndex++;
                         this.destination = getNextDestination();
                     }
@@ -72,17 +81,24 @@ namespace Toywars {
             }
             target = closest;
             if(target != null) {
-                state = State.chase;
-                this.destination = target.transform.position;
+                Vector3 dir = (target.transform.position - this.transform.position).normalized;
+                if(minionType == MinionType.Range) {
+                    state = State.Kite;
+                    this.destination = -dir.normalized * (kiteRange / 2);
+                }
+                else {
+                    state = State.Chase;
+                    this.destination = target.transform.position;
+                }
             }
             else {
-                state = State.exit;
+                state = State.Exit;
                 this.destination = getNextDestination();
             }
         }
 
         bool reachedDestination() {
-            if(state == State.exit) {
+            if(state == State.Exit) {
                 if(!nva.pathPending) {
                     if(nva.remainingDistance <= nva.stoppingDistance) {
                         if(!nva.hasPath || nva.velocity.sqrMagnitude == 0f) {

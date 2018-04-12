@@ -214,6 +214,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: d6fa2a04fb7ba8e4890efa94a44036fc, type: 3}
   minionName: Divide
+  bulletPrefab: {fileID: 0}
+  minionType: 4
   health:
     start: 250
   armor:

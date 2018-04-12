@@ -214,6 +214,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 6c1c0400175ed3f4197356f5c2df4fd0, type: 3}
   minionName: Fast
+  bulletPrefab: {fileID: 0}
+  minionType: 2
   health:
     start: 100
   armor:
