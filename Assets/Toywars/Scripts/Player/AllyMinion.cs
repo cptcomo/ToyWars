@@ -30,6 +30,14 @@ namespace Toywars {
 
 
         protected void die() {
+            if(minionType == MinionType.Divide) {
+                GameObject min1 = (GameObject)Instantiate(meleePrefab, this.transform.position + this.transform.forward, this.transform.rotation);
+                min1.GetComponent<MinionMovement>().waypoints = this.getMinionMovement().waypoints;
+                min1.GetComponent<MinionMovement>().setWaypointIndex(this.getMinionMovement().getWaypointIndex());
+                GameObject min2 = (GameObject)Instantiate(meleePrefab, this.transform.position - this.transform.forward, this.transform.rotation);
+                min2.GetComponent<MinionMovement>().waypoints = this.getMinionMovement().waypoints;
+                min2.GetComponent<MinionMovement>().setWaypointIndex(this.getMinionMovement().getWaypointIndex());
+            }
             em.changeMoney(moneyValue);
             GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(effect, 5f);

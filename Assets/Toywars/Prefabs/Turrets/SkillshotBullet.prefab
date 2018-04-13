@@ -95,8 +95,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d339cef7d4e9dc46bf9b031c5b52818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 60
   impactEffect: {fileID: 1749179818377794, guid: 958045474c08db34aaa5fd329b437753,
+    type: 2}
+  isFireball: 0
+  fireballParticle: {fileID: 1805904854945230, guid: 5ebe48951ad6b3a4d8a4d7fcfdccd120,
     type: 2}
 --- !u!135 &135674956367086026
 SphereCollider:

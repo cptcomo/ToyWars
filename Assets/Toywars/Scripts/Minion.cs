@@ -10,6 +10,7 @@ namespace Toywars {
         public Sprite sprite;
         public string minionName;
         public GameObject bulletPrefab;
+        public GameObject meleePrefab;
 
         public MinionType minionType;
 
@@ -96,7 +97,7 @@ namespace Toywars {
                     buff.tick();
             });
         }
-
+       
         public void removeBuff(Buff buff) {
             buffs.Remove(buff);
         }
@@ -109,17 +110,19 @@ namespace Toywars {
         protected virtual void attack() {
             GameObject target = minionMovement.getTarget();
             if(target != null) {
-                if(minionType == MinionType.Range && Vector3.Distance(this.transform.position, target.transform.position) < attackRadius.get() && Time.time >= rangeLastFire + rangeFireRate) {
-                    GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
-                    TargetBullet bullet = bulletGO.GetComponent<TargetBullet>();
-                    if(bullet != null) {
-                        bullet.seek(target.transform);
-                        bullet.setDamage(damage.get());
-                        bullet.setSpeed(70f);
-                        bullet.setBuffToApply(null);
-                        bullet.setTargetTag(target.tag);
+                if(minionType == MinionType.Range){
+                    if(Vector3.Distance(this.transform.position, target.transform.position) < attackRadius.get() && Time.time >= rangeLastFire + rangeFireRate) {
+                        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
+                        TargetBullet bullet = bulletGO.GetComponent<TargetBullet>();
+                        if(bullet != null) {
+                            bullet.seek(target.transform);
+                            bullet.setDamage(damage.get());
+                            bullet.setSpeed(70f);
+                            bullet.setBuffToApply(null);
+                            bullet.setTargetTag(target.tag);
+                        }
+                        rangeLastFire = Time.time;
                     }
-                    rangeLastFire = Time.time;
                 }
                 else {
                     Damageable component = (Damageable)target.GetComponent(typeof(Damageable));

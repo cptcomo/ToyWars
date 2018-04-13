@@ -11,9 +11,16 @@ namespace Toywars {
         private string targetTag;
         private float damage;
         private float range = 10000;
+        private float explosionRadius;
         private bool playerShot;
         private bool ignoreArmor;
+        private Buff buffToApply;
         public GameObject impactEffect;
+
+        [Header("Fireball")]
+        public bool isFireball;
+        public GameObject fireballParticle;
+        GameObject fireballParticleInstance;
 
         private void Start() {
             this.startPos = this.transform.position;
@@ -22,6 +29,10 @@ namespace Toywars {
 
             if(!ignoreArmor)
                 ignoreArmor = false;
+
+            if(isFireball) {
+                this.fireballParticleInstance = (GameObject)Instantiate(fireballParticle, transform.position, transform.rotation);
+            }
         }
 
         public void seek(Vector3 dir) {
@@ -36,16 +47,32 @@ namespace Toywars {
             this.playerShot = playerShot;
         }
 
+        public void setFireball(bool fireball) {
+            this.isFireball = fireball; 
+        }
+
         private void Update() {
-            if(Vector3.SqrMagnitude(this.transform.position - startPos) > range) {
-                Destroy(gameObject);
+            if(Vector3.Distance(this.transform.position, startPos) > range) {
+                destroy();
                 return;
             }
+
             transform.Translate(Time.deltaTime * dir * speed, Space.World);
+
+            if(isFireball) {
+                fireballParticleInstance.transform.position = this.transform.position;
+                Quaternion rotation = Quaternion.LookRotation(dir);
+                rotation *= Quaternion.Euler(0, 90, 0);
+                fireballParticleInstance.transform.rotation = Quaternion.Slerp(fireballParticleInstance.transform.rotation, rotation, Time.deltaTime * 100);
+            }
         }
 
         public void setDamage(float dmg) {
             this.damage = dmg;
+        }
+
+        public void setExplosionRadius(float radius) {
+            this.explosionRadius = radius;
         }
 
         public void setRange(float rng) {
@@ -54,6 +81,10 @@ namespace Toywars {
 
         public void setIgnoreArmor(bool ignoreArmor) {
             this.ignoreArmor = ignoreArmor;
+        }
+
+        public void setBuffToApply(Buff buff) {
+            this.buffToApply = buff;
         }
 
         void OnCollisionEnter(Collision collision) {
@@ -65,15 +96,46 @@ namespace Toywars {
         void hitTarget(Transform target) {
             GameObject effectInstance = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
             Destroy(effectInstance, 5f);
+            if(explosionRadius > 0f) {
+                explode();
+            }
+            else 
+                doDamage(target);
 
-            doDamage(target);
-            Destroy(gameObject);
+            destroy();
         }
 
         void doDamage(Transform minion) {
             Minion m = minion.GetComponent<Minion>();
+
             if(m != null)
                 m.takeDamage(damage, playerShot, this.ignoreArmor);
+
+            if(buffToApply != null) {
+                try {
+                    buffToApply.copy().apply(m);
+                }
+                catch(System.Exception) {
+                    Debug.LogWarning("Tried to add buff to an object without a Minion script");
+                }
+            }
+        }
+
+        void explode() {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+            foreach(Collider col in colliders) {
+                if(col.tag.Equals(targetTag)) {
+                    doDamage(col.transform);
+                }
+            }
+        }
+
+        void destroy() {
+            if(isFireball) {
+                Destroy(fireballParticleInstance);
+            }
+
+            Destroy(gameObject);
         }
     }
 

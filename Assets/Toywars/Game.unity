@@ -46669,6 +46669,8 @@ MonoBehaviour:
   baseHealth: 5
   money: 5000
   exp: 10000
+  moneyAmplify: 0
+  expAmplify: 0
 --- !u!1 &698537025
 GameObject:
   m_ObjectHideFlags: 0
@@ -49547,6 +49549,7 @@ MonoBehaviour:
   abilityName: Triple Shot
   description: Shoots 3 projectiles
   cooldown: 10
+  level: 0
   numOfCasts: 3
   intervalBtwnCast: 0.3
   startCDOnCast: 0
@@ -72702,9 +72705,9 @@ MonoBehaviour:
   R: {fileID: 1426249667}
   abilityUpgradePath:
     qPath:
-    - {fileID: 114318860199296668, guid: 5cf7ca3c36207c54fb38cdf440577c29, type: 2}
-    - {fileID: 114318860199296668, guid: 41af64ec05925e74bb2064358af19ccf, type: 2}
-    - {fileID: 114318860199296668, guid: 3fd9b3b700d82ca4eb27571f4b13455c, type: 2}
+    - {fileID: 114056903239355040, guid: 5cf7ca3c36207c54fb38cdf440577c29, type: 2}
+    - {fileID: 114595426493738278, guid: 41af64ec05925e74bb2064358af19ccf, type: 2}
+    - {fileID: 114681721503007168, guid: 3fd9b3b700d82ca4eb27571f4b13455c, type: 2}
     wPath:
     - {fileID: 114022099251892088, guid: 35d44966270bd934d87352b4efd39aef, type: 2}
     - {fileID: 114022099251892088, guid: d3ac02ed0ec8dea47b52e6287a9c7e6c, type: 2}
@@ -89624,6 +89627,7 @@ MonoBehaviour:
   enemiesAlive: 0
   baseHealth: 10
   money: 0
+  moneyAmplify: 0
 --- !u!1 &1396861898 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1617708291032238, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8,
@@ -91233,6 +91237,7 @@ MonoBehaviour:
   abilityName: BAZOOKA
   description: Shoots a lot of projectiles
   cooldown: 16
+  level: 0
   numOfCasts: 8
   intervalBtwnCast: 0.15
   startCDOnCast: 0
@@ -105122,6 +105127,7 @@ MonoBehaviour:
   abilityName: Ghost
   description: Moves fast
   cooldown: 8
+  level: 0
   pct: 40
   duration: 3
 --- !u!1 &1655394998
@@ -122812,9 +122818,12 @@ MonoBehaviour:
   abilityName: Basic Shot
   description: Shoots a basic projectile
   cooldown: 0.7
-  projectile: {fileID: 1826154541861776, guid: ceab346c7d650ea4881c8f3c39c027cd, type: 2}
+  level: 0
+  bullet: {fileID: 1805904854945230, guid: 5ebe48951ad6b3a4d8a4d7fcfdccd120, type: 2}
+  ablazeEffect: {fileID: 1389869015831724, guid: 57ea72b002a3bfb469d17dad56f8507d,
+    type: 2}
   damage: 25
-  range: 70
+  range: 10
 --- !u!1 &1966276348
 GameObject:
   m_ObjectHideFlags: 0

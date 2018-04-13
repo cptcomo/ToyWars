@@ -119,5 +119,13 @@ namespace Toywars {
         public GameObject getTarget() {
             return target;
         }
+
+        public int getWaypointIndex() {
+            return this.waypointIndex;
+        }
+
+        public void setWaypointIndex(int index) {
+            this.waypointIndex = index;
+        }
     }
 }

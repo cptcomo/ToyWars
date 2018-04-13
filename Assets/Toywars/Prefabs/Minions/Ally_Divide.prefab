@@ -215,6 +215,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: d6fa2a04fb7ba8e4890efa94a44036fc, type: 3}
   minionName: Divide
   bulletPrefab: {fileID: 0}
+  meleePrefab: {fileID: 1044195431293078, guid: 3447c7d034538ee4297e06585f017903,
+    type: 2}
   minionType: 4
   health:
     start: 250
@@ -227,6 +229,7 @@ MonoBehaviour:
   damageModifier:
     start: 100
   moneyValue: 25
+  rangeFireRate: 0
   deathEffect: {fileID: 1787243369622486, guid: ffa7fb7607c9baa46bcb69956d18788c,
     type: 2}
   hpBarPrefab: {fileID: 1914454742012642, guid: cb05f27a6cf80624e9252ae301389554,

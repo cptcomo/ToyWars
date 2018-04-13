@@ -9,6 +9,7 @@ namespace Toywars {
         public float rangeInc;
         public override void activate(Player player) {
             Q q = (Q)player.Q;
+            q.level++;
             q.damage += dmgInc;
             q.cooldown -= cdReduce;
             q.range += rangeInc;
