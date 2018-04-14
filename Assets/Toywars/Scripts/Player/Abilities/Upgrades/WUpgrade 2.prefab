@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a326a065a792f804881518f27dc28e85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: W Upgrade 2
+  upgradeName: Improved Speed Boost
   cost: 300
-  cdReduce: 1
-  durationInc: 0.5
-  buffInc: 10
+  cdReduce: 2
+  durationInc: 1
+  buffInc: 25

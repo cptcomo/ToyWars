@@ -12,6 +12,7 @@ namespace Toywars {
             w.cooldown -= cdReduce;
             w.duration += durationInc;
             w.pct += buffInc;
+            w.level++;
         }
     }
 }

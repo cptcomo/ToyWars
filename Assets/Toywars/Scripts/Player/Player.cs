@@ -163,6 +163,10 @@ namespace Toywars {
             this.nva.SetDestination(waveStartPosition);
         }
 
+        public NavMeshAgent getNVA() {
+            return nva;
+        }
+
         void upgradeAbility(int upgradeIndex) {
             abilityUpgradePath.upgrade(upgradeIndex, this);
         }

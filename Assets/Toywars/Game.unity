@@ -72709,7 +72709,7 @@ MonoBehaviour:
     - {fileID: 114595426493738278, guid: 41af64ec05925e74bb2064358af19ccf, type: 2}
     - {fileID: 114681721503007168, guid: 3fd9b3b700d82ca4eb27571f4b13455c, type: 2}
     wPath:
-    - {fileID: 114022099251892088, guid: 35d44966270bd934d87352b4efd39aef, type: 2}
+    - {fileID: 0}
     - {fileID: 114022099251892088, guid: d3ac02ed0ec8dea47b52e6287a9c7e6c, type: 2}
     - {fileID: 114022099251892088, guid: f4a3b35469e795640a690df41c051892, type: 2}
     ePath:
@@ -122819,7 +122819,7 @@ MonoBehaviour:
   description: Shoots a basic projectile
   cooldown: 0.7
   level: 0
-  bullet: {fileID: 1805904854945230, guid: 5ebe48951ad6b3a4d8a4d7fcfdccd120, type: 2}
+  bullet: {fileID: 1826154541861776, guid: ceab346c7d650ea4881c8f3c39c027cd, type: 2}
   ablazeEffect: {fileID: 1389869015831724, guid: 57ea72b002a3bfb469d17dad56f8507d,
     type: 2}
   damage: 25
