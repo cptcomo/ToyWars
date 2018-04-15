@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4171771148774392}
-  - component: {fileID: 114399874717196444}
+  - component: {fileID: 114035238724762764}
   m_Layer: 0
   m_Name: RUpgrade 1
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114399874717196444
+--- !u!114 &114035238724762764
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,12 +48,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1619680697575378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c45ef82537f08409a4d510fed4e8a1, type: 3}
+  m_Script: {fileID: 11500000, guid: 27b6c5ad4610b6e498f2ce97fcd4097b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: R Upgrade 1
-  cost: 200
-  cdReduce: 1
-  shotsInc: 0
-  dmgPerBulletInc: 20
-  rangeInc: 10
+  upgradeName: 'UNLOCK: BAZOOKA'
+  cost: 250

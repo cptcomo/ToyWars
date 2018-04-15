@@ -12,6 +12,9 @@ namespace Toywars {
         private float damage;
         private float range = 10000;
         private float explosionRadius;
+        private float pctMissingHealthDamage;
+        private float pctDistanceDamage;
+        private float chanceToImpactEffect = 100f;
         private bool playerShot;
         private bool ignoreArmor;
         private Buff buffToApply;
@@ -21,6 +24,9 @@ namespace Toywars {
         public bool isFireball;
         public GameObject fireballParticle;
         GameObject fireballParticleInstance;
+
+        [Header("Rocket")]
+        public bool isRocket;
 
         private void Start() {
             this.startPos = this.transform.position;
@@ -51,6 +57,18 @@ namespace Toywars {
             this.isFireball = fireball; 
         }
 
+        public void setPctMissingHealthDamage(float pct) {
+            this.pctMissingHealthDamage = pct;
+        }
+
+        public void setPctDistanceDamage(float pct) {
+            this.pctDistanceDamage = pct;
+        }
+
+        public void setChanceToImpactEffect(float pct) {
+            this.chanceToImpactEffect = pct;
+        }
+
         private void Update() {
             if(Vector3.Distance(this.transform.position, startPos) > range) {
                 destroy();
@@ -58,6 +76,11 @@ namespace Toywars {
             }
 
             transform.Translate(Time.deltaTime * dir * speed, Space.World);
+
+            if(isRocket) {
+                this.transform.LookAt(this.transform.position + dir);
+            }
+            
 
             if(isFireball) {
                 fireballParticleInstance.transform.position = this.transform.position;
@@ -88,14 +111,17 @@ namespace Toywars {
         }
 
         void OnCollisionEnter(Collision collision) {
+            Debug.Log("Hello");
             if(collision.transform.tag.Equals(targetTag)) {
                 hitTarget(collision.transform);
             }
         }
 
         void hitTarget(Transform target) {
-            GameObject effectInstance = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
-            Destroy(effectInstance, 5f);
+            if(Random.Range(0f, 1f) < chanceToImpactEffect) {
+                GameObject effectInstance = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
+                Destroy(effectInstance, 5f);
+            }
             if(explosionRadius > 0f) {
                 explode();
             }
@@ -109,7 +135,7 @@ namespace Toywars {
             Minion m = minion.GetComponent<Minion>();
 
             if(m != null)
-                m.takeDamage(damage, playerShot, this.ignoreArmor);
+                m.takeDamage(damage + m.health.getMissing() * pctMissingHealthDamage / 100f + Mathf.Clamp(Vector3.Distance(this.transform.position, startPos) * pctDistanceDamage / 100f, 0f, 2 * damage), playerShot, this.ignoreArmor);
 
             if(buffToApply != null) {
                 try {

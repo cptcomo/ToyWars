@@ -4,64 +4,61 @@ using UnityEngine;
 
 namespace Toywars {
     public class R : RepeatAbility {
-        public GameObject projectile;
+        public GameObject projectileBullet;
+        public GameObject projectileMissile;
         public float damagePerProjectile;
         public float range;
+        public float armorShred;
+        public float explosionRadius;
         public override void activate(Player player) {
+            player.usingR = true;
             StartCoroutine(shootWaves(player));
             nextFire = Time.time + cooldown;
         }
 
         IEnumerator shootWaves(Player player) {
+            player.setDest(player.transform.position);
+            Vector3 pos = Input.mousePosition;
+            pos.z = player.getCameraHeightOffset();
+            pos = Camera.main.ScreenToWorldPoint(pos);
+            Vector3 dir = (pos - player.transform.position).normalized;
             for(int i = 0; i < numOfCasts; i++) {
-                shootNorth(player);
-                shootEast(player);
-                shootWest(player);
-                shootSouth(player);
+                shootWave(player, dir);
                 yield return new WaitForSeconds(intervalBtwnCast);
             }
             if(!startCDOnCast)
                 nextFire = Time.time + cooldown;
+            player.usingR = false;
         }
 
-        void shootNorth(Player player) {
-            GameObject proj = (GameObject)Instantiate(projectile, player.transform.position, Quaternion.identity);
-            SkillshotBullet projScript = proj.GetComponent<SkillshotBullet>();
-            projScript.seek(Vector3.forward);
-            projScript.setDamage(damagePerProjectile);
-            projScript.setRange(range);
-            projScript.setPlayerShot(true);
-            projScript.setTargetTag(player.targetTag);
+        void shootWave(Player player, Vector3 mouseDir) {
+            shoot(player, mouseDir);
+            shoot(player, Quaternion.Euler(0, 5, 0) * mouseDir);
+            shoot(player, Quaternion.Euler(0, -5, 0) * mouseDir);
+            shoot(player, Quaternion.Euler(0, 10, 0) * mouseDir);
+            shoot(player, Quaternion.Euler(0, -10, 0) * mouseDir);
+            shoot(player, Quaternion.Euler(0, 15, 0) * mouseDir);
+            shoot(player, Quaternion.Euler(0, -15, 0) * mouseDir);
+            shoot(player, Quaternion.Euler(0, 20, 0) * mouseDir);
+            shoot(player, Quaternion.Euler(0, -20, 0) * mouseDir);
         }
 
-        void shootEast(Player player) {
-            GameObject proj = (GameObject)Instantiate(projectile, player.transform.position, Quaternion.identity);
+        void shoot(Player player, Vector3 dir) {
+            GameObject proj = (GameObject)Instantiate(level == 3 ? projectileMissile : projectileBullet, player.transform.position, Quaternion.identity);
             SkillshotBullet projScript = proj.GetComponent<SkillshotBullet>();
-            projScript.seek(Vector3.right);
+            proj.transform.localScale /= 1.6f;
+            projScript.seek(dir);
             projScript.setDamage(damagePerProjectile);
             projScript.setRange(range);
-            projScript.setPlayerShot(true);
             projScript.setTargetTag(player.targetTag);
-        }
-
-        void shootWest(Player player) {
-            GameObject proj = (GameObject)Instantiate(projectile, player.transform.position, Quaternion.identity);
-            SkillshotBullet projScript = proj.GetComponent<SkillshotBullet>();
-            projScript.seek(Vector3.left);
-            projScript.setDamage(damagePerProjectile);
-            projScript.setRange(range);
+            projScript.setIgnoreArmor(false);
             projScript.setPlayerShot(true);
-            projScript.setTargetTag(player.targetTag);
-        }
-
-        void shootSouth(Player player) {
-            GameObject proj = (GameObject)Instantiate(projectile, player.transform.position, Quaternion.identity);
-            SkillshotBullet projScript = proj.GetComponent<SkillshotBullet>();
-            projScript.seek(Vector3.back);
-            projScript.setDamage(damagePerProjectile);
-            projScript.setRange(range);
-            projScript.setPlayerShot(true);
-            projScript.setTargetTag(player.targetTag);
+            if(level >= 2) {
+                ArmorShredBuff buff = new ArmorShredBuff(2, armorShred);
+                projScript.setBuffToApply(buff);
+            }
+            projScript.setExplosionRadius(level == 3 ? explosionRadius : 0f);
+            projScript.setChanceToImpactEffect(level == 3 ? .2f : 1f);
         }
     }
 }

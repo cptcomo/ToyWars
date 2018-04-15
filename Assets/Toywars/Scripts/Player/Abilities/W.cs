@@ -8,7 +8,6 @@ namespace Toywars {
         public float duration;
         public override void activate(Player player) {
             if(level == 3) {
-                Debug.Log("Ayy");
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if(Physics.Raycast(ray, out hit)) {

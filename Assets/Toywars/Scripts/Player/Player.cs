@@ -27,6 +27,8 @@ namespace Toywars {
 
         public Ability Q, W, E, R;
         private Ability[] abilities;
+        [HideInInspector]
+        public bool usingR = false;
         public AbilityUpgradePath abilityUpgradePath;
         public Image qImage, wImage, eImage, rImage;
 
@@ -70,7 +72,7 @@ namespace Toywars {
                 updateBuffs();
                 updateAbilityUI();
                 nva.speed = speed.get();
-                if(Input.GetMouseButtonDown(1)) {
+                if(Input.GetMouseButtonDown(1) && !usingR) {
                     RaycastHit hit;
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                     if(Physics.Raycast(ray, out hit)) {
@@ -165,6 +167,11 @@ namespace Toywars {
 
         public NavMeshAgent getNVA() {
             return nva;
+        }
+
+        public void setDest(Vector3 dest) {
+            this.dest = dest;
+            nva.SetDestination(dest);
         }
 
         void upgradeAbility(int upgradeIndex) {

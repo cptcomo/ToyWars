@@ -25,6 +25,7 @@ namespace Toywars {
         }
 
         public override void takeDamage(float damage, bool playershot, bool ignoreArmor) {
+            Debug.Log(damage);
             this.health.modifyFlat(-damage * armorDamageMultiplier(ignoreArmor, armor.get()) * Random.Range(0.9f, 1.1f), -1, health.getStart());
             if(health.get() <= 0f)
                 die(playershot);

@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4214265287620670}
-  - component: {fileID: 114255554771853846}
+  - component: {fileID: 114988120954719474}
   m_Layer: 0
   m_Name: EUpgrade 1
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114255554771853846
+--- !u!114 &114988120954719474
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,11 +48,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1368934348354512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81727861ef2acc846a79718f9987d455, type: 3}
+  m_Script: {fileID: 11500000, guid: 3592d47250bf6234da0ffff6edee2b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: E Upgrade 1
-  cost: 200
-  cdReduce: 0.5
-  shotsInc: 0
-  dmgPerbulletInc: 10
+  upgradeName: 'UNLOCK: Death Rocket'
+  cost: 100

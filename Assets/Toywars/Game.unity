@@ -37583,7 +37583,7 @@ MonoBehaviour:
   wave:
     sections:
     - minion: {fileID: 1044195431293078, guid: 6ab181c249b2b9b429c43fc457c183ba, type: 2}
-      count: 2
+      count: 5
       rate: 1
   doneWithWave: 0
 --- !u!1 &568439775
@@ -49546,16 +49546,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 143ed6d58bf33e046aac66aff8b6cdd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityName: Triple Shot
-  description: Shoots 3 projectiles
-  cooldown: 10
+  abilityName: Death Rocket
+  description: Shoots a rocket that explodes on impact
+  cooldown: 2
   level: 0
-  numOfCasts: 3
-  intervalBtwnCast: 0.3
-  startCDOnCast: 0
-  projectile: {fileID: 1826154541861776, guid: ceab346c7d650ea4881c8f3c39c027cd, type: 2}
-  damagePerBullet: 20
-  range: 70
+  projectile: {fileID: 1802994176725908, guid: 231fa284d229b1140af4154e407f4a98, type: 2}
+  damage: 35
+  range: 10
+  explosionRadius: 5
+  pctDamage: 8
+  pctDistanceDamage: 25
 --- !u!1 &754739943
 GameObject:
   m_ObjectHideFlags: 0
@@ -72703,23 +72703,24 @@ MonoBehaviour:
   W: {fileID: 1654585324}
   E: {fileID: 754270681}
   R: {fileID: 1426249667}
+  usingR: 0
   abilityUpgradePath:
     qPath:
     - {fileID: 114056903239355040, guid: 5cf7ca3c36207c54fb38cdf440577c29, type: 2}
     - {fileID: 114595426493738278, guid: 41af64ec05925e74bb2064358af19ccf, type: 2}
     - {fileID: 114681721503007168, guid: 3fd9b3b700d82ca4eb27571f4b13455c, type: 2}
     wPath:
-    - {fileID: 0}
+    - {fileID: 114194857669998428, guid: 35d44966270bd934d87352b4efd39aef, type: 2}
     - {fileID: 114022099251892088, guid: d3ac02ed0ec8dea47b52e6287a9c7e6c, type: 2}
-    - {fileID: 114022099251892088, guid: f4a3b35469e795640a690df41c051892, type: 2}
+    - {fileID: 114577751757502660, guid: f4a3b35469e795640a690df41c051892, type: 2}
     ePath:
-    - {fileID: 114255554771853846, guid: 903c3653035ee2144a4ee303fbff6931, type: 2}
-    - {fileID: 114255554771853846, guid: 06b9b8107eec2854488ce496055abc46, type: 2}
-    - {fileID: 114255554771853846, guid: 2838001a28f01104cbbfe64e5f9df65b, type: 2}
+    - {fileID: 114988120954719474, guid: 903c3653035ee2144a4ee303fbff6931, type: 2}
+    - {fileID: 114576775034969492, guid: 06b9b8107eec2854488ce496055abc46, type: 2}
+    - {fileID: 114119541103483626, guid: 2838001a28f01104cbbfe64e5f9df65b, type: 2}
     rPath:
-    - {fileID: 114399874717196444, guid: b35cccd699b3c30429a4f96f729e20b5, type: 2}
-    - {fileID: 114399874717196444, guid: 61bc29386ad2b464a9ff787698649da4, type: 2}
-    - {fileID: 114399874717196444, guid: 734ac45e4c165d64295288c8882022c6, type: 2}
+    - {fileID: 114035238724762764, guid: b35cccd699b3c30429a4f96f729e20b5, type: 2}
+    - {fileID: 114102169529582924, guid: 61bc29386ad2b464a9ff787698649da4, type: 2}
+    - {fileID: 114652366796535302, guid: 734ac45e4c165d64295288c8882022c6, type: 2}
   qImage: {fileID: 915681952}
   wImage: {fileID: 1199065327}
   eImage: {fileID: 70307217}
@@ -91236,14 +91237,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: BAZOOKA
   description: Shoots a lot of projectiles
-  cooldown: 16
+  cooldown: 2
   level: 0
-  numOfCasts: 8
+  numOfCasts: 10
   intervalBtwnCast: 0.15
   startCDOnCast: 0
-  projectile: {fileID: 1826154541861776, guid: ceab346c7d650ea4881c8f3c39c027cd, type: 2}
+  projectileBullet: {fileID: 1826154541861776, guid: ceab346c7d650ea4881c8f3c39c027cd,
+    type: 2}
+  projectileMissile: {fileID: 1802994176725908, guid: 231fa284d229b1140af4154e407f4a98,
+    type: 2}
   damagePerProjectile: 15
-  range: 120
+  range: 20
+  armorShred: 3
+  explosionRadius: 3
 --- !u!1 &1426425948 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1876672601701140, guid: 1c241b2ae7dd82d4e9d9dce8253b8ee8,
@@ -105126,7 +105132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Ghost
   description: Moves fast
-  cooldown: 8
+  cooldown: 10
   level: 0
   pct: 40
   duration: 3
@@ -109389,7 +109395,7 @@ MonoBehaviour:
       rate: 1
     - minion: {fileID: 1044195431293078, guid: 6bab36d28a5fbce449196fb6dfc35bc9, type: 2}
       count: 10
-      rate: 2
+      rate: 4
   doneWithWave: 0
 --- !u!1 &1739551637 stripped
 GameObject:

@@ -243,11 +243,12 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: ee7fc27e0ae75d147a85df1c236eb2ac, type: 3}
   minionName: Tank
   bulletPrefab: {fileID: 0}
+  meleePrefab: {fileID: 0}
   minionType: 3
   health:
     start: 800
   armor:
-    start: 50
+    start: 100
   damage:
     start: 20
   attackRadius:
@@ -255,6 +256,7 @@ MonoBehaviour:
   damageModifier:
     start: 100
   moneyValue: 150
+  rangeFireRate: 0
   deathEffect: {fileID: 1787243369622486, guid: ffa7fb7607c9baa46bcb69956d18788c,
     type: 2}
   hpBarPrefab: {fileID: 1453098498204944, guid: 54209f3e5e99ef34c88c9508dc919680,

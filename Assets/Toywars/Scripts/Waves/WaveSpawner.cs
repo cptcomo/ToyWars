@@ -7,7 +7,6 @@ namespace Toywars {
         public bool isEnemy;
         public Vector3[] minionWaypoints;
 
-        [HideInInspector]
         public Wave wave;
 
         GameManager gm;
