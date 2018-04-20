@@ -48,6 +48,14 @@ namespace Toywars {
             return new TowerUpgrade[] { leftPath[leftIndex], rightPath[rightIndex] };
         }
 
+        public bool hasRemainingUpgrades() {
+            TowerUpgrade[] upgrades = getAvailableUpgrades();
+            if(upgrades[0] == null && upgrades[1] == null)
+                return false;
+            else
+                return true;
+        }
+
         public void upgrade(int upgradeIndex, Turret turret, bool playerTurret) {
             if(upgradeIndex == 0) {
                 TowerUpgrade upgrade = leftPath[leftIndex];

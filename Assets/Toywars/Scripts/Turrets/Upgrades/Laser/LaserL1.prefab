@@ -51,6 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648738893b4b3ba4e857a69f768de06a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Damage Increase
+  upgradeName: Damage Boost
   cost: 250
   flatDotIncrease: 15

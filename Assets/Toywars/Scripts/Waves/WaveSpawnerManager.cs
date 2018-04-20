@@ -67,6 +67,29 @@ namespace Toywars {
             allyLeftScore = spawners[0].calculateScore(minionPowerScores) + new Vector2(100, 100);
             allyCenterScore = spawners[1].calculateScore(minionPowerScores) + new Vector2(100, 100);
             allyRightScore = spawners[2].calculateScore(minionPowerScores) + new Vector2(100, 100);
+            Debug.Log("Left: " + allyLeftScore);
+            Debug.Log("Center: " + allyCenterScore);
+            Debug.Log("Right: " + allyRightScore);
+        }
+
+        public void retrieveAIWaveComposition(GameObject[] left, GameObject[] center, GameObject[] right) {
+            spawners[3].wave = convertGameobjectsToWave(left);
+            spawners[4].wave = convertGameobjectsToWave(center);
+            spawners[5].wave = convertGameobjectsToWave(right);
+        }
+
+        Wave convertGameobjectsToWave(GameObject[] gos) {
+            Wave wave = new Wave();
+            Dictionary<string, int> minionCount = minionManagement.getMinionCounts();
+            for(int i = 0; i < gos.Length; i++) {
+                Minion m = gos[i].GetComponent<Minion>();
+                WaveSection ws = new WaveSection();
+                ws.minion = gos[i];
+                ws.rate = 1;
+                ws.count = minionCount[m.minionName];
+                wave.sections.Add(ws);
+            }
+            return wave;
         }
 
         void startNextWave() {
@@ -101,6 +124,14 @@ namespace Toywars {
                     return;
 
             gm.callEventEndWave();
+        }
+
+        public GameObject[] getMinionsAvailable() {
+            return minionManagement.getMinionsAvailable();
+        }
+
+        public int getMinionsUnlockCount() {
+            return minionManagement.getUnlockCount();
         }
 
         void disableScript() {

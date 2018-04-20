@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58197033ed85f4e4c88e4acbe8c71b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: 'Tank Shred #2'
+  upgradeName: 'Tank Shreder #2'
   cost: 1400
   pctMax: 15
   pctRangeInc: 25

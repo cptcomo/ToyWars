@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Toywars{
     public class Turret : MonoBehaviour {
+        Tile tile;
+        GameManager gm;
+
         public Sprite towerSprite;
         public Attribute range;
         public Attribute fireRate;
@@ -102,6 +106,7 @@ namespace Toywars{
         }
 
         public void init() {
+            gm = GameManager.getInstance();
             isInit = true;
             attrs = new List<Attribute>();
             attrs.Add(range);
@@ -229,12 +234,14 @@ namespace Toywars{
         }
 
         void updateBuffs() {
-            buffs.ForEach(buff => {
-                if(buff.finished)
-                    buff.finish();
-                else
-                    buff.tick();
-            });
+            if(buffs != null) {
+                buffs.ForEach(buff => {
+                    if(buff.finished)
+                        buff.finish();
+                    else
+                        buff.tick();
+                });
+            }
         }
 
         void lockOnTarget() {
@@ -372,8 +379,9 @@ namespace Toywars{
             Collider[] cols = Physics.OverlapSphere(this.transform.position, range.get());
             foreach(Collider col in cols) {
                 if(col.tag.Equals(beaconTurretTag) && col.gameObject != this.gameObject) {
-                    if(col.GetComponent<Turret>().towerType != Turret.TowerType.Beacon)
+                    if(col.GetComponent<Turret>().towerType != Turret.TowerType.Beacon) {
                         turretBuff.copy().apply(col.transform);
+                    }
                 }
                 if(col.tag.Equals(beaconMinionTag) && col.gameObject != this.gameObject) {
                     minionBuff.copy().apply(col.transform);
@@ -472,6 +480,18 @@ namespace Toywars{
 
         public void addBuff(Buff b) {
             buffs.Add(b);
+        }
+
+        public void setTile(Tile t) {
+            tile = t;
+        }
+
+        public Tile getTile() {
+            return tile;
+        }
+
+        private void OnMouseDown() {
+            tile.tileClick();
         }
 
         [HideInInspector]

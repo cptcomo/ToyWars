@@ -52,4 +52,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeName: 'UNLOCK: Death Rocket'
-  cost: 100
+  cost: 200

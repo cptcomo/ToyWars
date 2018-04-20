@@ -84,7 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4490005668362824}
   - component: {fileID: 114424261292498706}
-  - component: {fileID: 65729196703994716}
+  - component: {fileID: 65844942762414782}
   m_Layer: 11
   m_Name: StandardTurret
   m_TagString: Tower
@@ -246,7 +246,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1700327058232922}
   m_Mesh: {fileID: 4300000, guid: 948c27f5b159cf943aebd621941a4a9b, type: 3}
---- !u!65 &65729196703994716
+--- !u!65 &65844942762414782
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -256,8 +256,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114424261292498706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -273,9 +273,9 @@ MonoBehaviour:
   range:
     start: 10
   fireRate:
-    start: 1
+    start: 1.1
   damage:
-    start: 25
+    start: 45
   projectileSpeed:
     start: 70
   towerType: 0

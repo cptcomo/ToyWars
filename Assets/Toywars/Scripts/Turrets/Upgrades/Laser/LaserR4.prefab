@@ -53,5 +53,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Target Can't Move
   cost: 1400
-  setSlowPct: 80
+  setSlowPct: 85
   flatDmgDec: 20

@@ -24,8 +24,8 @@ GameObject:
   - component: {fileID: 114415250242238440}
   - component: {fileID: 64776790000383044}
   m_Layer: 11
-  m_Name: SupportTower
-  m_TagString: Tower
+  m_Name: SupportTowerAI
+  m_TagString: EnemyTower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,9 +134,9 @@ MonoBehaviour:
   ablazeEffect: {fileID: 0}
   fireDOT:
     start: 0
-  beaconTurretTag: Tower
-  beaconMinionTag: AllyMinion
-  isPlayer: 1
+  beaconTurretTag: EnemyTower
+  beaconMinionTag: Enemy
+  isPlayer: 0
   beaconTurretFireRate:
     start: 20
   beaconTurretRange:
@@ -162,7 +162,7 @@ MonoBehaviour:
   beaconExpRate:
     start: 0
   turnSpeed: 10
-  targetTag: Enemy
+  targetTag: AllyMinion
   partToRotate: {fileID: 0}
   firePoint: {fileID: 0}
   towerUpgradePath:

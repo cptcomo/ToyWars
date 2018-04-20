@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf70d679664c12a42a4f9a309159f89c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Explosion Radius
-  cost: 250
+  upgradeName: Explosion Radius Boost
+  cost: 400
   isPctBuff: 0
   pct: 0
   flatInc: 3

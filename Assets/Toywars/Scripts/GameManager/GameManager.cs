@@ -16,6 +16,9 @@ namespace Toywars {
         public event GameManagerEventHandler GoToMenuSceneEvent;
         public event GameManagerEventHandler GameOverEvent;
 
+        public delegate void PlayerDeathEventHandler(float deathTime);
+        public event PlayerDeathEventHandler PlayerDeathEvent;
+
         public delegate void TileSelectHandler(Tile tile);
         public event TileSelectHandler SelectTileEvent;
 
@@ -163,6 +166,12 @@ namespace Toywars {
                     gameResult = GameResult.Lose;
 
                 GameOverEvent();
+            }
+        }
+
+        public void callEventPlayerDeath(float deathTime) {
+            if(PlayerDeathEvent != null) {
+                PlayerDeathEvent(deathTime);
             }
         }
 

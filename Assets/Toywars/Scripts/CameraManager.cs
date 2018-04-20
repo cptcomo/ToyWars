@@ -23,7 +23,7 @@ namespace Toywars {
         }
 
         private void Update() {
-            if(gm.isBuilding()) {
+            if(gm.isBuilding() || gm.isAITurn()) {
                 if(Input.GetKey("w") || Input.mousePosition.y >= Screen.height - panBorderThickness) {
                     transform.Translate(Vector3.forward * panSpeed * Time.deltaTime, Space.World);
                 }

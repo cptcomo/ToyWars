@@ -54,6 +54,6 @@ MonoBehaviour:
   upgradeName: ICBM
   cost: 1200
   pctTowerRangeInc: 600
-  pctDmgInc: 30
+  pctDmgInc: 50
   pctFireRateDec: 75
   pctExplosionRadiusInc: 125

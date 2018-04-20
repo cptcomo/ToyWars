@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b305a9c633eba42be414153db8d745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Small Fire Rate
-  cost: 150
+  upgradeName: Fire Rate Boost
+  cost: 100
   isPctBuff: 1
   pct: 25
   flatInc: 0

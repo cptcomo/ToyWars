@@ -194,12 +194,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed:
-    start: 5
+    start: 3
   detectionRadius:
-    start: 15
+    start: 10
   tagsToDetect:
-  - Player
   - AllyMinion
+  - Player
   waypoints:
   - {x: 0, y: 0, z: -87}
 --- !u!114 &114431392995043340
@@ -240,22 +240,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bbb1ff1768b69b46ae06e4189fce85f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  personalRating: 0
   sprite: {fileID: 21300000, guid: ee7fc27e0ae75d147a85df1c236eb2ac, type: 3}
   minionName: Tank
   bulletPrefab: {fileID: 0}
   meleePrefab: {fileID: 0}
   minionType: 3
   health:
-    start: 800
+    start: 1000
   armor:
-    start: 100
+    start: 250
   damage:
-    start: 20
+    start: 70
   attackRadius:
-    start: 2
+    start: 1.5
   damageModifier:
     start: 100
-  moneyValue: 150
+  moneyValue: 200
   rangeFireRate: 0
   deathEffect: {fileID: 1787243369622486, guid: ffa7fb7607c9baa46bcb69956d18788c,
     type: 2}
@@ -264,8 +265,8 @@ MonoBehaviour:
   hpCanvasName: MinionHealthBarCanvas
   hpBarOffset: 1
   mobPct: 0
-  dpsPct: 0
-  expValue: 20
+  dpsPct: 100
+  expValue: 250
 --- !u!114 &114505111955585292
 MonoBehaviour:
   m_ObjectHideFlags: 1

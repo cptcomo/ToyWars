@@ -55,4 +55,4 @@ MonoBehaviour:
   cost: 300
   cdReduce: 2
   durationInc: 1
-  buffInc: 25
+  buffInc: 40

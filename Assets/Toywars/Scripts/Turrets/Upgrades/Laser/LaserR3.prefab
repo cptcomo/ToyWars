@@ -51,6 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4784c5fa3fa500b42b78f439bfcb9c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Reduces Target's Damage
+  upgradeName: Cripple
   cost: 600
   pctDamageModifierPerSecond: 25

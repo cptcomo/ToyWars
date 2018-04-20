@@ -111,7 +111,6 @@ namespace Toywars {
         }
 
         void OnCollisionEnter(Collision collision) {
-            Debug.Log("Hello");
             if(collision.transform.tag.Equals(targetTag)) {
                 hitTarget(collision.transform);
             }
@@ -135,7 +134,7 @@ namespace Toywars {
             Minion m = minion.GetComponent<Minion>();
 
             if(m != null)
-                m.takeDamage(damage + m.health.getMissing() * pctMissingHealthDamage / 100f + Mathf.Clamp(Vector3.Distance(this.transform.position, startPos) * pctDistanceDamage / 100f, 0f, 2 * damage), playerShot, this.ignoreArmor);
+                m.takeDamage(damage + m.health.getMissing() * pctMissingHealthDamage / 100f + Mathf.Clamp(Vector3.Distance(this.transform.position, startPos) * pctDistanceDamage / 100f, 0f, 5 * damage), playerShot, this.ignoreArmor);
 
             if(buffToApply != null) {
                 try {

@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a543eac92b6a23145b313f9cfc64c988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Third Shot
-  cost: 500
+  upgradeName: Triple Shot
+  cost: 400
   numberOfHits: 3
-  damagePct: 4
+  damagePct: 5

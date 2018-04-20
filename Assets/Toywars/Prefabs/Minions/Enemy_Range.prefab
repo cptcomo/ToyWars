@@ -198,7 +198,6 @@ MonoBehaviour:
   detectionRadius:
     start: 15
   tagsToDetect:
-  - Player
   - AllyMinion
   waypoints:
   - {x: 0, y: 0, z: -87}
@@ -240,32 +239,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bbb1ff1768b69b46ae06e4189fce85f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  personalRating: 500
   sprite: {fileID: 21300000, guid: 98571f15aefe6454f9169f3d0180cf79, type: 3}
   minionName: Range
   bulletPrefab: {fileID: 1826154541861776, guid: 69a4036772dcd7c4586123f121f9bb92,
     type: 2}
+  meleePrefab: {fileID: 0}
   minionType: 1
   health:
-    start: 100
+    start: 150
   armor:
-    start: 40
+    start: 30
   damage:
-    start: 20
+    start: 55
   attackRadius:
-    start: 10
+    start: 8
   damageModifier:
     start: 100
-  moneyValue: 70
-  rangeFireRate: 1
+  moneyValue: 50
+  rangeFireRate: 0.7
   deathEffect: {fileID: 1787243369622486, guid: ffa7fb7607c9baa46bcb69956d18788c,
     type: 2}
   hpBarPrefab: {fileID: 1453098498204944, guid: 54209f3e5e99ef34c88c9508dc919680,
     type: 2}
   hpCanvasName: MinionHealthBarCanvas
   hpBarOffset: 1
-  mobPct: 0
-  dpsPct: 0
-  expValue: 20
+  mobPct: 40
+  dpsPct: 60
+  expValue: 100
 --- !u!114 &114505111955585292
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d020a29f9df059b46bcde5863ce627f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: More Damage
-  cost: 500
-  flatDamageInc: 50
-  pctFireRateDec: 50
-  pctRangeInc: 25
+  upgradeName: Precision
+  cost: 400
+  flatDamageInc: 40
+  pctFireRateDec: 40
+  pctRangeInc: 20

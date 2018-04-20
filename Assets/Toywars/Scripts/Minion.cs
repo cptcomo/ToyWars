@@ -7,6 +7,7 @@ namespace Toywars {
     public class Minion : MonoBehaviour, Damageable {
         protected GameManager gm;
 
+        public float personalRating;
         public Sprite sprite;
         public string minionName;
         public GameObject bulletPrefab;
@@ -40,6 +41,10 @@ namespace Toywars {
         List<Attribute> attrs;
 
         public virtual void Start() {
+            
+        }
+
+        public virtual void initialize() {
             gm = GameManager.getInstance();
             minionMovement = (MinionMovement)GetComponent<MinionMovement>();
             buffs = new List<Buff>();
@@ -134,8 +139,25 @@ namespace Toywars {
         }
 
         public virtual Vector2 calculateScore() {
-            float rawScore = health.getStart() / 5f + damage.getStart() * 10 + attackRadius.getStart() * 40 + minionMovement.speed.getStart() * 30;
-            return new Vector2(rawScore * (mobPct / 100f), rawScore * (dpsPct / 100f));
+            float rawScore = personalRating
+                + Mathf.Log(health.getStart()) * 150f
+                + armor.getStart() * 3f
+                + damage.getStart() * 20f 
+                + Mathf.Log(attackRadius.getStart()) * 300f
+                + Mathf.Log(minionMovement.speed.getStart()) * 5;
+
+            Vector2 divideScore = new Vector2(0, 0);
+
+            if(minionType == MinionType.Divide) {
+                GameObject g = (GameObject)Instantiate(meleePrefab, new Vector3(1000, 1000, 1000), Quaternion.identity);
+                Minion m = g.GetComponent<Minion>();
+                m.Start();
+                g.GetComponent<MinionMovement>().enabled = false;
+                divideScore = 2 * m.calculateScore();
+                Destroy(g);
+            }
+
+            return new Vector2(rawScore * (mobPct / 100f), rawScore * (dpsPct / 100f)) + divideScore;
         }
 
         public void addBuff(Buff buff) {

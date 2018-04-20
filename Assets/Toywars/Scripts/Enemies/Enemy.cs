@@ -11,9 +11,17 @@ namespace Toywars {
         
         public override void Start() {
             base.Start();
+            health.setStart(health.getStart() + health.getStart() * GameManager.getInstance().waveIndex * 7f / 100f);
+            armor.setStart(armor.getStart() + armor.getStart() * GameManager.getInstance().waveIndex * 7f / 100f);
+            damage.setStart(damage.getStart() + damage.getStart() * GameManager.getInstance().waveIndex * 7f / 100f);
+            initialize();
             em = EnemiesManager.getInstance();
             pm = PlayerManager.getInstance();
             em.enemiesAlive++;
+        }
+
+        public override void initialize() {
+            base.initialize();
         }
 
         public override void Update() {
@@ -25,8 +33,7 @@ namespace Toywars {
         }
 
         public override void takeDamage(float damage, bool playershot, bool ignoreArmor) {
-            Debug.Log(damage);
-            this.health.modifyFlat(-damage * armorDamageMultiplier(ignoreArmor, armor.get()) * Random.Range(0.9f, 1.1f), -1, health.getStart());
+            this.health.modifyFlat(-damage * armorDamageMultiplier(ignoreArmor, armor.get()) * Random.Range(0.9f, 1.1f));
             if(health.get() <= 0f)
                 die(playershot);
         }

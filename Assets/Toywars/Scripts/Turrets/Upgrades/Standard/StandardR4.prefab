@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Sniper
   cost: 1000
-  flatRangeInc: 200
-  pctDamageInc: 200
-  pctHeadshot: 30
-  fireRateDecFactor: 4
+  flatRangeInc: 150
+  pctDamageInc: 250
+  pctHeadshot: 40
+  fireRateDecFactor: 5

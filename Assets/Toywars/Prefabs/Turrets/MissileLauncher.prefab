@@ -69,7 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4868489058151158}
   - component: {fileID: 114563857947470342}
-  - component: {fileID: 64672487775682796}
+  - component: {fileID: 65493210164929902}
   m_Layer: 11
   m_Name: MissileLauncher
   m_TagString: Tower
@@ -245,8 +245,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1540997836265146}
   m_Mesh: {fileID: 4300004, guid: 8cdb954a67785d24aa6be3a5f67b813d, type: 3}
---- !u!64 &64672487775682796
-MeshCollider:
+--- !u!65 &65493210164929902
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -254,11 +254,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114563857947470342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -272,17 +270,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerSprite: {fileID: 21300000, guid: 222444063aa9ba34b8a91b5d09a0b8d9, type: 3}
   range:
-    start: 12
+    start: 10
   fireRate:
-    start: 0.55
+    start: 0.5
   damage:
-    start: 50
+    start: 15
   projectileSpeed:
     start: 70
   towerType: 1
   turretBulletPrefab: {fileID: 0}
   missileExplosionRadius:
-    start: 8
+    start: 7
   missilePrefab: {fileID: 1802994176725908, guid: d192dcb3923b03242b866fea5b39e193,
     type: 2}
   laserDOT:

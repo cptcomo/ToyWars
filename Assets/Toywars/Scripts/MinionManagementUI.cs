@@ -16,6 +16,7 @@ namespace Toywars {
         bool[] panelsLockStatus;
 
         public GameObject[] minions;
+        public GameObject[] minionsAI;
 
         private Selection selectedMinion;
         private Selection[] allSelections = new Selection[] { Selection.NONE, Selection.DELETE, Selection.SIMPLE, Selection.NORMAL, Selection.FAST, Selection.TOUGH, Selection.DIVIDE };
@@ -24,6 +25,7 @@ namespace Toywars {
         private Color initialColor;
 
         Dictionary<Selection, Minion> minionMap;
+        Dictionary<string, int> minionCount;
         public int[] minionUnlockLevels;
 
         GameManager gm;
@@ -68,6 +70,7 @@ namespace Toywars {
             rightLaneSlots = getAllChildren(rightLane);
             centerLaneSlots = getAllChildren(centerLane);
             initializeMinionMap();
+            initializeMinionCountMap();
             initializeLockArrays();
             updateLocks();
         }
@@ -77,6 +80,15 @@ namespace Toywars {
             for(int i = 0; i < minions.Length; i++) {
                 minionMap[allSelections[i + 2]] = minions[i].GetComponent<Minion>();
             }
+        }
+
+        void initializeMinionCountMap() {
+            minionCount = new Dictionary<string, int>();
+            minionCount.Add("Melee", 3);
+            minionCount.Add("Range", 2);
+            minionCount.Add("Fast", 5);
+            minionCount.Add("Tank", 1);
+            minionCount.Add("Divide", 1);
         }
 
         void initializeLockArrays() {
@@ -211,10 +223,11 @@ namespace Toywars {
                 foreach(Transform t in ts) {
                     if(t.name.ToLower().Contains("image")) {
                         foreach(GameObject go in minions) {
-                            if(go.GetComponent<Minion>().sprite == t.GetComponent<Image>().sprite) {
+                            Minion m = go.GetComponent<Minion>();
+                            if(m.sprite == t.GetComponent<Image>().sprite) {
                                 WaveSection section = new WaveSection();
                                 section.minion = go;
-                                section.count = 1;
+                                section.count = minionCount[m.minionName];
                                 section.rate = 1;
                                 wave.sections.Add(section);
                             }
@@ -225,6 +238,29 @@ namespace Toywars {
             return wave;
         }
 
+        public GameObject[] getMinionsAvailable() {
+            List<GameObject> unlockedMinions = new List<GameObject>();
+            for(int i = 0; i < panelsLockStatus.Length; i++) {
+                if(panelsLockStatus[i]) {
+                    unlockedMinions.Add(minionsAI[i]);
+                }
+            }
+            return unlockedMinions.ToArray();
+        }
+
+        public int getUnlockCount() {
+            int count = 0;
+            for(int i = 0; i < slotUnlockStatus.Length; i++) {
+                if(slotUnlockStatus[i])
+                    count++;
+            }
+            return count;
+        }
+
+        public Dictionary<string, int> getMinionCounts() {
+            return minionCount;
+        }
+        
         enum Selection {
             NONE, DELETE, SIMPLE, NORMAL, FAST, DIVIDE, TOUGH
         }

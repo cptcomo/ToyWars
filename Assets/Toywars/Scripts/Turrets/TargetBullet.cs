@@ -124,7 +124,7 @@ namespace Toywars {
         void explode() {
             Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
             foreach(Collider col in colliders) {
-                if(col.tag.Equals(targetTag)) {            
+                if(col.tag.Equals(targetTag) && col.gameObject != target) {            
                     doDamage(col.transform);
                 }
             }

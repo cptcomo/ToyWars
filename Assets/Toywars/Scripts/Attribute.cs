@@ -17,6 +17,10 @@ namespace Toywars {
             calledInit = true;
         }
 
+        public void setStart(float val) {
+            this.start = val;
+        }
+
         public float getStart() {
             return this.start;
         }

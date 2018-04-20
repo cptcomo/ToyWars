@@ -52,7 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4109260721999466}
   - component: {fileID: 114962483813817650}
-  - component: {fileID: 64143595261914896}
+  - component: {fileID: 65708561861728350}
   m_Layer: 11
   m_Name: FireTower
   m_TagString: Tower
@@ -245,8 +245,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1956284493138980}
   m_Mesh: {fileID: 4300002, guid: 8cdb954a67785d24aa6be3a5f67b813d, type: 3}
---- !u!64 &64143595261914896
-MeshCollider:
+--- !u!65 &65708561861728350
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -254,11 +254,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114962483813817650
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -272,9 +270,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerSprite: {fileID: 21300000, guid: d18d96dbc06fdbd4795d0170bf348aa4, type: 3}
   range:
-    start: 14
+    start: 10
   fireRate:
-    start: 0.6
+    start: 0.8
   damage:
     start: 25
   projectileSpeed:
@@ -296,7 +294,7 @@ MonoBehaviour:
   ablazeEffect: {fileID: 1389869015831724, guid: 57ea72b002a3bfb469d17dad56f8507d,
     type: 2}
   fireDOT:
-    start: 3
+    start: 4
   beaconTurretTag: 
   beaconMinionTag: 
   isPlayer: 0

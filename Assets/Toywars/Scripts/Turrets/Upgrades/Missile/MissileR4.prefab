@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14aa69ac73eb1bd46af3eec50e273db9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Super fast
-  cost: 800
-  pctRateInc: 125
-  pctRangeInc: 30
+  upgradeName: Reusable Rockets
+  cost: 1400
+  pctRateInc: 150
+  pctRangeInc: 15

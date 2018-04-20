@@ -14,7 +14,7 @@ namespace Toywars {
         private AI ai;
 
         [HideInInspector]
-        public PathWrapper[] leftWrappers, centerWrappers, rightWrappers;
+        public PathWrapper[] leftWrappers, centerWrappers, rightWrappers, middleWrappers;
 
         private void Start() {
             em = EnemiesManager.getInstance();
@@ -26,6 +26,7 @@ namespace Toywars {
             leftWrappers = new PathWrapper[ai.leftPaths.Length];
             centerWrappers = new PathWrapper[ai.centerPaths.Length];
             rightWrappers = new PathWrapper[ai.rightPaths.Length];
+            middleWrappers = new PathWrapper[ai.middlePaths.Length];
             for(int i = 0; i < leftWrappers.Length; i++) {
                 leftWrappers[i] = new PathWrapper(ai.leftPaths[i], Vector3.Distance(this.transform.position, ai.leftPaths[i].transform.position));
             }
@@ -34,6 +35,9 @@ namespace Toywars {
             }
             for(int i = 0; i < rightWrappers.Length; i++) {
                 rightWrappers[i] = new PathWrapper(ai.rightPaths[i], Vector3.Distance(this.transform.position, ai.rightPaths[i].transform.position));
+            }
+            for(int i = 0; i < middleWrappers.Length; i++) {
+                middleWrappers[i] = new PathWrapper(ai.middlePaths[i], Vector3.Distance(this.transform.position, ai.middlePaths[i].transform.position));
             }
         }
         
@@ -49,6 +53,7 @@ namespace Toywars {
         }
 
         public void upgradeTurret(int upgradeIndex) {
+            Debug.Log("Upgraded " + this.gameObject.name + " on " + upgradeIndex);
             this.turret.GetComponent<Turret>().upgrade(upgradeIndex, false);
         }
 

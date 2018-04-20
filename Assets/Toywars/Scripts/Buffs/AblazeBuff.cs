@@ -47,6 +47,7 @@ namespace Toywars {
 
             minion.addBuff(this);
             ablazeEffectInstance = (GameObject)MonoBehaviour.Instantiate(ablazeEffect);
+            MonoBehaviour.Destroy(ablazeEffectInstance, duration);
         }
 
         public Buff copy() {

@@ -53,6 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Damage Boost
   cost: 250
-  cdReduce: 0.2
-  dmgInc: 25
+  cdReduce: 0.15
+  dmgInc: 20
   rangeInc: 0

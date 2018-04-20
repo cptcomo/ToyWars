@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4123852024665288}
   - component: {fileID: 120155357004823078}
   - component: {fileID: 114917222432253092}
-  - component: {fileID: 64115192220190170}
+  - component: {fileID: 65503411887071012}
   m_Layer: 11
   m_Name: LaserBeamerAI
   m_TagString: EnemyTower
@@ -339,8 +339,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1399570396886132}
   m_Mesh: {fileID: 4300002, guid: 49e8acd437ca1a944b5246f3e0cb5526, type: 3}
---- !u!64 &64115192220190170
-MeshCollider:
+--- !u!65 &65503411887071012
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -348,11 +348,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1.6666665, z: 12}
+  m_Center: {x: 2000, y: -3328.333, z: -1995}
 --- !u!108 &108297251997772158
 Light:
   m_ObjectHideFlags: 1
@@ -402,7 +400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerSprite: {fileID: 0}
   range:
-    start: 15
+    start: 12
   fireRate:
     start: 0
   damage:
@@ -415,9 +413,9 @@ MonoBehaviour:
     start: 0
   missilePrefab: {fileID: 0}
   laserDOT:
-    start: 30
+    start: 40
   laserSlowPct:
-    start: 10
+    start: 0
   laserLineRenderer: {fileID: 120155357004823078}
   laserImpactEffect: {fileID: 198858390960681222}
   laserImpactLight: {fileID: 108297251997772158}
@@ -457,8 +455,16 @@ MonoBehaviour:
   partToRotate: {fileID: 4088465091112662}
   firePoint: {fileID: 4111531793861510}
   towerUpgradePath:
-    leftPath: []
-    rightPath: []
+    leftPath:
+    - {fileID: 114046652309193214, guid: 942f59a3ee80fbb4c94092eef05be60f, type: 2}
+    - {fileID: 114695070582870620, guid: d20b754b44f09784baed379eeac3ef6b, type: 2}
+    - {fileID: 114833413563293878, guid: 7123ae599706f3d44b9c12074d57673e, type: 2}
+    - {fileID: 114107730312029000, guid: 15bcacfc172afda4895bcffa973ff3a9, type: 2}
+    rightPath:
+    - {fileID: 114459119701580244, guid: 84ff9c0cbd9c7dd48b8e30e12a2616ac, type: 2}
+    - {fileID: 114339037258725316, guid: de7478751f0e8b445bb6d8d917bcc10e, type: 2}
+    - {fileID: 114546955002018384, guid: 8835736012ad86e48be35fd7a6c8d1b8, type: 2}
+    - {fileID: 114198231174508958, guid: 9b9f1b71bf036bd4f8fc2bae13d6c6b5, type: 2}
 --- !u!120 &120155357004823078
 LineRenderer:
   m_ObjectHideFlags: 1

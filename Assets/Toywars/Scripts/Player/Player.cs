@@ -15,7 +15,7 @@ namespace Toywars {
         public Image healthBar;
         public Text healthText;
 
-        public Vector3 waveStartPosition = new Vector3(0, 0, 96);
+        public Vector3 waveStartPosition = new Vector3(0, 0, -96);
 
         private NavMeshAgent nva;
         private Vector3 dest;
@@ -35,6 +35,8 @@ namespace Toywars {
         private List<Buff> buffs;
         private List<Attribute> attrs;
 
+        bool dead;
+
         private void Start() {
             gm = GameManager.getInstance();
             buffs = new List<Buff>();
@@ -46,19 +48,20 @@ namespace Toywars {
             nva = GetComponent<NavMeshAgent>();
             nva.speed = speed.getStart();
             abilityUpgradePath.init();
-            gm.StartNextWaveEvent += resetPosition;
+            gm.EndWaveEvent += endWave;
             gm.StartNextWaveEvent += gm.callEventTogglePlayerUI;
             gm.EndWaveEvent += gm.callEventTogglePlayerUI;
             gm.TogglePlayerUIEvent += toggleUI;
             gm.UpgradePlayerEvent += upgradeAbility;
             gm.GameOverEvent += gm.callEventTogglePlayerUI;
+            gm.PlayerDeathEvent += playerDeath;
             abilities = new Ability[] { Q, W, E, R };
             foreach(Ability ability in abilities)
                 ability.start();
         }
 
         private void OnDisable() {
-            gm.StartNextWaveEvent -= resetPosition;
+            gm.EndWaveEvent -= endWave;
             gm.StartNextWaveEvent -= gm.callEventTogglePlayerUI;
             gm.EndWaveEvent -= gm.callEventTogglePlayerUI;
             gm.TogglePlayerUIEvent -= toggleUI;
@@ -67,7 +70,7 @@ namespace Toywars {
         }
 
         private void Update() {
-            if(gm.isPlaying()) {
+            if(gm.isPlaying() && !dead) {
                 resetAttributes();
                 updateBuffs();
                 updateAbilityUI();
@@ -99,13 +102,13 @@ namespace Toywars {
                 }
 
                 if(health.get() < 0f) {
-                    gm.callEventGameOver(false);
+                    gm.callEventPlayerDeath(5 + gm.waveIndex);
                 }
 
                 healthBar.fillAmount = health.get() / health.getStart();
                 healthText.text = "" + Mathf.Round(health.get());
             }
-            else {
+            else if(!gm.isPlaying()){
                 dest = this.transform.position;
                 nva.SetDestination(dest);
             }
@@ -143,6 +146,32 @@ namespace Toywars {
             this.health.modifyFlat(-dmg * armorDamageMultiplier(ignoreArmor, armor.get()) * Random.Range(0.9f, 1.1f), -1, health.getStart());
         }
 
+        void playerDeath(float deathTime) {
+            dead = true;
+            resetPosition();
+            updateAbilityUI();
+            this.nva.enabled = false;
+            Invoke("revive", deathTime);
+        }
+
+        void endWave() {
+            resetPosition();
+            resetHealth();
+            PlayerManager.getInstance().changeExp(20 + 5 * gm.waveIndex);
+        }
+
+        void resetHealth() {
+            this.health.set(this.health.getStart());
+        }
+
+        void revive() {
+            this.health.set(this.health.getStart());
+            dead = false;
+            this.nva.enabled = true;
+            this.dest = this.transform.position;
+            nva.SetDestination(dest);
+        }
+
         float armorDamageMultiplier(bool ignoreArmor, float armor) {
             if(ignoreArmor)
                 return 1;
@@ -160,9 +189,12 @@ namespace Toywars {
         }
 
         public void resetPosition() {
+            this.nva.enabled = false;
             this.transform.position = waveStartPosition;
             this.transform.rotation = Quaternion.identity;
-            this.nva.SetDestination(waveStartPosition);
+            this.nva.enabled = true;
+            this.dest = waveStartPosition;
+            this.nva.SetDestination(dest);
         }
 
         public NavMeshAgent getNVA() {

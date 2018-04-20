@@ -51,12 +51,17 @@ namespace Toywars {
             nva.SetDestination(destination);
             nva.speed = speed.get();
 
+            if(Vector3.Distance(this.transform.position, waypoints[waypoints.Length - 1]) < 10f) {
+                endPath();
+                return;
+            }
+
             if(reachedDestination()) {
                 if(waypointIndex == waypoints.Length - 1) {
                     endPath();
                 }
                 else {
-                    if(state == State.Exit && Vector3.Distance(this.transform.position, getNextDestination()) < 3) {
+                    if(state == State.Exit && Vector3.Distance(this.transform.position, getNextDestination()) < 5f) {
                         waypointIndex++;
                         this.destination = getNextDestination();
                     }
@@ -82,6 +87,16 @@ namespace Toywars {
             target = closest;
             if(target != null) {
                 Vector3 dir = (target.transform.position - this.transform.position).normalized;
+                if(target.tag.Equals("Player")) {
+                    Vector3 basedir = (waypoints[waypoints.Length - 1] - this.transform.position).normalized;
+                    float angle = Mathf.Acos(Vector3.Dot(basedir, dir) / (basedir.magnitude * dir.magnitude)) * 180f / 3.14159265f;
+                    if(angle > 115 && minionType != MinionType.Fast) {
+                        state = State.Exit;
+                        this.destination = getNextDestination();
+                        return;
+                    }
+                }
+
                 if(minionType == MinionType.Range) {
                     state = State.Kite;
                     this.destination = -dir.normalized * (kiteRange / 2);
