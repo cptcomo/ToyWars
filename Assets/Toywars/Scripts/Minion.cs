@@ -22,6 +22,7 @@ namespace Toywars {
         public Attribute damageModifier;
         public int moneyValue;
         public float rangeFireRate;
+        public int livesValue;
         float rangeLastFire;
 
         public GameObject deathEffect;
@@ -63,13 +64,14 @@ namespace Toywars {
             hpBarImage = hpBar.GetComponent<Image>();
             minionMovement.setMinionType(minionType);
             minionMovement.setKiteRange(attackRadius.get() * .9f);
+            minionMovement.setLivesValue(livesValue);
             if(hpBarImage == null)
                 Debug.LogWarning("Minion Health Bar does not have an Image component");
             if(minionType == MinionType.Range)
                 rangeLastFire = Time.time;
         }
 
-        public virtual void takeDamage(float damage, bool playerShot, bool ignoreArmor) { }
+        public virtual void takeDamage(float damage, GameObject source, bool ignoreArmor) { }
 
         protected float armorDamageMultiplier(bool ignoreArmor, float armor) {
             if(ignoreArmor)
@@ -120,6 +122,7 @@ namespace Toywars {
                         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
                         TargetBullet bullet = bulletGO.GetComponent<TargetBullet>();
                         if(bullet != null) {
+                            bullet.setSource(this.gameObject);
                             bullet.seek(target.transform);
                             bullet.setDamage(damage.get());
                             bullet.setSpeed(70f);
@@ -132,7 +135,7 @@ namespace Toywars {
                 else {
                     Damageable component = (Damageable)target.GetComponent(typeof(Damageable));
                     if(component != null && Vector3.Distance(this.transform.position, target.transform.position) < attackRadius.get()) {
-                        component.takeDamage(damage.get() * damageModifier.get() / 100f * Time.deltaTime, false, false);
+                        component.takeDamage(damage.get() * damageModifier.get() / 100f * Time.deltaTime, this.gameObject, false);
                     }
                 }
             }

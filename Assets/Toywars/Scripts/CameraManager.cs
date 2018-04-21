@@ -16,14 +16,21 @@ namespace Toywars {
         public float minY = 10f;
         public float maxY = 200f;
 
+        bool playerIsDead;
+
         private void Start() {
             gm = GameManager.getInstance();
+            gm.PlayerDeathEvent += onDeath;
             playerScript = player.gameObject.GetComponent<Player>();
             playerScript.setCameraHeightOffset(playerHoverOffset.y);
         }
 
+        private void OnDisable() {
+            gm.PlayerDeathEvent -= onDeath;
+        }
+
         private void Update() {
-            if(gm.isBuilding() || gm.isAITurn()) {
+            if(gm.isBuilding() || gm.isAITurn() || (gm.isPlaying() && playerIsDead)) {
                 if(Input.GetKey("w") || Input.mousePosition.y >= Screen.height - panBorderThickness) {
                     transform.Translate(Vector3.forward * panSpeed * Time.deltaTime, Space.World);
                 }
@@ -45,6 +52,15 @@ namespace Toywars {
             } else if(gm.isPlaying()) {
                 focusOnPlayer();
             }
+        }
+
+        void onDeath(float timer) {
+            playerIsDead = true;
+            Invoke("onRevival", timer);
+        }
+
+        void onRevival() {
+            playerIsDead = false;
         }
 
         void focusOnPlayer() {

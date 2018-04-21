@@ -11,6 +11,8 @@ namespace Toywars {
 
         public int baseHealth;
 
+        public int lastBaseHealth;
+
         [SerializeField]
         int money;
 
@@ -27,6 +29,7 @@ namespace Toywars {
 
         private void Start() {
             enemiesAlive = 0;
+            lastBaseHealth = baseHealth;
         }
 
         public int getMoney() {

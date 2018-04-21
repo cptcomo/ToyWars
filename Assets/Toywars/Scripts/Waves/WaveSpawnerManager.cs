@@ -15,6 +15,8 @@ namespace Toywars {
         [HideInInspector]
         public Vector2 allyLeftScore, allyCenterScore, allyRightScore, enemyLeftScore, enemyCenterScore, enemyRightScore;
 
+        bool updatedBaseHealths;
+
         private void Awake() {
             if(instance == null) {
                 instance = this;
@@ -48,6 +50,15 @@ namespace Toywars {
 
         private void Update() {
             if(gm.gameState == GameManager.GameState.Play) {
+                if(spawnedAllMinions() && !updatedBaseHealths) {
+                    if(em.baseHealth != em.lastBaseHealth) {
+                        em.lastBaseHealth = em.baseHealth;
+                    }
+                    if(pm.baseHealth != pm.lastBaseHealth) {
+                        pm.lastBaseHealth = pm.baseHealth;
+                    }
+                    updatedBaseHealths = true;
+                }
                 checkGameOver();
                 checkEndWave();
             }
@@ -67,9 +78,6 @@ namespace Toywars {
             allyLeftScore = spawners[0].calculateScore(minionPowerScores) + new Vector2(100, 100);
             allyCenterScore = spawners[1].calculateScore(minionPowerScores) + new Vector2(100, 100);
             allyRightScore = spawners[2].calculateScore(minionPowerScores) + new Vector2(100, 100);
-            Debug.Log("Left: " + allyLeftScore);
-            Debug.Log("Center: " + allyCenterScore);
-            Debug.Log("Right: " + allyRightScore);
         }
 
         public void retrieveAIWaveComposition(GameObject[] left, GameObject[] center, GameObject[] right) {
@@ -101,15 +109,16 @@ namespace Toywars {
 
         void endWave() {
             gm.gameState = GameManager.GameState.Build;
+            updatedBaseHealths = false;
         }
 
         void checkGameOver() {
-            if(em.baseHealth == 0) {
+            if(em.baseHealth <= 0) {
                 gm.callEventGameOver(true);
                 return;
             }
 
-            if(pm.baseHealth == 0) {
+            if(pm.baseHealth <= 0) {
                 gm.callEventGameOver(false);
                 return;
             }
@@ -119,11 +128,17 @@ namespace Toywars {
             if(gm.minionsAlive > 0)
                 return;
 
-            foreach(WaveSpawner spawner in spawners)
-                if(!spawner.doneWithWave)
-                    return;
+            if(!spawnedAllMinions())
+                return;
 
             gm.callEventEndWave();
+        }
+
+        bool spawnedAllMinions() {
+            foreach(WaveSpawner spawner in spawners)
+                if(!spawner.doneWithWave)
+                    return false;
+            return true;
         }
 
         public GameObject[] getMinionsAvailable() {

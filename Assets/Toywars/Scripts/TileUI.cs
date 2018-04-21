@@ -9,6 +9,7 @@ namespace Toywars {
         public GameObject upgradeUI;
         public GameObject upgradeButtonPrefab;
         public Image towerSpriteImage;
+        public Text towerDamageText;
 
         [Header("Upgrade Button Prefab Settings")]
         [SerializeField]
@@ -42,6 +43,7 @@ namespace Toywars {
         void updateUI(Tile tile) {
             destroyAllChildren(upgradeUI.transform);
             Turret turret = tile.turret.GetComponent<Turret>();
+            this.towerDamageText.text = "" + Mathf.Round(turret.damageDone);
             TowerUpgrade[] upgrades = turret.towerUpgradePath.getAvailableUpgrades();
             for(int i = 0; i < upgrades.Length; i++) {
                 GameObject newButton = Instantiate(upgradeButtonPrefab);

@@ -4,21 +4,27 @@ using UnityEngine;
 
 namespace Toywars {
     public class AblazeBuff : Buff {
+        private static int maxParticles = 40;
+
         float duration, interval, startTime, damage, pctHealth;
 
         float lastDotTick;
 
         Minion minion;
 
+        GameObject source;
+        GameObject ablazeEffectsContainer;
         GameObject ablazeEffect;
         GameObject ablazeEffectInstance;
 
-        public AblazeBuff(float dur, float damage, float interval, float pctHealth, GameObject ablazeEffect) {
+        public AblazeBuff(GameObject source, float dur, float damage, float interval, float pctHealth, GameObject ablazeEffect) {
+            this.source = source;
             this.duration = dur;
             this.interval = interval;
             this.damage = damage;
             this.pctHealth = pctHealth;
             this.ablazeEffect = ablazeEffect;
+            this.ablazeEffectsContainer = GameManager.getInstance().ablazeEffectsContainer;
         }
 
         public bool finished
@@ -46,23 +52,31 @@ namespace Toywars {
             buffsToRemove.ForEach(buff => buff.finish());
 
             minion.addBuff(this);
-            ablazeEffectInstance = (GameObject)MonoBehaviour.Instantiate(ablazeEffect);
-            MonoBehaviour.Destroy(ablazeEffectInstance, duration);
+
+            Transform[] ts = ablazeEffectsContainer.GetComponentsInChildren<Transform>();
+
+            if(ts.Length < maxParticles) {
+                ablazeEffectInstance = (GameObject)MonoBehaviour.Instantiate(ablazeEffect);
+                ablazeEffectInstance.transform.SetParent(ablazeEffectsContainer.transform);
+                MonoBehaviour.Destroy(ablazeEffectInstance, duration);
+            }
         }
 
         public Buff copy() {
-            return new AblazeBuff(duration, damage, interval, pctHealth, ablazeEffect);
+            return new AblazeBuff(source, duration, damage, interval, pctHealth, ablazeEffect);
         }
 
         public void finish() {
             minion.removeBuff(this);
-            MonoBehaviour.Destroy(ablazeEffectInstance, .4f);
+            if(ablazeEffectInstance != null)
+                MonoBehaviour.Destroy(ablazeEffectInstance, .4f);
         }
 
         public void tick() {
-            ablazeEffectInstance.transform.position = minion.transform.position;
+            if(ablazeEffectInstance != null)
+                ablazeEffectInstance.transform.position = minion.transform.position;
             if(Time.time >= lastDotTick + interval) {
-                minion.takeDamage(getActualDamage(), false, true);
+                minion.takeDamage(getActualDamage(), source, true);
                 lastDotTick = Time.time;
             }
         }

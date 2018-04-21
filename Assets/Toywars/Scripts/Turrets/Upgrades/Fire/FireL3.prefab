@@ -51,6 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7afab5f0d320054aa520eed45e0044c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Stronger Ablaze
+  upgradeName: Ablaze deals % health
   cost: 800
   pctHealth: 5

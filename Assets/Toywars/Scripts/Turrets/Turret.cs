@@ -15,6 +15,9 @@ namespace Toywars{
         public Attribute projectileSpeed;
         private float fireCooldown;
 
+        [HideInInspector]
+        public float damageDone;
+
         public TowerType towerType;
 
         [Header("Turret")]
@@ -163,9 +166,9 @@ namespace Toywars{
                 foreach(Collider col in cols) {
                     if(col.tag.Equals(targetTag)) {
                         Minion m = col.GetComponent<Minion>();
-                        m.takeDamage(fireR4dps * 0.5f, false, true);
+                        m.takeDamage(fireR4dps * 0.5f, this.gameObject, true);
                         if(fireAblazeUnlock) {
-                            AblazeBuff buff = new AblazeBuff(ablazeDuration, fireDOT.get(), fireDotTickInterval, fireAblazePctHealth, ablazeEffect);
+                            AblazeBuff buff = new AblazeBuff(this.gameObject, ablazeDuration, fireDOT.get(), fireDotTickInterval, fireAblazePctHealth, ablazeEffect);
                             buff.apply(col.transform);
                         }
                     }
@@ -255,6 +258,7 @@ namespace Toywars{
             GameObject bulletGO = (GameObject)Instantiate(prefab, firePoint.position, firePoint.rotation);
             TargetBullet bullet = bulletGO.GetComponent<TargetBullet>();
             if(bullet != null) {
+                bullet.setSource(this.gameObject);
                 bullet.seek(target);
                 bullet.setDamage(damage);
                 bullet.setExplosionRadius(explosionRadius);
@@ -319,7 +323,7 @@ namespace Toywars{
                 dam += targetMinion.health.getPctStart(laserL4PctMax);
             }
 
-            targetMinion.takeDamage(dam * Time.deltaTime, false, laserIgnoreArmor);
+            targetMinion.takeDamage(dam * Time.deltaTime, this.gameObject, laserIgnoreArmor);
 
             if(laserR3Unlock && Time.time >= laserR3lastFire + laserR3tickRate) {
                 DamageModifierBuff dmb = new DamageModifierBuff(4, -laserR3PctModifier * laserR3tickRate);
@@ -352,7 +356,7 @@ namespace Toywars{
                 Buff b = null;
 
                 if(fireAblazeUnlock) {
-                    b = new AblazeBuff(ablazeDuration, fireDOT.get(), fireDotTickInterval, fireAblazePctHealth, ablazeEffect);
+                    b = new AblazeBuff(this.gameObject, ablazeDuration, fireDOT.get(), fireDotTickInterval, fireAblazePctHealth, ablazeEffect);
                 }
 
                 bool toExplode = false;
@@ -386,10 +390,10 @@ namespace Toywars{
                 if(col.tag.Equals(beaconMinionTag) && col.gameObject != this.gameObject) {
                     minionBuff.copy().apply(col.transform);
                     Minion m = col.GetComponent<Minion>();
-                    m.takeDamage(-beaconMinionHeal.get() / 100f * m.health.getMissing() / .5f, false, true);
+                    m.takeDamage(-beaconMinionHeal.get() / 100f * m.health.getMissing() / .5f, this.gameObject, true);
                 }
                 if(col.tag.Equals("Player") && isPlayer) {
-                    col.GetComponent<Damageable>().takeDamage(-beaconPlayerHeal.get() / 100f * col.GetComponent<Player>().health.getMissing() / .5f, false, true);
+                    col.GetComponent<Damageable>().takeDamage(-beaconPlayerHeal.get() / 100f * col.GetComponent<Player>().health.getMissing() / .5f, this.gameObject, true);
                 }
             }
         }

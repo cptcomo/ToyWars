@@ -15,6 +15,7 @@ namespace Toywars {
             Vector3 dir = (pos - player.transform.position).normalized;
             GameObject proj = (GameObject)Instantiate(bullet, player.transform.position, Quaternion.identity);
             SkillshotBullet projScript = proj.GetComponent<SkillshotBullet>();
+            projScript.setSource(player.gameObject);
             projScript.seek(dir);
             projScript.setDamage(damage);
             projScript.setRange(range);
@@ -23,7 +24,7 @@ namespace Toywars {
             if(level == 3) {
                 projScript.setFireball(true);
                 proj.GetComponent<Renderer>().enabled = false;
-                AblazeBuff ab = new AblazeBuff(2f, damage / 8f, .25f, 0, ablazeEffect);
+                AblazeBuff ab = new AblazeBuff(player.gameObject, 2f, damage / 8f, .25f, 0, ablazeEffect);
                 projScript.setBuffToApply(ab);
             }
             projScript.setPlayerShot(true);

@@ -7,12 +7,12 @@ namespace Toywars {
         public float flatRangeInc;
         public float pctDamageInc;
         public float pctHeadshot;
-        public float fireRateDecFactor;
+        public float fireRateDec;
         public override void activate(Turret turret) {
             turret.turretR4Upgrade(pctHeadshot);
             turret.range.modifyFlat(flatRangeInc);
             turret.damage.modifyPct(pctDamageInc);
-            turret.fireRate.modifyFlat(-(turret.fireRate.get() - turret.fireRate.get() / fireRateDecFactor));
+            turret.fireRate.modifyPct(-fireRateDec, 0.05f, turret.fireRate.get());
             turret.projectileSpeed.modifyPct(200);
         }
     }

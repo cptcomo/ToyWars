@@ -53,5 +53,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: 'Tank Shreder #2'
   cost: 1400
-  pctMax: 15
+  pctMax: 12
   pctRangeInc: 25

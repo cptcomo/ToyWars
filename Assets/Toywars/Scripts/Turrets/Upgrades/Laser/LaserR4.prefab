@@ -54,4 +54,4 @@ MonoBehaviour:
   upgradeName: Target Can't Move
   cost: 1400
   setSlowPct: 85
-  flatDmgDec: 20
+  flatDmgDec: 15

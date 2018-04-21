@@ -274,9 +274,10 @@ MonoBehaviour:
   fireRate:
     start: 0.5
   damage:
-    start: 15
+    start: 20
   projectileSpeed:
     start: 70
+  damageDone: 0
   towerType: 1
   turretBulletPrefab: {fileID: 0}
   missileExplosionRadius:

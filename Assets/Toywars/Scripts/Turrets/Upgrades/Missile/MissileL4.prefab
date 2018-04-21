@@ -55,5 +55,5 @@ MonoBehaviour:
   cost: 1200
   pctTowerRangeInc: 600
   pctDmgInc: 50
-  pctFireRateDec: 75
-  pctExplosionRadiusInc: 125
+  pctFireRateDec: 125
+  pctExplosionRadiusInc: 50

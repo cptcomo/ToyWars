@@ -196,7 +196,7 @@ MonoBehaviour:
   speed:
     start: 11
   detectionRadius:
-    start: 7
+    start: 4
   tagsToDetect: []
   waypoints:
   - {x: 0, y: 0, z: 87}
@@ -218,9 +218,9 @@ MonoBehaviour:
   meleePrefab: {fileID: 0}
   minionType: 2
   health:
-    start: 100
+    start: 150
   armor:
-    start: 50
+    start: 75
   damage:
     start: 50
   attackRadius:
@@ -229,6 +229,7 @@ MonoBehaviour:
     start: 100
   moneyValue: 25
   rangeFireRate: 0
+  livesValue: 1
   deathEffect: {fileID: 1787243369622486, guid: ffa7fb7607c9baa46bcb69956d18788c,
     type: 2}
   hpBarPrefab: {fileID: 1914454742012642, guid: cb05f27a6cf80624e9252ae301389554,

@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97135e1ab7604224ca28ab77456fcf06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Range
+  upgradeName: Range Boost
   cost: 200
   isPctBuff: 1
   pct: 30

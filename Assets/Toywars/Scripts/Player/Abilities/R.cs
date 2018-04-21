@@ -46,6 +46,7 @@ namespace Toywars {
         void shoot(Player player, Vector3 dir) {
             GameObject proj = (GameObject)Instantiate(level == 3 ? projectileMissile : projectileBullet, player.transform.position, Quaternion.identity);
             SkillshotBullet projScript = proj.GetComponent<SkillshotBullet>();
+            projScript.setSource(player.gameObject);
             proj.transform.localScale /= 1.6f;
             projScript.seek(dir);
             projScript.setDamage(damagePerProjectile);

@@ -11,7 +11,7 @@ namespace Toywars {
         public override void activate(Turret turret) {
             turret.range.modifyPct(pctTowerRangeInc);
             turret.damage.modifyPct(pctDmgInc);
-            turret.fireRate.modifyPct(-pctFireRateDec, 0.1f, 1000);
+            turret.fireRate.modifyPct(-pctFireRateDec, 0.05f, 1000);
             turret.missileExplosionRadius.modifyPct(pctExplosionRadiusInc);
         }
     }

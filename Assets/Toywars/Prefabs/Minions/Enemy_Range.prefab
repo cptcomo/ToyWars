@@ -258,6 +258,7 @@ MonoBehaviour:
     start: 100
   moneyValue: 50
   rangeFireRate: 0.7
+  livesValue: 4
   deathEffect: {fileID: 1787243369622486, guid: ffa7fb7607c9baa46bcb69956d18788c,
     type: 2}
   hpBarPrefab: {fileID: 1453098498204944, guid: 54209f3e5e99ef34c88c9508dc919680,
@@ -266,7 +267,7 @@ MonoBehaviour:
   hpBarOffset: 1
   mobPct: 40
   dpsPct: 60
-  expValue: 100
+  expValue: 50
 --- !u!114 &114505111955585292
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -7,6 +7,7 @@ namespace Toywars {
         private Transform target;
         public float speed = 70f;
 
+        private GameObject source;
         private float damage;
         private float explosionRadius;
         private bool playerShot;
@@ -30,6 +31,10 @@ namespace Toywars {
             if(isFireball) {
                 this.fireballParticleInstance = (GameObject)Instantiate(fireballParticle, transform.position, transform.rotation);
             }
+        }
+
+        public void setSource(GameObject source) {
+            this.source = source;
         }
 
         public void seek(Transform target) {
@@ -106,10 +111,10 @@ namespace Toywars {
         }
 
         void doDamage(Transform t) {
-            Minion m = target.GetComponent<Minion>();
+            Minion m = t.GetComponent<Minion>();
 
             if(m != null)
-                m.takeDamage(damage, playerShot, this.ignoreArmor);
+                m.takeDamage(damage, source, this.ignoreArmor);
 
             if(buffToApply != null) {
                 try {
@@ -124,7 +129,7 @@ namespace Toywars {
         void explode() {
             Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
             foreach(Collider col in colliders) {
-                if(col.tag.Equals(targetTag) && col.gameObject != target) {            
+                if(col.tag.Equals(targetTag)) {
                     doDamage(col.transform);
                 }
             }

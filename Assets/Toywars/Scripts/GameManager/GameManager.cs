@@ -8,6 +8,8 @@ namespace Toywars {
         private EnemiesManager em;
         private PlayerManager pm;
 
+        public GameObject ablazeEffectsContainer;
+
         public delegate void GameManagerEventHandler();
         public event GameManagerEventHandler StartNextWaveEvent;
         public event GameManagerEventHandler EndWaveEvent;

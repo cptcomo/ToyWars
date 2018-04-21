@@ -89,7 +89,7 @@ namespace Toywars {
             GameObject[] centerLane = new GameObject[unlockCount];
             GameObject[] rightLane = new GameObject[unlockCount];       
             for(int i = 0; i < leftLane.Length; i++) {
-                if(PlayerManager.getInstance().baseHealth < 5f && Random.Range(0f, 1f) < .2f && unlockCount >= 3) { //Close to winning, rush! maybe
+                if(PlayerManager.getInstance().baseHealth < 7f && Random.Range(0f, 1f) < .2f && unlockCount >= 3) { //Close to winning, rush! maybe
                     leftLane[i] = minionGOs[2]; //fast minion
                     centerLane[i] = minionGOs[2];
                     rightLane[i] = minionGOs[2];

@@ -13,6 +13,8 @@ namespace Toywars {
 
         public int baseHealth;
 
+        public int lastBaseHealth;
+
         [SerializeField]
         int money;
 
@@ -36,6 +38,7 @@ namespace Toywars {
             gm = GameManager.getInstance();
             gm.StartNextWaveEvent += assertion;
             gm.EndWaveEvent += assertion;
+            lastBaseHealth = baseHealth;
             alliesAlive = 0;
         }
 

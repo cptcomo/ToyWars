@@ -8,6 +8,7 @@ namespace Toywars {
         private Vector3 startPos;
         public float speed = 5f;
 
+        private GameObject source;
         private string targetTag;
         private float damage;
         private float range = 10000;
@@ -41,6 +42,10 @@ namespace Toywars {
             }
         }
 
+        public void setSource(GameObject source) {
+            this.source = source;
+        }
+
         public void seek(Vector3 dir) {
             this.dir = dir;
         }
@@ -70,6 +75,9 @@ namespace Toywars {
         }
 
         private void Update() {
+            if(source == null)
+                Debug.LogWarning("Source is null in SkillshotBullet");
+
             if(Vector3.Distance(this.transform.position, startPos) > range) {
                 destroy();
                 return;
@@ -134,7 +142,7 @@ namespace Toywars {
             Minion m = minion.GetComponent<Minion>();
 
             if(m != null)
-                m.takeDamage(damage + m.health.getMissing() * pctMissingHealthDamage / 100f + Mathf.Clamp(Vector3.Distance(this.transform.position, startPos) * pctDistanceDamage / 100f, 0f, 5 * damage), playerShot, this.ignoreArmor);
+                m.takeDamage(damage + m.health.getMissing() * pctMissingHealthDamage / 100f + Mathf.Clamp(Vector3.Distance(this.transform.position, startPos) * pctDistanceDamage / 100f, 0f, 5 * damage), source, this.ignoreArmor);
 
             if(buffToApply != null) {
                 try {

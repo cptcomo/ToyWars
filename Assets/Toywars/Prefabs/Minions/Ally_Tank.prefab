@@ -219,9 +219,9 @@ MonoBehaviour:
   meleePrefab: {fileID: 0}
   minionType: 3
   health:
-    start: 1000
+    start: 800
   armor:
-    start: 250
+    start: 200
   damage:
     start: 70
   attackRadius:
@@ -230,6 +230,7 @@ MonoBehaviour:
     start: 100
   moneyValue: 200
   rangeFireRate: 0
+  livesValue: 10
   deathEffect: {fileID: 1787243369622486, guid: ffa7fb7607c9baa46bcb69956d18788c,
     type: 2}
   hpBarPrefab: {fileID: 1914454742012642, guid: cb05f27a6cf80624e9252ae301389554,

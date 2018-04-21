@@ -18,6 +18,7 @@ namespace Toywars {
 
         GameObject target;
         protected Vector3 destination;
+        protected int livesValue;
         float kiteRange;
 
         protected enum State {
@@ -43,6 +44,10 @@ namespace Toywars {
 
         public void setKiteRange(float range) {
             this.kiteRange = range;
+        }
+
+        public void setLivesValue(int livesValue) {
+            this.livesValue = livesValue;
         }
 
         protected virtual void Update() {

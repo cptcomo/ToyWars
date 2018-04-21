@@ -8,16 +8,22 @@ namespace Toywars {
 
         EnemiesManager em;
         PlayerManager pm;
-        
+
+        float lastPlayerHit;
+
         public override void Start() {
             base.Start();
-            health.setStart(health.getStart() + health.getStart() * GameManager.getInstance().waveIndex * 7f / 100f);
-            armor.setStart(armor.getStart() + armor.getStart() * GameManager.getInstance().waveIndex * 7f / 100f);
-            damage.setStart(damage.getStart() + damage.getStart() * GameManager.getInstance().waveIndex * 7f / 100f);
-            initialize();
             em = EnemiesManager.getInstance();
             pm = PlayerManager.getInstance();
+            int pmDeltaLives = pm.baseHealth - pm.lastBaseHealth;
+            int emDeltaLives = em.baseHealth - em.lastBaseHealth;
+            float multiplier = Mathf.Clamp((emDeltaLives - pmDeltaLives) / 5f, 0f, 10f);
+            health.setStart(health.getStart() + health.getStart() * GameManager.getInstance().waveIndex * (6f + multiplier) / 100f);
+            armor.setStart(armor.getStart() + armor.getStart() * GameManager.getInstance().waveIndex * (6f + multiplier) / 100f);
+            damage.setStart(damage.getStart() + damage.getStart() * GameManager.getInstance().waveIndex * (6f + multiplier) / 100f);
+            initialize();
             em.enemiesAlive++;
+            lastPlayerHit = 0;
         }
 
         public override void initialize() {
@@ -32,10 +38,20 @@ namespace Toywars {
             base.attack();
         }
 
-        public override void takeDamage(float damage, bool playershot, bool ignoreArmor) {
-            this.health.modifyFlat(-damage * armorDamageMultiplier(ignoreArmor, armor.get()) * Random.Range(0.9f, 1.1f));
+        public override void takeDamage(float damage, GameObject source, bool ignoreArmor) {
+            float dam = damage * armorDamageMultiplier(ignoreArmor, armor.get()) * Random.Range(0.9f, 1.1f);
+            this.health.modifyFlat(-dam);
+            bool playerShot = false;
+            if(source.tag.Equals("Tower")) {
+                source.GetComponent<Turret>().damageDone += dam;
+            }
+            else if(source.tag.Equals("Player")) {
+                source.GetComponent<Player>().damageDone += dam;
+                playerShot = true;
+                lastPlayerHit = Time.time;
+            }
             if(health.get() <= 0f)
-                die(playershot);
+                die(playerShot);
         }
 
         protected void die(bool playerShot) {
@@ -49,6 +65,9 @@ namespace Toywars {
             }
 
             pm.changeMoney(moneyValue);
+            if(Time.time <= lastPlayerHit + 2f) {
+                pm.changeExp(expValue);
+            }
             if(playerShot) {
                 pm.changeExp(expValue);
             }

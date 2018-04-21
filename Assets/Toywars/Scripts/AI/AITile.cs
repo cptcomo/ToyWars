@@ -53,7 +53,6 @@ namespace Toywars {
         }
 
         public void upgradeTurret(int upgradeIndex) {
-            Debug.Log("Upgraded " + this.gameObject.name + " on " + upgradeIndex);
             this.turret.GetComponent<Turret>().upgrade(upgradeIndex, false);
         }
 

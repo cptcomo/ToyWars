@@ -52,6 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeName: Fiery Aura
-  cost: 1000
-  radius: 6
+  cost: 1400
+  radius: 5
   dps: 40

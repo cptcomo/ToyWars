@@ -54,4 +54,4 @@ MonoBehaviour:
   upgradeName: Triple Shot
   cost: 400
   numberOfHits: 3
-  damagePct: 5
+  damagePct: 6

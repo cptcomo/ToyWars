@@ -8,12 +8,15 @@ namespace Toywars {
         EnemiesManager em;
         public override void Start() {
             base.Start();
-            health.setStart(health.getStart() + health.getStart() * GameManager.getInstance().waveIndex * 5f / 100f);
-            armor.setStart(armor.getStart() + armor.getStart() * GameManager.getInstance().waveIndex * 5f / 100f);
-            damage.setStart(damage.getStart() + damage.getStart() * GameManager.getInstance().waveIndex * 5f / 100f);
-            initialize();
             pm = PlayerManager.getInstance();
             em = EnemiesManager.getInstance();
+            int pmDeltaLives = pm.baseHealth - pm.lastBaseHealth;
+            int emDeltaLives = em.baseHealth - em.lastBaseHealth;
+            float multiplier = Mathf.Clamp((pmDeltaLives - emDeltaLives) / 5f, 0f, 10f);
+            health.setStart(health.getStart() + health.getStart() * GameManager.getInstance().waveIndex * (4f + multiplier) / 100f);
+            armor.setStart(armor.getStart() + armor.getStart() * GameManager.getInstance().waveIndex * (4f + multiplier) / 100f);
+            damage.setStart(damage.getStart() + damage.getStart() * GameManager.getInstance().waveIndex * (4f + multiplier) / 100f);
+            initialize();
             pm.alliesAlive++;
         }
 
@@ -29,7 +32,7 @@ namespace Toywars {
             base.attack();
         }
 
-        public override void takeDamage(float damage, bool playerShot, bool ignoreArmor) {
+        public override void takeDamage(float damage, GameObject source, bool ignoreArmor) {
             this.health.modifyFlat(-damage * armorDamageMultiplier(ignoreArmor, armor.get()) * Random.Range(0.9f, 1.1f));
             if(health.get() <= 0f)
                 die();

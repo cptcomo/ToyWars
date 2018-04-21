@@ -53,4 +53,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Explosive Fireballs
   cost: 800
-  explosionRadius: 30
+  explosionRadius: 6

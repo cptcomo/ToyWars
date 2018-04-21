@@ -53,5 +53,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Heal
   cost: 1000
-  pctMissingPlayer: 10
-  pctMissingMinion: 5
+  pctMissingPlayer: 8
+  pctMissingMinion: 3

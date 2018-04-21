@@ -8,6 +8,9 @@ namespace Toywars {
     public class Player : MonoBehaviour, Damageable {
         public GameObject playerUI;
 
+        [HideInInspector]
+        public float damageDone;
+
         public Attribute health;
         public Attribute armor;
         public Attribute speed;
@@ -102,7 +105,7 @@ namespace Toywars {
                 }
 
                 if(health.get() < 0f) {
-                    gm.callEventPlayerDeath(5 + gm.waveIndex);
+                    gm.callEventPlayerDeath(5 + (gm.waveIndex / 2));
                 }
 
                 healthBar.fillAmount = health.get() / health.getStart();
@@ -142,7 +145,7 @@ namespace Toywars {
             rImage.fillAmount = R.uiFillAmount();
         }
 
-        void Damageable.takeDamage(float dmg, bool isPlayerShot, bool ignoreArmor) {
+        void Damageable.takeDamage(float dmg, GameObject source, bool ignoreArmor) {
             this.health.modifyFlat(-dmg * armorDamageMultiplier(ignoreArmor, armor.get()) * Random.Range(0.9f, 1.1f), -1, health.getStart());
         }
 
@@ -157,7 +160,7 @@ namespace Toywars {
         void endWave() {
             resetPosition();
             resetHealth();
-            PlayerManager.getInstance().changeExp(20 + 5 * gm.waveIndex);
+            PlayerManager.getInstance().changeExp(10 + 3 * gm.waveIndex);
         }
 
         void resetHealth() {
@@ -170,6 +173,8 @@ namespace Toywars {
             this.nva.enabled = true;
             this.dest = this.transform.position;
             nva.SetDestination(dest);
+            MovementSpeedBuff homeguards = new MovementSpeedBuff(3f, 100f);
+            homeguards.apply(this);
         }
 
         float armorDamageMultiplier(bool ignoreArmor, float armor) {

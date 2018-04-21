@@ -14,7 +14,7 @@ namespace Toywars {
 
         protected override void endPath() {
             base.endPath();
-            pm.baseHealth--;
+            pm.baseHealth -= livesValue;
             Destroy(gameObject);
         }
     }

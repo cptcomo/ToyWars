@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 085e7cd3791905e4481f88ced1301ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Damage
+  upgradeName: Damage Boost
   cost: 400
   isPctBuff: 1
-  pct: 50
+  pct: 40
   flatDmg: 0
