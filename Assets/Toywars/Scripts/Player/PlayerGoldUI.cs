@@ -23,7 +23,7 @@ namespace Toywars {
         }
 
         private void Update() {
-            goldText.text = "$" + pm.getMoney();
+            goldText.text = "Money: $" + pm.getMoney();
         }
 
         void show() {

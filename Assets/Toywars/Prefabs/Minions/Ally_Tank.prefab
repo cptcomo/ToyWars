@@ -219,9 +219,9 @@ MonoBehaviour:
   meleePrefab: {fileID: 0}
   minionType: 3
   health:
-    start: 800
+    start: 700
   armor:
-    start: 200
+    start: 175
   damage:
     start: 70
   attackRadius:

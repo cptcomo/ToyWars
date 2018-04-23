@@ -73,6 +73,9 @@ namespace Toywars {
             initializeMinionCountMap();
             initializeLockArrays();
             updateLocks();
+            changeSprite(leftLaneSlots[0], minions[0].GetComponent<Minion>().sprite);
+            changeSprite(centerLaneSlots[0], minions[0].GetComponent<Minion>().sprite);
+            changeSprite(rightLaneSlots[0], minions[0].GetComponent<Minion>().sprite);
         }
 
         void initializeMinionMap() {

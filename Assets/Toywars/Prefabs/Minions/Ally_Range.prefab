@@ -222,14 +222,14 @@ MonoBehaviour:
   health:
     start: 150
   armor:
-    start: 30
+    start: 75
   damage:
-    start: 50
+    start: 80
   attackRadius:
     start: 8
   damageModifier:
     start: 100
-  moneyValue: 55
+  moneyValue: 50
   rangeFireRate: 0.7
   livesValue: 4
   deathEffect: {fileID: 1787243369622486, guid: ffa7fb7607c9baa46bcb69956d18788c,

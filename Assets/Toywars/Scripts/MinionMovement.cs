@@ -66,7 +66,7 @@ namespace Toywars {
                     endPath();
                 }
                 else {
-                    if(state == State.Exit && Vector3.Distance(this.transform.position, getNextDestination()) < 5f) {
+                    if(state == State.Exit && Vector3.Distance(this.transform.position, getNextDestination()) < 7f) {
                         waypointIndex++;
                         this.destination = getNextDestination();
                     }

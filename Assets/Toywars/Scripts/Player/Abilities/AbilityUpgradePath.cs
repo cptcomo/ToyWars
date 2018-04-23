@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Toywars {
     [System.Serializable]
     public class AbilityUpgradePath {
-        private int qIndex = 0, wIndex = 0, eIndex = 0, rIndex = 0;
+        private int qIndex = 1, wIndex = 0, eIndex = 0, rIndex = 0;
         public AbilityUpgrade[] qPath, wPath, ePath, rPath;
 
         GameManager gm;

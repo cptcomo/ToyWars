@@ -38,7 +38,7 @@ namespace Toywars {
 
         public void changeMoney(int d) {
             if(d > 0)
-                d = (int)(d * 1.4f);
+                d = (int)(d * 1.3f);
             this.money += d;
         }
 

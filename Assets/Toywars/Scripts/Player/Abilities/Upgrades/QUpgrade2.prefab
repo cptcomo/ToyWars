@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e2d1e725dd2fdd43bead0703be5ca39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Damage Boost
+  upgradeName: 'Basic Shot: Damage Boost'
   cost: 250
   cdReduce: 0.15
   dmgInc: 20

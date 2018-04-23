@@ -408,6 +408,7 @@ namespace Toywars{
         }
 
         public void upgrade(int upgradeIndex, bool playerTurret) {
+            Debug.Log(this.name + " upgraded with index: " + upgradeIndex);
             towerUpgradePath.upgrade(upgradeIndex, this, playerTurret);
         }
 

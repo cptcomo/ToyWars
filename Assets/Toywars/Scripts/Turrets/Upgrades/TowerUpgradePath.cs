@@ -5,7 +5,8 @@ using UnityEngine;
 namespace Toywars {
     [System.Serializable]
     public class TowerUpgradePath {
-        private int leftIndex = 0, rightIndex = 0;
+        [HideInInspector]
+        public int leftIndex = 0, rightIndex = 0;
         public TowerUpgrade[] leftPath;
         public TowerUpgrade[] rightPath;
 

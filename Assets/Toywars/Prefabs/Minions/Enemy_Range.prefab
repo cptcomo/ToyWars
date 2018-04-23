@@ -249,9 +249,9 @@ MonoBehaviour:
   health:
     start: 150
   armor:
-    start: 30
+    start: 75
   damage:
-    start: 55
+    start: 80
   attackRadius:
     start: 8
   damageModifier:
@@ -267,7 +267,7 @@ MonoBehaviour:
   hpBarOffset: 1
   mobPct: 40
   dpsPct: 60
-  expValue: 50
+  expValue: 45
 --- !u!114 &114505111955585292
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -22,12 +22,14 @@ namespace Toywars {
             gm.SelectTileEvent += selectTile;
             gm.DeselectTileEvent += deselectTile;
             gm.UpgradeTurretEvent += upgradeSelectedTurret;
+            gm.StartNextWaveEvent += deselectTurret;
         }
 
         private void OnDisable() {
             gm.SelectTileEvent -= selectTile;
             gm.DeselectTileEvent -= deselectTile;
             gm.UpgradeTurretEvent -= upgradeSelectedTurret;
+            gm.StartNextWaveEvent -= deselectTurret;
         }
 
         public static BuildManager getInstance() {
@@ -51,11 +53,15 @@ namespace Toywars {
 
         void selectTile(Tile tile) {
             selectedTile = tile;
-            turretToBuild = null;
+            deselectTurret();
         }
 
         void deselectTile() {
             selectedTile = null;
+        }
+
+        void deselectTurret() {
+            turretToBuild = null;
         }
 
         void upgradeSelectedTurret(int upgradeIndex) {

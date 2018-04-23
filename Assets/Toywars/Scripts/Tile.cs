@@ -47,6 +47,9 @@ namespace Toywars {
         }
 
         void buildTurret(TurretBlueprint blueprint) {
+            if(blueprint == null)
+                return;
+
             GameObject turret = (GameObject)Instantiate(blueprint.prefab, getBuildPosition(), Quaternion.identity);
             this.turret = turret;
             turret.GetComponent<Turret>().setTile(this);

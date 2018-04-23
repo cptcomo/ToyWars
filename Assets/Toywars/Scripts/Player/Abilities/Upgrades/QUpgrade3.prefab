@@ -51,5 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66926a008a79caa469e5a232bf9f89d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: 'Fireball '
+  upgradeName: 'Basic Shot: Fireball '
   cost: 500

@@ -220,7 +220,7 @@ MonoBehaviour:
     type: 2}
   minionType: 4
   health:
-    start: 400
+    start: 300
   armor:
     start: 150
   damage:

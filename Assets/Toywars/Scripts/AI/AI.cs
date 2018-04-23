@@ -29,6 +29,8 @@ namespace Toywars {
         bool hasBuiltATower;
 
         List<AITile> tilesWithTowers;
+        List<AITile> tilesWithDPSTowers;
+        List<AITile> tilesWithMobTowers;
 
         public static AI getInstance() {
             return instance;
@@ -57,6 +59,8 @@ namespace Toywars {
             middlePaths = getChildren(middle);
             hasBuiltATower = false;
             tilesWithTowers = new List<AITile>();
+            tilesWithDPSTowers = new List<AITile>();
+            tilesWithMobTowers = new List<AITile>();
         }
 
         GameObject[] getChildren(GameObject go) {
@@ -72,33 +76,65 @@ namespace Toywars {
             gm.AIStartTurnEvent -= takeTurn;
         }
 
+        int randomIndex(float[] percentages) {
+            float r = Random.Range(0f, 100f);
+            float min = 0;
+            float max = 0;
+            for(int i = 0; i < percentages.Length; i++) {
+                max = min + percentages[i];
+                if(r >= min && r < max)
+                    return i;
+                min = max;
+            }
+            return -1;
+        }
+
         void takeTurn() {
             gm.gameState = GameManager.GameState.AI;
 
-            bool isDebug = false;
+            bool isDebug = true;
 
             GameObject[] minionGOs = wsm.getMinionsAvailable();
             Minion[] minions = new Minion[minionGOs.Length];
             for(int i = 0; i < minionGOs.Length; i++) {
                 minions[i] = minionGOs[i].GetComponent<Minion>();
             }
-            int unlockCount = wsm.getMinionsUnlockCount();
+            int numMinionsUnlocked = minionGOs.Length;
             if(isDebug)
-                Debug.Log("Unlock slots available: " + unlockCount);
-            GameObject[] leftLane = new GameObject[unlockCount];
-            GameObject[] centerLane = new GameObject[unlockCount];
-            GameObject[] rightLane = new GameObject[unlockCount];       
+                Debug.Log("Unlock slots available: " + numMinionsUnlocked);
+            GameObject[] leftLane = new GameObject[numMinionsUnlocked];
+            GameObject[] centerLane = new GameObject[numMinionsUnlocked];
+            GameObject[] rightLane = new GameObject[numMinionsUnlocked];
+            float[] weightedProbabilities;
+            Debug.Log("Wave Index: " + gm.waveIndex);
+            Debug.Log("Unlock Count: " + numMinionsUnlocked);
+            if(numMinionsUnlocked == 1) {
+                weightedProbabilities = new float[] { 100 };
+            } else if(numMinionsUnlocked == 2) {
+                weightedProbabilities = new float[] { 75, 25 };
+            } else if(numMinionsUnlocked == 3) {
+                weightedProbabilities = new float[] { 60, 35, 15 };
+            } else if(numMinionsUnlocked == 4)
+                weightedProbabilities = new float[] {15, 40, 5, 50};
+            else {
+                weightedProbabilities = new float[] { 0, 30, 10, 30, 30 };
+            }
             for(int i = 0; i < leftLane.Length; i++) {
-                if(PlayerManager.getInstance().baseHealth < 7f && Random.Range(0f, 1f) < .2f && unlockCount >= 3) { //Close to winning, rush! maybe
-                    leftLane[i] = minionGOs[2]; //fast minion
-                    centerLane[i] = minionGOs[2];
-                    rightLane[i] = minionGOs[2];
-                }
-                else {
-                    leftLane[i] = minionGOs[Random.Range(0, minions.Length)];
-                    centerLane[i] = minionGOs[Random.Range(0, minions.Length)];
-                    rightLane[i] = minionGOs[Random.Range(0, minions.Length)];
-                }
+                leftLane[i] = minionGOs[randomIndex(weightedProbabilities)];
+                centerLane[i] = minionGOs[randomIndex(weightedProbabilities)];
+                rightLane[i] = minionGOs[randomIndex(weightedProbabilities)];
+            }
+            Debug.Log("Left: ");
+            foreach(GameObject go in leftLane) {
+                Debug.Log(go);
+            }
+            Debug.Log("Center: ");
+            foreach(GameObject go in centerLane) {
+                Debug.Log(go);
+            }
+            Debug.Log("Right: ");
+            foreach(GameObject go in rightLane) {
+                Debug.Log(go);
             }
             wsm.retrieveAIWaveComposition(leftLane, centerLane, rightLane);
 
@@ -125,35 +161,88 @@ namespace Toywars {
                 if(isDebug)
                     Debug.Log("Vulnerable Lane: " + vulnerableLane);
 
+                Vector2 score;
+                if(vulnerableLane == Lane.left) {
+                    score = wsm.allyLeftScore;
+                } else if(vulnerableLane == Lane.center) {
+                    score = wsm.allyCenterScore;
+                } else {
+                    score = wsm.allyRightScore;
+                }
+                float ratio = score.y / score.x;
+
+                if(isDebug)
+                    Debug.Log("Vulnerable Lane Ratio: " + ratio);
+
                 if(Random.Range(0f, 1f) < .8f && hasBuiltATower) { //Upgrade
                     if(isDebug)
                         Debug.Log("In Upgrade Branch");
 
-                    AITile tile = getBestTile(tilesWithTowers.ToArray(), -1);
-                    if(tile == null) {
-                        continue;
-                    }
-                    Turret tower = tile.turret.GetComponent<Turret>();
-                    TowerUpgrade[] upgrades = tower.towerUpgradePath.getAvailableUpgrades();
-                    float money = em.getMoney();
                     List<int> availableIndexes = new List<int>();
-                    if(upgrades[0] != null && upgrades[1] != null) {
-                        if(money >= upgrades[0].cost)
-                            availableIndexes.Add(0);
-                        if(money >= upgrades[1].cost)
-                            availableIndexes.Add(1);
+                    AITile tile;
+                    bool specialCase = false;
+                    float money = em.getMoney();
+                    if(ratio > 1.5f) {
+                        tile = getBestTile(tilesWithDPSTowers.ToArray(), -1);
+                        if(tile != null) {
+                            specialCase = true;
+                            Turret tu = tile.turret.GetComponent<Turret>();
+                            TowerUpgrade[] upgs = tu.towerUpgradePath.getAvailableUpgrades();
+                            //All the tank shredding upgrades are on the leftPath
+                            if(upgs[0] != null && money >= upgs[0].cost)
+                                availableIndexes.Add(0);
+                            if(upgs[1] != null && tu.towerUpgradePath.rightIndex < 1 && money >= upgs[1].cost)
+                                availableIndexes.Add(1);
+                        }
                     }
-                    else if(upgrades[0] != null) {
-                        if(money >= upgrades[0].cost)
-                            availableIndexes.Add(0);
+                    else if(ratio < 0.5f) {
+                        tile = getBestTile(tilesWithMobTowers.ToArray(), -1);
+                        if(tile != null) {
+                            specialCase = true;
+                            Turret tu = tile.turret.GetComponent<Turret>();
+                            TowerUpgrade[] upgs = tu.towerUpgradePath.getAvailableUpgrades();
+                            if(tu.towerType == Turret.TowerType.Fire) { //Fire's mob killing is on the right
+                                if(upgs[1] != null && money >= upgs[1].cost)
+                                    availableIndexes.Add(1);
+                                if(upgs[0] != null && tu.towerUpgradePath.leftIndex < 1 && money >= upgs[0].cost)
+                                    availableIndexes.Add(0);
+                            }
+                            else {
+                                if(upgs[0] != null && money >= upgs[0].cost)
+                                    availableIndexes.Add(0);
+                                if(upgs[1] != null && money >= upgs[1].cost)
+                                    availableIndexes.Add(1);
+                            }
+                        }
                     }
-                    else if(upgrades[1] != null) {
-                        if(money >= upgrades[1].cost)
-                            availableIndexes.Add(1);
+                    else {
+                        tile = getBestTile(tilesWithTowers.ToArray(), -1);
                     }
+
+                    if(!specialCase) {
+                        if(tile != null) {
+                            Turret tower = tile.turret.GetComponent<Turret>();
+                            TowerUpgrade[] upgrades = tower.towerUpgradePath.getAvailableUpgrades();
+
+                            if(upgrades[0] != null && upgrades[1] != null) {
+                                if(money >= upgrades[0].cost)
+                                    availableIndexes.Add(0);
+                                if(money >= upgrades[1].cost)
+                                    availableIndexes.Add(1);
+                            } else if(upgrades[0] != null) {
+                                if(money >= upgrades[0].cost)
+                                    availableIndexes.Add(0);
+                            } else if(upgrades[1] != null) {
+                                if(money >= upgrades[1].cost)
+                                    availableIndexes.Add(1);
+                            }
+                        } else continue;
+                    }
+                    
                     if(availableIndexes.Count > 0) {
-                        if(availableIndexes.Count == 1)
+                        if(availableIndexes.Count == 1) {
                             tile.upgradeTurret(availableIndexes[0]);
+                        }
                         else
                             tile.upgradeTurret(availableIndexes[Random.Range(0, availableIndexes.Count)]);
                     }
@@ -164,138 +253,63 @@ namespace Toywars {
                 } else { //Build
                     if(isDebug)
                         Debug.Log("Build branch");
-                    Vector2 score;
-                    TurretBlueprint blueprint = null;
+
                     Turret turret = null;
-                    if(vulnerableLane == Lane.left) {
-                        score = wsm.allyLeftScore;
-                    } else if(vulnerableLane == Lane.center) {
-                        score = wsm.allyCenterScore;
-                    } else {
-                        score = wsm.allyRightScore;
-                    }
-                    float ratio = score.y / score.x;
-                    if(isDebug) {
-                        Debug.Log("Vulnerable lane score: " + score);
-                        Debug.Log("DPS to group ratio: " + ratio);
-                    }
-                    if(ratio > 1.5f) { // The 2 DPS focused towers are the turret and laser beamer      
+                    TurretBlueprint blueprint = null;
+                    List<TurretBlueprint> availableBlueprints = new List<TurretBlueprint>();
+                    if(ratio > 1.5f) { // The 3 DPS focused towers are the turret, laser, and fire
                         if(isDebug)
                             Debug.Log("In DPS ratio branch");
-                        if(em.getMoney() > Mathf.Max(standardTurretBlueprint.cost, laserBeamerBlueprint.cost)) {
-                            float rng = Random.Range(0f, 100f);
-                            if(rng < 60f) {
-                                if(isDebug)
-                                    Debug.Log("Both turret and laser beamer were eligible, selected turret with: " + Mathf.Round(rng));
-                                blueprint = standardTurretBlueprint;
-                                turret = dummyStandard;
-                            }
-                            else {
-                                if(isDebug)
-                                    Debug.Log("Both turret and laser beamer were eligible, selected laser beamer with: " + Mathf.Round(rng));
-                                blueprint = laserBeamerBlueprint;
-                                turret = dummyLaser;
-                            }
-                        }
-                        else if(em.getMoney() > Mathf.Min(standardTurretBlueprint.cost, laserBeamerBlueprint.cost)) {
-                            if(isDebug)
-                                Debug.Log("Only one was available, cheaper one chosen");
-                            blueprint = standardTurretBlueprint.cost < laserBeamerBlueprint.cost ? standardTurretBlueprint : laserBeamerBlueprint;
-                            turret = standardTurretBlueprint.cost < laserBeamerBlueprint.cost ? dummyStandard : dummyLaser;
-                        }
-                    }
-                    else if(ratio < 0.5f) { //The group focused towers are primarily the missile launcher and maybe the fire tower
+
+                        if(em.getMoney() >= standardTurretBlueprint.cost)
+                            availableBlueprints.Add(standardTurretBlueprint);
+                        if(em.getMoney() >= laserBeamerBlueprint.cost)
+                            availableBlueprints.Add(laserBeamerBlueprint);
+                        if(em.getMoney() >= fireBlueprint.cost)
+                            availableBlueprints.Add(fireBlueprint);
+                    } else if(ratio < 0.5f) { //The group focused towers are primarily the missile launcher and the fire tower
                         if(isDebug)
                             Debug.Log("In Group focused branch");
-                        if(em.getMoney() > Mathf.Max(missileLauncherBlueprint.cost, fireBlueprint.cost)) {
-                            float rng = Random.Range(0f, 100f);
-                            if(rng < 75f) {
-                                if(isDebug)
-                                    Debug.Log("Both missile and fire tower were eligible, selected missile with: " + Mathf.Round(rng));
-                                blueprint = missileLauncherBlueprint;
-                                turret = dummyMissile;
-                            }
-                            else {
-                                if(isDebug)
-                                    Debug.Log("Both missile and fire tower were eligible, selected fire with: " + Mathf.Round(rng));
-                                blueprint = fireBlueprint;
-                                turret = dummyFire;
-                            }
-                        }
-                        else if(em.getMoney() > Mathf.Min(missileLauncherBlueprint.cost, fireBlueprint.cost)) {
-                            if(isDebug)
-                                Debug.Log("Only one was available, cheaper one chosen");
-                            blueprint = missileLauncherBlueprint.cost < fireBlueprint.cost ? missileLauncherBlueprint : fireBlueprint;
-                            turret = missileLauncherBlueprint.cost < fireBlueprint.cost ? dummyMissile : dummyFire;
-                        }
+                        if(em.getMoney() >= missileLauncherBlueprint.cost)
+                            availableBlueprints.Add(missileLauncherBlueprint);
+                        if(em.getMoney() >= fireBlueprint.cost)
+                            availableBlueprints.Add(fireBlueprint);
+                    } else { //Otherwise, any of the towers would do.
+                        if(em.getMoney() >= standardTurretBlueprint.cost)
+                            availableBlueprints.Add(standardTurretBlueprint);
+                        if(em.getMoney() >= missileLauncherBlueprint.cost)
+                            availableBlueprints.Add(missileLauncherBlueprint);
+                        if(em.getMoney() >= laserBeamerBlueprint.cost)
+                            availableBlueprints.Add(laserBeamerBlueprint);
+                        if(em.getMoney() >= fireBlueprint.cost)
+                            availableBlueprints.Add(fireBlueprint);
+                        if(em.getMoney() >= supportBlueprint.cost)
+                            availableBlueprints.Add(supportBlueprint);
                     }
-                    else { //Otherwise, any of the towers would do.
-                        //23% chance for turret
-                        float rng = Random.Range(0f, 100f);
+
+                    if(availableBlueprints.Count > 0) {
+                        float[] percentages = new float[availableBlueprints.Count];
+                        for(int i = 0; i < percentages.Length; i++) {
+                            percentages[i] = 100f / percentages.Length;
+                        }
+                        int index = randomIndex(percentages);
+                        blueprint = availableBlueprints[index];
+                        if(blueprint == standardTurretBlueprint)
+                            turret = dummyStandard;
+                        else if(blueprint == missileLauncherBlueprint)
+                            turret = dummyMissile;
+                        else if(blueprint == laserBeamerBlueprint)
+                            turret = dummyLaser;
+                        else if(blueprint == fireBlueprint)
+                            turret = dummyFire;
+                        else if(blueprint == supportBlueprint)
+                            turret = dummySupport;
+                        else Debug.LogError("Did not match a blueprint to a turret.");
+
                         if(isDebug)
-                            Debug.Log("semi-randomly choosing tower, first rng: " + rng + " " + (rng < 23f));
-                        bool chosenTurret = false;
-                        if(rng < 23f) {
-                            if(em.getMoney() >= standardTurretBlueprint.cost) {
-                                blueprint = standardTurretBlueprint;
-                                turret = dummyStandard;
-                                chosenTurret = true;
-                            }
-                            else {
-                                if(isDebug)
-                                    Debug.Log("Did not have enough money: " + em.getMoney() + " vs " + standardTurretBlueprint.cost);
-                            }
-                        }
-                        rng = Random.Range(0f, 100f);
-                        if(isDebug && !chosenTurret)
-                            Debug.Log("Second rng: " + rng + " " + (rng < 29.8701f));
-                        if(!chosenTurret && rng < 29.8701f) {
-                            if(em.getMoney() >= missileLauncherBlueprint.cost) {
-                                blueprint = missileLauncherBlueprint;
-                                turret = dummyMissile;
-                                chosenTurret = true;
-                            } else {
-                                if(isDebug)
-                                    Debug.Log("Did not have enough money: " + em.getMoney() + " vs " + missileLauncherBlueprint.cost);
-                            }
-                        }
-                        rng = Random.Range(0f, 100f);
-                        if(isDebug && !chosenTurret)
-                            Debug.Log("Third rng: " + rng + " " + (rng < 42.55f));
-                        if(!chosenTurret && rng < 32.55f) {
-                            if(em.getMoney() >= laserBeamerBlueprint.cost) {
-                                blueprint = laserBeamerBlueprint;
-                                turret = dummyLaser;
-                                chosenTurret = true;
-                            } else {
-                                if(isDebug)
-                                    Debug.Log("Did not have enough money: " + em.getMoney() + " vs " + laserBeamerBlueprint.cost);
-                            }
-                        }
-                        rng = Random.Range(0f, 100f);
-                        if(isDebug && !chosenTurret)
-                            Debug.Log("Fourth rng: " + rng + " " + (rng < 74.064f));
-                        if(!chosenTurret && rng < 77.064f) {
-                            if(em.getMoney() >= fireBlueprint.cost) {
-                                blueprint = fireBlueprint;
-                                turret = dummyFire;
-                                chosenTurret = true;
-                            } else {
-                                if(isDebug)
-                                    Debug.Log("Did not have enough money: " + em.getMoney() + " vs " + fireBlueprint.cost);
-                            }
-                        }
-                        if(!chosenTurret) {
-                            if(em.getMoney() >= supportBlueprint.cost) {
-                                blueprint = supportBlueprint;
-                                turret = dummySupport;
-                                chosenTurret = true;
-                            } else {
-                                if(isDebug)
-                                    Debug.Log("Did not have enough money: " + em.getMoney() + " vs " + supportBlueprint.cost);
-                            }
-                        }
+                            Debug.Log("Chose: " + turret.towerType);
                     }
+
                     if(blueprint == null) {
                         if(isDebug) {
                             Debug.Log("Did not choose a tower");
@@ -304,9 +318,6 @@ namespace Toywars {
                         continue;
                     }
 
-                    if(isDebug) {
-                        Debug.Log("Chose: " + turret.towerType);
-                    }
 
                     if(em.getMoney() < blueprint.cost) {
                         isDone = true;
@@ -318,8 +329,13 @@ namespace Toywars {
                     if(t == null)
                         continue;
                     t.buildTurret(blueprint);
-                    t.turret.GetComponent<Turret>().init();
+                    Turret tu = t.turret.GetComponent<Turret>();
+                    tu.init();
                     tilesWithTowers.Add(t);
+                    if(tu.towerType == Turret.TowerType.Turret || tu.towerType == Turret.TowerType.Laser || tu.towerType == Turret.TowerType.Fire)
+                        tilesWithDPSTowers.Add(t);
+                    if(tu.towerType == Turret.TowerType.Missile || tu.towerType == Turret.TowerType.Fire)
+                        tilesWithMobTowers.Add(t);
                     hasBuiltATower = true;
                     actionsRemaining--;
                 }

@@ -53,3 +53,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: SUPER MEGA DEATH ROCKET!!!
   cost: 700
+  cdIncrease: 4

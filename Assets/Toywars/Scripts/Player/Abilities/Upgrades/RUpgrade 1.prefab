@@ -52,4 +52,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeName: 'UNLOCK: BAZOOKA'
-  cost: 250
+  cost: 400

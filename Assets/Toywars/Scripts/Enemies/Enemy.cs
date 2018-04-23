@@ -18,9 +18,9 @@ namespace Toywars {
             int pmDeltaLives = pm.baseHealth - pm.lastBaseHealth;
             int emDeltaLives = em.baseHealth - em.lastBaseHealth;
             float multiplier = Mathf.Clamp((emDeltaLives - pmDeltaLives) / 5f, 0f, 10f);
-            health.setStart(health.getStart() + health.getStart() * GameManager.getInstance().waveIndex * (6f + multiplier) / 100f);
-            armor.setStart(armor.getStart() + armor.getStart() * GameManager.getInstance().waveIndex * (6f + multiplier) / 100f);
-            damage.setStart(damage.getStart() + damage.getStart() * GameManager.getInstance().waveIndex * (6f + multiplier) / 100f);
+            health.setStart(health.getStart() + health.getStart() * (GameManager.getInstance().waveIndex - 1) * (6f + multiplier) / 100f);
+            armor.setStart(armor.getStart() + armor.getStart() * (GameManager.getInstance().waveIndex - 1) * (6f + multiplier) / 100f);
+            damage.setStart(damage.getStart() + damage.getStart() * (GameManager.getInstance().waveIndex - 1) * (6f + multiplier) / 100f);
             initialize();
             em.enemiesAlive++;
             lastPlayerHit = 0;
@@ -63,9 +63,13 @@ namespace Toywars {
                 min2.GetComponent<MinionMovement>().waypoints = this.getMinionMovement().waypoints;
                 min2.GetComponent<MinionMovement>().setWaypointIndex(this.getMinionMovement().getWaypointIndex());
             }
-
-            pm.changeMoney(moneyValue);
-            if(Time.time <= lastPlayerHit + 2f) {
+            try {
+                pm.changeMoney(moneyValue);
+            } catch (System.Exception e) {
+                Debug.LogWarning("Couldn't give money with " + this.name);
+            }
+            
+            if(Time.time <= lastPlayerHit + 1f) {
                 pm.changeExp(expValue);
             }
             if(playerShot) {

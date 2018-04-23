@@ -1697,12 +1697,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1073965376}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.000035286, y: 30}
-  m_SizeDelta: {x: 100, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &22806569
 MonoBehaviour:
@@ -1737,10 +1737,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1968,12 +1968,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1073965376}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -30}
-  m_SizeDelta: {x: 100, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &28384292
 MonoBehaviour:
@@ -22385,7 +22385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9852941, g: 0.9852941, b: 0.9852941, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -43959,6 +43959,12 @@ Prefab:
       propertyPath: m_Name
       value: Right0
       objectReference: {fileID: 0}
+    - target: {fileID: 114731544368902344, guid: c441446126b65e442a65a30ee1782ca1,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66e112a6d81e2e04782529b4e210f0f5,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c441446126b65e442a65a30ee1782ca1, type: 2}
   m_IsPrefabParent: 0
@@ -46720,7 +46726,7 @@ MonoBehaviour:
   baseHealth: 100
   lastBaseHealth: 0
   money: 400
-  exp: 100
+  exp: 0
   moneyAmplify: 0
   expAmplify: 0
 --- !u!1 &698537025
@@ -69997,6 +70003,7 @@ GameObject:
   - component: {fileID: 1073965376}
   - component: {fileID: 1073965378}
   - component: {fileID: 1073965377}
+  - component: {fileID: 1073965379}
   m_Layer: 5
   m_Name: PlayerStatsBuild
   m_TagString: Untagged
@@ -70015,6 +70022,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.1193193, y: 1.1193198, z: 1.1193198}
   m_Children:
+  - {fileID: 1863579162}
   - {fileID: 28384291}
   - {fileID: 22806568}
   m_Father: {fileID: 1040085845}
@@ -70060,6 +70068,28 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1073965375}
+--- !u!114 &1073965379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1073965375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1297475563, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 5
+    m_Right: 5
+    m_Top: 5
+    m_Bottom: 5
+  m_ChildAlignment: 4
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
 --- !u!1 &1074745893
 GameObject:
   m_ObjectHideFlags: 0
@@ -82293,6 +82323,12 @@ Prefab:
       propertyPath: m_Name
       value: Mid0
       objectReference: {fileID: 0}
+    - target: {fileID: 114731544368902344, guid: c441446126b65e442a65a30ee1782ca1,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66e112a6d81e2e04782529b4e210f0f5,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c441446126b65e442a65a30ee1782ca1, type: 2}
   m_IsPrefabParent: 0
@@ -91505,9 +91541,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: BAZOOKA
   description: Shoots a lot of projectiles
-  cooldown: 16
+  cooldown: 18
   level: 0
-  numOfCasts: 10
+  numOfCasts: 8
   intervalBtwnCast: 0.15
   startCDOnCast: 0
   projectileBullet: {fileID: 1826154541861776, guid: ceab346c7d650ea4881c8f3c39c027cd,
@@ -95530,6 +95566,12 @@ Prefab:
       propertyPath: m_Name
       value: Left0
       objectReference: {fileID: 0}
+    - target: {fileID: 114731544368902344, guid: c441446126b65e442a65a30ee1782ca1,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66e112a6d81e2e04782529b4e210f0f5,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c441446126b65e442a65a30ee1782ca1, type: 2}
   m_IsPrefabParent: 0
@@ -118076,6 +118118,93 @@ MonoBehaviour:
     prefab: {fileID: 0}
     buildEffect: {fileID: 0}
     cost: 0
+--- !u!1 &1863579161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1863579162}
+  - component: {fileID: 1863579165}
+  - component: {fileID: 1863579164}
+  - component: {fileID: 1863579163}
+  m_Layer: 5
+  m_Name: WavesText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1863579162
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1863579161}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1073965376}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1863579163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1863579161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82bc0c1b6d69f8040b6fa1a7cbb382fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveText: {fileID: 1863579164}
+--- !u!114 &1863579164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1863579161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: New Text
+--- !u!222 &1863579165
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1863579161}
 --- !u!1 &1866735354
 GameObject:
   m_ObjectHideFlags: 0
@@ -123288,11 +123417,11 @@ MonoBehaviour:
   abilityName: Basic Shot
   description: Shoots a basic projectile
   cooldown: 0.7
-  level: 0
+  level: 1
   bullet: {fileID: 1826154541861776, guid: ceab346c7d650ea4881c8f3c39c027cd, type: 2}
   ablazeEffect: {fileID: 1389869015831724, guid: 57ea72b002a3bfb469d17dad56f8507d,
     type: 2}
-  damage: 25
+  damage: 30
   range: 10
 --- !u!1 &1966276348
 GameObject:
