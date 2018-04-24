@@ -272,9 +272,9 @@ MonoBehaviour:
   range:
     start: 10
   fireRate:
-    start: 0.5
+    start: 0.55
   damage:
-    start: 20
+    start: 25
   projectileSpeed:
     start: 70
   damageDone: 0
@@ -327,6 +327,8 @@ MonoBehaviour:
   partToRotate: {fileID: 4472867435522608}
   firePoint: {fileID: 4329050872738252}
   towerUpgradePath:
+    leftIndex: 0
+    rightIndex: 0
     leftPath:
     - {fileID: 114391685480464560, guid: 1e82740fe9751da45bf47de1aaca640e, type: 2}
     - {fileID: 114120815103454830, guid: 7ebd3038a4471044a8d058d292cccde1, type: 2}

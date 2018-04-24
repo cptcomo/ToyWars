@@ -54,5 +54,5 @@ MonoBehaviour:
   upgradeName: Additional Fire Rate Boost
   cost: 400
   isPctBuff: 1
-  pct: 40
+  pct: 35
   flatInc: 0

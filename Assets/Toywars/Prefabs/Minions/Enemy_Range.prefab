@@ -253,7 +253,7 @@ MonoBehaviour:
   damage:
     start: 80
   attackRadius:
-    start: 8
+    start: 12
   damageModifier:
     start: 100
   moneyValue: 50

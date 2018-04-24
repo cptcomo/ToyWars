@@ -54,5 +54,5 @@ MonoBehaviour:
   upgradeName: Bigger Rockets
   cost: 600
   pctExplosionRadiusInc: 150
-  flatDmgInc: 4
+  flatDmgInc: 12
   flatRangeInc: 4

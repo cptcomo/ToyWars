@@ -53,4 +53,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Armor Shred
   cost: 600
-  flatArmorShred: 5
+  flatArmorShred: 4

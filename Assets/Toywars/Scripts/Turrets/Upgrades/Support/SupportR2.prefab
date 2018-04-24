@@ -54,4 +54,4 @@ MonoBehaviour:
   upgradeName: Minion Move Fast
   cost: 400
   damage: 0
-  speed: 30
+  speed: 20

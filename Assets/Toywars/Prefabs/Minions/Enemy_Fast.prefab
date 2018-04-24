@@ -257,7 +257,7 @@ MonoBehaviour:
     start: 100
   moneyValue: 25
   rangeFireRate: 0
-  livesValue: 1
+  livesValue: 2
   deathEffect: {fileID: 1787243369622486, guid: ffa7fb7607c9baa46bcb69956d18788c,
     type: 2}
   hpBarPrefab: {fileID: 1453098498204944, guid: 54209f3e5e99ef34c88c9508dc919680,

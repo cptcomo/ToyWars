@@ -100,11 +100,12 @@ namespace Toywars {
                 minions[i] = minionGOs[i].GetComponent<Minion>();
             }
             int numMinionsUnlocked = minionGOs.Length;
+            int numSlotsUnlocked = wsm.getMinionsUnlockCount();
             if(isDebug)
-                Debug.Log("Unlock slots available: " + numMinionsUnlocked);
-            GameObject[] leftLane = new GameObject[numMinionsUnlocked];
-            GameObject[] centerLane = new GameObject[numMinionsUnlocked];
-            GameObject[] rightLane = new GameObject[numMinionsUnlocked];
+                Debug.Log("Unlock slots available: " + numSlotsUnlocked);
+            GameObject[] leftLane = new GameObject[numSlotsUnlocked];
+            GameObject[] centerLane = new GameObject[numSlotsUnlocked];
+            GameObject[] rightLane = new GameObject[numSlotsUnlocked];
             float[] weightedProbabilities;
             Debug.Log("Wave Index: " + gm.waveIndex);
             Debug.Log("Unlock Count: " + numMinionsUnlocked);
