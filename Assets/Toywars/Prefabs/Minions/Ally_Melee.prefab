@@ -228,7 +228,7 @@ MonoBehaviour:
     start: 2
   damageModifier:
     start: 100
-  moneyValue: 45
+  moneyValue: 40
   rangeFireRate: 0
   livesValue: 3
   deathEffect: {fileID: 1787243369622486, guid: ffa7fb7607c9baa46bcb69956d18788c,

@@ -18,9 +18,10 @@ namespace Toywars {
             int pmDeltaLives = pm.baseHealth - pm.lastBaseHealth;
             int emDeltaLives = em.baseHealth - em.lastBaseHealth;
             float multiplier = Mathf.Clamp((emDeltaLives - pmDeltaLives) / 4f, 0f, 10f);
-            health.setStart(health.getStart() + health.getStart() * (GameManager.getInstance().waveIndex - 1) * (8f + multiplier) / 100f);
-            armor.setStart(armor.getStart() + armor.getStart() * (GameManager.getInstance().waveIndex - 1) * (8f + multiplier) / 100f);
-            damage.setStart(damage.getStart() + damage.getStart() * (GameManager.getInstance().waveIndex - 1) * (8f + multiplier) / 100f);
+            float handicap = GameManager.getInstance().difficulty == Difficulty.hard ? 2f : -1f;
+            health.setStart(health.getStart() + health.getStart() * (GameManager.getInstance().waveIndex) * (6f + handicap + multiplier) / 100f);
+            armor.setStart(armor.getStart() + armor.getStart() * (GameManager.getInstance().waveIndex) * (6f + handicap + multiplier) / 100f);
+            damage.setStart(damage.getStart() + damage.getStart() * (GameManager.getInstance().waveIndex) * (6f + handicap + multiplier) / 100f);
             initialize();
             em.enemiesAlive++;
             lastPlayerHit = 0;
@@ -69,7 +70,7 @@ namespace Toywars {
                 Debug.LogWarning("Couldn't give money with " + this.name);
             }
             
-            if(Time.time <= lastPlayerHit + 1f) {
+            if(Time.time <= lastPlayerHit + (GameManager.getInstance().difficulty == Difficulty.hard ? .5f : 2f)) {
                 pm.changeExp(expValue);
             }
             if(playerShot) {

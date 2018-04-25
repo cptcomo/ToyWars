@@ -10,6 +10,7 @@ TagManager:
   - AllyTower
   - EnemyTower
   - Tower
+  - Difficulty
   layers:
   - Default
   - TransparentFX

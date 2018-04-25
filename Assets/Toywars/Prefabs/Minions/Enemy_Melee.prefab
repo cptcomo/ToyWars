@@ -251,7 +251,7 @@ MonoBehaviour:
   armor:
     start: 100
   damage:
-    start: 45
+    start: 40
   attackRadius:
     start: 2
   damageModifier:

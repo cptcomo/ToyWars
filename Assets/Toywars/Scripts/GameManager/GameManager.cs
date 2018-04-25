@@ -7,6 +7,7 @@ namespace Toywars {
         private static GameManager instance = null;
         private EnemiesManager em;
         private PlayerManager pm;
+        private GameObject difficultyContainer;
 
         public GameObject ablazeEffectsContainer;
 
@@ -62,6 +63,9 @@ namespace Toywars {
         public int waveIndex;
 
         [HideInInspector]
+        public Difficulty difficulty;
+
+        [HideInInspector]
         public int playerMinionsAlive, enemyMinionsAlive;
 
         [HideInInspector]
@@ -92,6 +96,18 @@ namespace Toywars {
         private void Start() {
             pm = PlayerManager.getInstance();
             em = EnemiesManager.getInstance();
+
+            difficultyContainer = GameObject.FindGameObjectWithTag("Difficulty");
+            if(difficultyContainer != null) {
+                DifficultySelection ds = difficultyContainer.GetComponent<DifficultySelection>();
+                difficulty = ds.difficulty;
+            }
+            else {
+                difficulty = Difficulty.hard;
+            }
+
+            Debug.Log("Difficulty: " + difficulty);
+
             Time.timeScale = 1;
             waveIndex = 0;
             gameState = GameState.Build;

@@ -224,9 +224,9 @@ MonoBehaviour:
   armor:
     start: 75
   damage:
-    start: 80
+    start: 70
   attackRadius:
-    start: 12
+    start: 14
   damageModifier:
     start: 100
   moneyValue: 50

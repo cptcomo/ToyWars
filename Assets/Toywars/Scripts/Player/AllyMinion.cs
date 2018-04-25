@@ -13,9 +13,10 @@ namespace Toywars {
             int pmDeltaLives = pm.baseHealth - pm.lastBaseHealth;
             int emDeltaLives = em.baseHealth - em.lastBaseHealth;
             float multiplier = Mathf.Clamp((pmDeltaLives - emDeltaLives) / 4f, 0f, 10f);
-            health.setStart(health.getStart() + health.getStart() * (GameManager.getInstance().waveIndex - 1) * (6f + multiplier) / 100f);
-            armor.setStart(armor.getStart() + armor.getStart() * (GameManager.getInstance().waveIndex - 1) * (6f + multiplier) / 100f);
-            damage.setStart(damage.getStart() + damage.getStart() * (GameManager.getInstance().waveIndex - 1) * (6f + multiplier) / 100f);
+            float handicap = GameManager.getInstance().difficulty == Difficulty.hard ? -1f : 2f;
+            health.setStart(health.getStart() + health.getStart() * (GameManager.getInstance().waveIndex) * (6f + handicap + multiplier) / 100f);
+            armor.setStart(armor.getStart() + armor.getStart() * (GameManager.getInstance().waveIndex) * (6f + handicap + multiplier) / 100f);
+            damage.setStart(damage.getStart() + damage.getStart() * (GameManager.getInstance().waveIndex) * (6f + handicap + multiplier) / 100f);
             initialize();
             pm.alliesAlive++;
         }

@@ -8,6 +8,7 @@ namespace Toywars {
         private static AI instance;
 
         GameManager gm;
+        PlayerManager pm;
         EnemiesManager em;
         WaveSpawnerManager wsm;
 
@@ -45,6 +46,7 @@ namespace Toywars {
 
         private void Start() {
             gm = GameManager.getInstance();
+            pm = PlayerManager.getInstance();
             em = EnemiesManager.getInstance();
             wsm = WaveSpawnerManager.getInstance();
             gm.AIStartTurnEvent += takeTurn;
@@ -92,7 +94,11 @@ namespace Toywars {
         void takeTurn() {
             gm.gameState = GameManager.GameState.AI;
 
-            bool isDebug = true;
+            bool isDebug = false;
+
+            MinionStrategy minionStrategy = MinionStrategy.weightedAvg;
+
+            
 
             GameObject[] minionGOs = wsm.getMinionsAvailable();
             Minion[] minions = new Minion[minionGOs.Length];
@@ -109,6 +115,15 @@ namespace Toywars {
             float[] weightedProbabilities;
             Debug.Log("Wave Index: " + gm.waveIndex);
             Debug.Log("Unlock Count: " + numMinionsUnlocked);
+            if(gm.difficulty == Difficulty.hard) {
+                if(numMinionsUnlocked == 3 && Random.Range(0f, 1f) <= .2f) {
+                    minionStrategy = MinionStrategy.rush;
+                }
+                if((em.lastBaseHealth - em.baseHealth) > (pm.lastBaseHealth - pm.baseHealth)) {
+                    minionStrategy = MinionStrategy.mimic;
+                }
+            }
+            Debug.Log("Strategy: " + minionStrategy);
             if(numMinionsUnlocked == 1) {
                 weightedProbabilities = new float[] { 100 };
             } else if(numMinionsUnlocked == 2) {
@@ -121,9 +136,31 @@ namespace Toywars {
                 weightedProbabilities = new float[] { 0, 30, 10, 30, 30 };
             }
             for(int i = 0; i < leftLane.Length; i++) {
-                leftLane[i] = minionGOs[randomIndex(weightedProbabilities)];
-                centerLane[i] = minionGOs[randomIndex(weightedProbabilities)];
-                rightLane[i] = minionGOs[randomIndex(weightedProbabilities)];
+                if(minionStrategy == MinionStrategy.weightedAvg) {
+                    leftLane[i] = minionGOs[randomIndex(weightedProbabilities)];
+                    centerLane[i] = minionGOs[randomIndex(weightedProbabilities)];
+                    rightLane[i] = minionGOs[randomIndex(weightedProbabilities)];
+                }
+                else if(minionStrategy == MinionStrategy.rush) {
+                    leftLane[i] = minionGOs[2];
+                    centerLane[i] = minionGOs[2];
+                    rightLane[i] = minionGOs[2];
+                }
+                else if(minionStrategy == MinionStrategy.mimic) {
+                    Dictionary<MinionType, GameObject> typeToEnemy = new Dictionary<MinionType, GameObject>();
+                    try {
+                        typeToEnemy.Add(MinionType.Melee, minionGOs[0]);
+                        typeToEnemy.Add(MinionType.Range, minionGOs[1]);
+                        typeToEnemy.Add(MinionType.Fast, minionGOs[2]);
+                        typeToEnemy.Add(MinionType.Tank, minionGOs[3]);
+                        typeToEnemy.Add(MinionType.Divide, minionGOs[4]);
+                    }
+                    catch(System.Exception e) { }
+                    
+                    leftLane[i] = typeToEnemy[wsm.spawnPoints[0].GetComponent<WaveSpawner>().wave.sections[i].minion.GetComponent<Minion>().minionType];
+                    centerLane[i] = typeToEnemy[wsm.spawnPoints[1].GetComponent<WaveSpawner>().wave.sections[i].minion.GetComponent<Minion>().minionType];
+                    rightLane[i] = typeToEnemy[wsm.spawnPoints[2].GetComponent<WaveSpawner>().wave.sections[i].minion.GetComponent<Minion>().minionType];
+                }
             }
             Debug.Log("Left: ");
             foreach(GameObject go in leftLane) {
@@ -402,6 +439,10 @@ namespace Toywars {
 
         enum Lane {
             left, center, right
+        }
+
+        enum MinionStrategy {
+            weightedAvg, rush, mimic
         }
     }
 }

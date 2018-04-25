@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed:
-    start: 11
+    start: 13
   detectionRadius:
     start: 4
   tagsToDetect:
@@ -248,9 +248,9 @@ MonoBehaviour:
   health:
     start: 200
   armor:
-    start: 75
+    start: 60
   damage:
-    start: 50
+    start: 35
   attackRadius:
     start: 2
   damageModifier:
