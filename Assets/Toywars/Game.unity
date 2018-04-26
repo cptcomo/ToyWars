@@ -57670,7 +57670,7 @@ MonoBehaviour:
   - {fileID: 1044195431293078, guid: 4026b54be6908b94286c171b209ed98f, type: 2}
   - {fileID: 1044195431293078, guid: 6bab36d28a5fbce449196fb6dfc35bc9, type: 2}
   - {fileID: 1044195431293078, guid: 02b92efda4bd2684c864509d928f0134, type: 2}
-  minionUnlockLevels: 010000000300000005000000080000000c000000
+  minionUnlockLevels: 010000000300000006000000090000000d000000
   leftLane: {fileID: 1109890695}
   rightLane: {fileID: 1933607697}
   centerLane: {fileID: 1297652223}
@@ -106758,6 +106758,11 @@ MonoBehaviour:
     buildEffect: {fileID: 1260696139226476, guid: 997994e619de874488b2e33ba0038330,
       type: 2}
     cost: 500
+  turretBackground: {fileID: 58967483}
+  missileBackground: {fileID: 1313711156}
+  laserBackground: {fileID: 1411479254}
+  fireBackground: {fileID: 2060049176}
+  supportBackground: {fileID: 949920683}
 --- !u!1 &1669331928
 GameObject:
   m_ObjectHideFlags: 0
@@ -127233,6 +127238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildEffect: {fileID: 1260696139226476, guid: 997994e619de874488b2e33ba0038330,
     type: 2}
+  shop: {fileID: 1669311905}
 --- !u!1 &2016992831
 GameObject:
   m_ObjectHideFlags: 0

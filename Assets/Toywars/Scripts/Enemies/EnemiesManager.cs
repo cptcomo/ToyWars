@@ -38,8 +38,7 @@ namespace Toywars {
 
         public void changeMoney(int d) {
             if(d > 0) {
-                Debug.Log("Money is boosted!");
-                d = (int)(d * (GameManager.getInstance().difficulty == Difficulty.normal ? 1.1f : 1.35f));
+                d = (int)(d * (GameManager.getInstance().difficulty == Difficulty.normal ? 1.15f : 1.35f));
             }
                 
             this.money += d;

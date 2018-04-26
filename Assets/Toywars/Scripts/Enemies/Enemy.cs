@@ -18,7 +18,7 @@ namespace Toywars {
             int pmDeltaLives = pm.baseHealth - pm.lastBaseHealth;
             int emDeltaLives = em.baseHealth - em.lastBaseHealth;
             float multiplier = Mathf.Clamp((emDeltaLives - pmDeltaLives) / 4f, 0f, 10f);
-            float handicap = GameManager.getInstance().difficulty == Difficulty.hard ? 2f : -1f;
+            float handicap = GameManager.getInstance().difficulty == Difficulty.hard ? 3f : 0f;
             health.setStart(health.getStart() + health.getStart() * (GameManager.getInstance().waveIndex) * (6f + handicap + multiplier) / 100f);
             armor.setStart(armor.getStart() + armor.getStart() * (GameManager.getInstance().waveIndex) * (6f + handicap + multiplier) / 100f);
             damage.setStart(damage.getStart() + damage.getStart() * (GameManager.getInstance().waveIndex) * (6f + handicap + multiplier) / 100f);

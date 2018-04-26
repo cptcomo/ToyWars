@@ -98,8 +98,6 @@ namespace Toywars {
 
             MinionStrategy minionStrategy = MinionStrategy.weightedAvg;
 
-            
-
             GameObject[] minionGOs = wsm.getMinionsAvailable();
             Minion[] minions = new Minion[minionGOs.Length];
             for(int i = 0; i < minionGOs.Length; i++) {
@@ -113,8 +111,6 @@ namespace Toywars {
             GameObject[] centerLane = new GameObject[numSlotsUnlocked];
             GameObject[] rightLane = new GameObject[numSlotsUnlocked];
             float[] weightedProbabilities;
-            Debug.Log("Wave Index: " + gm.waveIndex);
-            Debug.Log("Unlock Count: " + numMinionsUnlocked);
             if(gm.difficulty == Difficulty.hard) {
                 if(numMinionsUnlocked == 3 && Random.Range(0f, 1f) <= .2f) {
                     minionStrategy = MinionStrategy.rush;
@@ -123,7 +119,6 @@ namespace Toywars {
                     minionStrategy = MinionStrategy.mimic;
                 }
             }
-            Debug.Log("Strategy: " + minionStrategy);
             if(numMinionsUnlocked == 1) {
                 weightedProbabilities = new float[] { 100 };
             } else if(numMinionsUnlocked == 2) {
@@ -161,18 +156,6 @@ namespace Toywars {
                     centerLane[i] = typeToEnemy[wsm.spawnPoints[1].GetComponent<WaveSpawner>().wave.sections[i].minion.GetComponent<Minion>().minionType];
                     rightLane[i] = typeToEnemy[wsm.spawnPoints[2].GetComponent<WaveSpawner>().wave.sections[i].minion.GetComponent<Minion>().minionType];
                 }
-            }
-            Debug.Log("Left: ");
-            foreach(GameObject go in leftLane) {
-                Debug.Log(go);
-            }
-            Debug.Log("Center: ");
-            foreach(GameObject go in centerLane) {
-                Debug.Log(go);
-            }
-            Debug.Log("Right: ");
-            foreach(GameObject go in rightLane) {
-                Debug.Log(go);
             }
             wsm.retrieveAIWaveComposition(leftLane, centerLane, rightLane);
 
@@ -212,7 +195,7 @@ namespace Toywars {
                 if(isDebug)
                     Debug.Log("Vulnerable Lane Ratio: " + ratio);
 
-                if(Random.Range(0f, 1f) < .8f && hasBuiltATower) { //Upgrade
+                if(Random.Range(0f, 1f) < .85f && hasBuiltATower) { //Upgrade
                     if(isDebug)
                         Debug.Log("In Upgrade Branch");
 

@@ -221,9 +221,9 @@ MonoBehaviour:
   health:
     start: 700
   armor:
-    start: 175
+    start: 150
   damage:
-    start: 70
+    start: 60
   attackRadius:
     start: 1.5
   damageModifier:

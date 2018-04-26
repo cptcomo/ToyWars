@@ -8,6 +8,7 @@ namespace Toywars {
         private GameManager gm;
         private PlayerManager pm;
         public GameObject buildEffect;
+        public Shop shop;
 
         private void Awake() {
             if(instance == null)
@@ -62,6 +63,7 @@ namespace Toywars {
 
         void deselectTurret() {
             turretToBuild = null;
+            shop.selectNone();
         }
 
         void upgradeSelectedTurret(int upgradeIndex) {

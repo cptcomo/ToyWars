@@ -88,6 +88,14 @@ namespace Toywars {
             supportBackground.color = highlightColor;
         }
 
+        public void selectNone() {
+            turretBackground.color = startColor;
+            missileBackground.color = startColor;
+            laserBackground.color = startColor;
+            fireBackground.color = startColor;
+            supportBackground.color = startColor;
+        }
+
         void toggleShop() {
             shop.SetActive(!shop.activeSelf);
         }

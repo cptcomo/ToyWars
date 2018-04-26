@@ -196,7 +196,7 @@ MonoBehaviour:
   speed:
     start: 13
   detectionRadius:
-    start: 4
+    start: 2
   tagsToDetect:
   - Player
   waypoints:
@@ -248,11 +248,11 @@ MonoBehaviour:
   health:
     start: 200
   armor:
-    start: 60
+    start: 75
   damage:
-    start: 35
+    start: 30
   attackRadius:
-    start: 2
+    start: 1
   damageModifier:
     start: 100
   moneyValue: 25
